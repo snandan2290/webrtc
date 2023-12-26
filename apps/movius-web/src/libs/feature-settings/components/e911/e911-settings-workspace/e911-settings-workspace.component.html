@@ -1,0 +1,37 @@
+<ng-container *ngIf="view$ | async as view">
+    <pane-frame
+        *ngIf="view.isE911Available"
+        class="emergency emergency__pane emergency__height"
+        [includeDefaultHeader]="false"
+        [includeDefaultFooter]="false"        
+    >
+        <div class="emergency__header" headingCustom>
+            <div class="emergency__headerTxt">E911</div>
+        </div>
+        <div mainCustom class="emergency__main">
+            <div class="emergency__caption">
+                <p class="emergency__captionTxt">
+                    This address is given to dispatchers when you call 911 using
+                    Wi-Fi. It's necessary to help first responders find you if
+                    you're unable to tell them where you are.
+                </p>
+                <p class="emergency__captionTxt">
+                    Please note that location should be enabled while dialing or messaging 911.
+                </p>
+            </div>
+            <div class="emergency__edit" *ngIf="view.isEdit; else viewTemplate">
+                <movius-web-e911-address-edit
+                    [address]="view.address"
+                    (cancel)="onCancel()"
+                    (updated)="onUpdated($event)"
+                ></movius-web-e911-address-edit>
+            </div>
+            <ng-template #viewTemplate>
+                <movius-web-e911-address-view
+                    [address]="view.address"
+                    (edit)="onEdit(view.address)"
+                ></movius-web-e911-address-view>
+            </ng-template>
+        </div>
+    </pane-frame>
+</ng-container>

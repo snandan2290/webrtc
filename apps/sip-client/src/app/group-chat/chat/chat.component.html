@@ -1,0 +1,55 @@
+<ng-container *ngIf="chatView$ | async as chat">
+    <button
+        [disabled]="!chat.user.actions.isConnectAvailable"
+        (click)="onConnect()"
+        nz-button
+        nzType="primary"
+        nzBlock
+    >
+        Connect
+    </button>
+    <button
+        [disabled]="!chat.user.actions.isRegisterAvailable"
+        (click)="onRegister()"
+        nz-button
+        nzType="primary"
+        nzBlock
+    >
+        Register
+    </button>
+    <input #text />
+    <button
+        [disabled]="!chat.user.actions.isSendMessageAvailable"
+        (click)="onSendMessage(chat.participants, text.value)"
+        nz-button
+        nzType="primary"
+        nzBlock
+    >
+        Send message
+    </button>
+    <button
+        [disabled]="!chat.user.actions.isUnregisterAvailable"
+        (click)="onUnregister()"
+        nz-button
+        nzType="primary"
+        nzBlock
+    >
+        Unregister
+    </button>
+    <button
+        [disabled]="!chat.user.actions.isDisconnectAvailable"
+        (click)="onDisconnect()"
+        nz-button
+        nzType="primary"
+        nzBlock
+    >
+        Disconnect
+    </button>
+
+    <movius-web-chat-messages
+        *ngIf="sipUser$ | async as sipUser"
+        [sipUser]="sipUser"
+        [userIdentifier]="user.identifier"
+    >
+    </movius-web-chat-messages>
+</ng-container>

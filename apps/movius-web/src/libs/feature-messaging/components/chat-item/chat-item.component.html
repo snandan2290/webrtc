@@ -1,0 +1,245 @@
+<div class="chat-frame">
+    <div class="chat-unread-frame" *ngIf="(message.isFirstNotRead !== false)" id="unread_messages_element">
+        <!-- <div class="chat-unread-frame__unread-item-liner">
+            <div
+                id="unread_messages_element"
+                class="chat-unread chat-unread-frame__unread-item"
+                (click)="scrollToBottom.emit()"
+            >
+                <div class="chat-unread__arrow"></div>
+                <div class="chat-unread__text">
+                    {{ afterReadCountUpdate }} Unread Messages
+                </div>
+            </div>
+        </div> -->
+    </div>
+    <div class="chat-date" *ngIf="message.isDateBefore">
+        {{ message.dateFormatted }}
+    </div>
+    <div
+        class="chat-message"
+        (mouseenter)="isActive = true"
+        (mouseleave)="isActive = false"
+    >
+        <div
+            class="chat-message__itemFrame"
+            [ngClass]="{ 'chat-message__itemFrame--self': isSelf }"
+        >
+            <div
+                class="chat-message__item"
+                [ngClass]="{
+                    'chat-message__item--self': isSelf,
+                    'chat-message__item--system--whatsapp': message?.isSystem && chatId?.includes('whatsapp:') && !message?.content?.startsWith('[Automated Message]'),
+                    'chat-message__item--system': message?.isSystem && message?.content?.startsWith('[Automated Message]')
+                }"
+            >
+                <div
+                    class="chat-message__timestamp"
+                    [ngClass]="{ 'chat-message__timestamp--self': isSelf }"
+                >
+                <div 
+                class="chat-message__sentFrom"
+                *ngIf="message.from !== 'me' && isGroupChat === true && !message?.isSystem && !message?.content?.includes('the conversation.')"
+                >
+                {{ getContactName(message.fromNumber) }},&nbsp;
+                
+                </div>
+                    <div class="chat-message__timeValue"></div>
+                    {{ formatTime(message.sentTime) }}
+                    
+                </div>
+                <div class="chat-message__textFrame" *ngIf="message?.messageType !== 'voicemail' && message?.messageType !== 'picture'">
+                <!-- <div class="chat-message__textFrame"> -->
+                    <div [ngClass] ="message?.isSystem  && isWhatsAppThread && !message?.content?.startsWith('[Automated Message]') ? 'chat-message__infoicon-textFrame' : 'chat-message__infoicon-textFrame-cont'">
+                        <span class="chat-message__infoicon" *ngIf="message?.isSystem  && isWhatsAppThread && !message?.content?.startsWith('[Automated Message]') ">
+                            <img src="{{GetTheme() == 'Dark' ? 'assets/icons/dark_theme_icons/info_dark.svg': 'assets/icons/movius/common/info (1).svg'}}" alt="" srcset="">
+                        </span>
+                        <div [ngClass]="message?.isSystem  && isWhatsAppThread && !message?.content?.startsWith('[Automated Message]') ? 'chat-message__text--systemMsg ' : isMobileDevice ? 'chat-message__text--mobile' : 'chat-message__text'"
+                            [innerHTML]="(message?.content?.includes('Looks like this contact') && !isthislastmessage(message.sentTime)) 
+                                                    ? 'Looks like this contact hasnt enabled WhatsApp.' :  (message?.content?.includes('Last message:') && message?.isSystem) 
+                                                    ? replacestring(message.content)  : message.content
+                                                     | linky: { newWindow: true } | highlighText: searchItem">
+                        </div>
+                    </div>
+                    
+                    <div class="chat-message__textFrame" *ngIf="(message?.content?.startsWith('Looks like this contact')
+                    && (!timecrossed(message.sentTime) || (optincrossed(optInRequestCount) && isthislastmessage(message.sentTime))))">
+                        <div>
+                            <p></p>
+                        </div>
+                    </div>
+
+                    <div *ngIf="noWAthread(message)" class="chat-message__sms-query-text-frame" >
+                            <img src="{{GetTheme() == 'Dark' ? 'assets/icons/dark_theme_icons/info_dark.svg': 'assets/icons/movius/common/info (1).svg'}}" alt="" srcset="">
+                            <p class="chat-message__sms-query-text">Do you want to send an SMS instead?</p>
+                    </div>
+
+                    <div class="chat-message__optInReqButton" *ngIf="noWAthread(message)">
+                        <input class="chat-message__optInReqButton-input" type="button" value="No" (click)="onNoOptionForEnableWhatsApp()"/>
+                        <span class="chat-message__dividerLine"></span>
+                        <input class="chat-message__optInReqButton-input" type="button" value="Yes" (click)="onYesOptionForEnableWhatsApp(peer_multiLine)"/>
+                    </div>
+
+                    <div  style="margin-top:20px;" *ngIf="message?.content?.startsWith('Looks like this contact') && 
+                    timecrossed(message.sentTime) && !optincrossed(optInRequestCount) && !isMoreThen1Day(message.sentTime)">
+                        <!--<p class="chat-message__text-input">Currently, the contact hasn't enabled WhatsApp. You may try sending the request again now.</p>-->
+                       
+                        <p class="chat-message__sms-query-text-frame">
+                            <img src="assets/icons/movius/common/info (1).svg" alt="" srcset="">&nbsp;&nbsp;&nbsp;&nbsp;Currently, the contact hasn't enabled WhatsApp.</p>
+                    </div>
+                    <!--<div class="chat-message__optInReqButton"  *ngIf="message.content.startsWith('To Re-Engage the conversation')">
+                        <input class="chat-message__optInReqButton-input" type="button" value="Re-Engage Request" (click)="resendOptInRequest(cnt_id, peer_multiLine)"/>
+                    </div>-->
+                   <!--<button 
+                        [disabled]="disableOptinRequest"
+                        *ngIf="noWAResend(message,whatsOptInReqStatus)" 
+                        class="chat-message__optInReqButton" 
+                        (click)="resendOptInRequest(cnt_id,peer_multiLine)">
+                        Resend Opt-in Request
+                    </button>
+
+                    <button 
+                        [disabled]="disableOptinRequest"
+                        *ngIf="(message.isSystem && (message.content.includes('You can try sending the request again.') 
+                        || (message.content.includes('Currently, the contact hasnt enabled WhatsApp'))) && 
+                        optInRequestCountCheck(optInRequestCount, whatsOptInReqStatus, message.sentTime))" 
+                        class="chat-message__optInReqButton" 
+                        (click)="resendOptInRequest(cnt_id,peer_multiLine)">
+                        Resend Opt-in Request
+                    </button>-->
+                </div>
+
+                <div *ngIf="message.messageType == 'voicemail'">
+                    <movius-web-audio-player class="chat-audio-message__audioItemFrame" [message]="message?.messageInfo"></movius-web-audio-player>
+                </div>
+
+                <div class="chat-message__picture"
+                [ngClass]="{
+                    'chat-message__item--self':isSelf,
+                    'chat-message__loading':showToggleSpinner,
+                    'chat-message__image-size':(!showToggleSpinner && multimediaType != 'image/gif'),
+                    'chat-message__gif-size':(!showToggleSpinner && multimediaType == 'image/gif')
+                }"
+                *ngIf="message.messageType == 'picture'">
+                <img  *ngIf="showToggleSpinner === false && multimediaType == 'image/gif'"  class="chat-message__spinner" src="assets/icons/movius/common/gif.svg"  (click)="imagePreview(imageUrl)" alt="GIF">
+                <img class="chat-message__spinner" *ngIf="showToggleSpinner === true" src="assets/icons/movius/audio/icons_spinner_blue.svg" alt="Spinner">
+                <img  *ngIf="showToggleSpinner === false" class="chat-message__img" [src]= "imageUrl" (click)="imagePreview(imageUrl)">
+                </div>
+
+                <div
+                    class="chat-message__error-frame"
+                    nz-popover
+                    nzPopoverTrigger="click"
+                    [nzPopoverContent]="message.state.kind === 'PictureMessageAPIError' || imageDownloadStatus ? '' : notSentTemplate"
+                >
+                    <div
+                        class="chat-message__error-bulb"
+                        *ngIf="message.state.kind === 'MessageStateError' || message.state.kind === 'PictureMessageAPIError' || message.state.kind === 'PicMsgRetryThresholdReached'"
+                        [ngClass]="{ 'chat-message__error-bulb--self': isSelf }"
+                    ></div>
+                    <div
+                        class="chat-message__error-msg"
+                        data-cy="error-message"
+                        *ngIf="message.state.kind === 'MessageStateError' || message.state.kind === 'MessageStateInvalid' || message.state.kind === 'PicMsgRetryThresholdReached'"
+                    >
+                        Not sent
+                    </div>
+                    <div
+                        class="chat-message__error-msg"
+                        data-cy="error-message"
+                        *ngIf="imageDownloadStatus"
+                    >
+                        Failed to download
+                    </div>
+                    <div
+                        class="chat-message__error-msg"
+                        data-cy="error-message"
+                        *ngIf="message.state.kind === 'PictureMessageAPIError'"
+                    >
+                        Sending
+                    </div>
+                </div>
+                <ng-template #notSentTemplate>
+                    <div [ngClass]="isMobileDevice ? 'chat-message__notSent-mobile': 'chat-message__notSent'" *ngIf="message.state.kind === 'MessageStateError'">
+                        <p class="chat-message__notSentTitle">
+                            No Internet Connection
+                        </p>
+                        <p [ngClass]="isMobileDevice ? 'chat-message__notSentMsg-mobile': 'chat-message__notSentMsg'">
+                            Message not delivered. Looks like you have lost internet
+                            connection
+                        </p>
+                    </div>
+                    <div class="chat-message__notSent" *ngIf="message.state.kind === 'PicMsgRetryThresholdReached'">
+                        <p [ngClass]="isMobileDevice ? 'chat-message__notSentMsg-mobile': 'chat-message__notSentMsg'">
+                            Image is not sent. Please try again!!
+                        </p>
+                    </div>
+                    <div class="chat-message__notSentDisplayNone" *ngIf="message.state.kind !== 'PicMsgRetryThresholdReached' || message.state.kind !== 'MessageStateError'">
+                    </div>
+                </ng-template>
+            </div>
+            <div
+                *ngIf="!message.isSystem"
+                data-cy="chat-item-dropdown"
+                class="chat-message__dropdown"
+                [ngClass]="{ 'chat-message__dropdown--self': isSelf }"
+                [style.visibility]="isActive && 
+                (message.messageType !== 'voicemail' 
+                && !imageDownloadStatus) ? 'visible' : 'hidden'"
+                nz-dropdown
+                [nzDropdownMenu]="menu"
+                [nzPlacement]="'bottomLeft'"
+            ></div>
+        
+            <nz-dropdown-menu #menu="nzDropdownMenu">
+                <ul
+                    nz-menu
+                    class="chat-message__dropMenu"
+                    (mouseleave)="isActive = false"
+                    (mouseenter)="isActive = true"
+                >
+                    <li *ngIf="isLogingViaTeams !== 'true' || message.messageType == 'text'"
+                        nz-menu-item
+                        class="chat-message__dropMenuItem"
+                        [ngClass] ="getConnectionErrorValue === false ? 'chat-message__dropMenuItem' : 'chat-message__dropMenuItem-disabled'"
+                        (click)="copy.emit()"
+                    >
+                        Copy
+                    </li>
+                    <li
+                        *ngIf="message.messageType == 'picture' && !isMobileDevice"
+                        nz-menu-item
+                        class="chat-message__dropMenuItem"
+                        [ngClass] ="getConnectionErrorValue === false && showToggleSpinner === false ? 'chat-message__dropMenuItem' : 'chat-message__dropMenuItem-disabled'"
+                    >
+                        <a [href]="imageUrl" download="{{imageFileName}}">Download</a>
+                    </li>
+                    <!--<li nz-menu-item class="chat-message__dropMenuItem">Reply</li>-->
+                    <li *ngIf="!chatId.includes('whatsapp:')"
+                        nz-menu-item
+                        [ngClass] ="getConnectionErrorValue === false && (message.messageType !== 'picture' || message.messageType === 'picture' && showToggleSpinner === false)? 'chat-message__dropMenuItem' : 'chat-message__dropMenuItem-disabled'"
+                        (click)="forward.emit()"
+                    >
+                        Forward
+                    </li>
+                    <!--
+                    <li
+                        data-cy="chat-item-remove-message"
+                        nz-menu-item
+                        class="chat-message__dropMenuItem"
+                        (click)="remove.emit()"
+                    >
+                        Delete
+                    </li>
+                -->
+                </ul>
+            </nz-dropdown-menu>
+        </div>
+    </div>
+</div>
+
+
+<movius-web-general-failure 
+    class="chat-message__displayNone"
+    (passConnectionError)="getConnectionError($event)">
+</movius-web-general-failure>

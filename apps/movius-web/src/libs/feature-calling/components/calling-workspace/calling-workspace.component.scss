@@ -1,0 +1,65 @@
+@import 'scss/mixins';
+@import 'scss/variables';
+@import 'scss/app.scss';
+
+.calls {
+    display: flex;
+    height: 100%;
+
+    @include verticalToHorizontalWorkspace();
+
+    &__historyItem {
+        @extend %history-item;
+        width: auto;
+    }
+
+    &__hstType {
+        min-height: 1.188rem;
+        margin: 0 0.75rem 0 0;
+        @include font-normal(0.875rem);
+        line-height: 0.875rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    // &__hstAround {
+    //     display: flex;
+    //     flex-direction: column;
+    //     justify-items: center;
+    //     height: $list-item-content-height;
+    //     margin-left: $spacing-xl;
+    // }
+
+    // &__hstAside {
+    //     display: flex;
+    //     flex-direction: row;
+    //     align-items: flex-end;
+    //     justify-content: flex-end;
+    //     text-align: end;
+    //     height: $list-item-content-height;
+
+    //     //white-space: nowrap;
+
+    //     @include font-normal(0.875rem);
+    //     color: var(--movius_text-gray);
+    // }
+
+    // &__hstDate,
+    // &__hstTime {
+    //     margin-bottom: auto;
+    //     //max-width: 4rem;
+    //     white-space: normal;
+    //     @include font-normal(0.75rem);
+    //     line-height: 0.75rem;
+    //     word-break: break-word;
+    // }
+
+    @include leftWorkspaceGeneralMarkup();
+
+    @include historyItemTwoLiner();
+
+    @include emptySearch('../icons/movius/common/icons-all-no-results.svg');
+
+    @include generalFailure();
+}

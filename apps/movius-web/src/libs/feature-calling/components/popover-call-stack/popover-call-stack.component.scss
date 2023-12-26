@@ -1,0 +1,28 @@
+@import 'scss/mixins';
+@import 'scss/variables';
+
+:host {
+    display: block;
+}
+
+.call-stack {
+    &__header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+
+        height: 1.5rem;
+        padding: 0.2rem $spacing-xs 0.3rem $spacing-xs;
+        vertical-align: bottom;
+        background: var(--movius_menu-primary);
+        color: var(--movius_white);
+        border-top-left-radius: $dnd-border-rad;
+        border-top-right-radius:$dnd-border-rad;
+    }
+
+    & > *:last-child {
+        border-bottom-left-radius: $dnd-border-rad;
+        border-bottom-right-radius: $dnd-border-rad;
+    }
+}

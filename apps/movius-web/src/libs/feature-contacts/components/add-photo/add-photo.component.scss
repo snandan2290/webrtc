@@ -1,0 +1,124 @@
+@import 'scss/variables';
+@import 'scss/mixins';
+@import 'scss/app.scss';
+
+$dndWidth: 16.375rem;
+$dndHeight: 16.375rem;
+
+:host ::ng-deep .avatar-uploader > .ant-upload {
+    width: $dndWidth;
+    height: $dndHeight;
+    padding: 0;
+}
+
+:host ::ng-deep .ant-upload.ant-upload-drag {
+    margin: auto;
+}
+
+:host ::ng-deep .ant-upload.ant-upload-drag .ant-upload {
+    padding: 0;
+}
+
+.addPhoto {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+
+    &__header {
+        margin: $spacing-xxl-3 0 $spacing-xl 0;
+        @include font-bold(1.125rem);
+        text-align: center;
+    }
+
+    &__dnd {
+        margin: auto;
+        overflow: hidden;
+    }
+
+    &__dndShell{
+        width: $dndWidth;
+        height: $dndHeight;
+        @include background-image('/movius/common/icons-pattern.svg');
+        background-repeat: repeat;
+        background-size: auto;
+    }
+
+    &__dndCrcl {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: $dndWidth;
+        height: $dndHeight;
+        border-radius: 8.25rem;
+        border: 0.0625rem solid var(--movius_black);
+        background: var(--movius_white);
+        color: var(--black);
+    }
+
+    &__dndControl {
+        width: 16rem;
+        height: 16rem;
+    }
+
+    &__orUpload {
+        display: flex;
+        flex-direction: row;
+        margin: 0 auto 0 auto;
+    }
+
+    &__upload {
+        display: flex;
+        flex-direction: row;
+        margin: 0 auto $spacing-xxl-3 auto;
+    }
+
+    &__uploadTxt {
+        outline: none;
+        border: none;
+        background: transparent;
+        font-weight: bold;
+        //color: var(--movius_menu-primary);
+        color: var(--movius_menu-primary-uploadTxt);
+        cursor: pointer;
+    }
+
+    &__uploadIco {
+        width: 1rem;
+        height: 1rem;
+        //@include background-image('/movius/contacts/icons-all-upload.svg');
+        cursor: pointer;
+    }
+
+    &__or {
+        margin: $spacing-xs 0 $spacing-xs 0;
+    }
+
+    &__controls {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        padding: 0 0 $spacing-xxl-3 0;
+    }
+
+    &__cancel {
+        display: inline-block;
+        width: 5.8125rem;
+        height: 2.25rem;
+        @extend %sync-btn--cancel;
+        margin: 0 0 0 0;
+    }
+    &__add {
+        display: inline-block;
+        width: 5.4375rem;
+        height: 2.25rem;
+        @extend %sync-btn--apply;
+        margin: 0 0 0 $spacing-l;
+    }
+
+    &__image {
+        width: $dndWidth;
+        height: $dndHeight;
+    }
+}

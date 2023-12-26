@@ -1,0 +1,399 @@
+@import '../../../../../assets/scss/variables';
+@import '../../../../../assets/scss/mixins';
+@import '../../../../../assets/scss/app.scss';
+
+$addCnt: 'addCnt';
+$buttons-height: 2.25rem;
+$inputHeight: 2rem;
+$removeBtnSize: 1rem;
+
+pane-frame {
+    //padding: $spacing-xl $spacing-xxl-10 $spacing-xxl-10 $spacing-xxl-10;
+    overflow-y: auto;
+    overflow-x: hidden;
+    //background: #f5f5f5;
+    background: var(--movius_lightgray_and_black_details_edit_contact_details);
+}
+
+section {
+    margin: 0 0 $spacing-xxl-4 0;
+}
+
+input {
+    width: 100%;
+}
+
+[nz-col], [nz-row] {
+    //CB: 21Apr2021: Ng-zorro adds some strange height related to font-size to its nz-rows.
+    font-size: 0;
+}
+
+movius-web-ui-slide-input[nz-col] {
+    $inputValidationHeight: $spacing-m;
+    margin: 0 0 ($spacing-l - $inputValidationHeight) $spacing-l;
+
+    &:first-of-type{
+        margin: 0 0 0 0;
+    }
+}
+
+%havingRightAbsRemoveOnHover {
+    width: calc(100% + #{$removeBtnSize});
+    padding-right: $removeBtnSize;
+    &:hover .#{$addCnt}__removeBtn {
+        &--rightAbs {
+            visibility: visible;
+        }
+    }
+}
+
+.#{$addCnt} {
+    $base: &;
+    display: flex;
+    flex-direction: column;
+    //height: 100%;
+
+    margin: $spacing-xl $spacing-xxl-10 $spacing-xxl-2 $spacing-xxl-10;
+
+    &__caption {
+        @include font-semi-bold-600(1.5rem);
+        margin: 0 0 1.875rem 0;
+    }
+
+    %subCaptionSpaced {
+        margin: 0 0 $spacing-m 0;
+    }
+
+    &__subCaption {
+        @include font-bold(1rem);
+        max-height: 1.375rem;
+        position: relative;
+
+        @extend %subCaptionSpaced;
+        @extend %havingRightAbsRemoveOnHover;
+    }
+
+    &__form{
+        height: inherit;
+    }
+
+    &__logo{
+    }
+
+    &__logoShell {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+
+        padding: $spacing-l 0 0 0;
+    }
+
+    &__logoShellWrap {
+        position: relative;
+    }
+
+    &__logoPreview{
+        width: 5.625rem;
+        height: 5.625rem;
+
+        background-size: 5.625rem;
+        border-radius: 50%;
+    }
+
+    &__addLogo {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 2.25rem;
+        height: 2.25rem;
+        bottom: -0.5rem;
+        right: 0rem;
+
+        @include circle-logo;
+        border: none;
+
+        background: var(--movius_colors-primary-green-2);
+    }
+
+    &__addLogoIco {
+        display: flex;
+        width: 1rem;
+        height: 1rem;
+        @include background-image('/movius/common/icons-all-photo.svg');
+    }
+
+    &__logoSider {
+        margin: 0 0 0 3.438rem;
+    }
+
+    &__selectShell {
+        line-height: 2.15rem;
+        border-bottom: 0.0625rem var(--movius_text-gray) solid;
+    }
+
+    &__select {
+        width: 100%;
+
+        nz-select-top-control {
+            border: none;
+        }
+    }
+
+    &__phone, &__email, &__work, &__chat, &__other {
+        position: relative;
+        @extend %havingRightAbsRemoveOnHover;
+    }
+
+    &__inpCtrl {
+        $self: &;
+        padding: 1rem;
+
+        &--header {
+            @extend #{$self};
+            &, > input {
+                width: 100%;
+            }
+        }
+    }
+
+    &__inpFld {
+        $self: &;
+
+        line-height: $inputHeight;
+        border: none;
+        border-bottom: 0.0625rem solid  var(--movius_text-gray);
+
+        &.focus {
+            @extend #{$self};
+            position: relative;
+            border-bottom: 0.0625rem solid  var(--movius_black);
+        }
+        &:focus {
+            @include placeholder {
+                color: transparent;
+            }
+        }
+
+        &--spaced {
+            @extend #{$self};
+            margin: 0 0 $spacing-xxl-4 0;
+        }
+    }
+
+    &__inpPlaceholder{
+
+        display: block;
+
+        @include font-normal(0.75rem);
+        color: var(--movius_text-gray);
+    }
+
+    //#region Sections
+    &__city, &__zipPostalCode {
+        margin-right: $spacing-xxl-3;
+    }
+    //#endregion Sections
+
+    //#region Controls
+
+    &__controls {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        margin: $spacing-xxl-4 calc(-#{$spacing-xxl-4}) 0 0;
+    }
+
+    &__control {
+        margin: 0 $spacing-xxl-4 0 0;
+    }
+
+    &__cancelBtn {
+        background: var(--movius-cancel-btn-bgclr) !important;
+        color: var(--black) !important;
+        width: 6rem;
+        @include bordered-rounded-btn(var(--movius_colors-primary-green-2));
+    }
+
+    &__applyBtn {
+        width: 6rem;
+        // @include bordered-rounded-btn(var(--movius_colors-primary-green-2));
+        @include bordered-rounded-btn-teams(var(--movius_colors-primary-green-2));
+
+    }
+
+    &__addMoreBtn {
+        margin: auto auto auto 0;
+    }
+    //#endregion Controls
+
+    &__removeBtn {
+        $self: &;
+        $size: $removeBtnSize;
+        align-self: center;
+        width: $size;
+        height: $size;
+        margin-left: $spacing-l;
+        visibility: hidden;
+        @include background-image("/movius/contacts/icons-contact-delete-blue.svg");
+        cursor: pointer;
+
+        &--rightAbs {
+            @extend #{$self};
+            position: absolute;
+            right: -0.938rem;
+        }
+    }
+
+    //#region Country selector
+    &__countries {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    &__countrySelector {
+        justify-content: center;
+        align-items: center;
+        z-index: 1;
+    }
+
+    &__phoneControls {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__phoneInput {
+        width: 100%;
+    }
+    //#endregion Country selector
+
+    &__valErr {
+        //TODO CB:22Jan2021: Strange 2px difference occurs. Hotfix with 0.125rem.
+        $divergencyAddition: 0.125rem;
+        margin: calc(#{$inputHeight} + 0.063rem + #{$divergencyAddition}) 0 0 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    &__splitter {
+        margin: 0 0 $spacing-xxl-4 0;
+    }
+
+    &__contactInfo {
+    }
+
+    &__contactInfoEmails {
+        display: block;
+        margin: $spacing-l 0 0 0;
+    }
+
+    &__addMoreMenu {
+        &:empty {
+           display: none;
+        }
+    }
+}
+
+.addBtn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    //margin: auto $spacing-l $spacing-xxl-6 $spacing-m;
+    max-width: 12rem;
+    white-space: nowrap;
+
+    & > div {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin: 0 0 0 $spacing-xs;
+
+        cursor: pointer;
+    }
+}
+
+.addIco {
+    width: 1rem;
+    height: 1rem;
+    //@include background-image('/movius/contacts/icons-add.svg');
+}
+
+.addIcoEnd {
+    width: 8px;
+    height: 5px;
+    @include background-image('/movius/contacts/icons-arrow-down.svg');
+}
+
+.addText {
+    @include font-semi-bold-600(0.875rem);
+}
+
+.removable-input {
+    + .removable-icon {
+        display: none;
+        margin: 1.5rem 0 0 0;
+        z-index: 1;
+        padding: 0 0 0 0;
+
+        &:hover {
+            display: inline-flex;
+        }
+    }
+
+    &:hover {
+        + .removable-icon {
+            display: inline-flex;
+        }
+    }
+}
+
+.removable-icon {
+    display: none;
+    width: $removeBtnSize;
+    height: $removeBtnSize;
+
+    @include background-image("/movius/contacts/icons-contact-delete.svg");
+    cursor: pointer;
+}
+
+::ng-deep.editCntDropdown {
+    width: 100%;
+    .ant-dropdown-menu {
+        background-color: var(--movius_text-gray-and-white);
+        border-radius: 0.5rem;
+    }
+}
+
+.greyed-out {
+    color: var(--movius_menu-text);
+}
+
+@media only screen and (max-width: 414px) {
+    .addCnt__controls {
+        display: block;
+    }
+    .addBtn {
+        margin-bottom: 20px;
+    }
+    .addCnt__control {
+        display: inline-flex;
+    }
+}
+
+@media only screen and (max-width: 414px) {
+    .ant-dropdown-menu {
+        width: 190px !important;
+        margin-left: 115px !important;
+    }
+}
+
+

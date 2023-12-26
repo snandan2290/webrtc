@@ -1,0 +1,27 @@
+{
+    "thread": { "id": "e1da87d9-0b73-4f8b-a928-d3ff1a627c24" },
+    "messages": [
+        {
+            "ts": "2020-11-17 16:58:17.258203",
+            "id": "32d4d035-16e0-429f-ab3b-3c75a4fac000",
+            "seq": 23,
+            "seq_a": 12,
+            "from": "12129195056",
+            "body": "zzzzzzzzz",
+            "multimedia_id": "",
+            "multimedia_content_type": ""
+        },
+        {
+            "ts": "2020-11-18 16:58:17.258203",
+            "id": "new-message-id-1",
+            "seq": 24,
+            "seq_a": 12,
+            "from": "12129195056",
+            "body": "lol",
+            "multimedia_id": "",
+            "multimedia_content_type": ""
+        }
+    ],
+    "return": 0,
+    "desc": "Success"
+}

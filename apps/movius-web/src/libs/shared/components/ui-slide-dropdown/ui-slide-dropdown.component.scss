@@ -1,0 +1,109 @@
+@import 'scss/variables';
+@import 'scss/mixins';
+
+$slidedrop: 'slidedrop';
+
+$inputHeight: 2rem;
+$brd-size: 0.0625rem;
+
+$main-color: var(--movius_black);
+$secondary-color: var(--movius_text-gray);
+
+:host {
+    height: $inputHeight;
+}
+
+:host ::ng-deep {
+    $nz-select-top-control: 'nz-select-top-control';
+    $nz-select-item: 'nz-select-item';
+    $nz-select-arrow: 'nz-select-arrow';
+
+    #{$nz-select-top-control} {
+        width: inherit !important;
+        padding: 0 0.6875rem 0 0 !important;
+
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+        border-bottom: none !important;
+        border-radius: 0 !important;
+        color: $main-color !important;
+    }
+
+    #{$nz-select-item} {
+        width: inherit !important;
+    }
+
+    #{$nz-select-arrow} {
+        display: none;
+    }
+
+    .ant-select-single .ant-select-selector .ant-select-selection-search {
+        left: 0;
+    }
+
+    // .ant-select-show-search.ant-select-single:not(.ant-select-customize-input) .ant-select-selector input {
+
+    //     &::placeholder{
+    //         color: $secondary-color;
+    //     }
+    //     @include placeholder {
+    //         color: $secondary-color;
+    //     }
+
+    //     &:focus {
+    //         &::placeholder {
+    //             color: $main-color;
+    //         }
+    //         @include placeholder {
+    //             color: $main-color;
+    //         }
+    //     }
+    // }
+}
+
+.#{$slidedrop} {
+    &__placeholder {
+        margin: 0 0 0.25rem 0;
+        line-height: 1rem;
+        visibility: hidden;
+        color: $secondary-color;
+        @include font-normal(0.75rem);
+
+        &.active {
+            visibility: visible;
+        }
+    }
+
+    &__select {
+        $parent: &;
+        position: relative;
+        width: inherit;
+
+        border-bottom: $brd-size solid $secondary-color;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 30%;
+            right: 0;
+
+            width: 0.5rem;
+            height: 0.3125rem;
+
+            @include background-image('/movius/common/icons-arrow-down.svg');
+        }
+
+        &.invalid {
+            @extend #{$parent};
+            border-bottom: $brd-size solid var(--movius_invalid-red);
+        }
+    }
+
+    &__option {
+    }
+
+    &__validation {
+
+    }
+}

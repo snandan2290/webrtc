@@ -1,0 +1,52 @@
+<div
+    class="lbtn"
+    nz-popover
+    [nzPopoverContent]="!disbaledCallButton ?
+                        false :
+                        (isDisplayErrorPopup() && e911DialPopover)"
+    [nzPopoverOverlayClassName]="'e911tooltip'"
+    nzTooltipPlacement="top"
+>
+    <button
+        class="phoneBtn--crcl lbtn__button"
+        [class.disabled]="isDisabled && disbaledCallButton"
+        [disabled]="isDisabled && disbaledCallButton"
+        (click)="onClick()"
+        (mouseover)="changeImage()"
+        (mouseleave)="resetImage()"
+        [ngStyle]="{ 'background-color': bg_color }"
+    >
+        <div
+            class="lbtn__img"
+            [style.backgroundImage]="'url(' + activeImageUri + ')'"
+        ></div>
+    </button>
+    <div class="lbtn__info" *ngIf="text">
+        <span>{{ text }}</span>
+    </div>
+</div>
+<ng-template #e911DialPopover>
+    <!-- TECH-DEBT: CB:20Jul2021: Duplications detected. Consider extracting template to shell with introduced tempalte-variable for status OR separate comp. -->
+    <div class="e911Pop--error">
+        <p>Sorry!</p>
+        <p class="e911Pop--error" [ngSwitch]="isDisabled">
+            <ng-template ngSwitchCase="network-error">
+                Network Unreachable
+            </ng-template>
+            <ng-template ngSwitchCase="calls-not-allowed">
+                Call functionality has been disabled for your organization
+            </ng-template>
+            <ng-template ngSwitchCase="mic-not-allowed">
+                To enable calling functionality, please permit to access the microphone
+            </ng-template>
+            <ng-template ngSwitchCase="e911-declined">
+                You have not accepted E911 Terms and Conditions. To enable
+                calling functionality, please enter an address for E911 under
+                <a routerLink="/settings/e911">Settings > E911</a>
+            </ng-template>
+            <ng-template ngSwitchCase="another-active-call">
+                Another call in progress.
+            </ng-template>
+        </p>
+    </div>
+</ng-template>

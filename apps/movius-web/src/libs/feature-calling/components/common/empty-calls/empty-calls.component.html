@@ -1,0 +1,65 @@
+<pane-frame
+    [isBodyCentered]="true"
+    [includeDefaultBody]="false"
+    [includeDefaultHeader]="false"
+    [includeDefaultFooter]="false"
+>
+    <div mainCustom class="emptyCalls">
+        <div class="emptyCalls__caption">
+            <div class="emptyCalls__captionIco"></div>
+            <div class="emptyCalls__captionTxt">
+                Your contacts are waiting to hear from you! Click
+                <strong>Make a Call</strong> to begin dialing a number.
+            </div>
+        </div>
+
+        <div
+            class="emptyCalls__controls"
+            nz-popover
+            [nzPopoverContent]="disbaledCallButton && e911DialPopover"
+            [nzPopoverOverlayClassName]="'e911tooltip'"
+            nzTooltipPlacement="top"
+        >
+            <button
+                [disabled]="disbaledCallButton || getConnectionErrorValue == true"
+                [class.disabled]="disbaledCallButton"
+                data-cy="call-button"
+                class="emptyCalls__callBtn"
+                [routerLink]="['./call/new']"
+                (click)="onCall()"
+            >
+                Make a Call
+            </button>
+        </div>
+    </div>
+</pane-frame>
+
+<ng-template #e911DialPopover>
+    <!-- TECH-DEBT: CB:20Jul2021: Duplications detected. Consider extracting template to shell with introduced tempalte-variable for status OR separate comp. -->
+    <div class="e911Pop--error">
+        <p>Sorry!</p>
+        <p class="e911Pop--error" [ngSwitch]="callingStatus">
+            <ng-template ngSwitchCase="network-error">
+                Network Unreachable
+            </ng-template>
+            <ng-template ngSwitchCase="calls-not-allowed">
+                Call functionality has been disabled for your organization
+            </ng-template>
+            <ng-template ngSwitchCase="mic-not-allowed">
+                To enable calling functionality, please permit to access the microphone
+            </ng-template>
+            <ng-template ngSwitchCase="e911-declined">
+                You have not accepted E911 Terms and Conditions. To enable
+                calling functionality, please enter an address for E911 under
+                <a routerLink="/settings/e911">Settings > E911</a>
+            </ng-template>
+            <ng-template ngSwitchCase="another-active-call">
+                Another call in progress.
+            </ng-template>
+        </p>
+    </div>
+</ng-template>
+
+<movius-web-general-failure style="display: none;"
+    (passConnectionError)="getConnectionError($event)">
+</movius-web-general-failure>

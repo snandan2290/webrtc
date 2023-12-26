@@ -1,0 +1,43 @@
+<pane-frame
+    class="privacy-sets privacy-sets__pane"
+    [includeDefaultHeader]="false"
+    [includeDefaultFooter]="false"
+    *ngIf="view$ | async as view"
+>
+    <div class="privacy-sets__header" headingCustom>
+        <div class="privacy-sets__headerTxt">Privacy Settings</div>
+    </div>
+    <div mainCustom class="privacy-sets__main">
+        <div class="privacy-sets__controls">
+            <div class="privacy-sets__cntName">Allow use of personal data</div>
+            <div
+                class="privacy-sets__cntCtrl"
+                [ngClass]="getConnectionErrorValue === true ? 'privacy-sets__cntCtrl-disabled' : 'privacy-sets__cntCtrl'"
+                (click)="
+                    onTermAcceptedChanged(view.userEmail, !view.isAccepted)
+                "
+            >
+                <nz-switch
+                    class="privacy-sets__switch"
+                    [ngModel]="view.isAccepted"
+                    [nzDisabled]="getConnectionErrorValue === true ? true : false"
+                >
+                </nz-switch>
+                <div class="privacy-sets__switchCheck" *ngIf="view.isAccepted"></div>
+            </div>
+        </div>
+
+        <div class="privacy-sets__termsBlock">
+            This application requires the use of your personal data as defined
+            in
+            <a
+                class="privacy-sets__termsLink"
+                (click)="onTermsClicked(view.userEmail)"
+                >Terms & Conditions</a
+            >. You agreed to allow the use of this data when you intially signed
+            up for this service
+        </div>
+    </div>
+</pane-frame>
+
+<movius-web-general-failure class="error-class" (passConnectionError)="getConnectionError($event)"></movius-web-general-failure>

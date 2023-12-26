@@ -1,0 +1,73 @@
+@import '../../../../assets/scss/variables';
+
+.commitem {
+    $self: &;
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+
+    height: 100%;
+
+    background: unset;
+    word-break: keep-all;
+
+    align-items: center;
+
+    &__align_item {
+        height: 20px;
+        align-items: center;
+        margin: auto -14px auto -30px;
+        cursor: pointer;
+        fill: var(--black);
+    }
+
+    &__align_item_group {
+        height: 20px;
+        align-items: center;
+        margin: auto -8px auto -20px;
+        cursor: pointer;
+    }
+
+    &__customLogo {
+    }
+
+    &__content {
+        display: inherit;
+        flex-direction: column;
+        min-width: 6rem;
+
+        &.full-width {
+            width: 100%;
+        }
+    }
+
+    &__title {
+        font-size: large;
+        font-weight: bold;
+    }
+
+    &__subtitle {
+        font-size: small;
+        font-weight: normal;
+    }
+
+    &__addition {
+        margin-left: auto;
+    }
+
+    &--vertical {
+        @extend #{$self};
+        flex-direction: column;
+
+        #{$self}__content {
+            align-items: center;
+            text-align: center;
+        }
+
+        #{$self}__addition {
+            margin-left: initial;
+            margin-top: auto;
+        }
+    }
+
+}

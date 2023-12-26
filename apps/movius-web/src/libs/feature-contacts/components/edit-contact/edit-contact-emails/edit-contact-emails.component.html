@@ -1,0 +1,17 @@
+<div nz-row class="addCnt__email" *ngFor="let email of formArray.controls; let i = index;">
+    <div nz-col nzFlex="24">
+        <movius-web-ui-slide-input
+            cyAttribute="email"
+            uiTitle="Email"
+            [control]="email"
+        >
+        </movius-web-ui-slide-input>
+    </div>
+    <div
+        data-cy="remove-email-button()"
+        (click)="remove.emit(i)"
+        class="addCnt__removeBtn--rightAbs"
+        data-cy="remove-email-button"
+        nz-button
+    ></div>
+</div>

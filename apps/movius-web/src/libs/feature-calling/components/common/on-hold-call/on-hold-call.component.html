@@ -1,0 +1,35 @@
+<div class="onhold">
+    <div class="onhold__header">
+        <div class="onhold__caption">On Hold</div>
+        <movius-web-call-timer
+            class="onhold__timer"
+            [callId]="call.callId"
+        ></movius-web-call-timer>
+    </div>
+    <div class="onhold__content">
+        <communication-item class="onhold__item" [peer]="peer">
+            <p title class="onhold__name">
+                {{
+                    call.isAnonymous ? 'Anonymous' : peer.name || peer.multiLine
+                }}
+            </p>
+            <div addition class="onhold__buttons">
+                <div
+                    data-cy="call-swap-btn"
+                    class="onhold__swap gradBtn"
+                    (click)="swap.emit()"
+                >
+                    <div class="onhold__swapIco"></div>
+                    <div class="onhold__swapTxt">Swap call</div>
+                </div>
+                <movius-web-call-control-button
+                    data-cy="call-reject-btn"
+                    class="onhold__button endCall"
+                    [type]="callControlTypes.Stop"
+                    [isSmall]="true"
+                    (click)="reject.emit()"
+                ></movius-web-call-control-button>
+            </div>
+        </communication-item>
+    </div>
+</div>

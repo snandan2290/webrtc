@@ -1,0 +1,55 @@
+<div class="pop-outgo">
+    <div class="pop-outgo__header">
+        <div class="pop-outgo__caption">Outgoing</div>
+    </div>
+    <div class="pop-outgo__content">
+        <communication-item class="pop-outgo__item" [peer]="peer">
+            <p title class="pop-outgo__name">
+                {{ peer.name || peer.multiLine.includes('whatsapp:') ? peer.multiLine.replace('whatsapp:','') : peer.multiLine }}
+            </p>
+            <div addition class="pop-outgo__buttons">
+                <movius-web-call-control-button
+                    class="pop-outgo__button mute"
+                    [type]="callControlTypes.Mute"
+                    [isSmall]="true"
+                    [isGrad]="true"
+                    [isActive]="false"
+                ></movius-web-call-control-button>
+                <movius-web-call-control-button
+                    class="pop-outgo__button hold"
+                    [type]="callControlTypes.Hold"
+                    [isSmall]="true"
+                    [isGrad]="true"
+                    [isActive]="false"
+                ></movius-web-call-control-button>
+                <movius-web-call-control-button
+                    class="pop-outgo__button endCall"
+                    [type]="callControlTypes.Stop"
+                    [isSmall]="true"
+                    (click)="cancel.emit()"
+                ></movius-web-call-control-button>
+            </div>
+        </communication-item>
+    </div>
+    <!-- TODO: CB:26Feb2020: Example usage -->
+    <!-- <movius-web-other-incoming-call
+        class="pop-outgo__otherCall"
+        *ngIf="true"
+        [peer]="peer"
+        [call]="call"
+        [isTitleVisible]="true"
+        [isPhoneVisible]="false"
+    >
+    </movius-web-other-incoming-call> -->
+    <!-- TODO: CB:01Mar2020: Example usage -->
+    <!-- <movius-web-on-hold-call
+        [peer]="peer"
+        [call]="call"
+    >
+    </movius-web-on-hold-call>
+    <movius-web-on-hold-call
+        [peer]="peer"
+        [call]="call"
+    >
+    </movius-web-on-hold-call> -->
+</div>

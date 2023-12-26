@@ -1,0 +1,531 @@
+{
+    "version": 1,
+    "projects": {
+        "sip-client": {
+            "projectType": "application",
+            "schematics": {
+                "@schematics/angular:component": {
+                    "style": "scss"
+                }
+            },
+            "root": "apps/sip-client",
+            "sourceRoot": "apps/sip-client/src",
+            "prefix": "movius-web",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/apps/sip-client",
+                        "index": "apps/sip-client/src/index.html",
+                        "main": "apps/sip-client/src/main.ts",
+                        "polyfills": "apps/sip-client/src/polyfills.ts",
+                        "tsConfig": "apps/sip-client/tsconfig.app.json",
+                        "aot": true,
+                        "assets": [
+                            "apps/sip-client/src/favicon.ico",
+                            "apps/sip-client/src/assets"
+                        ],
+                        "styles": [
+                            "node_modules/ng-zorro-antd/src/ng-zorro-antd.min.css",
+                            "apps/sip-client/src/styles.scss"
+                        ],
+                        "scripts": []
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/sip-client/src/environments/environment.ts",
+                                    "with": "apps/sip-client/src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "2mb",
+                                    "maximumError": "6mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "6kb",
+                                    "maximumError": "10kb"
+                                }
+                            ]
+                        },
+                        "staging": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/sip-client/src/environments/environment.ts",
+                                    "with": "apps/sip-client/src/environments/environment.stg.ts"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "sip-client:build"
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "sip-client:build:production"
+                        }
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "sip-client:build"
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "apps/sip-client/tsconfig.app.json",
+                            "apps/sip-client/tsconfig.spec.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**",
+                            "!apps/sip-client/**/*"
+                        ]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "apps/sip-client/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                }
+            }
+        },
+        "sip-client-e2e": {
+            "root": "apps/sip-client-e2e",
+            "sourceRoot": "apps/sip-client-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/sip-client-e2e/cypress.json",
+                        "tsConfig": "apps/sip-client-e2e/tsconfig.e2e.json",
+                        "devServerTarget": "sip-client:serve"
+                    },
+                    "configurations": {
+                        "production": {
+                            "devServerTarget": "sip-client:serve:production"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": ["apps/sip-client-e2e/tsconfig.e2e.json"],
+                        "exclude": [
+                            "**/node_modules/**",
+                            "!apps/sip-client-e2e/**/*"
+                        ]
+                    }
+                }
+            }
+        },
+        "sip": {
+            "projectType": "library",
+            "root": "libs/sip",
+            "sourceRoot": "libs/sip/src",
+            "prefix": "movius-web",
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/sip/tsconfig.lib.json",
+                            "libs/sip/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/sip/**/*"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/sip/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                }
+            },
+            "schematics": {
+                "@schematics/angular:component": {
+                    "style": "scss"
+                }
+            }
+        },
+        "movius-web": {
+            "projectType": "application",
+            "schematics": {
+                "@schematics/angular:component": {
+                    "style": "scss"
+                }
+            },
+            "root": "apps/movius-web",
+            "sourceRoot": "apps/movius-web/src",
+            "prefix": "movius-web",
+            "architect": {
+                "build": {
+                    "builder": "@angular-devkit/build-angular:browser",
+                    "options": {
+                        "outputPath": "dist/apps/movius-web",
+                        "index": "apps/movius-web/src/index.html",
+                        "main": "apps/movius-web/src/main.ts",
+                        "polyfills": "apps/movius-web/src/polyfills.ts",
+                        "tsConfig": "apps/movius-web/tsconfig.app.json",
+                        "aot": true,
+                        "assets": [
+                            "apps/movius-web/src/favicon.ico",
+                            "apps/movius-web/src/assets",
+                            {
+                                "glob": "**/*",
+                                "input": "./node_modules/@ant-design/icons-angular/src/inline-svg/",
+                                "output": "/assets/"
+                            }
+                        ],
+                        "styles": [
+                            "node_modules/intl-tel-input/build/css/intlTelInput.css",
+                            "node_modules/ng-zorro-antd/src/ng-zorro-antd.min.css",
+                            "apps/movius-web/src/theme.less",
+                            "apps/movius-web/src/styles.scss"
+                        ],
+                        "stylePreprocessorOptions": {
+                            "includePaths": ["apps/movius-web/src/assets"]
+                        },
+                        "scripts": []
+                    },
+                    "configurations": {
+                        "production": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/movius-web/src/environments/environment.ts",
+                                    "with": "apps/movius-web/src/environments/environment.prod.ts"
+                                }
+                            ],
+                            "optimization": true,
+                            "outputHashing": "all",
+                            "sourceMap": false,
+                            "extractCss": true,
+                            "namedChunks": false,
+                            "extractLicenses": true,
+                            "vendorChunk": false,
+                            "buildOptimizer": true,
+                            "budgets": [
+                                {
+                                    "type": "initial",
+                                    "maximumWarning": "7mb",
+                                    "maximumError": "7mb"
+                                },
+                                {
+                                    "type": "anyComponentStyle",
+                                    "maximumWarning": "7kb",
+                                    "maximumError": "16kb"
+                                }
+                            ]
+                        },
+                        "staging": {
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/movius-web/src/environments/environment.ts",
+                                    "with": "apps/movius-web/src/environments/environment.stg.ts"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@angular-devkit/build-angular:dev-server",
+                    "options": {
+                        "browserTarget": "movius-web:build",
+                        "proxyConfig": "apps/movius-web/proxy.conf.json"
+                    },
+                    "configurations": {
+                        "production": {
+                            "browserTarget": "movius-web:build:production"
+                        }
+                    }
+                },
+                "extract-i18n": {
+                    "builder": "@angular-devkit/build-angular:extract-i18n",
+                    "options": {
+                        "browserTarget": "movius-web:build"
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "apps/movius-web/tsconfig.app.json",
+                            "apps/movius-web/tsconfig.spec.json"
+                        ],
+                        "exclude": [
+                            "**/node_modules/**",
+                            "!apps/movius-web/**/*"
+                        ]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "apps/movius-web/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                }
+            }
+        },
+        "movius-web-e2e": {
+            "root": "apps/movius-web-e2e",
+            "sourceRoot": "apps/movius-web-e2e/src",
+            "projectType": "application",
+            "architect": {
+                "e2e": {
+                    "builder": "@nrwl/cypress:cypress",
+                    "options": {
+                        "cypressConfig": "apps/movius-web-e2e/cypress.json",
+                        "tsConfig": "apps/movius-web-e2e/tsconfig.e2e.json",
+                        "devServerTarget": "movius-web:serve"
+                    },
+                    "configurations": {
+                        "production": {
+                            "devServerTarget": "movius-web:serve:production"
+                        }
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": ["apps/movius-web-e2e/tsconfig.e2e.json"],
+                        "exclude": [
+                            "**/node_modules/**",
+                            "!apps/movius-web-e2e/**/*"
+                        ]
+                    }
+                }
+            }
+        },
+        "domain": {
+            "root": "libs/domain",
+            "sourceRoot": "libs/domain/src",
+            "projectType": "library",
+            "schematics": {},
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/domain/tsconfig.lib.json",
+                            "libs/domain/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/domain/**/*"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/domain/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                }
+            }
+        },
+        "msgarph": {
+            "root": "libs/msgarph",
+            "sourceRoot": "libs/msgarph/src",
+            "projectType": "library",
+            "schematics": {},
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/msgarph/tsconfig.lib.json",
+                            "libs/msgarph/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/msgarph/**/*"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/msgarph/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                }
+            }
+        },
+        "encrypt": {
+            "root": "libs/encrypt",
+            "sourceRoot": "libs/encrypt/src",
+            "projectType": "library",
+            "schematics": {},
+            "architect": {
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "libs/encrypt/tsconfig.lib.json",
+                            "libs/encrypt/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!libs/encrypt/**/*"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "libs/encrypt/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                }
+            }
+        },
+        "electron": {
+            "root": "apps/electron",
+            "sourceRoot": "apps/electron/src",
+            "projectType": "application",
+            "prefix": "electron",
+            "schematics": {},
+            "architect": {
+                "build": {
+                    "builder": "@nrwl/node:build",
+                    "options": {
+                        "outputPath": "dist/apps/electron",
+                        "main": "apps/electron/src/app.ts",
+                        "tsConfig": "apps/electron/tsconfig.app.json",
+                        "assets": ["apps/electron/src/assets"]
+                    },
+                    "configurations": {
+                        "production": {
+                            "optimization": true,
+                            "extractLicenses": true,
+                            "inspect": false,
+                            "fileReplacements": [
+                                {
+                                    "replace": "apps/electron/src/environments/environment.ts",
+                                    "with": "apps/electron/src/environments/environment.prod.ts"
+                                }
+                            ]
+                        }
+                    }
+                },
+                "serve": {
+                    "builder": "@nrwl/node:execute",
+                    "options": {
+                        "buildTarget": "electron:build"
+                    }
+                },
+                "lint": {
+                    "builder": "@angular-devkit/build-angular:tslint",
+                    "options": {
+                        "tsConfig": [
+                            "apps/electron/tsconfig.app.json",
+                            "apps/electron/tsconfig.spec.json"
+                        ],
+                        "exclude": ["**/node_modules/**", "!apps/electron/**/*"]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "options": {
+                        "jestConfig": "apps/electron/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                }
+            }
+        },
+        "ts-logger": {
+            "projectType": "library",
+            "root": "libs/ts-logger",
+            "sourceRoot": "libs/ts-logger/src",
+            "prefix": "tsl",
+            "architect": {
+                "lint": {
+                    "builder": "@nrwl/linter:eslint",
+                    "options": {
+                        "lintFilePatterns": [
+                            "libs/ts-logger/src/**/*.ts",
+                            "libs/ts-logger/src/**/*.html"
+                        ]
+                    }
+                },
+                "test": {
+                    "builder": "@nrwl/jest:jest",
+                    "outputs": ["coverage/libs/ts-logger"],
+                    "options": {
+                        "jestConfig": "libs/ts-logger/jest.config.js",
+                        "passWithNoTests": true
+                    }
+                }
+            }
+        }
+    },
+    "cli": {
+        "defaultCollection": "@nrwl/angular",
+        "analytics": "0e0b3b24-9bf7-473c-9cc2-04caf922a95e"
+    },
+    "schematics": {
+        "@nrwl/workspace": {
+            "library": {
+                "linter": "tslint"
+            }
+        },
+        "@nrwl/cypress": {
+            "cypress-project": {
+                "linter": "tslint"
+            }
+        },
+        "@nrwl/node": {
+            "application": {
+                "linter": "tslint"
+            },
+            "library": {
+                "linter": "tslint"
+            }
+        },
+        "@nrwl/nest": {
+            "application": {
+                "linter": "tslint"
+            },
+            "library": {
+                "linter": "tslint"
+            }
+        },
+        "@nrwl/express": {
+            "application": {
+                "linter": "tslint"
+            },
+            "library": {
+                "linter": "tslint"
+            }
+        },
+        "@nrwl/angular:application": {
+            "style": "scss",
+            "linter": "eslint",
+            "unitTestRunner": "jest",
+            "e2eTestRunner": "cypress"
+        },
+        "@nrwl/angular:library": {
+            "style": "scss",
+            "linter": "eslint",
+            "unitTestRunner": "jest"
+        },
+        "@nrwl/angular:component": {
+            "style": "scss"
+        }
+    },
+    "defaultProject": "movius-web"
+}

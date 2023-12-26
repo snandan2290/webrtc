@@ -1,0 +1,182 @@
+<pane-frame
+    *ngIf="view$ | async as view"
+    class="cntInfo"
+    [includeDefaultHeader]="false"
+>
+    <movius-web-contact-header
+        *ngIf="view.contact as contact"
+        headingCustom
+        class="cntInfo__header"
+        [srcContactName]="getContactFriendlyName(contact)"
+        [srcContactAddress]="getContactFriendlyAddress(contact)"
+        [srcContactStatus]="''"
+        [addCustomLogo]="true"
+    >
+        <movius-web-contact-logo
+            customLogo
+            class="cntInfo__selfLogo"
+            [peer]="contact"
+            [alt]="'Contact Logo'"
+            [doZoomLetters]="true"
+        >
+        </movius-web-contact-logo>
+        <ng-container buttons class="cntInfo__controls">
+            <movius-web-labeled-button
+                *ngIf="contact.type == 'personal' || contact.type == 'organization'"
+                class="cntInfo__msg"
+                text="Message"
+                imgUri="assets/icons/movius/common/icons-contact-message.svg"
+                nz-dropdown
+                (clicked)="
+                    contact.phones?.length === 1
+                        ? onMessage(contact, contact.phones[0].phone)
+                        : null
+                "
+                [nzTrigger]="
+                    view.messagingStatus === 'allowed' &&
+                    contact.phones?.length > 1
+                        ? 'click'
+                        : false
+                "
+                [isDisabled]="
+                    view.messagingStatus !== 'allowed' ||
+                    !contact.phones?.length || checkValidNumornot(contact.phones[0].phone)
+                "
+                [nzDropdownMenu]="messageMenu"
+            ></movius-web-labeled-button>
+            <movius-web-labeled-button *ngIf="contact.type == 'Line'" data-cy="contact-type-button" text="{{contact.type}}"
+                imgUri='assets/icons/movius/contacts/icons-line-white.svg' (click)="onWeChatOrLine(contact, contact.type)">
+            </movius-web-labeled-button>
+
+            <movius-web-labeled-button *ngIf="contact.type == 'WeChat'" data-cy="contact-type-button" text="{{contact.type}}"
+                imgUri='assets/icons/movius/contacts/icons-wechat-white.svg' (click)="onWeChatOrLine(contact, contact.type)">
+
+            </movius-web-labeled-button>
+            <movius-web-labeled-button
+                *ngIf="contact.type == 'personal' || contact.type == 'organization'"
+                class="cntInfo__cll"
+                text="Call"
+                [isDisabled]="getConnectionErrorValue == true ? callingStatus_tmp : 
+                        disbaledCallButton
+                        ? view.callingStatus
+                        : !contact.phones?.length || checkValidNumornot(contact.phones[0].phone)
+                "
+                imgUri="assets/icons/movius/common/icons-contact-call.svg"
+                nz-dropdown
+                (clicked)="
+                    contact.phones?.length === 1
+                        ? onCall(contact, contact.phones[0].phone)
+                        : null
+                "
+                [nzTrigger]="
+                    contact.phones?.length > 1
+                        ? 'click'
+                        : false
+                "
+                [nzDropdownMenu]="callMenu"
+            ></movius-web-labeled-button>
+            <movius-web-labeled-button
+                *ngIf="contact.type == 'personal' || contact.type == 'organization'"
+                data-cy="edit-button"
+                [text]="
+                    contact.type ? 'Edit' : 'Add to Contacts'
+                "
+                [imgUri]="
+                    contact.type
+                        ? 'assets/icons/movius/contacts/icons-contact-edit.svg'
+                        : 'assets/icons/movius/common/icons-contact-create.svg'
+                "
+                (click)="onEdit(contact)"
+            ></movius-web-labeled-button>
+            <movius-web-labeled-button
+                data-cy="delete-button"
+                text="Delete"
+                imgUri="assets/icons/movius/contacts/icons-contact-delete.svg"
+                (clicked)="onDelete(view.contact.id, contact.phones[0]?.phone)"
+            >
+            </movius-web-labeled-button>
+            <movius-web-labeled-button
+                *ngIf="(contact.type === 'personal' || contact.type === 'organization') && view.whatsAppMessageEnabled && contact.phones[0]?.phone != '+911'"
+                data-cy="whatsapp-button"
+                text="WhatsApp"
+                imgUri="assets/icons/movius/contacts/ic_baseline-whatsapp.svg"
+                nz-dropdown
+                        (clicked)="
+                            contact.phones?.length === 1
+                                ? onWhatsAppMessage(view.contact.id, contact.phones[0]?.phone)
+                                : null
+                        "
+                [nzTrigger]="
+                        contact.phones?.length > 1
+                            ? 'click'
+                            : false
+                    "
+                [isDisabled]="
+                        view.messagingStatus !== 'allowed' ||
+                        !contact.phones?.length || checkValidNumornot(contact.phones[0].phone)
+                    "
+                [nzDropdownMenu]="whatsappcallMenu"
+            >
+            </movius-web-labeled-button>
+        </ng-container>
+        <nz-dropdown-menu #messageMenu="nzDropdownMenu">
+            <ul class="cntInfo__dropMenu" nz-menu>
+                <span *ngFor="let phone of contact.phones">
+                <li
+                    class="{{disableIfNotValidNum(phone.phone)}}"
+                    nz-menu-item
+                    (click)="onMessage(contact, phone.phone)"
+                >
+                    <p class="cntInfo__dropItemHeader">
+                        {{ phone.type | camelCap }}
+                    </p>
+                    <p class="cntInfo__dropItemContent">{{ addPulsToMultilineNumber(phone.phone) }}</p>
+                </li>
+            </span>
+            </ul>
+        </nz-dropdown-menu>
+        <nz-dropdown-menu #callMenu="nzDropdownMenu">
+            <ul class="cntInfo__dropMenu" nz-menu>
+                <span *ngFor="let phone of contact.phones">  
+                <li
+                    class="{{disableIfNotValidNum(phone.phone)}}"
+                    nz-menu-item
+                    (click)="onCall(contact, phone.phone)"
+                >
+                    <p class="cntInfo__dropItemHeader">
+                        {{ phone.type | camelCap }}
+                    </p>
+                    <p class="cntInfo__dropItemContent">{{ addPulsToMultilineNumber(phone.phone) }}</p>
+                </li>
+                </span>
+            </ul>
+        </nz-dropdown-menu>
+
+        <nz-dropdown-menu #whatsappcallMenu="nzDropdownMenu">
+            <ul class="cntInfo__dropMenu" nz-menu>
+             <span *ngFor="let phone of contact.phones">
+               <li
+                    class="{{disableIfNotValidNum(phone.phone)}}"
+                    nz-menu-item
+                    (click)="onWhatsAppMessage(view.contact.id, phone.phone)"
+                >
+                    <p class="cntInfo__dropItemHeader">
+                     {{ phone.type | camelCap }}
+                   </p>
+                   <p class="cntInfo__dropItemContent">{{ addPulsToMultilineNumber(phone.phone) }}</p>  
+                </li>
+             </span>
+            </ul>
+        </nz-dropdown-menu>
+    </movius-web-contact-header>
+
+    <div mainCustom class="cntInfo__container">
+        <movius-web-contact-details [userInfoFields]="view.info">
+        </movius-web-contact-details>
+    </div>
+</pane-frame>
+
+
+<movius-web-general-failure style="display: none;"
+    (passConnectionError)="getConnectionError($event)">
+</movius-web-general-failure>

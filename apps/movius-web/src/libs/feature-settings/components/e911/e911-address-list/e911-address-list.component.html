@@ -1,0 +1,36 @@
+<section class="emergency__addresses" nz-row>
+    <nz-radio-group class="emergency__options" [(ngModel)]="activeIndex">
+        <label
+            *ngFor="let item of addresses; let i = index"
+            class="emergency__option"
+            [class.is-active]="i === activeIndex"
+            nz-radio
+            [nzValue]="i"
+        >
+            {{ getAddressString(item) }}
+        </label>
+    </nz-radio-group>
+    <ng-template #loadingTemplate>Loading ...</ng-template>
+</section>
+<div nz-row class="emergency__controls" [nzJustify]="'end'">
+    <div nz-col>
+        <button
+            nz-button
+            nzType="text"
+            class="emergency__cancel"
+            (click)="onCancel()"
+        >
+            Cancel
+        </button>
+    </div>
+    <div nz-col>
+        <button
+            nz-button
+            nzType="text"
+            class="emergency__add"
+            (click)="onSave()"
+        >
+            Save
+        </button>
+    </div>
+</div>

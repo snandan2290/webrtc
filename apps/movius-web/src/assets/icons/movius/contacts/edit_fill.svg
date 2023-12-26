@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icons/contact/edit</title>
+    <g id="Teams-SSO" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Messages:-Empty-Copy-76" transform="translate(-817.000000, -346.000000)" fill="#FFFFFF">
+            <g id="Group-13" transform="translate(577.000000, 145.000000)">
+                <g id="Group-12" transform="translate(139.000000, 185.000000)">
+                    <g id="Group-9" transform="translate(85.000000, 0.000000)">
+                        <g id="icons/contact/edit" transform="translate(16.000000, 16.000000)">
+                            <path d="M8.46734328,2.86376119 L12.9504478,7.34686567 L4.48310448,15.814209 L0,15.814209 L0,11.3311045 L8.46734328,2.86376119 Z M11.9541493,0 C12.369194,0 12.7219104,0.145432836 13.0120597,0.43558209 L15.3786269,2.80119403 C15.6687761,3.09229851 15.814209,3.44477612 15.814209,3.8600597 C15.814209,4.27510448 15.6687761,4.6278209 15.3786269,4.91868657 L13.9467463,6.35056716 L9.46340299,1.86746269 L10.8955224,0.43558209 C11.1863881,0.145432836 11.5391045,0 11.9541493,0 Z"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

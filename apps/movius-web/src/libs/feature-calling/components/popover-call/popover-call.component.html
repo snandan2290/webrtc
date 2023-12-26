@@ -1,0 +1,26 @@
+<movius-web-popover-outgoing-call
+    class="outgoing"
+    *ngIf="isOutgoingCall"
+    [peer]="peer"
+    [call]="call"
+    (cancel)="cancel.emit()"
+></movius-web-popover-outgoing-call>
+<movius-web-popover-ongoing-call
+    class="ongoing"
+    *ngIf="isOngoingCall"
+    [peer]="peer"
+    [call]="call"
+    (reject)="cancel.emit()"
+    (mute)="mute.emit($event)"
+    (hold)="hold.emit($event)"
+    (swap)="swap.emit($event)"
+></movius-web-popover-ongoing-call>
+<movius-web-popover-incoming-call
+    class="incoming"
+    *ngIf="isIncomingCall"
+    [isStacked]="isStacked"
+    [peer]="peer"
+    [call]="call"
+    (accept)="accept.emit()"
+    (reject)="cancel.emit()"
+></movius-web-popover-incoming-call>

@@ -1,0 +1,245 @@
+@import '../../../../assets/scss/mixins';
+@import '../../../../assets/scss/variables';
+
+.chatspace {
+
+    &__padding {
+        padding: 0 16px 0 16px;
+        background-color: var(--movius_lightgray);
+    }
+
+    &__padding-height {
+        // padding: 0 1rem 0 1rem;
+        //background-color: white;
+    }
+    &__image-mobile{
+        padding: 0 1rem 0 1rem;
+    }
+
+    &__heading {
+    }
+
+    &__hName {
+        margin: 0 0 0 $spacing-s;
+        // @include font-semi-bold-600(1.5rem);
+        @include font-teams(18px);
+        word-break: keep-all;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        font-weight: 700;
+        cursor: pointer;
+        color: var(--black);
+    }
+
+    &__hPhone {
+        margin: 0 0 0 $spacing-s;
+        @include font-normal(0.875rem);
+        word-break: keep-all;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        cursor: pointer;
+    }
+
+    &__hCntLogo {
+        width: 2.5rem;
+        height: 2.5rem;
+        cursor: pointer;
+    }
+
+    &__hControls {
+        display: flex;
+        flex-direction: row;
+
+        > * {
+            margin-right: $spacing-xs;
+
+            &:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+
+    &__hBtn {
+        //TECH-DEBT: CB:08Apr2021: Consider using labeled-button with correlated styling instead.
+        padding: 0;
+        @include simple-round-btn(1.75rem, 1.75rem);
+        background-color: $movius-blue;
+        &:not(:disabled):hover {
+            background-color: $movius-dark-blue;
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            @include unSelectable();
+        }
+    }
+
+    &__hCall {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $movius-blue;
+        &:not(:disabled):hover {
+            background-color: $movius-dark-blue;
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            @include unSelectable();
+        }
+    }
+
+    &__hCallIco {
+        width: 50%;
+        height: 50%;
+        @include background-image('movius/common/icons-contact-call.svg');
+        background-size: contain;
+    }
+
+    &__hOther {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__hOtherIco {
+        width: 50%;
+        height: 50%;
+        //CB: INF: 15Dec2020: Disabled style - icons-all-message-more.svg
+        //@include background-image('/movius/messages/icons-all-message-more.svg');
+        @include background-image('/movius/messages/icons-all-more.svg');
+        background-size: contain;
+    }
+
+    &__hMuteIcon {
+        width: 50%;
+        height: 50%;
+        @include background-image('/movius/messages/ion_notifications-off-outline.svg');
+        background-size: contain;
+    }
+
+    &__hUnmuteIcon {
+        width: 50%;
+        height: 50%;
+        @include background-image('/movius/messages/icons-unmute-bell.svg');
+        background-size: contain;
+    }
+
+    &__hGroupInfoIcon {
+        width: 50%;
+        height: 50%;
+        @include background-image('/movius/messages/icons-all-info.svg');
+        background-size: contain;
+    }
+
+    &__image-templete {
+        @include screen-mobile-above{
+            background-color: $movius_lightgray;
+        }
+        @include screen-mobile{
+            background-color: $movius_white;
+        }
+    }
+
+    &__image{
+
+    }
+
+    &__chat {
+        overflow: auto;
+    }
+
+    &__controls{
+        margin: $spacing-m 0 $spacing-m 0;
+        @include screen-mobile{
+            margin: 1px 0 1px 0;
+        }
+        overflow-y: hidden;
+        overflow-x: hidden;
+    }
+
+    &__form {
+    }
+
+    @include dropDownMenu;
+    &__dropMenu {
+        position: absolute;
+        left: -11rem;
+        top: 0rem;
+    }
+    &__dropMenuItem {
+        padding: calc(#{$spacing-xxl/2}) 1.375rem calc(#{$spacing-xxl/2}) 1.375rem;
+
+        &:first-child {
+            padding-top: $spacing-xxl;
+        }
+        &:last-child {
+            padding-bottom: $spacing-xxl;
+        }
+    }
+    &__dropMenuItem:hover {
+        background-color: var(--movius_hover_grey_whitegrey);
+    }
+}
+
+.anonymousDisableCall {
+    font-size: 12px;
+    font-weight: 600;
+    color: black;
+    margin-bottom: 0px;
+}
+
+::ng-deep .anonymousDisableCallPopup {
+    width: 170px;
+
+    &::ng-deep {
+        .ant-popover-inner {
+            border-radius: 0.5rem;
+        }
+    }
+}
+
+
+.start {
+            &__headingError {
+                display: block;
+                justify-content: center;
+                align-items: center;
+                word-break: break-all;
+
+                .errorVariant {
+                    color: var(--movius_invalid-red);
+     }
+    }
+}
+
+.align_item {
+    display: flex;
+    height: 20px;
+    align-items: center;
+    position: absolute;
+    margin: 28px -24px;
+    cursor: pointer;
+}
+
+.mobile_ui_send_picture {
+    // background-color: $movius_lightgray;
+}
+
+.chatspace__image-mobile{
+    background-color: $movius_white !important;
+}
+
+
+@media only screen and (max-width: 414px) {
+    ::ng-deep {
+        .mobile_ui_send_picture {
+            .pane__body_min_height {
+                height: 565px !important;
+                padding-right: 0px !important;
+            }
+        }
+    }
+}

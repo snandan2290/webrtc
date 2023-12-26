@@ -1,0 +1,13 @@
+<movius-web-shared-details-workspace
+    *ngIf="view$ | async as view"
+    [getActiveChatId]="getActiveChatId"
+    [userGhost]="view.ghost"
+    [doShowAddToExisting]="(peers$ | async)?.length > 0"
+    (onCreateContactOccured)="onCreateContact($event)"
+    (onAddToContactOccured)="onAddToContact($event)"
+    (onDeleteContactOccured) = "onDeleteContact($event)"
+    (onWhatsAppMessageOccured) = "onWhatsAppMessage($event)"
+    (onLineMessageOccured) = "onLineMessage($event)"
+    (onWeChatMessageOccured) = "onWeChatMessage($event)"
+>
+</movius-web-shared-details-workspace>

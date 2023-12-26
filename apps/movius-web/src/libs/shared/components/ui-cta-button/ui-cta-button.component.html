@@ -1,0 +1,4 @@
+<button class="cta-btn {{ btnType ? btnType.toLowerCase() : '' }}" [class.disabled]="isDisabled"
+    [disabled]="isDisabled" (click)="clicked.emit()">
+    <div class="cta-btn__ico" [class.disabled]="isDisabled"></div>
+</button>

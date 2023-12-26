@@ -1,0 +1,21 @@
+@import 'scss/variables';
+@import 'scss/mixins';
+
+.chat {
+    $self: &;
+    display: flex;
+    flex-direction: column;
+    align-self: flex-start;
+    @include screen-mobile-above{
+        padding-left: 70px;
+        padding-right: 30px;
+    }
+    @include screen-mobile{
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+
+    &__empty {
+    }
+}

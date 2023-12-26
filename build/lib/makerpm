@@ -1,0 +1,7 @@
+#!/usr/bin/perl -w
+# standard minimal mcp/*/build/makerpm
+# repositories should copy or link to this file
+# builds all spec files in the build directory, or only the spec files passed on the command line
+BEGIN { unshift(@INC, "lib"); }
+use makerpm;
+makerpm::run(\@ARGV);

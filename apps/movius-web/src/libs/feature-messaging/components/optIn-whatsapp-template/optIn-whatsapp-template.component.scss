@@ -1,0 +1,264 @@
+@import 'scss/variables';
+@import 'scss/mixins';
+@import 'scss/app.scss';
+
+$optIn: 'optIn';
+
+.#{$optIn} {
+    &__viewport {
+        width: 100%;
+        overflow-y: auto;
+        @extend %scroll;
+    }
+
+    &__main {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        justify-content: space-between;
+        //background-color: var(--add-user-popup-bgcolor-white-dark);
+
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    &__section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    &__part {
+        width: 100%;
+        max-height: 24.4rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        margin: 0.8125rem 0 0 0;
+        border-bottom: 1px solid var(--movius_border-gray);
+
+        overflow-y: scroll;
+        @include scrollbars(0.375rem, var(--movius_darkgray), transparent);
+
+        @include chrome-safari {
+            overflow-y: overlay;
+            @include scrollbars-overlay(1rem, var(--movius_darkgray), transparent);
+        }
+
+        &--limitedHeight {
+            max-height: 40vh;
+        }
+    }
+
+    //#region Header
+    &__header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        margin: $spacing-l $spacing-m 0 $spacing-m;
+    }
+
+    &__hCaption {
+        display: flex;
+        align-self: flex-start;
+        @include font-bold(1.125rem);
+    }
+
+    &__hClose {
+        display: flex;
+        align-self: center;
+        cursor: pointer;
+
+        width: 0.75rem;
+        height: 0.75rem;
+        @include background-image('/movius/common/icons-all-close.svg');
+    }
+
+    //#endregion Header
+
+
+    //#region Contact
+    &__cntShell {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: nowrap;
+        opacity: 1;
+        cursor: pointer;
+
+        padding: 0.50rem $spacing-m 0.50rem $spacing-m;
+        &:first-of-type {
+            border-top: 1px solid var(--movius_border-gray);
+        }
+
+        &:last-of-type {
+            border-bottom: 0;
+        }
+
+        border-bottom: 1px solid var(--movius_border-gray);
+
+        &.inactive {
+            //background-color: #d3d3d3;
+            background-color: var(--movius_hover_grey_whitegrey);
+            pointer-events: none;
+        }
+    }
+
+    &__cntLogo {
+        width: 2.5rem;
+        min-width: 2.5rem;
+        height: 2.5rem;
+    }
+
+    &__cntInfo {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        width: 80%;
+        margin: auto;
+    }
+
+    &__cntName {
+        @include font-semi-bold-600(1rem);
+        width: 80%;
+        word-break: break-word;
+        //color: var(--movius_black);
+        color: var(--black);
+        padding: 4px;
+        max-width: 375px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        margin: auto 0;
+    }
+
+    &__cntMsg{
+        padding-left: 25px;
+        font-size: 0.875rem;
+        font-weight: normal;
+        color: #808080;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        width: 95%;
+        margin: auto 0;
+    }
+
+    &__userInfo{
+        right: 25px !important;
+        position: absolute !important;
+        margin-top: 12px !important;
+        cursor: pointer !important;
+        pointer-events: all !important;
+    }
+
+    &__profileInfo {
+        height: 25px;
+        width: 25px;
+        background-color: $movius-blue;
+        border-radius: 50%;
+        margin: 6px 0px 16px 0px;
+        padding: 7px 4px;
+        object-fit: contain;
+    }
+
+    //#region Contorls
+    &__controls {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin: $spacing-m $spacing-m $spacing-m $spacing-m;
+
+        max-height: 4.6875rem;
+    }
+
+    &__actionBtn {
+        width: auto;
+        min-width: 6.5625rem;
+        height: 2.25rem;
+        margin: 0 0 0 $spacing-l;
+
+        @extend %sync-btn--apply;
+
+        &:only-child {
+            margin: 0;
+        }
+    }
+    //#endregion Controls
+
+    ::ng-deep.pane {
+        padding: 0;
+    }
+
+    $dropMenuBorderRadius: 0.5rem;
+
+    &__dropMenu {
+
+        width: 19.0625rem;
+        max-height: 18rem;
+        padding: 20px;
+        overflow-y: auto;
+        @extend %scroll;
+
+        border-radius: $dropMenuBorderRadius;
+        background-color: var(--movius_white);
+        color: var(--black);
+        box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.1);
+    }
+
+    &__dropMenuHeader {
+        font-size: 20px;
+        font-weight: 800;
+        margin: 0 0 14px 0;
+    }
+
+    &__dropMenuItem {
+        $self: &;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding: 8px;
+        //border-top: 2px solid #eaeaea;
+        border-top: 2px solid var(--movius_border-gray-optin-history-popup);
+        // margin: 0 0 $spacing-xs 0;
+
+        @include font-normal(0.875rem);
+    }
+
+    &__participantsHeader {
+        margin: 10px 0 0 25px;
+        font-size: 14px;
+        font-weight: 800;
+    }
+
+    &__whatsapp_icon {
+        //margin-top: 10px;
+        //margin-left: 10px;
+        margin-top: 0px;
+        margin-left: 5px;
+        margin-right: 3px;
+    }
+
+    &__participantsSubHeader {
+        margin: 6px 0 0 25px;
+        font-size: 12px;
+    }
+
+    &__breakLine {
+        border-top: 2px solid var(--movius_border-gray-2);
+      }
+
+    ::ng-deep .cdk-virtual-scroll-orientation-vertical{
+        .cdk-virtual-scroll-content-wrapper {
+            width: 100%;
+        }
+    }
+}

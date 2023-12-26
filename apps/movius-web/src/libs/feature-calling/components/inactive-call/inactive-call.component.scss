@@ -1,0 +1,138 @@
+@import '../../../../assets/scss/variables';
+@import '../../../../assets/scss/mixins';
+@import '../../../../assets/scss/app.scss';
+
+%bordered {
+    @include bottom-bordered(darken($color: $movius_lightgray, $amount: 30));
+}
+
+%central-frame{
+    width: $cnt-details-def-width;
+    margin: 0 auto;
+}
+
+$history: 'history';
+.#{$history} {
+    @extend %scroll;
+
+    &__heading {
+        margin-top: $cnt-details-top-margin;
+    }
+
+    &__controls {
+        justify-content: space-between;
+    }
+
+    &__container {
+        height: 50%;
+        margin: $spacing-xxl-7 0 auto 0;
+    }
+
+    &__detailsLink {
+    }
+
+    &__libCaption {
+        @extend %central-frame;
+
+        display: flex;
+        flex-direction: row;
+        margin-bottom: $spacing-m;
+
+        @include generalFont;
+        @include font-semi-bold-600(1.125rem);
+        color: var(--movius_black);
+    }
+
+    &__clearAll {
+        margin-left: auto;
+        //CB: 18Nov2020: Styles for btn to be 'outside-of-container'. Remove when 100% obsolete.
+        //margin-right: $spacing-l;
+
+        @include generalFont;
+        @include font-semi-bold-600(0.875rem);
+
+        //border: solid 1px var(--movius_colors-primary-green-2);
+        border: none;
+    }
+
+    &__historyItem {
+        display: block;
+        height: 2.5rem;
+        padding: 0 0 0 $spacing-xl;
+        @include bottom-bordered(darken($color: $movius_lightgray, $amount: 10));
+
+        &:first-of-type {
+            @include top-bordered(darken($color: $movius_lightgray, $amount: 10));
+        }
+
+        &.active {
+        }
+
+        &:hover {
+            cursor: pointer;
+            background: var(--movius_lightgray);
+
+            .#{history}__removeItemIco {
+                visibility: visible;
+            }
+        }
+    }
+
+    &__itemControls {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__duration {
+        margin: auto;
+        padding-right: $spacing-xs;
+    }
+
+    &__removeItem{
+        line-height: 2.5rem;
+        padding: 0 $spacing-xs 0 $spacing-xs;
+
+        //CB: 18Nov2020: Styles for btn to be 'outside-of-container'. Remove when 100% obsolete.
+        //background: white;
+        //@include bottom-bordered($movius_white);
+        //@include top-bordered($movius_white);
+    }
+
+    &__removeItemIco {
+        visibility: hidden;
+    }
+
+    &__itemCarrier {
+        display: flex;
+        align-items: center;
+    }
+
+    &__itemType, &__itemText{
+        display: inline-block;
+        word-break: keep-all;
+        color: var(--movius_black);
+    }
+    &__itemText {
+        color: var(--movius_text-gray);
+        margin-left: $spacing-xxl-2;
+    }
+
+    &__controls {
+        justify-content: space-between;
+    }
+
+    &__button {
+        display: inline-block;
+        margin: $spacing-m;
+        background: var(--movius_menu-secondary);
+    }
+
+    &__library {
+        @extend %central-frame;
+        height: 100%;
+
+        @extend %scroll;
+    }
+}

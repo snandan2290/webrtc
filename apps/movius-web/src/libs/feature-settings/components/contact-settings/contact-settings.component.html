@@ -1,0 +1,92 @@
+<ng-container *ngIf="view$ | async as view">
+    <pane-frame
+        class="cntSettings cntSettings__pane"
+        [includeDefaultHeader]="false"
+        [includeDefaultBody]="false"
+        [includeDefaultFooter]="false"
+        *ngIf="(view.msGraphProfileEmail || syncExchange) else connectContactsSettings"
+    >
+        <div mainCustom class="cntSettings__main">
+            <div class="cntSettings__header" headingCustom>
+                <div class="cntSettings__headerTxt">
+                    Exchange Contact
+                </div>
+            </div>
+
+            <div class="cntSettings__caption">
+                <div class="cntSettings__capSubTitle">
+                    <div class="cntSettings__checkmark"></div>
+                    <div class="cntSettings__capTxt">
+                        <span class="cntSettings__info--header"
+                            >Exchange Contacts</span
+                        >
+                    </div>
+                    <div class="cntSettings__capTxt">
+                        <span class="cntSettings__info">Synced to </span
+                        ><span class="cntSettings__info cntSettings__link">{{
+                            view.msGraphProfileEmail ? view.msGraphProfileEmail : getEmail(view)
+                        }}</span
+                        ><span class="cntSettings__info"> account</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <button
+                data-cy="disable-sync-button"
+                (click)="onDisableExchangeSync()"
+                class="cntSettings__manSyncBtn--logout"
+            >
+                Log Out
+            </button> -->
+
+            <nz-divider></nz-divider>
+
+            <div class="cntSettings__initialized">
+                <section class="cntSettings__manual">
+                    <div class="cntSettings__manTxt">
+                        Manually sync your contacts to Microsoft Exchange Server
+                    </div>
+                    <button
+                        data-cy="manual-sync-button"
+                        [disabled]="view.isSyncing"
+                        (click)="onManualSync()"
+                        class="cntSettings__manSyncBtn"
+                    >
+                       <span [ngClass]="{ spinnered: view.isSyncing }">Manual Sync</span>
+                    </button>
+                    <span *ngIf="view.isSyncing">Syncing...</span>
+                    <div class="cntSettings__manTxt">
+                        or Set automatic interval to sync your contacts to
+                        Microsoft Exchange Server
+                    </div>
+                </section>
+                <section class="cntSettings__intervals" nz-row>
+                    <!-- <p class="cntSettings__info">Sync interval</p> -->
+                    <nz-radio-group
+                        class="cntSettings__options"
+                        nz-col
+                        [nzSpan]="24"
+                        [ngModel]="view.exchangeSyncSettings.syncInterval"
+                        (ngModelChange)="onSyncIntervalChange($event)"
+                    >
+                        <div
+                            class="cntSettings__option"
+                            *ngFor="let item of intervalOptions; let i = index"
+                        >
+                            <label
+                                data-cy="interval-option-item"
+                                class="cntSettings__optTxt"
+                                nz-radio
+                                [nzValue]="item[0]"
+                                >{{ item[1] }}</label
+                            >
+                        </div>
+                    </nz-radio-group>
+                </section>
+            </div>
+        </div>
+    </pane-frame>
+    <ng-template #connectContactsSettings>
+        <movius-web-connect-contacts-settings></movius-web-connect-contacts-settings>
+    </ng-template>
+</ng-container>

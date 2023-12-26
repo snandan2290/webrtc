@@ -1,0 +1,84 @@
+@import '../../../../assets/scss/variables';
+@import '../../../../assets/scss/mixins';
+
+.cntHeader {
+
+    %noOverflow {
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+
+    &__name {
+        margin: 0;
+        word-break: break-word;
+        @include font-bold(1.5rem);
+        color: var(--black);
+        //@extend %noOverflow;
+        white-space: pre-line;
+    }
+
+    &__phone {
+        margin: $spacing-xxs 0 0 0;
+        @include font-normal(1rem);
+        color: var(--movius_black)-two;
+        @extend %noOverflow;
+    }
+
+    &__status {
+        margin: $spacing-xxs 0 0 0;
+        @include font-normal(0.875rem);
+        @extend %noOverflow;
+    }
+
+    &__controls {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        flex-wrap: wrap;
+        width: 100%;
+        margin: $spacing-m 0 0 0;
+        color: var(--black);
+
+        &:empty {
+            display: none;
+        }
+    }
+
+    &__contactInfo {
+        margin: $spacing-l auto 0 auto;
+        max-width: 40rem;
+        padding: 0 3rem;
+    }
+}
+
+.contact-info {
+    &--popup {
+        margin: $spacing-xs auto 0 auto;
+    }
+}
+
+.contact-name {
+    &--popup {
+        @include font-semi-bold-600(1.5rem);
+    }
+}
+
+.contact-phone {
+    &--popup {
+        margin: $spacing-xs 0 0 0;
+        @include font-normal(1.125rem);
+    }
+}
+
+.contact-type {
+    color: var(--movius_text-gray);
+}
+
+.contact-status {
+    color: var(--movius_black);
+}
+
+.clickable {
+    cursor: pointer;
+}

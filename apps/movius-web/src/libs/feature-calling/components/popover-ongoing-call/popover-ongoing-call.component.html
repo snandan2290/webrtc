@@ -1,0 +1,51 @@
+<div class="pop-ongo" *ngIf="call.status === 'active'; else onHoldCall">
+    <div class="pop-ongo__header">
+        <div class="pop-ongo__caption">Ongoing</div>
+        <movius-web-call-timer
+            class="pop-ongo__timer"
+            [callId]="call.callId"
+        ></movius-web-call-timer>
+    </div>
+    <div class="pop-ongo__content">
+        <communication-item class="pop-ongo__item" [peer]="peer">
+            <p title class="pop-ongo__name">
+                {{
+                    call.isAnonymous ? 'Anonymous' : peer.name || peer.multiLine
+                }}
+            </p>
+            <div addition class="pop-ongo__buttons">
+                <movius-web-call-control-button
+                    class="pop-ongo__button mute"
+                    [type]="callControlTypes.Mute"
+                    [isSmall]="true"
+                    [isGrad]="true"
+                    [isActive]="call.isMuted"
+                    (click)="onMute(!call.isMuted)"
+                ></movius-web-call-control-button>
+                <movius-web-call-control-button
+                    class="pop-ongo__button hold"
+                    [type]="callControlTypes.Hold"
+                    [isSmall]="true"
+                    [isGrad]="true"
+                    [isActive]="call.isHold"
+                    (click)="onHold(!call.isHold)"
+                ></movius-web-call-control-button>
+                <movius-web-call-control-button
+                    class="pop-ongo__button endCall"
+                    [type]="callControlTypes.Stop"
+                    [isSmall]="true"
+                    (click)="reject.emit()"
+                ></movius-web-call-control-button>
+            </div>
+        </communication-item>
+    </div>
+</div>
+<ng-template #onHoldCall>
+    <movius-web-on-hold-call
+        [peer]="peer"
+        [call]="call"
+        (reject)="reject.emit()"
+        (swap)="swap.emit()"
+    >
+    </movius-web-on-hold-call>
+</ng-template>

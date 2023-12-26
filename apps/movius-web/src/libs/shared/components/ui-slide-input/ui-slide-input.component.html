@@ -1,0 +1,109 @@
+<div class="slidein__inpCtrl--header">
+    <ng-container *ngIf="doSlideTitle">
+        <div class="slidein__inpPlaceholderWrapper">
+            <!--  [style.display]="getDisplayProperty" -->
+            <span
+                class="slidein__inpPlaceholder"
+                [style.visibility]="getHeaderVisibility"
+            >
+                {{ uiTitle }}
+            </span>
+            <!--   [style.display]="getDisplayProperty" -->
+            <sup
+                *ngIf="isRequiredControl"
+                [ngClass]="[(uiTitle === 'Business Phone' || uiTitle === 'First name' || uiTitle === 'Last name') && MandatoryStar  ?'slidein__inpPlaceholder phone-required' : 'slidein__inpPlaceholder--required']" 
+                [style.visibility]="getHeaderVisibility"
+            >
+                *
+            </sup>
+        </div>
+    </ng-container>
+    <input
+        *ngIf="!isDate && !isNumber && !!control"
+        [attr.data-cy]="cyAttribute"
+        placeholder=" "
+        class="slidein__inpFld"
+        #inputFieldControl
+        [formControl]="control"
+        autocomplete="disabled"
+        type="text"
+        (click)="currentActive = true"
+        (focusout)="currentActive = false"
+        (input)="onInputHandler($event)"
+        [ngClass]="{
+            'slidein__inpFld--invalid': control.dirty && control.invalid && MandatoryStar
+        }"
+    />
+    <input
+        *ngIf="!isDate && !isNumber && !control"
+        [attr.data-cy]="cyAttribute"
+        placeholder=" "
+        class="slidein__inpFld"
+        autocomplete="disabled"
+        #inputField
+        [formControlName]="inputFormControlName"
+        type="text"
+        (click)="currentActive = true"
+        (focusout)="currentActive = false"
+        (input)="onInputHandler($event)"
+        [ngClass]="{
+            'slidein__inpFld--invalid':
+                !!form &&
+                !!inputFormControlName &&
+                !!(form?.controls)[inputFormControlName] &&
+                (form?.controls)[inputFormControlName].invalid
+        }"
+    />
+    <nz-input-number
+        *ngIf="isNumber"
+        [attr.data-cy]="cyAttribute"
+        placeholder=" "
+        class="slidein__inpFld slidein__inpFld--numeric"
+        #inputField
+        [formControlName]="inputFormControlName"
+        type="text"
+        (click)="currentActive = true"
+        (focusout)="currentActive = false"
+        (input)="onInputHandler($event)"
+        [ngClass]="{
+            'slidein__inpFld--invalid':
+                !!form &&
+                !!inputFormControlName &&
+                !!(form?.controls)[inputFormControlName] &&
+                (form?.controls)[inputFormControlName].invalid
+        }"
+    ></nz-input-number>
+    <nz-date-picker
+        *ngIf="isDate"
+        placeholder=" "
+        class="slidein__inpFld slidein__inpFld--numeric"
+        #inputFieldControl
+        [formControl]="control"
+        type="text"
+        (click)="currentActive = true"
+        (focusout)="currentActive = false"
+        (input)="onInputHandler($event)"
+        nzFormat="MM/dd/yyyy"
+        [ngClass]="{
+            'slidein__inpFld--invalid': control.dirty && control.invalid
+        }"
+    >
+    </nz-date-picker>
+
+    <!--  [class.slidein__mainPlaceholder--narrow]="!canGrowHeight" -->
+    <span class="slidein__mainPlaceholder" [class.req]="isRequiredControl && MandatoryStar">
+        {{ uiTitle }}
+    </span>
+    <movius-web-show-errors
+        *ngIf="!!control || MandatoryStar"
+        [control]="control"
+        [customValidationMessage]="customValidationMessage"
+    >
+    </movius-web-show-errors>
+    <movius-web-show-errors
+        *ngIf="!control && !!form && !!inputFormControlName"
+        [control]="form.controls[inputFormControlName]"
+        [customValidationMessage]="customValidationMessage"
+    >
+    </movius-web-show-errors>
+</div>

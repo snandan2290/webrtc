@@ -1,0 +1,78 @@
+@import 'scss/variables';
+@import 'scss/mixins';
+@import 'scss/app.scss';
+
+
+.help {
+    &__box {
+        padding: 24px;
+        position: absolute;
+        width: 100%;
+        //background-color: var(--movius_text-gray-and-white);
+        color: var(--black);
+    }
+
+    &__title {
+        font-weight: 800;
+        margin: 14px 0px;
+        font-size: 22px;
+    }
+
+    &__subTitle {
+        font-weight: 800;
+        margin-bottom: 4px;
+        font-size: 16px;
+    }
+
+    &__message-wrapper {
+        position:relative;
+    }
+
+    &__message {
+        min-height: 9rem;
+        width: 100%;
+        background-color: var(--movius_white);
+        color: var(--black);
+    }
+
+    &__remaning-char {
+        position: absolute;
+        font-size: 12px;
+        float: right;
+        margin: -5px 0 0 0;
+        right: 24px;
+    }
+
+    &__submit {
+        width: auto;
+        height: 36px;
+        margin: 24px 0 24px 0;
+        padding: 8px 24px 9px;
+        float: right;
+        @extend %sync-btn--teams;
+
+        &:only-child {
+            margin: 0;
+        }
+
+        white-space: nowrap;
+    }
+
+    &__submit:disabled {
+        color: $white;
+        border-color: $movius-blue-disabled;
+        //background-color: $movius-blue-disabled !important;
+        background-color: var(--movius-blue-disabled-btn) !important;
+        width: auto;
+        height: 36px;
+        margin: 24px 0 24px 0;
+        padding: 8px 24px 9px;
+        @extend %sync-btn--cancel;
+        white-space: nowrap;
+        cursor: default;
+    }
+
+    &__display-none{
+        display: none;
+    }
+}

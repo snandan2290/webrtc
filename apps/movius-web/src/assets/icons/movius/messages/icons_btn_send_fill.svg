@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Send_fill</title>
+    <g id="Send_fill" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="btn/send" transform="translate(2.000000, 2.000000)" fill="#5C5FC8">
+            <g id="icons/all/send-message" transform="translate(-8.370873, -0.707952)">
+                <path d="M9.65185769,12.7867213 L15.5912923,9.47671346 C15.7334016,9.39711956 15.9176677,9.45455558 16.0092797,9.60523511 C16.1008916,9.75591465 16.0596778,9.93734791 15.9175688,10.0169506 L9.97813425,13.3269585 L12.9087594,22.3030277 L25.3537635,4.39419131 L2.97833994,5.89971065 L9.65185769,12.7867213 Z" transform="translate(14.166052, 13.348610) rotate(30.000000) translate(-14.166052, -13.348610) "></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,38 @@
+<div class="addCnt__work" nz-row>
+    <movius-web-ui-slide-input
+        *ngIf="formGroup.controls.company.value !== null"
+        nz-col
+        nzFlex="auto"
+        #title
+        cyAttribute="company"
+        uiTitle="Company"
+        [control]="formGroup.controls.company"
+    >
+    </movius-web-ui-slide-input>
+</div>
+<div class="addCnt__work" nz-row>
+    <movius-web-ui-slide-input
+        *ngIf="formGroup.controls.jobTitle.value !== null"
+        nz-col
+        nzFlex="auto"
+        #title
+        cyAttribute="job-title"
+        uiTitle="Job Title"
+        [control]="formGroup.controls.jobTitle"
+    >
+    </movius-web-ui-slide-input>
+    <div class="addCnt__removeBtn--rightAbs" nz-button (click)="removeData(formGroup.controls.jobTitle)"></div>
+</div>
+<div class="addCnt__work" nz-row>
+    <movius-web-ui-slide-input
+        *ngIf="formGroup.controls.yomiCompany.value !== null"
+        nz-col
+        nzFlex="auto"
+        #title
+        cyAttribute="yomi-company"
+        uiTitle="Yomi Company"
+        [control]="formGroup.controls.yomiCompany"
+    >
+    </movius-web-ui-slide-input>
+    <div class="addCnt__removeBtn--rightAbs" nz-button (click)="removeData(formGroup.controls.yomiCompany)"></div>
+</div>

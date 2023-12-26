@@ -1,0 +1,47 @@
+<div class="content">
+  <div class="user">
+    <h2>User 1</h2>
+    <button (click)="onConnect(user1)">Connect</button>
+    <button (click)="onRegister(user1)">Register</button>
+    <button (click)="onBeginSession(user1, user2)">Begin session</button>
+    <button (click)="onSendMessage(user1, user2, 'Hello from user 1')">
+      Send message
+    </button>
+    <button (click)="onEndSession(user1)">End session</button>
+    <button (click)="onUnregister(user1)">Unregister</button>
+    <button (click)="onDisconnect(user1)">Disconnect</button>
+    <div class="video">
+      <video id="videoRemoteAlice" width="100%" muted="muted">
+        <p>Your browser doesn't support HTML5 video.</p>
+      </video>
+      <div class="video-local">
+        <video id="videoLocalAlice" width="100%" muted="muted">
+          <p>Your browser doesn't support HTML5 video.</p>
+        </video>
+      </div>
+    </div>
+  </div>
+
+  <div class="user">
+    <h2>User 2</h2>
+    <button (click)="onConnect(user2)">Connect</button>
+    <button (click)="onRegister(user2)">Register</button>
+    <button (click)="onBeginSession(user2, user1)">Begin session</button>
+    <button (click)="onSendMessage(user1, user2, 'Hello from user 1')">
+      Send message
+    </button>
+    <button (click)="onEndSession(user2)">End session</button>
+    <button (click)="onUnregister(user2)">Unregister</button>
+    <button (click)="onDisconnect(user2)">Disconnect</button>
+    <div class="video">
+      <video id="videoRemoteBob" width="100%" muted="muted">
+        <p>Your browser doesn't support HTML5 video.</p>
+      </video>
+      <div class="video-local">
+        <video id="videoLocalBob" width="100%" muted="muted">
+          <p>Your browser doesn't support HTML5 video.</p>
+        </video>
+      </div>
+    </div>
+  </div>
+</div>

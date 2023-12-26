@@ -1,0 +1,19 @@
+@import '../../../../assets/scss/mixins';
+@import '../../../../assets/scss/variables';
+@import '../common/calling-common.scss';
+
+:host {
+    @include inherit-border();
+}
+
+.pop-inc {
+    @include popup-call();
+
+    &__delimeter {
+        display: flex;
+        align-self: center;
+        width: 20.5rem;
+        height: 0.0625rem;
+        background-color: var(--movius_separator);
+    }
+}

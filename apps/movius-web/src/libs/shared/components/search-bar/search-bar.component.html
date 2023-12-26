@@ -1,0 +1,49 @@
+<ng-container *ngIf="isActivated | async; then searchbar; else dummy"></ng-container>
+<ng-template #dummy>
+    <img
+        data-cy="search-bar-icon"
+        class="searchbar__icon"
+        (click)="onActivate()"
+        src="{{GetTheme() == 'Dark' ? 'assets/icons/dark_theme_icons/icons-all-search.svg': 'assets/icons/movius/common/icons-all-search.svg'}}"
+        alt=""
+    />
+</ng-template>
+<ng-template #searchbar>
+    <div class="searchbar searchbar-container">
+        <nz-input-group class="searchbar__body" [nzSuffix]="suffixIconSearch">
+            <input
+                class="searchbar__input searchinput"
+                #searchInput
+                data-cy="search-input"
+                type="text"
+                (focus)="focused()"
+                (blur)="blured()"
+                [(ngModel)]="searchTerm"
+                nz-input
+                (keydown.enter)="handleChange(searchTerm)"
+                (keyup)="checkFilterValue(searchTerm, $event)"
+                placeholder=""
+            />
+            <!-- <div class="searchbar__remove" *ngIf="searchTerm?.length > 0" (click)="clearAll()"></div> -->
+        </nz-input-group>
+        <ng-template #suffixIconSearch>
+              <div *ngIf="searchTerm?.length == 0"><i nz-icon nzType="search"></i></div>
+              <div class="searchbar__remove" *ngIf="searchTerm?.length > 0" (click)="clearAll()"></div>
+            <!-- <i *ngIf="searchTerm?.length > 0; then suffixIconDummy; else suffixIcon"></i> -->
+        </ng-template>
+        <ng-template #suffixIcon>
+            <i nz-icon nzType="search"></i>
+        </ng-template>
+        <ng-template #suffixIconDummy>
+            <i nzType="search"></i>
+        </ng-template>
+        <!-- <div *ngIf="isActivated | async" class="searchbar__cancel" (click)="onClose()">
+            <p class="searchbar__cancelTxt">Cancel</p>
+        </div> -->
+        <div *ngIf="searchTerm?.length > 0 && showSuggetion" class="searchbar_suggession">
+            <div>
+                Press 'Enter' to view the results &nbsp;
+            </div>
+        </div>
+    </div>
+</ng-template>

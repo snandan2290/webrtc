@@ -1,0 +1,62 @@
+<div
+    class="commitem {{ isVertical ? 'commitem--vertical' : '' }}"
+    [ngStyle]="externalStyle"
+>
+    <svg  [ngClass]="isGroup ? 'commitem__align_item_group' : 'commitem__align_item'" *ngIf="showBackOption && isMobileDevice && GetTheme() == null" (click)="onBackCLicked.emit()" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="80.593px" height="122.88px"
+        viewBox="0 0 80.593 122.88" enable-background="new 0 0 80.593 122.88" xml:space="preserve">
+        <g>
+            <polygon points="80.593,0 49.771,0 0,61.44 49.771,122.88 80.593,122.88 30.82,61.44 80.593,0" />
+        </g>
+    </svg>
+    <svg [ngClass]="isGroup ? 'commitem__align_item_group' : 'commitem__align_item'"
+        *ngIf="showBackOption && isMobileDevice && GetTheme() == 'Dark'" (click)="onBackCLicked.emit()" version="1.1" id="Layer_1"
+        xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="80.593px"
+        height="122.88px" viewBox="0 0 80.593 122.88" fill="#eaeaea" xml:space="preserve">
+        <g>
+            <polygon points="80.593,0 49.771,0 0,61.44 49.771,122.88 80.593,122.88 30.82,61.44 80.593,0" />
+        </g>
+    </svg>
+    <!-- TODO: CB:27Jan2021: TECH-DEBT: Logo part seems to be overchanged. Consider refactoring. -->
+    <ng-container *ngIf="!removeLogo">
+        <div *ngIf="peer; then thenBlock; else elseBlock"></div>
+        <ng-template #thenBlock>
+            <movius-web-contact-logo
+                class="contact-logo--small"
+                [isMuted]="isMuted"
+                [peer]="peer"
+                alt="Peer Logo"
+                [isGroup]="isGroup"
+            ></movius-web-contact-logo>
+        </ng-template>
+        <ng-template #elseBlock>
+            <!-- TODO: CB:27Jan2021: TECH-DEBT: LogoUrl is left here for back-compatability. Consider to remove. -->
+            <movius-web-contact-logo
+                class="contact-logo--small"
+                *ngIf="!!logoUrl && !addCustomLogo"
+                [isMuted]="isMuted"
+                [peer]="{ dummyImg: logoUrl }"
+                [alt]="'Logo'"
+                [isGroup]="isGroup"
+            ></movius-web-contact-logo>
+            <movius-web-contact-logo
+                class="contact-logo--small"
+                *ngIf="!logoUrl && !addCustomLogo"
+                [peer]="{}"
+                [isMuted]="isMuted"
+                [alt]="'Empty Logo'"
+                [isGroup]="isGroup"
+            ></movius-web-contact-logo>
+            <div class="commitem__customLogo" *ngIf="addCustomLogo">
+                <ng-content select="[customLogo]"></ng-content>
+            </div>
+        </ng-template>
+    </ng-container>
+    <div class="commitem__content" [class.full-width]="isFullWidth">
+        <ng-content select="[title]" class="commitem__title"></ng-content>
+        <ng-content select="[subtitle]" class="commitem__subtitle"></ng-content>
+    </div>
+    <div class="commitem__addition">
+        <ng-content select="[addition]"></ng-content>
+    </div>
+</div>

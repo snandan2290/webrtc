@@ -1,0 +1,74 @@
+@import '../../../../assets/scss/variables';
+@import '../../../../assets/scss/mixins';
+
+$el: "searchbar";
+
+.#{$el} {
+
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+
+    &__body {
+        border-radius: 8px;
+        border: 0.1rem solid var(--movius_search-gray);
+        background-color: var(--movius_text-gray-and-white);
+
+        .#{$el}__input {
+            height: 2rem;
+            padding: 0 $spacing-xl 0 $spacing-xxs;
+            border-radius: 8px;
+            background-color: var(--movius_text-gray-and-white);
+            color: var(--black);
+        }
+    }
+
+    &__cancel {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        cursor: pointer;
+    }
+
+    &__remove {
+        min-width: 1rem;
+        min-height: 1rem;
+        margin: 0px 0px 0px 8px;
+        @include background-image('/movius/common/icons-delete-circle.svg');
+        cursor: pointer;
+    }
+
+    &__cancelTxt {
+        margin: 0 0 0 $spacing-xs;
+    }
+}
+
+
+.searchbar-container{
+    position: relative;
+}
+
+.searchbar_suggession{
+    position: absolute;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 1px 1px #a7a7a7;
+    background-color: var(--movius_phone-button-gray-hover);
+    padding: 0.8rem 0.8rem;
+    top: 2.3rem;
+    z-index: 1000;
+    display: flex;
+    font-size: 14px;
+    justify-content: space-between;
+    text-align: center;
+    color: var(--black);
+}
+
+::ng-deep .ant-input-affix-wrapper:focus,
+.ant-input-affix-wrapper-focused {
+    border: 0.1rem solid var(--movius_menu-secondary) !important;
+}
+
+::ng-deep .ant-input-affix-wrapper {
+    padding: 0 $spacing-xs 0 $spacing-xs;
+}

@@ -1,0 +1,13 @@
+<ul
+    class="showerr"
+    [style.visibility]="shouldShowErrors() ? 'visible' : 'hidden'"
+>
+    <li class="showerr__item" *ngIf="!!customValidationMessage; else basicView">
+        {{ getCustomValidationMessage() }}
+    </li>
+    <ng-template #basicView>
+        <li class="showerr__item" *ngFor="let error of listOfErrors()">
+            {{ error }}
+        </li>
+    </ng-template>
+</ul>

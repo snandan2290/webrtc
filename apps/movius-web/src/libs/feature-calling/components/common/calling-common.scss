@@ -1,0 +1,210 @@
+@import 'scss/mixins';
+@import 'scss/variables';
+
+//#region Inbound
+.in-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-template-areas: 'accept reject';
+
+    justify-items: center;
+    align-items: center;
+}
+.reject {
+    grid-area: reject;
+}
+.accept {
+    grid-area: accept;
+}
+//#endregion Inbound
+
+//#region Outbound
+.out-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 2rem 2rem;
+    grid-template-areas:
+        'mute hold keypad'
+        '. call .';
+    &--reduced {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr;
+        gap: 2rem 0;
+        grid-template-areas:
+        '. . .'
+        '. call .';
+    }
+}
+.mute {
+    grid-area: mute;
+}
+.keypad {
+    grid-area: keypad;
+}
+.hold {
+    grid-area: hold;
+}
+.startCall {
+    grid-area: call;
+}
+.endCall {
+    grid-area: call;
+}
+//#region Outbound
+
+@mixin active-call {
+    &__heading {
+        align-self: center;
+        text-align: center;
+
+        margin-top: $cnt-details-top-margin;
+    }
+
+    &__keyboardShell {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__keyboard {
+        margin: auto;
+    }
+
+    &__button {
+        display: inline-block;
+        margin: auto;
+    }
+}
+
+@mixin keypad {
+    &__keypadShell{
+        position: relative;
+        min-width: 12rem;
+        max-width: 12rem;
+        margin: 0 auto 0 auto;
+    }
+
+    &__keypad {
+    }
+
+    &__hideKeypad {
+        $hideButtonHeight: 2rem;
+        display: flex;
+        align-items: center;
+        justify-items: center;
+        position: absolute;
+        right: -4rem;
+        top: calc(50% - #{$hideButtonHeight}/2);
+
+        width: 4rem;
+        height: $hideButtonHeight;
+
+        @include font-bold(0.875rem);
+        text-align: center;
+
+        border-radius: 1.5rem;
+        border: solid 0.0625rem var(--movius_colors-primary-green-2);
+
+        cursor: pointer;
+
+        & > span {
+            margin: auto;
+        }
+    }
+}
+
+@mixin inherit-border {
+    border: inherit;
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+}
+
+@mixin popup-call {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 22.5rem;
+    max-width: 100%;
+    cursor: grab;
+
+    background: var(--white);
+    @include inherit-border();
+
+    box-shadow: 0 5px 20px 0 var(--movius_popup-shadow);
+
+    overflow: auto;
+
+    &__header {
+        width: auto;
+        height: 1.0625rem;
+
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        margin: $spacing-xs 0 0 0;
+        padding: 0 $spacing-s 0 $spacing-s;
+    }
+
+    &__caption, &__timer {
+        @include font-bold(0.75rem);
+        color: var(--movius_btn-disabled-bgr);
+    }
+
+    &__content {
+        display: flex;
+        height: 4rem;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: $spacing-xs $spacing-s $spacing-m $spacing-s;
+        background: var(--movius_white);
+    }
+
+    &__item {
+        width: 100%;
+    }
+
+    &__photo {
+    }
+
+    &__name {
+        @include font-semi-bold-600(1rem);
+        margin: auto auto auto $spacing-xs;
+    }
+
+    &__buttons{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__button {
+        margin: 0 $spacing-m 0 0;
+        &:last-of-type{
+            margin: 0;
+        }
+    }
+
+    &__otherCall {
+        position: relative;
+        &:before{
+            content: "";
+            background: var(--movius_text-gray);
+            position: absolute;
+            top: 0;
+            left: 5%;
+            height: 0.0625rem;
+            width: 90%;
+        }
+    }
+}

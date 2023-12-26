@@ -1,0 +1,73 @@
+<div class="background-style">
+    <div class="close-cnt">
+        <svg class="svg-close" (click)="cancelPreview()" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g id="Cross_icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="Group">
+                    <path d="M12,24 C5.37272727,24 0,18.6272727 0,12 C0,5.37272727 5.37272727,0 12,0 C18.6272727,0 24,5.37272727 24,12 C24,18.6272727 18.6272727,24 12,24 Z M12,1.71428571 C6.31428571,1.71428571 1.71428571,6.31428571 1.71428571,12 C1.71428571,17.6857143 6.31428571,22.2857143 12,22.2857143 C17.6857143,22.2857143 22.2857143,17.6857143 22.2857143,12 C22.2857143,6.31428571 17.6857143,1.71428571 12,1.71428571 Z" id="Shape" fill="#1F1E33" fill-rule="nonzero"></path>
+                    <circle id="Oval" fill="#FFFFFF" cx="12" cy="12" r="10"></circle>
+                    <path d="M11.8041477,6.41460489 C11.3210952,6.46563461 10.9383217,6.86475704 10.9383217,7.35674302 L10.9376294,10.9486294 L7.37986014,10.9493796 C6.85131469,10.9493796 6.40909091,11.3793418 6.40909091,11.9090909 L6.41487849,12.0136237 C6.46840492,12.4947068 6.88630497,12.8748318 7.37986014,12.8748318 L10.9376294,12.8744755 L10.9383217,16.4614388 C10.9383217,16.9885666 11.3777301,17.4090909 11.9090909,17.4090909 L12.0140781,17.4035823 C12.4977077,17.3526013 12.886014,16.9538304 12.886014,16.4614388 L12.8854755,12.8744755 L16.4383217,12.8748318 C16.9671308,12.8748318 17.4090909,12.4384638 17.4090909,11.9090909 L17.4033,11.8045694 C17.3497441,11.3239245 16.9316308,10.9493796 16.4383217,10.9493796 L12.8854755,10.9486294 L12.886014,7.35674302 C12.886014,6.8291806 12.4402542,6.40909091 11.9090909,6.40909091 L11.8041477,6.41460489 Z" id="􀅼" fill="#1F1E33" fill-rule="nonzero" transform="translate(11.909091, 11.909091) rotate(-45.000000) translate(-11.909091, -11.909091) "></path>
+                </g>
+            </g>
+        </svg>
+    </div>
+    <div class="image-templete">
+        <img class="image-selected" [src]="imageBlob.blobUrl">
+    </div>
+    <div class="sendMMS-btn">
+        <img 
+            #sendBtn 
+            data-cy="send-message-button" 
+            (click)="onSendMMS()"
+            *ngIf="!(getConnectionErrorValue || disableSendButton)"
+            class="svg-send" 
+            src="assets/icons/movius/messages/icons_btn_send_fill.svg" 
+            alt="" 
+        />
+        <img 
+            [disabled]="getConnectionErrorValue || disableSendButton"
+            *ngIf="getConnectionErrorValue || disableSendButton"
+            class="svg-send" 
+            src="assets/icons/movius/messages/icons_btn_send_outline.svg" 
+            alt="" 
+        />
+        <!-- <svg (click)="onSendMMS()" [ngClass]="getConnectionErrorValue || disableSendButton? 'svg-send-disable':'svg-send'"
+            width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+            <defs>
+                <path
+                    d="M24,0 C37.255,0 48,10.7452 48,24 C48,37.2548 37.255,48 24,48 C10.745,48 0,37.2548 0,24 C0,10.7452 10.745,0 24,0 Z"
+                    id="path-1"></path>
+                <path
+                    d="M0,0 L21.137,9.3897 L0.419,18.2123 L2.466,9.4355 L9.605,9.5335 C9.776,9.5355 9.909,9.4058 9.904,9.2383 C9.9,9.0708 9.763,8.936 9.592,8.934 L9.592,8.934 L2.453,8.836 L0,0 Z"
+                    id="path-3"></path>
+            </defs>
+            <g id="M2022-519(Sending-Pictures&amp;GIF)" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="Messages:-MMS-Photo_Selected" transform="translate(-1208.000000, -719.000000)">
+                    <g id="Group" transform="translate(1208.000000, 719.000000)">
+                        <g id="Group-338">
+                            <mask id="mask-2" fill="white">
+                                <use xlink:href="#path-1"></use>
+                            </mask>
+                            <g id="Clip-337"></g>
+                            <polygon *ngIf="!getConnectionErrorValue && !disableSendButton" id="Fill-336"
+                                fill="rgb(1, 2, 30)" mask="url(#mask-2)" points="-1 49 49 49 49 -1 -1 -1"></polygon>
+                            <polygon *ngIf="getConnectionErrorValue || disableSendButton" id="Fill-336" fill="#94939C"
+                                mask="url(#mask-2)" points="-1 49 49 49 49 -1 -1 -1"></polygon>
+                        </g>
+                        <g id="Group-341" transform="translate(14.822000, 14.566100)">
+                            <mask id="mask-4" fill="white">
+                                <use xlink:href="#path-3"></use>
+                            </mask>
+                            <g id="Clip-340"></g>
+                            <polygon id="Fill-339" fill="#FFFFFF" mask="url(#mask-4)"
+                                points="4.919 -10.5186 30.389 4.187 16.219 28.7309 -9.252 14.0253"></polygon>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </svg> -->
+    </div>
+</div>
+<movius-web-general-failure class="display-none"
+    (passConnectionError)="getConnectionError($event)">
+</movius-web-general-failure>

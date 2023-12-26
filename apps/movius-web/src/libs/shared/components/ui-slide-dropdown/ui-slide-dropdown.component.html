@@ -1,0 +1,14 @@
+<div class="slidedrop__placeholder" [class.active]="!!control.value || isPlaceholderVisible">{{uiTitle}}</div>
+<nz-select
+    class="slidedrop__select"
+    [formControl]="control"
+    nzShowSearch
+    nzAllowClear
+    nzPlaceHolder="{{uiTitleEmpty}}"
+    (click)="isPlaceholderVisible = true"
+    (focusout)="isPlaceholderVisible = false"
+    [class.invalid]="!!control && control.dirty && control.invalid"
+>
+    <nz-option class="slidedrop__option" *ngFor="let opt of optionList" nzLabel="{{opt}}" nzValue="{{opt}}"></nz-option>
+</nz-select>
+<movius-web-show-errors class="slidedrop__validation" *ngIf="!!control" [control]="control" [customValidationMessage]="customValidationMessage"></movius-web-show-errors>

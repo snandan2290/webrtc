@@ -1,0 +1,43 @@
+<div class="other-inc">
+    <div class="other-inc__title" *ngIf="isTitleVisible">Incoming call</div>
+    <movius-web-contact-header
+        headingCustom
+        class="other-inc__heading"
+        *ngIf="{
+            title: getContactCallTitleAndSubtitle(peer, call.isAnonymous)
+        } as data"
+        [srcContactName]="(data?.title)[0]"
+        [srcContactAddress]="isPhoneVisible ? (data?.title)[1] : null"
+        [srcContactStatus]="null"
+        [addCustomLogo]="true"
+        [contactHeaderType]="'Popup'"
+    >
+        <movius-web-contact-logo
+            customLogo
+            class="contact-logo"
+            [peer]="peer"
+            [alt]="'Peer Logo'"
+            [doZoomLetters]="true"
+        >
+        </movius-web-contact-logo>
+    </movius-web-contact-header>
+    <div class="other-inc__controls">
+        <div
+            (click)="reject.emit()"
+            data-cy="reject-call-btn"
+            class="other-inc__reject control-btn cntBtn"
+        >
+            <div class="other-inc__rejectIco"></div>
+            <div>Reject</div>
+        </div>
+        <div
+            (click)="!call.isAccepted ? accept.emit() : 1"
+            data-cy="accept-call-btn"
+            class="other-inc__accept control-btn cntBtn"
+            [attr.disabled]="call.isAccepted"
+        >
+            <div class="other-inc__acceptIco"></div>
+            <div>Accept</div>
+        </div>
+    </div>
+</div>

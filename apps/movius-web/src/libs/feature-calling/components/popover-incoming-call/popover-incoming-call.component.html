@@ -1,0 +1,11 @@
+<div class="pop-inc">
+    <div class="pop-inc__delimeter" *ngIf="isStacked"></div>
+    <movius-web-other-incoming-call
+        [peer]="peer"
+        [call]="call"
+        (accept)="accept.emit()"
+        (reject)="reject.emit()"
+        [isPhoneVisible]="!isStacked"
+    >
+    </movius-web-other-incoming-call>
+</div>

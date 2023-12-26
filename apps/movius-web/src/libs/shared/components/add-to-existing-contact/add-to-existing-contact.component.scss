@@ -1,0 +1,131 @@
+@import 'scss/variables';
+@import 'scss/mixins';
+
+.addToExs {
+    &__main {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        justify-content: space-between;
+
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    &__section {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__part {
+        width: 100%;
+        max-height: 24.4rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 0.8125rem 0 1.875rem 0;
+
+        overflow-y: scroll;
+        @include scrollbars(0.375rem, var(--movius_darkgray), transparent);
+
+        @include chrome-safari {
+            overflow-y: overlay;
+            @include scrollbars-overlay(1rem, var(--movius_darkgray), transparent);
+        }
+    }
+
+    //#region Header
+    &__header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        margin: $spacing-l $spacing-m 0 $spacing-m;
+        //padding: $spacing-s $spacing-m $spacing-s $spacing-m;
+    }
+
+    &__hCaption {
+        display: flex;
+        align-self: flex-start;
+        @include font-bold(1.125rem);
+    }
+
+    &__hClose {
+        display: flex;
+        align-self: center;
+        cursor: pointer;
+
+        width: 0.75rem;
+        height: 0.75rem;
+        @include background-image('/movius/common/icons-all-close.svg');
+    }
+    //#endregion Header
+
+    //#region Search
+    &__title {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 1.125rem $spacing-m 0 $spacing-m;
+    }
+
+    &__search {
+        width: inherit;
+        height: 2rem;
+        padding: $spacing-xs $spacing-m $spacing-xs $spacing-m;
+        @include font-normal(0.875rem);
+        color: var(--movius_search-gray);
+        border: solid 1px var(--movius_search-gray);
+        border-radius: 1rem;
+    }
+    //#endregion Search
+
+    //#region Contact
+    &__cntShell {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-wrap: nowrap;
+
+        padding: $spacing-s $spacing-m $spacing-s $spacing-m;
+
+        &:first-of-type {
+            border-top: 1px solid $movius_border-gray;
+        }
+        border-bottom: 1px solid $movius_border-gray;
+    }
+
+    &__cntLogo {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+
+    &__cntName {
+        @include font-semi-bold-600(1rem);
+        color: var(--movius_black);
+        margin: 0 0 0 $spacing-m;
+    }
+
+    &__cntAdd {
+        width: 5.8125rem;
+        height: 2.25rem;
+        margin: 0 0 0 auto;
+        @include bordered-rounded-btn;
+    }
+    //#endregion Contact
+
+    ::ng-deep.pane {
+        padding: 0;
+    }
+}
+
+::ng-deep .ant-modal-footer {
+    display: none;
+}

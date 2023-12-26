@@ -1,0 +1,112 @@
+@import 'scss/variables';
+@import 'scss/mixins';
+@import 'scss/app.scss';
+
+$contactSelectorMinHeight: 3.25rem;
+$keypadMinHeight: 30rem;
+$topShellMinHeight: $contactSelectorMinHeight + $keypadMinHeight;
+
+
+.newCall {
+    width: 100%;
+    //margin: 0 auto;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+
+    &__topShell {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        min-height: $topShellMinHeight;
+        overflow: auto;
+
+        @extend %scroll;
+    }
+
+    %heading {
+        height: calc(2.0625rem + 1.1875rem);
+    }
+    &__heading {
+        @extend %heading;
+        border-bottom: 1px solid var(--movius_avatar-gray);
+
+        &--invalid {
+            @extend %heading;
+            border-bottom: 1px solid var(--movius_invalid-red);
+        }
+    }
+
+    &__headingError {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        word-break: break-all;
+
+        .errorVariant {
+            color: var(--movius_invalid-red);
+        }
+    }
+
+    &__headingShell {
+        width: 69.57%;
+        margin: 3.8125rem 0 $spacing-m 0;
+        min-height: $contactSelectorMinHeight;
+    }
+
+    &__keyboard {
+        max-width: 16.5rem;
+    }
+
+    &__controls {
+        display: flex;
+    }
+
+    &__selector {
+    }
+
+    &__input {
+        border: none;
+        text-align: center;
+        width: 100%;
+    }
+
+    &__dialerShell {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        height: 100%;
+        min-height: $keypadMinHeight;
+        overflow: auto;
+    }
+
+    &__dialer {
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+       justify-content: center;
+       height: 100%;
+
+       @include screen-mobile {
+            height: auto;
+       }
+    }
+
+    &__call {
+        margin: $spacing-xxl-6 auto auto auto;
+    }
+}
+
+::ng-deep {
+    .ant-divider-horizontal {
+        margin: 1.1875rem 0 0 0;
+    }
+}

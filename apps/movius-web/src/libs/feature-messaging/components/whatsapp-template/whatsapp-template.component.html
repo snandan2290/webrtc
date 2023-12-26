@@ -1,0 +1,9 @@
+<div class="templatebody" *ngIf="visible" [ngStyle]="{
+    'margin-right': !isMobileDevice ? '2.75rem' : ' '}">
+    <ul class="template-list">
+        <li class="template-item" (click)="onSelect(template)" *ngFor="let template of templates">
+            {{template.value}}
+        </li>
+    </ul>
+</div>
+

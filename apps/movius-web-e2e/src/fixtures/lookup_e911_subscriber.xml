@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?><root><return>0</return><desc><prov:QrySubscrResp xmlns:prov="http://lis.telecomsys.com/prov">
+    <prov:RqstId>14</prov:RqstId>
+    <prov:Subscriber><prov:SubscriberID>sip:15035479226@169.47.220.44</prov:SubscriberID>
+    <prov:SubscrName>sin par</prov:SubscrName>
+    <prov:CBN>5035479226</prov:CBN>
+    <Location xmlns="http://lis.telecomsys.com/prov">
+    <civicAddress xmlns="urn:ietf:params:xml:ns:pidf:geopriv10:civicAddr">
+    <country>US</country>
+    <A1>GA</A1>
+    <RD>APOLLO DR</RD>
+    <HNO>1510</HNO>
+    <LOC/>
+    <PC>30024</PC>
+    <PCN>suwanee</PCN>
+    </civicAddress>
+    </Location>
+    <prov:LocStatus>
+    <prov:VDBvalid>
+    <prov:VDBposition>
+    <prov:Latitude>34.112008</prov:Latitude>
+    <prov:Longitude>-84.118032</prov:Longitude>
+    </prov:VDBposition>
+    </prov:VDBvalid>
+    </prov:LocStatus>
+    <prov:LastProvisioned>2017-09-21T09:05:40.351-00:00</prov:LastProvisioned>
+    </prov:Subscriber>
+</prov:QrySubscrResp></desc></root>

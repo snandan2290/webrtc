@@ -1,0 +1,8 @@
+@import '../../../../assets/scss/variables';
+@import '../common/calling-common.scss';
+
+.dial {
+    @include active-call;
+}
+
+

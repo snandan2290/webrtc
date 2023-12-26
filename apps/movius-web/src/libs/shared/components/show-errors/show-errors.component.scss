@@ -1,0 +1,18 @@
+
+@import 'scss/variables';
+@import 'scss/mixins';
+
+$el: 'showerr';
+
+.#{$el} {
+
+    padding: inherit;
+
+    &__item {
+        @include font-normal(0.75rem);
+        margin: 0.063rem 0 0 0;
+        padding: 0;
+        list-style: none;
+        color: var(--movius_invalid-red);
+    }
+}

@@ -1,0 +1,321 @@
+<pane-frame
+    [ngClass] ="isMobileDevice ? 'details-mobile' : 'details'"
+    *ngIf="view$ | async as view"
+    [includeDefaultHeader]="false"
+>
+<!-- <div main> -->
+    <div headingCustom class="details__header_allign">
+        <div
+            headingCustom
+            *ngIf="backToAllParticipants"
+            class="details__participants__back"
+            (click)="participantsBackPage()"
+        >
+            <svg
+                *ngIf="GetTheme() == null"
+                class="svg_arrow_back"
+                width="24px"
+                height="24px"
+                margin-right="15px"
+                viewBox="0 0 24 24"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+                <g
+                    id="btn/back_arrow"
+                    stroke="none"
+                    stroke-width="1"
+                    fill="none"
+                    fill-rule="evenodd"
+                >
+                    <path
+                        d="M22,12.0105072 C22,12.7988967 21.3566217,13.4111157 20.579702,13.4111157 L6.70613584,13.4111157 L11.0573301,17.7019898 C11.5897199,18.2269991 11.5897199,19.0812337 11.0573301,19.606243 C10.5249404,20.1312523 9.65869709,20.1312523 9.12630731,19.606243 L2.39929233,12.9521266 C1.86690256,12.4271173 1.86690256,11.5728827 2.39929233,11.0478734 L9.14695118,4.39375698 C9.67934095,3.86874767 10.5455842,3.86874767 11.077974,4.39375698 C11.6103638,4.91876628 11.6103638,5.7730009 11.077974,6.2980102 L6.70613584,10.6101175 L20.579702,10.6101175 C21.3783089,10.6101175 22,11.2223584 22,12.0107261 L22,12.0105072 Z"
+                        id="Fill-1"
+                        fill="#1F1E33"
+                    ></path>
+                </g></svg>
+
+                <svg
+                *ngIf="GetTheme() == 'Dark'"
+                class="svg_arrow_back"
+                width="24px"
+                height="24px"
+                margin-right="15px"
+                viewBox="0 0 24 24"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+                <g
+                    id="btn/back_arrow"
+                    stroke="none"
+                    stroke-width="1"
+                    fill="none"
+                    fill-rule="evenodd"
+                >
+                    <path
+                        d="M22,12.0105072 C22,12.7988967 21.3566217,13.4111157 20.579702,13.4111157 L6.70613584,13.4111157 L11.0573301,17.7019898 C11.5897199,18.2269991 11.5897199,19.0812337 11.0573301,19.606243 C10.5249404,20.1312523 9.65869709,20.1312523 9.12630731,19.606243 L2.39929233,12.9521266 C1.86690256,12.4271173 1.86690256,11.5728827 2.39929233,11.0478734 L9.14695118,4.39375698 C9.67934095,3.86874767 10.5455842,3.86874767 11.077974,4.39375698 C11.6103638,4.91876628 11.6103638,5.7730009 11.077974,6.2980102 L6.70613584,10.6101175 L20.579702,10.6101175 C21.3783089,10.6101175 22,11.2223584 22,12.0107261 L22,12.0105072 Z"
+                        id="Fill-1"
+                        fill="#FFFFFF"
+                    ></path>
+                </g></svg>
+            Back to All Participants
+        </div>
+        <div
+            headingCustom
+            *ngIf="!backToAllParticipants"
+            class="details__back"
+            (click)="onBack()"
+        >
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="12"
+                height="12"
+                viewBox="0 0 12 12"
+            >
+                <g fill="none" fill-rule="evenodd">
+                    <g fill="gray">
+                        <path
+                            d="M11.7 1.77c.399-.398.398-1.042.002-1.438l-.034-.034C11.271-.099 10.628-.1 10.23.3L6.19 4.34c-.104.104-.275.103-.377 0L1.77.3C1.372-.1.728-.099.33.297L.299.332C-.099.729-.1 1.372.3 1.77L4.34 5.81c.104.104.103.275 0 .377L.3 10.23c-.399.399-.398 1.043-.002 1.44l.034.033c.397.397 1.04.398 1.439-.001L5.81 7.66c.104-.104.275-.103.377 0l4.041 4.04c.399.399 1.043.398 1.44.002l.033-.034c.397-.397.398-1.04-.001-1.439L7.66 6.19c-.104-.104-.103-.275 0-.377L11.7 1.77z"
+                            transform="translate(-1236 -95) translate(1236 95)"
+                        />
+                    </g>
+                </g>
+            </svg>
+        </div>
+    </div>
+
+    <div mainCustom class="details__container">
+        <movius-web-contact-header
+            *ngIf="view.ghost as ghost"
+            class="details__header"
+            [srcContactName]="
+            view.ghost?.friendlyName ? view.ghost?.friendlyName : contactName
+            "
+            [srcContactAddress]="view.ghost?.friendlyAddress"
+            srcContactStatus=""
+            [addCustomLogo]="true"
+        >
+            <movius-web-contact-logo
+                customLogo
+                class="contact-logo"
+                [peer]="ghost"
+                alt="Peer Logo"
+                [doZoomLetters]="true"
+            >
+            </movius-web-contact-logo>
+            <ng-container
+                *ngIf="!ghost.contact"
+                buttons
+                class="details__controls"
+            >
+                <movius-web-labeled-button
+                    *ngIf="appEmbededStatus !== 'messaging' && view.messsageChannelType == 'whatsapp'"
+                    text="Call"
+                    [isDisabled]="view.callingStatus"
+                    imgUri="assets/icons/movius/common/icons-contact-call.svg"
+                    (clicked)="onCall(ghost.id)"
+                ></movius-web-labeled-button>
+
+                <movius-web-labeled-button
+                    *ngIf="view.messsageChannelType == 'whatsapp'"
+                    text="Message"
+                    [isDisabled]="view.messagingStatus !== 'allowed'"
+                    imgUri="assets/icons/movius/common/messages_line.svg"
+                    hoverUrl="assets/icons/movius/common/messages_fill.svg"
+                    (clicked)="onMessage(ghost.id)"
+                ></movius-web-labeled-button>
+                <movius-web-labeled-button
+                    *ngIf="view.whatsAppMessageEnabled && view.ghost?.friendlyName != '+911'"
+                    [text]="view.messsageChannelType"
+                    imgUri="{{getImageLineWechatWhatsapp(view.messsageChannelType)}}"
+                    (click)="onWhatsAppMessage(ghost.id, ghost.multiLine, view.messsageChannelType)"
+                ></movius-web-labeled-button>
+                <movius-web-labeled-button
+                    [text]="'Create Contact'"
+                    imgUri="assets/icons/movius/common/create_contact.svg"
+                    hoverUrl="assets/icons/movius/common/create_contact_fill.svg"
+                    (click)="onCreateContact(ghost.id)"
+                >
+                </movius-web-labeled-button>
+                <movius-web-labeled-button
+                    *ngIf="doShowAddToExisting && view.messsageChannelType == 'whatsapp' && view.ghost?.friendlyName != '+911'"
+                    [text]="'Add to Existing'"
+                    imgUri="assets/icons/movius/common/add_to_existing_contact_line.svg"
+                    hoverUrl="assets/icons/movius/common/add_to_existing_contact_fill.svg"
+                    (click)="onAddToContact(ghost.id)"
+                >
+                </movius-web-labeled-button>
+            </ng-container>
+            <ng-container
+                *ngIf="ghost.contact as contact"
+                buttons
+                class="details__controls"
+            >
+                <movius-web-labeled-button
+                    *ngIf="view.messsageChannelType == 'whatsapp'"
+                    [text]="'Message'"
+                    imgUri="assets/icons/movius/common/messages_line.svg"
+                    hoverUrl="assets/icons/movius/common/messages_fill.svg"
+                    nz-dropdown
+                    (clicked)="
+                        contact.phones?.length === 1
+                            ? onMessage(contact.phones[0].phone)
+                            : null
+                    "
+                    [nzTrigger]="contact.phones?.length > 1 ? 'click' : false"
+                    [isDisabled]="
+                        !contact.phones?.length ||
+                        checkIsNumberValid(contact.phones[0].phone) == false
+                    "
+                    [nzDropdownMenu]="messageMenu"
+                ></movius-web-labeled-button>
+                <movius-web-labeled-button
+                    *ngIf="view.whatsAppMessageEnabled && contact.phones[0].phone != '911'"
+                    [text]="view.messsageChannelType"
+                    imgUri="{{getImageLineWechatWhatsapp(view.messsageChannelType)}}"
+                    nz-dropdown
+                    (clicked)="
+                        contact.phones?.length === 1
+                            ? onWhatsAppMessage(
+                                  ghost.id,
+                                  contact.phones[0].phone, view.messsageChannelType
+                              )
+                            : null
+                    "
+                    [nzTrigger]="contact.phones?.length > 1 ? 'click' : false"
+                    [isDisabled]="
+                        !contact.phones?.length ||
+                        checkIsNumberValid(contact.phones[0].phone) == false
+                    "
+                    [nzDropdownMenu]="whatsAppMessageMenu"
+                ></movius-web-labeled-button>
+                <movius-web-labeled-button
+                    *ngIf="
+                        !!contact.phones?.length &&
+                        appEmbededStatus !== 'messaging' && view.messsageChannelType == 'whatsapp'
+                    "
+                    [text]="'Call'"
+                    [isDisabled]="
+                        !contact.phones?.length ||
+                        checkIsNumberValid(contact.phones[0].phone) == false ||
+                        view.callingStatus
+                    "
+                    imgUri="assets/icons/movius/common/icons-contact-call.svg"
+                    nz-dropdown
+                    (clicked)="
+                        contact.phones?.length === 1
+                            ? onCall(contact.phones[0].phone)
+                            : null
+                    "
+                    [nzTrigger]="contact.phones?.length > 1 ? 'click' : false"
+                    [nzDropdownMenu]="callMenu"
+                ></movius-web-labeled-button>
+                <movius-web-labeled-button
+                    *ngIf="appEmbededStatus === 'messaging' && view.messsageChannelType == 'whatsapp'"
+                    [text]="'Edit'"
+                    imgUri="assets/icons/movius/contacts/edit.svg"
+                    hoverUrl="assets/icons/movius/contacts/edit_fill.svg"
+                    (click)="onEditContact(ghost.contact?.id)"
+                ></movius-web-labeled-button>
+                <movius-web-labeled-button
+                    *ngIf="appEmbededStatus === 'messaging'"
+                    [text]="'Delete'"
+                    imgUri="assets/icons/movius/contacts/delete.svg"
+                    hoverUrl="assets/icons/movius/contacts/delete_fill.svg"
+                    (click)="onDeleteContact(ghost.contact?.id, ghost.id)"
+                ></movius-web-labeled-button>
+                <nz-dropdown-menu #messageMenu="nzDropdownMenu">
+                    <ul class="details__dropMenu" nz-menu>
+                        <span *ngFor="let phone of contact.phones">
+                            <li
+                                class="{{ disableIfNotValidNum(phone.phone) }}"
+                                nz-menu-item
+                                (click)="onMsgDropDownClick(phone.phone)"
+                            >
+                                <p class="details__dropItemHeader">
+                                    {{ phone.type }}
+                                </p>
+                                <p class="details__dropItemContent">
+                                    {{ addPulsToMultilineNumber(phone.orgPhone) }}
+                                </p>
+                            </li>
+                        </span>
+                    </ul>
+                </nz-dropdown-menu>
+                <nz-dropdown-menu #whatsAppMessageMenu="nzDropdownMenu">
+                    <ul class="details__dropMenu" nz-menu>
+                        <span *ngFor="let phone of contact.phones">
+                            <li
+                                class="{{ disableIfNotValidNum(phone.phone) }}"
+                                nz-menu-item
+                                (click)="
+                                    onWhatsAppMessage(phone.phone, phone.phone, view.messsageChannelType)
+                                "
+                            >
+                                <p class="details__dropItemHeader">
+                                    {{ phone.type }}
+                                </p>
+                                <p class="details__dropItemContent">
+                                    {{ addPulsToMultilineNumber(phone.orgPhone) }}
+                                </p>
+                            </li>
+                        </span>
+                    </ul>
+                </nz-dropdown-menu>
+                <nz-dropdown-menu #callMenu="nzDropdownMenu">
+                    <ul class="details__dropMenu" nz-menu>
+                        <span *ngFor="let phone of contact.phones">
+                            <li
+                                class="{{ disableIfNotValidNum(phone.phone) }}"
+                                nz-menu-item
+                                (click)="onCall(phone.phone)"
+                            >
+                                <p class="details__dropItemHeader">
+                                    {{ phone.type }}
+                                </p>
+                                <p class="details__dropItemContent">
+                                    {{ addPulsToMultilineNumber(phone.orgPhone) }}
+                                </p>
+                            </li>
+                        </span>
+                    </ul>
+                </nz-dropdown-menu>
+            </ng-container>
+        </movius-web-contact-header>
+        <div class="details__library" *ngIf="view.ghost.contact">
+            <movius-web-contact-details [userInfoFields]="view.info">
+            </movius-web-contact-details>
+        </div>
+    </div>
+
+    <ng-template #e911DialPopover>
+        <!-- TECH-DEBT: CB:20Jul2021: Duplications detected. Consider extracting template to shell with introduced tempalte-variable for status OR separate comp. -->
+        <div class="e911Pop--error">
+            <p>Sorry!</p>
+            <p class="e911Pop--error" [ngSwitch]="view.callingStatus">
+                <ng-template ngSwitchCase="network-error">
+                    Network Unreachable
+                </ng-template>
+                <ng-template ngSwitchCase="calls-not-allowed">
+                    Call functionality has been disabled for your organization
+                </ng-template>
+                <ng-template ngSwitchCase="mic-not-allowed">
+                    To enable calling functionality, please permit to access the
+                    microphone
+                </ng-template>
+                <ng-template ngSwitchCase="e911-declined">
+                    You have not accepted E911 Terms and Conditions. To enable
+                    calling functionality, please enter an address for E911
+                    under <a routerLink="/settings/e911">Settings > E911</a>
+                </ng-template>
+                <ng-template ngSwitchCase="another-active-call">
+                    Another call in progress.
+                </ng-template>
+            </p>
+        </div>
+    </ng-template>
+<!-- </div> -->
+
+</pane-frame>

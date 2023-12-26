@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?><root>
+  <device_data>
+    <sip_username>7f455815-ff9c-4b7a-b8b0-856f8654dff7</sip_username>
+    <sip_password>JHjcqNA</sip_password>
+    <sip_address>169.46.70.250</sip_address>
+    <adk_address>scrum1.moviuscorp.net</adk_address>
+    <stun_address>169.46.70.250</stun_address>
+    <sip_reg_interval>600</sip_reg_interval>
+    <auth_required>false</auth_required>
+    <device_type>webrtc</device_type>
+    <transport>wss</transport>
+    <sms_capable>false</sms_capable>
+    <secure_enabled>true</secure_enabled>
+    <capabilities>
+      <wifi_only>true</wifi_only>
+      <diagnostics>true</diagnostics>
+      <minimum_client_version nil="true"/>
+      <allowed_application_names nil="true"/>
+      <pending_events>true</pending_events>
+    </capabilities>
+  </device_data>
+  <api_token>sSRz8Ae+/lSg3Er8yG5UwK/sFblgC4anWeFowcK6qeDjbmjZZ5XyoEQjhC9Tm9ZTt2WgxJS3i9IWn1pusjIHIDZgbfSVCxc3dbqVs3AZ4+8=
+</api_token>
+  <connection_info>
+    <stun_url>stun:u3.xirsys.com</stun_url>
+    <turn_url>turns:u3.xirsys.com:443?transport=tcp</turn_url>
+    <turn_username>C4VpCUnxTZCXEZY-GsnFlTy74mYGM6iUjiI90bnV_PgBkhDMMszx8mC0ubtPx_N3AAAAAF371Zl2cHJhYmhhaw==</turn_username>
+    <turn_password>73788352-2299-11ea-9075-f676af1e4042</turn_password>
+    <asterisk_ip>scrum1.moviuscorp.net</asterisk_ip>
+    <ws_port>8088</ws_port>
+    <wss_port>8089</wss_port>
+    <outbound_proxy_port>5060</outbound_proxy_port>
+    <sec_stun_url>stun:stun.l.google.com:19302</sec_stun_url>
+    <sec_asterisk_ip></sec_asterisk_ip>
+    <sec_ws_port>8088</sec_ws_port>
+    <sec_wss_port>8089</sec_wss_port>
+    <sec_outbound_proxy_port>5060</sec_outbound_proxy_port>
+  </connection_info>
+  <return type="integer">0</return>
+  <desc>Success</desc>
+</root>

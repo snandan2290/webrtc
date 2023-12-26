@@ -1,0 +1,95 @@
+<div
+    class="settings"
+    [class.settings--topSpaced]="getConnectionErrorValue === true"
+    *ngIf="view$ | async as view"
+>
+    <movius-web-general-failure 
+        (passConnectionError)="getConnectionError($event)">
+    </movius-web-general-failure>
+
+    <div class="settings__splitter settings__splitter--first settings__general">
+        <pane-frame
+            class="settings__pane"
+            [includeDefaultHeader]="false"
+            [includeDefaultFooter]="false"
+        >
+            <!--#region HEADER -->
+            <div headingCustom class="settings__heading">
+                <div class="settings__caption">
+                    Settings
+                </div>
+            </div>
+            <!--#endregion HEADER -->
+            <!--#region MAIN-->
+            <div class="settings__main" main>
+                <ul nz-list nzSize="large">
+                    <!-- <nz-list-header>Header</nz-list-header> -->
+                    <li
+                        *ngIf="view.isE911Available"
+                        data-cy="e911-settings"
+                        class="settings__listItem"
+                        nz-list-item
+                        nzNoFlex
+                        [routerLink]="['./e911']"
+                        [routerLinkActive]="['is-active']"
+                    >
+                        <div class="settings__liText">E911</div>
+                    </li>
+                    <li
+                        *ngIf="view.isSyncExchangeAvailable"
+                        data-cy="contact-settings"
+                        class="settings__listItem"
+                        nz-list-item
+                        nzNoFlex
+                        [routerLink]="['./contact']"
+                        [routerLinkActive]="['is-active']"
+                    >
+                        <div class="settings__liText">
+                            Exchange Contact
+                        </div>
+                    </li>
+                    <li *ngIf="isSSOUser === false"
+                        class="settings__listItem"
+                        nz-list-item
+                        nzNoFlex
+                        [routerLink]="['./password']"
+                        [routerLinkActive]="['is-active']"
+                    >
+                        <div class="settings__liText">Change Password</div>
+                    </li>
+                    <!-- <nz-list-footer>Footer</nz-list-footer> -->
+                </ul>
+                <div class="settings__menuDelimeter">Permissions</div>
+                <ul nz-list nzSize="large">
+                    <li
+                        class="settings__listItem"
+                        nz-list-item
+                        nzNoFlex
+                        [routerLink]="['./terms-privacy']"
+                        [routerLinkActive]="['is-active']"
+                    >
+                        <div class="settings__liText">
+                            Terms & Privacy Policy
+                        </div>
+                    </li>
+                    <li
+                        *ngIf="view.isPrivacyAvailable"
+                        class="settings__listItem"
+                        nz-list-item
+                        nzNoFlex
+                        [routerLink]="['./privacy-settings']"
+                        [routerLinkActive]="['is-active']"
+                    >
+                        <div class="settings__liText">Privacy Settings</div>
+                    </li>
+                </ul>
+            </div>
+            <!--#endregion MAIN-->
+        </pane-frame>
+    </div>
+    <div
+        class="settings__splitter settings__splitter--second settings__details"
+    >
+        <router-outlet></router-outlet>
+    </div>
+</div>

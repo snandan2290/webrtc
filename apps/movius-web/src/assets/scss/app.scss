@@ -1,0 +1,459 @@
+@import 'variables';
+@import 'mixins';
+@import 'fonts';
+
+//#region Buttons
+.phoneBtn {
+    padding: 0;
+    @include simple-round-btn($keypad-button-size, $keypad-button-size-small);
+
+    &--crcl {
+        @extend .phoneBtn;
+        background: var(--movius_phone-button-gray);
+    }
+}
+
+.gradBtn {
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(145, 178, 159, 0.15) 65%), linear-gradient(to bottom, rgba(245, 245, 245, 0.5), rgba(245, 245, 245, 0.5));
+}
+
+%sync-btn {
+    //TODO: CB:15Mar2021: TECH - Duplication @mixin bordered-rounded-btn
+    $self: &;
+    display: block;
+    border: none;
+    border-radius: 6.25rem;
+
+    > * {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    cursor: pointer;
+
+    &--apply {
+        @extend #{$self};
+        color: $white;
+        background-color: $movius-blue;
+        margin: 0.5rem;
+
+        &:hover:not(:disabled) {
+            background-color: $movius-dark-blue;
+        }
+
+        &:disabled {
+            background: $movius-blue-disabled;
+            color: $white;
+            cursor: not-allowed;
+        }
+    }
+
+    &--teams {
+        @extend #{$self};
+        color: var(--white);
+        background-color: var(--movius-blue);
+        margin: 0.5rem;
+
+        &:hover:not(:disabled) {
+            background-color: $movius-dark-blue;
+            // border: 1px solid $movius-dark-blue;
+            color: $white;
+        }
+
+        &:disabled {
+            background: $movius-blue-disabled;
+            color: $white;
+            cursor: not-allowed;
+        }
+    }
+
+    &--start-chat {
+        @extend #{$self};
+        color: var(--white);
+        background-color: var(--movius-blue);
+        margin: 0.5rem;
+
+        &:hover:not(:disabled) {
+            background-color: $movius-dark-blue;
+        }
+
+        &:disabled {
+            background: $movius-blue-disabled;
+            color: $white;
+            cursor: not-allowed;
+        }
+    }
+
+    &--cancel {
+        @extend #{$self};
+        //color: $black;
+        color: var(--black);
+        //background-color: $movius-white;
+        background: var(--movius-cancel-btn-bgclr) !important;
+        border: 0.0625rem $black solid;
+        margin: 0.5rem;
+
+        &:hover:not(:disabled) {
+            //background-color: #696363;
+            background-color: var(--movius-cancel-btn-hoverclr);
+            border: 0.0625rem var(--movius_black) solid;
+            color: var(--black);
+        }
+
+        &:disabled {
+            border: 0.0625rem $black solid;
+            color: $black;
+            cursor: not-allowed;
+        }
+    }
+}
+
+%withGradientFade {
+    background-image: linear-gradient(
+        to bottom,
+        var(--movius_white),
+        rgba(255, 255, 255, 0)
+    );
+    border: 1px solid var(--movius_gray);
+}
+
+//#endregion Buttons
+
+//#region Scroll
+%scroll {
+    overflow-y: auto;
+    @include scrollbars(0.3em, $movius_scroll_darkgray, transparent);
+}
+
+%no-scroll {
+    overflow-y: auto;
+    @include scrollbars(0.3em, transparent, transparent);
+}
+//#endregion Scroll
+
+//#region General rules
+
+* {
+    @include generalFont;
+    outline: none;
+    &:focus {
+        outline: none;
+    }
+}
+
+.spinnered:after  {
+    content: "";
+    width: 1rem;
+    height: 1rem;
+    background-image: url("../../assets/icons/movius/common/spinner.svg");
+    background-size: contain;
+    background-position: center;
+    display: inline-flex;
+    margin: 0.15rem 0 0.15rem 0.5rem;
+}
+//#endregion General rules
+
+//#region Logos
+.logo-avatar {
+    @include circle-logo;
+}
+
+.contact {
+    &-name {
+    }
+
+    &-phone {
+    }
+
+    &-status {
+    }
+
+    &-logo {
+        width: $logo-avatar-size;
+        height: $logo-avatar-size;
+
+        @include font-semi-bold-600(calc(#{$logo-avatar-size * 0.4}));
+
+        &--small {
+
+            @include screen-mobile-above{
+                width: $std-logo-radius;
+                height: $std-logo-radius;
+                min-width: $std-logo-radius;
+                min-height: $std-logo-radius;
+                margin-left: 0.5rem;
+            }
+            @include screen-mobile{
+                width: $std-logo-radius-mobile;
+                height: $std-logo-radius-mobile;
+                min-width: $std-logo-radius-mobile;
+                min-height: $std-logo-radius-mobile;
+                margin-left: 0.5rem;
+            }
+
+        }
+    }
+}
+//#endregion
+
+//#region Common layouts
+//TODO: CB:26Nov2020: Rename to %list-item
+%history-item {
+
+    $borderWidth: 0.0625rem;
+    display: block;
+    position: relative;
+    width: auto;
+    @include screen-mobile-above{
+        height: 3.5rem;
+    }
+    @include screen-mobile{
+        height: 4.5rem;
+    }
+
+    margin: 0 8px 0 $spacing-xs;
+    //padding: $spacing-s $spacing-s $spacing-s 0.688rem;
+    //border-bottom: solid 0.0625rem var(--movius_border-gray);
+
+    cursor: pointer;
+    &:not(.is-active):after {
+        content: "";
+        @include screen-mobile{
+            border-bottom: var(--movius_border_color) $borderWidth solid;
+        }
+        position: absolute;
+        left: $spacing-s;
+        right: $spacing-s;
+        bottom: -#{$borderWidth};
+    }
+
+    &.is-active {
+        //#region Easy solution to reomve border of previous el.
+        //height: calc(4rem + 4px);
+        //margin-top: -4px;
+        //border-top: 1px solid var(--movius_settings-light-gray);
+        //border-bottom: 1px solid var(--movius_settings-light-gray);
+        //#endregion Easy solution to reomve border of previous el.
+
+        border-radius: 0.4rem;
+        background: var(--movius_text-gray-and-white);
+        box-shadow: 0 0 15px 0 rgba(0, 0, 0, 0.05);
+        color: var(--black);
+
+        .messages__hstPreview{
+            color: var(--movius_text-black-and-white);
+        }
+        .messages__hstDate{
+            color: var(--black);
+        }
+
+        &:before {
+            content: "";
+            border-top: var(--movius_settings-light-gray) $borderWidth solid;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: -#{$borderWidth};
+            z-index: -1;
+        }
+    }
+
+    .unread {
+        &--name{
+            @include font-bold($historyItemTitleFontSize);
+        }
+
+        &--date {
+            //color: var(--movius_black);
+            color: var(--black);
+        }
+    }
+}
+
+.allow-pointer-events {
+    pointer-events: all;
+}
+
+
+::ng-deep .e911tooltip {
+    width: 20rem;
+
+    &::ng-deep {
+        .ant-popover-inner {
+            border-radius: 0.5rem;
+        }
+    }
+}
+
+.e911Pop {
+    $self: &;
+
+    &--error {
+        @extend #{$self};
+        color: var(--movius_invalid-red);
+
+        a {
+            color: var(--movius_invalid-red);
+            text-decoration: underline;
+        }
+    }
+}
+
+
+.emoji-mart,
+.emoji-mart * {
+  box-sizing: border-box;
+  line-height: 1.15;
+  color: var(--black);
+}
+
+.emoji-mart {
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", sans-serif;
+  font-size: 16px;
+  display: inline-block;
+  color: #222427;
+  border: 1px solid #d9d9d9;
+  border-radius: 5px;
+  background: var(--movius_text-gray-and-white);
+}
+
+.emoji-mart-search input {
+    font-size: 16px;
+    display: block;
+    width: 100%;
+    padding: 5px 25px 6px 10px;
+    border-radius: 5px;
+    border: 1px solid #d9d9d9;
+    outline: 0;
+    background-color: var(--movius_white);
+    color: var(--black);
+  }
+
+  .emoji-mart-category-label span {
+    display: block;
+    width: 100%;
+    font-weight: 500;
+    padding: 5px 6px;
+    background-color: var(--movius_white);
+    color: var(--black);
+  }
+  .emoji-mart-dark .emoji-mart-category-label span{
+    background-color: var(--movius_white);
+    color: var(--black);
+  }
+  .emoji-mart-dark .emoji-mart-search input{
+    background-color: var(--movius_white);
+    color: var(--black);
+  }
+
+.anticon-search svg{
+    fill: var(--black);
+}
+.anticon-close svg{
+    fill: var(--black);
+}
+
+.ant-image-preview-operations-icon svg{
+    fill: #ffffff !important;
+}
+
+.ant-dropdown-menu-item{
+    //background-color: var(--movius_text-gray-and-white);
+    color: var(--black);
+}
+
+.ant-dropdown-menu-submenu-title{
+    background-color: var(--movius_text-gray-and-white);
+    color: var(--black);
+}
+
+.ant-dropdown-menu-item:hover, .ant-dropdown-menu-submenu-title:hover {
+    background-color: var(--movius_hover_grey_whitegrey);
+}
+
+.terms__body a{
+    color: var(--movius_text-hyperlink) !important;
+}
+
+.ant-select-item-option-active:not(.ant-select-item-option-disabled) {
+    background-color: var(--movius_hover_grey_whitegrey);
+}
+
+.ant-select-dropdown{
+    background-color: var(--movius_text-gray-and-white);
+
+
+    @include placeholder {
+        color: var(--black);
+    }
+    @include scrollbars(0.3rem, var(--movius_darkgray), var(--movius_lightgray));
+}
+
+.cdk-virtual-scroll-viewport{
+    @include scrollbars(0.3rem, var(--movius_darkgray), var(--movius_lightgray));
+}
+
+.ant-select-item-option{
+    color: var(--black);
+}
+
+.ant-dropdown-menu {
+    background-color: var(--movius_text-gray-and-white) !important;
+}
+
+.ant-dropdown-menu-submenu-arrow-icon{
+    svg{
+        fill: var(--movius_text-black-and-white);
+    }
+}
+
+.anticon-right .anticon svg {
+    fill: var(--movius_text-black-and-white);
+}
+
+.ant-select-show-search.ant-select:not(.ant-select-customize-input) .ant-select-selector {
+    background-color: var(--movius_text-gray-and-white) !important;
+}
+.ant-select-single.ant-select-show-arrow .ant-select-selection-item, .ant-select-single.ant-select-show-arrow .ant-select-selection-placeholder {
+    color: var(--movius_text-black-and-white);
+}
+.ant-select-selection-placeholder {
+    color: var(--movius_text-black-and-white);
+    opacity: 0.6;
+}
+.ant-select-clear .anticon svg {
+    color: var(--movius_text-black-and-white);
+    background-color: var(--movius_text-gray-and-white) !important;
+}
+.ant-modal-content {
+    background-color: var(--movius_text-gray-and-white) !important;
+    color: var(--black);
+}
+
+.ant-dropdown-menu-submenu.ant-dropdown-menu-submenu-disabled .ant-dropdown-menu-submenu-title, .ant-dropdown-menu-submenu.ant-dropdown-menu-submenu-disabled .ant-dropdown-menu-submenu-title .ant-dropdown-menu-submenu-arrow-icon {
+    //color: rgba(0, 0, 0, 0.25);
+    //background-color: #fff;
+    color: var(--black);
+    background-color: var(--movius_hover_grey_whitegrey) !important;
+    cursor: not-allowed;
+}
+
+.ant-dropdown-menu-item > a, .ant-dropdown-menu-submenu-title > a {
+    display: block;
+    margin: -5px -12px;
+    padding: 5px 12px;
+    color: var(--black);
+    transition: all 0.3s;
+}
+
+.ant-dropdown-menu-item > a:hover, .ant-dropdown-menu-submenu-title > a:hover {
+    color: var(--black);
+}
+
+// .ant-modal-body {
+//     background-color: var(--movius_text-gray-and-white) !important;
+// }
+.select-icon-fill{
+    fill: var(--movius_text-black-and-white);
+}
+//#endregion Common layouts

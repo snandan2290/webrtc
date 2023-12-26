@@ -1,0 +1,8 @@
+<div class="strength">
+    <div class="strength__block{{ (i < currentBlocksCount) ? '--active': ''}}" *ngFor="let block of totalBlocks; let i = index" [style]="{'width': 100/totalBlocksCount + '%'}"></div>
+</div>
+
+<div class="desc" *ngIf="{ value: passedValidatorsPct } as curThreshold">
+    <span class="desc__weak{{ curThreshold.value <= strongPwdThreshold ? '--active' : ''}}">WEAK</span>
+    <span class="desc__strong{{ curThreshold.value > strongPwdThreshold ? '--active' : ''}}">STRONG</span>
+</div>

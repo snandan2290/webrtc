@@ -1,0 +1,82 @@
+@import '../../../../../assets/scss/mixins';
+@import '../../../../../assets/scss/variables';
+
+.other-inc {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-xl;
+
+    &__title {
+        @include font-normal(0.75rem);
+        margin: 0 0 $spacing-xs 0;
+    }
+
+    &__heading {
+    }
+
+    &__controls {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin: $spacing-xxl-2 0 0 0;
+
+        & > *:last-child {
+            margin-right: 0;
+        }
+    }
+
+    &__reject {
+        width: 3rem;
+        height: 1rem;
+
+        background: var(--movius_popup-call-reject);
+    }
+
+    &__rejectIco {
+        width: 1rem;
+        height: 1rem;
+        @include background-image('/movius/calls/icons-reject.svg');
+    }
+
+    &__accept {
+        width: 3rem;
+        height: 1rem;
+
+        background: var(--movius_popup-call-accept);
+    }
+
+    &__acceptIco {
+        width: 1rem;
+        height: 1rem;
+        @include background-image('/movius/calls/icons-accept.svg');
+    }
+}
+
+.cntBtn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 0 $spacing-m 0 0;
+
+    div {
+        margin: 0 $spacing-xs 0 $spacing-xs;
+    }
+}
+
+.control-btn {
+    width: 8rem;
+    height: 2.25rem;
+    border-radius: 1rem;
+
+    color: var(--movius_white);
+    @include font-bold(0.875rem);
+}
+
+.contact-logo {
+    width: 4.5rem;
+    height: 4.5rem;
+}

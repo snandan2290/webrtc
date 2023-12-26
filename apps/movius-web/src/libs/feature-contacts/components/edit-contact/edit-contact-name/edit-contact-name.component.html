@@ -1,0 +1,100 @@
+<div nz-row [formGroup]="formGroup">
+    <movius-web-ui-slide-input
+        class="removable-input"
+        nz-col
+        nzFlex="23.87%"
+        #title
+        cyAttribute="title"
+        uiTitle="Title"
+        *ngIf="formGroup.controls?.title.value !== null"
+        [control]="formGroup.controls?.title"
+    >
+    </movius-web-ui-slide-input>
+    <div class="removable-icon" (click)="removeTitle.emit()"></div>
+    <movius-web-ui-slide-input
+        nz-col
+        [nzFlex]="'auto'"
+        cyAttribute="first-name"
+        uiTitle="First name"
+        (keypress)="omit_special_char($event)"
+        [control]="formGroup.controls?.firstName"
+        [MandatoryStar]="true"
+    >
+    </movius-web-ui-slide-input>
+</div>
+<div nz-row>
+    <movius-web-ui-slide-input
+        class="removable-input"
+        nz-col
+        [nzFlex]="'auto'"
+        *ngIf="formGroup.controls?.middleName.value !== null"
+        cyAttribute="middle-name"
+        uiTitle="Middle name"
+        [control]="formGroup.controls?.middleName"
+    >
+    </movius-web-ui-slide-input>
+    <div class="removable-icon" (click)="removeMiddlename.emit()"></div>
+</div>
+<div nz-row>
+    <movius-web-ui-slide-input
+        nz-col
+        [nzFlex]="'auto'"
+        cyAttribute="last-name"
+        uiTitle="Last name"
+        (keypress)="omit_special_char($event)"
+        [control]="formGroup.controls?.lastName"
+        [MandatoryStar]="true"
+    >
+    </movius-web-ui-slide-input>
+    <movius-web-ui-slide-input
+        class="removable-input"
+        nz-col
+        nzFlex="23.87%"
+        #suffix
+        *ngIf="formGroup.controls?.suffix.value !== null"
+        cyAttribute="suffix"
+        uiTitle="Suffix"
+        [control]="formGroup.controls?.suffix"
+    >
+    </movius-web-ui-slide-input>
+    <div class="removable-icon" (click)="removeSuffix.emit()"></div>
+</div>
+<div nz-row>
+    <movius-web-ui-slide-input
+        class="removable-input"
+        *ngIf="formGroup.controls?.nickName.value !== null"
+        nz-col
+        nzFlex="auto"
+        cyAttribute="nick-name"
+        uiTitle="Nickname"
+        [control]="formGroup.controls?.nickName"
+    >
+    </movius-web-ui-slide-input>
+    <div class="removable-icon" (click)="removeNickname.emit()"></div>
+</div>
+<div nz-row>
+    <movius-web-ui-slide-input
+        class="removable-input"
+        *ngIf="formGroup.controls?.yomiFirstName.value !== null || formGroup.controls?.yomiLastName.value !== null"
+        nz-col
+        nzFlex="auto"
+        cyAttribute="yomi-first-name"
+        uiTitle="Yomi First Name"
+        [control]="formGroup.controls?.yomiFirstName"
+    >
+    </movius-web-ui-slide-input>
+    <div class="removable-icon" (click)="removeYomiNames.emit()"></div>
+</div>
+<div nz-row>
+    <movius-web-ui-slide-input
+        class="removable-input"
+        *ngIf="formGroup.controls?.yomiFirstName.value !== null || formGroup.controls?.yomiLastName.value !== null"
+        nz-col
+        nzFlex="auto"
+        cyAttribute="yomi-last-name"
+        uiTitle="Yomi Last Name"
+        [control]="formGroup.controls?.yomiLastName"
+    >
+    </movius-web-ui-slide-input>
+    <div class="removable-icon" (click)="removeYomiNames.emit()"></div>
+</div>

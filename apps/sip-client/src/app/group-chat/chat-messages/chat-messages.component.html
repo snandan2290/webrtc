@@ -1,0 +1,5 @@
+<nz-list nzItemLayout="horizontal">
+    <nz-list-item *ngFor="let msg of messages$ | async">
+        <movius-web-chat-message [message]="msg"></movius-web-chat-message>
+    </nz-list-item>
+</nz-list>

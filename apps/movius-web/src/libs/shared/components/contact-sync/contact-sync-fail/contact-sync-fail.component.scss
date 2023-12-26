@@ -1,0 +1,18 @@
+@import '../../../../../assets/scss/variables';
+@import '../../../../../assets/scss/mixins';
+@import '../sync-styles.scss';
+
+.syncCntFail {
+    @include sync-component;
+
+    &__loadingControls {
+        display: flex;
+        flex-direction: row;
+        margin: $spacing-xxl-2 0 0 0;
+    }
+
+    &__failBtn {
+        width: 4.25rem;
+        height: 2.25rem;
+    }
+}

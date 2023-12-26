@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group 10</title>
+    <defs>
+        <path d="M16,0 C24.8366,0 32,7.1634 32,16 C32,24.83656 24.8366,32 16,32 C7.1634,32 0,24.83656 0,16 C0,7.1634 7.1634,0 16,0 Z" id="path-1"></path>
+        <path d="M9.7401,0 C15.1107,0 19.4801,3.7995 19.4801,8.46962 C19.4801,13.13977 15.1107,16.93925 9.7401,16.93925 C8.9316,16.93925 8.1296,16.85328 7.3529,16.68346 C6.8422,17.22298 5.2876,18.63317 2.9872,18.63317 L2.9872,18.63317 L2.15,18.62936 L2.618,17.96577 C3.509,16.7021 3.7343,15.62307 3.7906,15.17714 C1.4119,13.57892 0,11.0897 0,8.46962 C0,3.7995 4.3695,0 9.7401,0 Z" id="path-3"></path>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-369" transform="translate(-651.000000, -796.000000)">
+            <g id="Group-10" transform="translate(651.000000, 796.000000)">
+                <g id="Group-256">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="Clip-255"></g>
+                    <polygon id="Fill-254" fill="#444444" mask="url(#mask-2)" points="-1 33 33 33 33 -1 -1 -1"></polygon>
+                </g>
+                <g id="Group-5" transform="translate(6.400000, 6.400000)">
+                    <g id="Group-259">
+                        <mask id="mask-4" fill="white">
+                            <use xlink:href="#path-3"></use>
+                        </mask>
+                        <g id="Clip-258"></g>
+                        <polygon id="Fill-257" fill="#FFFFFF" mask="url(#mask-4)" points="-1 19.63317 20.4801 19.63317 20.4801 -1 -1 -1"></polygon>
+                    </g>
+                    <g id="Group-264" transform="translate(4.884200, 6.461402)" stroke="#444444">
+                        <path d="M0,0.5 C5.239766,0.5 7.859649,0.5 7.859649,0.5" id="Stroke-260"></path>
+                        <path d="M2.3579,3.64386 C7.597666,3.64386 10.217549,3.64386 10.217549,3.64386" id="Stroke-262"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

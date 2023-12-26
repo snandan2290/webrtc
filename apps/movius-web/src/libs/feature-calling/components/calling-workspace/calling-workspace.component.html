@@ -1,0 +1,175 @@
+<div
+    class="calls"
+    [class.calls--topSpaced]="getConnectionErrorValue === true"
+    *ngIf="view$ | async as view"
+>
+    <movius-web-general-failure 
+        (passConnectionError)="getConnectionError($event)"
+    ></movius-web-general-failure>
+
+    <movius-web-empty-calls
+        *ngIf="view.showEmptyListPlaceholder; else callingContent"
+        [callingStatus]="view.status"
+        (callClicked)="onNewCall()"
+    >
+    </movius-web-empty-calls>
+
+    <ng-template #callingContent>
+        <div class="calls__splitter calls__splitter--first calls__general">
+            <pane-frame
+                class="calls__pane"
+                *ngIf="{
+                    isEmptySearch:
+                        view.isSearchBarActivated && view.sessions.length === 0
+                } as data"
+                [includeDefaultHeader]="false"
+                [includeDefaultFooter]="false"
+                [isBodyCentered]="data.isEmptySearch"
+            >
+                <div headingCustom class="calls__heading">
+                    <div
+                        class="calls__caption"
+                        [class.hidden]="view.isSearchBarActivated"
+                    >
+                        Calls
+                    </div>
+                    <div
+                        class="calls__headingRight"
+                        [class.active]="view.isSearchBarActivated"
+                    >
+                        <movius-web-search-bar
+                            headingRight
+                            class="calls__search"
+                            [class.active]="view.isSearchBarActivated"
+                            (isActivated)="onSearchBarActivated($event)"
+                            (changed)="updateSearch($event)"
+                        >
+                        </movius-web-search-bar>
+                        <div
+                            *ngIf="!view.isSearchBarActivated"
+                            nz-popover
+                            [nzPopoverContent]="
+                                displayErrorPopup(view.status) &&
+                                e911DialPopover
+                            "
+                            [nzPopoverOverlayClassName]="'e911tooltip'"
+                            nzTooltipPlacement="top"
+                        >
+                            <movius-web-ui-cta-button
+                                class="calls__topControl"
+                                data-cy="call-number-button"
+                                [isDisabled]="displayErrorPopup(view.status)"
+                                btnType="Call"
+                                routerLinkActive
+                                (clicked)="onNewCall()"
+                            >
+                            </movius-web-ui-cta-button>
+                        </div>
+                    </div>
+                </div>
+                <ng-container main>
+                    <communication-item
+                        data-cy="calls-list-item"
+                        class="calls__historyItem"
+                        *ngFor="
+                            let peerSession of view.sessions;
+                            trackBy: trackBySession
+                        "
+                        [peer]="peerSession.peer"
+                        [routerLink]="[
+                            '/calling/call',
+                            peerSession.peer.multiLine
+                        ]"
+                        [routerLinkActive]="['is-active']"
+                        [isFullWidth]="true"
+                    >
+                        <div
+                            class="calls__hstAround"
+                            title
+                            *ngIf="peerSession.history[0] as latestSession"
+                        >
+                            <div class="calls__hstTwoLiner">
+                                <div class="calls__hstFirstLine">
+                                    <p
+                                        class="calls__hstName"
+                                        [class.unread--name]="
+                                            peerSession.unViewed
+                                        "
+                                    >
+                                    {{ peerSession.callTitle.includes('whatsapp:') ? peerSession.callTitle.replace('whatsapp:','') : peerSession.callTitle }}
+                                        <ng-container
+                                            *ngIf="
+                                                peerSession.history.length > 1
+                                            "
+                                        >
+                                            ({{ peerSession.history.length }})
+                                        </ng-container>
+                                    </p>
+                                    <div
+                                        class="calls__hstDate"
+                                        [class.unread--date]="
+                                            peerSession.unViewed
+                                        "
+                                        *ngIf="
+                                            peerSession
+                                                .history[0] as latestSession
+                                        "
+                                    >
+                                        {{
+                                            formatHistoryTime(
+                                                latestSession.startTime
+                                            )
+                                        }}
+                                    </div>
+                                </div>
+                                <div class="calls__hstSecondLine">
+                                    <movius-web-type-of-call
+                                        class="calls__hstType"
+                                        [callType]="
+                                            peerSession.callType | camelCap
+                                        "
+                                        [historySession]="latestSession"
+                                    >
+                                    </movius-web-type-of-call>
+                                </div>
+                            </div>
+                        </div>
+                    </communication-item>
+                    <div class="calls__emptyShell" *ngIf="data.isEmptySearch">
+                        <div class="calls__emptyIco"></div>
+                        <div class="calls__emptyTxt">No Results Found</div>
+                    </div>
+                </ng-container>
+            </pane-frame>
+        </div>
+        <div class="calls__splitter calls__splitter--second calls__details">
+            <router-outlet></router-outlet>
+        </div>
+    </ng-template>
+
+    <ng-template #e911DialPopover>
+        <!-- TECH-DEBT: CB:20Jul2021: Duplications detected. Consider extracting template to shell with introduced tempalte-variable for status OR separate comp. -->
+        <div class="e911Pop--error">
+            <p>Sorry!</p>
+            <p class="e911Pop--error" [ngSwitch]="view.status">
+                <ng-template ngSwitchCase="network-error">
+                    Network Unreachable
+                </ng-template>
+                <ng-template ngSwitchCase="calls-not-allowed">
+                    Call functionality has been disabled for your organization
+                </ng-template>
+                <ng-template ngSwitchCase="mic-not-allowed">
+                    To enable calling functionality, please permit to access the microphone
+                </ng-template>
+                <ng-template ngSwitchCase="e911-declined">
+                    You have not accepted E911 Terms and Conditions. To enable
+                    calling functionality, please enter an address for E911
+                    under <a routerLink="/settings/e911">Settings > E911</a>
+                </ng-template>
+                <ng-template ngSwitchCase="another-active-call">
+                    Another call in progress.
+                </ng-template>
+            </p>
+        </div>
+    </ng-template>
+</div>

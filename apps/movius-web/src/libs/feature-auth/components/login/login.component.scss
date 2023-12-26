@@ -1,0 +1,66 @@
+@import '../../../../assets/scss/variables';
+@import '../../../../assets/scss/mixins';
+@import '../../../../assets/scss/auth.scss';
+@import '../common/auth-common.scss';
+
+
+.login {
+    @extend %flex-col-centered;
+
+    &__inputs,
+    &__header,
+    &__buttons,
+    &__controls,
+    &__reset,
+    &__footer {
+        @extend %flex-col-centered;
+    }
+
+    @include authGeneralMarkup;
+
+    &__reset {
+        margin: $spacing-xxl-6;
+        cursor: pointer;
+    }
+
+    &__resetText {
+        @extend %authFont;
+        @include font-semi-bold-600(14px);
+
+        color: var(--movius_colors-primary-green-2);
+    }
+
+    &__button {
+    }
+
+    &__specialErrors {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__nna-err {
+        @include font-normal(1rem);
+    }
+
+    &__errTitle {
+        @include font-bold(2rem);
+    }
+
+    &__errText {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+
+        width: 19.8125rem;
+        height: 5.5rem;
+
+        margin: 1.875rem 0 0 0;
+    }
+
+    &__errOk {
+        width: 16.125rem;
+        margin: 1.375rem 0 0 0;
+    }
+}

@@ -1,0 +1,102 @@
+<!-- TODO : Join with chat component ! -->
+<pane-frame [ngClass]="isMobileDevice ? 'start__startPane-mobile' : 'start__startPane'" [includeDefaultHeader]="false">
+    <div class="start__heading--cntr" headingCustom>
+        <movius-web-message-contact-selector
+            [contacts]="peers$ | async"
+            (changed)="processContactChanged($event)"
+        >
+        </movius-web-message-contact-selector>
+        <!-- <movius-web-group-message-participants>
+            </movius-web-group-message-participants> -->
+        <!-- <movius-web-group-message-header>
+            </movius-web-group-message-header> -->
+        <!-- <movius-web-contact-selector
+        [contacts]="peers$ | async"
+        (changed)="processContactChanged($event)"
+        ></movius-web-contact-selector> -->
+        <span class="start__help_text">
+            {{ showHelpText() }}</span
+        >
+        <div
+            class="start__headingError"
+            [ngSwitch]="messageForm?.messageError || msgFrmErr"
+        >
+            <div class="errorVariant" *ngSwitchCase="'messages-not-allowed'">
+                You are not allowed to send messages, please contact
+                administrator
+            </div>
+            <!-- <div class="errorVariant" *ngSwitchCase="'empty-destination'">
+                Enter recipient number to send SMS.
+            </div> -->
+            <div class="errorVariant" *ngSwitchCase="'self-destination'">
+                {{ selfDestinationError }}
+            </div>
+            <div class="errorVariant" *ngSwitchCase="'invalid-data'">
+                {{ invalidDataError }}
+            </div>
+            <div class="errorVariant" *ngSwitchCase="'conference-destination'">
+                {{ conferenceNumberErrorMsg }}
+            </div>
+            <div
+                class="errorVariant"
+                *ngSwitchCase="'destination-emergency-error'"
+            >
+                {{ emergencyNumber }}
+            </div>
+            <div
+                class="errorVariant"
+                *ngSwitchCase="'specialCharacterValidation'"
+            >
+                {{ validatioSpecialCharcs }}
+            </div>
+            <div class="errorVariant" *ngSwitchCase="'invalid-number'">
+                <div *ngIf="!!selectedContact?.multiline">
+                    {{ selectedContact?.multiline }} is invalid. Please enter
+                    the phone number with a valid country code (e.g. For U.S:
+                    1xxxxxxxxxx).
+                </div>
+            </div>
+        </div>
+        <div
+            main
+            class="chatspace__image-templete"
+            *ngIf="getDisplayImagesSelectedValue === true"
+        >
+            <display-selected-image
+                (imagePreviewCancel)="imagePreviewCancelStatus($event)"
+                [imageBlob]="imageBlobData"
+                (sendNewMMSEvent)="onSendMedia($event)"
+                [selectedContactMultiline]="multiline"
+                (msgFormError)="setMsgFormError($event)"
+                [messageFormError]="messageForm?.messageError"
+            >
+            </display-selected-image>
+        </div>
+
+    </div>
+    <div main class="chatspace__empty-image-div" *ngIf="getDisplayImagesSelectedValue === false ">
+        <img class="chatspace__empty-image" *ngIf="composeMessageType == 'whatsapp'"
+            src="assets/icons/movius/contacts/WhatsApp_empty.svg" alt="whatsapp" />
+        <img class="chatspace__empty-image" *ngIf="composeMessageType !== 'whatsapp'"
+            src="assets/icons/movius/contacts/Message_empty.svg" alt="message" />
+    </div>
+    <div
+        footer
+        class="chatspace__controls"
+        *ngIf="getDisplayImagesSelectedValue === false"
+    >
+        <div [ngClass]="isMobileDevice ? 'start__msgFormShell-mobile' : 'start__msgFormShell'">
+            <movius-web-message-form
+                class="start__msgForm"
+                #messageForm
+                [doStoreMsgSeparatelyForMultilines]="false"
+                [selectedContactMultiline]="multiline"
+                (messageSent)="onSendMessage($event)"
+                (displayImageSelected)="getDisplayImagesSelectedStatus($event)"
+                [picMsgCancelledStatus]="picMsgeventCancelled"
+                (blobImageURL)="fetchBlobURL($event)"
+            >
+            </movius-web-message-form>
+        </div>
+    </div>
+</pane-frame>

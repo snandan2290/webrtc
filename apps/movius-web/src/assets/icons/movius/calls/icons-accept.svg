@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="17" height="12" viewBox="0 0 17 12">
+    <defs>
+        <filter id="rgmkctgdxa" width="106.3%" height="116.7%" x="-3.2%" y="-4.2%" filterUnits="objectBoundingBox">
+            <feOffset dy="1" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feColorMatrix in="shadowOffsetOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+        </filter>
+        <path id="ljs0qta9kb" d="M5.015 9.493L1.254 5.731 0 6.985 5.015 12 15.761 1.254 14.507 0z"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g>
+            <g>
+                <g transform="translate(-711 -310) translate(687 298) translate(24 12)">
+                    <use fill="#000" filter="url(#rgmkctgdxa)" xlink:href="#ljs0qta9kb"/>
+                    <use fill="#FFF" xlink:href="#ljs0qta9kb"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

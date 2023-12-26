@@ -1,0 +1,54 @@
+<div class="addCnt__other" nz-row>
+    <movius-web-ui-slide-input
+        *ngIf="formGroup.controls.personalWebPage.value !== null"
+        nz-col
+        nzFlex="auto"
+        #title
+        cyAttribute="personal-web-page"
+        uiTitle="Personal Web Page"
+        [control]="formGroup.controls.personalWebPage"
+    >
+    </movius-web-ui-slide-input>
+    <div class="addCnt__removeBtn--rightAbs" nz-button (click)="removeData(formGroup.controls.personalWebPage)"></div>
+</div>
+<div class="addCnt__other" nz-row>
+    <movius-web-ui-slide-input
+        *ngIf="formGroup.controls.significantOther.value !== null"
+        nz-col
+        nzFlex="auto"
+        #title
+        cyAttribute="significant-other"
+        uiTitle="Significant Other"
+        [control]="formGroup.controls.significantOther"
+    >
+    </movius-web-ui-slide-input>
+    <div class="addCnt__removeBtn--rightAbs" nz-button (click)="removeData(formGroup.controls.significantOther)"></div>
+</div>
+<div class="addCnt__other" nz-row>
+    <movius-web-ui-slide-input
+        *ngIf="formGroup.controls.birthday.value !== null"
+        [isDate]="true"
+        nz-col
+        nzFlex="auto"
+        #title
+        cyAttribute="birthday"
+        uiTitle="Birthday"
+        [control]="formGroup.controls.birthday"
+    >
+    </movius-web-ui-slide-input>
+    <div class="addCnt__removeBtn--rightAbs" nz-button (click)="removeData(formGroup.controls.birthday)"></div>
+</div>
+<!--
+<div nz-row>
+    <movius-web-ui-slide-input
+        *ngIf="formGroup.controls.anniversary.value !== null"
+        nz-col
+        nzFlex="auto"
+        #title
+        cyAttribute="anniversary"
+        uiTitle="Anniversary"
+        [control]="formGroup.controls.anniversary"
+    >
+    </movius-web-ui-slide-input>
+</div>
+-->

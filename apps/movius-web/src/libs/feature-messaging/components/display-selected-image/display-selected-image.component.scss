@@ -1,0 +1,61 @@
+.background-style {
+    width: auto;
+    height: calc(100vh - 9rem);
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 0px !important;
+    background-color: var(--white);
+
+    .close-cnt {
+        width: auto;
+        height: 60px;
+        display: flex;
+        justify-content: end;
+
+        .svg-close {
+            float: right;
+            margin: 12px;
+            cursor: pointer;
+        }
+    }
+
+    .image-templete {
+        width: auto;
+        height: calc(100vh - 15rem);;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0px 30px 30px 30px;
+
+        .image-selected {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+    }
+
+    .sendMMS-btn {
+        display: flex;
+        justify-content: end;
+        margin-bottom: 20px;
+
+        .svg-send {
+            position: absolute;
+            right: 3rem;
+            bottom: 5rem;
+            cursor: pointer;
+        }
+
+        .svg-send-disable {
+            position: absolute;
+            right: 3rem;
+            bottom: 5rem;
+            cursor: not-allowed;
+        }
+    }
+}
+
+.display-none {
+    display: none;
+}

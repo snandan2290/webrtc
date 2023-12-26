@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="48px" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group</title>
+    <defs>
+        <path d="M24,0 C37.255,0 48,10.7452 48,24 C48,37.2548 37.255,48 24,48 C10.745,48 0,37.2548 0,24 C0,10.7452 10.745,0 24,0 Z" id="path-1"></path>
+        <path d="M0,0 L21.137,9.3897 L0.419,18.2123 L2.466,9.4355 L9.605,9.5335 C9.776,9.5355 9.909,9.4058 9.904,9.2383 C9.9,9.0708 9.763,8.936 9.592,8.934 L9.592,8.934 L2.453,8.836 L0,0 Z" id="path-3"></path>
+    </defs>
+    <g id="M2022-519(Sending-Pictures&amp;GIF)" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Messages:-MMS-Photo_Selected" transform="translate(-1208.000000, -719.000000)">
+            <g id="Group" transform="translate(1208.000000, 719.000000)">
+                <g id="Group-338">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="Clip-337"></g>
+                    <polygon id="Fill-336" fill="#94939C" mask="url(#mask-2)" points="-1 49 49 49 49 -1 -1 -1"></polygon>
+                </g>
+                <g id="Group-341" transform="translate(14.822000, 14.566100)">
+                    <mask id="mask-4" fill="white">
+                        <use xlink:href="#path-3"></use>
+                    </mask>
+                    <g id="Clip-340"></g>
+                    <polygon id="Fill-339" fill="#FFFFFF" mask="url(#mask-4)" points="4.919 -10.5186 30.389 4.187 16.219 28.7309 -9.252 14.0253"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

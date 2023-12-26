@@ -1,0 +1,17 @@
+@import '../../../../assets/scss/variables';
+@import '../common/settings-common.scss';
+
+.terms {
+    max-height: 94vh;
+    @include settings-layouts;
+
+    &__shell {
+        margin: $spacing-l 0 0 0;
+    }
+
+    &__main {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+}

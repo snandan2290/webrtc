@@ -1,0 +1,546 @@
+@import 'scss/mixins';
+@import 'scss/variables';
+@import 'scss/app.scss';
+
+$addCnt: 'addCnt';
+
+
+::ng-deep {
+    &.ant-popover-inner-content {
+        color: var(--movius_invalid-red);
+        border-radius: 0.5rem;
+    }
+
+    &.ant-popover-inner {
+        border-radius: 0.375rem;
+    }
+}
+
+.msgForm {
+    &__operation-wpic {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+        padding: 12px 0px;
+        width: 100%;
+        @include screen-mobile{
+            padding: 12px 1rem;
+            background-color: var(--mobile-details-page-bgcolor);
+        }
+    }
+
+    &__operation-wopic {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+        padding: 12px 0px;
+        @include screen-mobile(){
+            padding: 12px 1rem;
+            background-color: var(--mobile-details-page-bgcolor);
+        }
+        width: 100%;
+    }
+
+    &__operation {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-evenly;
+        background: var(--movius_lightgray-dark);
+    }
+
+    &__writeFieldWrapper {
+        display: flex;
+        width: 100%;
+        margin: 0 8px;
+        border-radius: 8px;
+        // border: solid 1px $movius_avatar-gray !important;
+        border: solid 1px var(--movius_border_color) !important;
+        align-items: end;
+        background-color: var(--movius_white);
+        // background: #eeeeee;
+        // margin: 0 $spacing-xs 0 $spacing-m;
+
+        // &.restricted {
+        //     cursor: not-allowed;
+        // }
+    }
+    &__emojiImg:hover{
+        .msgForm__cancel-icons{
+            fill: $movius-blue;
+            opacity: 1;
+        }
+    }
+
+
+    &__templateWrapper {
+        // $height: 3rem;
+        $max-height: 5rem;
+        // height: $height;
+        max-height: $max-height;
+        border-radius: 8px 0px 0px 8px;
+        background: var(--movius_white);
+        // padding-top: 10px;
+        //position: fixed;
+        //bottom: 25px;
+        padding-bottom: 2px;
+    }
+
+    &__templateWrapperDisabled {
+        background: var(--movius_white);
+        padding-top: 10px;
+        opacity: 0.5;
+        pointer-events: none;
+        cursor: default;
+        //position: fixed;
+        //bottom: 25px;
+    }
+
+    &__optInTemplate {
+        margin-left: 10px;
+        cursor: pointer;
+    }
+
+    &__fieldset {
+        width: 100%;
+        background: $movius-white;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+    }
+
+    &__writeFieldOptIn {
+        $self: &;
+        $height: 3rem;
+        $max-height: 5rem;
+
+        width: 100%;
+        height: $height;
+        max-height: $max-height;
+
+        //padding: 0.9375rem $spacing-l 0.9375rem $spacing-l;
+        padding: 6px 10px 0 3rem;
+
+        border: none;
+        border-radius: 8px;
+        background: var(--movius_white);
+        color: var(--movius_text-gray);
+        resize: none;
+        outline: none;
+
+        @include scrollbars(0.375rem, var(--movius_darkgray), transparent);
+
+        @include chrome-safari {
+            overflow-y: overlay;
+            @include scrollbars-overlay(1rem, var(--movius_darkgray), transparent);
+        }
+
+        @include no-box-shadow();
+        @include font-normal(0.875rem);
+
+        overflow: visible;
+
+        &:focus {
+            @extend #{$self};
+            color: var(--movius_black);
+            background-color: var(--movius_white);
+            border: solid 0.0625rem var(--movius_colors-primary-green-2);
+
+            @include placeholder {
+                color: var(--movius_black);
+            }
+        }
+
+        // &.restricted {
+        //     pointer-events: none;
+        //     opacity: 0.5;
+        // }
+
+        // &.no-scroll {
+        //     overflow: hidden;
+        // }
+
+    }
+
+    &__writeField {
+        $self: &;
+        $height: 3rem;
+        $max-height: 5rem;
+
+        width: 100%;
+        height: $height;
+        // max-height: $max-height;
+
+        //padding: 0.9375rem $spacing-l 0.9375rem $spacing-l;
+        padding: 14px 8px 0 1rem;
+
+        border: none;
+        // border-radius: 0px 8px 8px 0px;
+        background: var(--movius_white);
+        color: var(--movius_text-gray);
+        resize: none;
+        outline: none;
+
+        @include scrollbars(0.375rem, var(--movius_darkgray), transparent);
+
+        @include chrome-safari {
+            overflow-y: overlay;
+            @include scrollbars-overlay(1rem, var(--movius_darkgray), transparent);
+        }
+
+        @include no-box-shadow();
+        @include font-normal(0.875rem);
+
+        overflow: visible;
+
+        &:focus {
+            @extend #{$self};
+            color: var(--black) !important;
+            background-color: var(--movius_white);
+            // border: solid 0.0625rem var(--movius_colors-primary-green-2);
+
+            @include placeholder {
+                color: var(--movius_black);
+            }
+        }
+
+        &.disabledTextTemplate {
+            color: var(--black) !important;
+            opacity: 2.5 !important;
+        }
+
+        // &.restricted {
+        //     pointer-events: none;
+        //     opacity: 0.5;
+        // }
+
+        &.no-scroll {
+            overflow: hidden;
+        }
+
+        @include placeholder {
+            color: var(--black);
+        }
+    }
+
+    &__button {
+        width: 3rem;
+        height: 3rem;
+        align-self: center;
+        cursor: pointer;
+
+        background: var(--movius_lightgray);
+
+        &:disabled {
+            cursor: default;
+            opacity: 0.5;
+        }
+    }
+    &__sendImg-div{
+        align-self: flex-end;
+        margin-bottom: 10px;
+    }
+
+    &__sendImg {
+        width: 24px;
+        height: 24px;
+    }
+
+    &__sendImg-active {
+        width: 24px;
+        height: 24px;
+        stroke-width: 1px;
+        cursor: pointer;
+    }
+
+    &__emoji {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        align-self: flex-end;
+        margin-bottom: 6px;
+        @include screen-mobile(){
+            margin-bottom: 5px;
+        }
+        cursor: pointer;
+    }
+
+    &__emoji-disabled {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        pointer-events: none;
+        opacity: 0.5;
+        cursor: default;
+        align-self: flex-end;
+        padding-bottom: 6px;
+    }
+
+    &__emojiImg {
+        width: 1.5rem;
+        height: 1.5rem;
+        margin: 0 0.5rem 0 0;
+
+        &:last-child {
+            margin: 0;
+        }
+    }
+    &__emojiImg:hover {
+        scale: 1.1;
+        .smile_emoji {
+            fill: var(--movius-blue);
+            opacity: 0.8;
+            stroke: var(--black);
+            stroke-width: 0.5px;
+
+         }
+         .stroke{
+            stroke: var(--movius-blue);
+        };
+        .line{
+            fill: black;
+            stroke: black;
+            stroke-width: 0.5px;
+
+        }
+    }
+
+    &__gallery:hover {
+         .color{
+            fill: var(--movius-blue);
+        }
+        .opacity{
+            opacity: 1;
+        }
+    }
+
+    &__sendImg:hover {
+        .smile_emoji {
+            fill: var(--movius-blue);
+            opacity: 1;
+            stroke-width: 1px;
+            scale: 1.1;
+            .line{
+                fill: black;
+                stroke: black;
+                stroke-width: 0.5px;
+
+            }
+         }
+
+         .stroke{
+            stroke: var(--movius-blue);
+        }
+
+    }
+
+
+    &__smile_active {
+        fill: var(--movius-blue);
+        opacity: 0.8;
+        stroke: var(--black);
+        stroke-width: 0.5px;
+        .line{
+            fill: black;
+            stroke: black;
+            stroke-width: 0.5px;
+        }
+     }
+
+
+}
+
+.emoji {
+
+    &.persisted-hidden {
+        display: block;
+        visibility: hidden;
+        height: 0;
+        max-height: 0px;
+        line-height: 0;
+        overflow: hidden;
+        zoom: 1;
+    }
+
+    &.persisted-visible {
+        visibility: visible;
+        height: initial;
+        max-height: initial;
+        line-height: initial;
+        overflow: initial;
+        zoom: initial;
+    }
+}
+
+.isGroupMessageEnabledClass{
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+.text-danger{
+    color: var(--red);
+    display: flex;
+    align-items: center;
+    // justify-content: center;
+    margin-bottom: 8px;
+    margin-left: 6%;
+    font-size: 12px;
+
+    .user-info{
+        width: 1rem;
+        height: 1rem;
+        min-height: 1rem;
+        min-width: 1rem;
+        background-color: var(--red);
+        border-radius: 50%;
+        position: static;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 8px;
+    }
+
+    svg{
+        fill: var(--white);
+    }
+}
+
+
+.addBtn {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    //margin: auto $spacing-l $spacing-xxl-6 $spacing-m;
+    max-width: 12rem;
+    white-space: nowrap;
+    margin-right: 12px;
+
+    & > div {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin: 0 0 0 $spacing-xs;
+
+        cursor: pointer;
+    }
+
+}
+
+.addIco {
+    width: 1.5rem;
+    height: 1.5rem;
+    @include background-image('/movius/contacts/icons-add.svg');
+}
+
+
+.photoIco {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    //margin: auto $spacing-l $spacing-xxl-6 $spacing-m;
+    max-width: 12rem;
+    white-space: nowrap;
+    margin-right: 12px;
+    cursor: pointer;
+}
+
+
+.photoIco-disabled {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    //margin: auto $spacing-l $spacing-xxl-6 $spacing-m;
+    max-width: 12rem;
+    white-space: nowrap;
+    margin-right: 12px;
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: default;
+}
+
+
+.crossIco {
+    width: 1.5rem;
+    height: 1.5rem;
+    @include background-image('/movius/messages/Cross_icon.svg');
+}
+
+
+.cameraIco {
+    width: 1.5rem;
+    height: 1.5rem;
+    @include background-image('/movius/messages/photo-camera.svg');
+}
+
+
+
+
+.addCnt {
+    $base: &;
+    display: flex;
+    flex-direction: column;
+    //height: 100%;
+
+    margin: $spacing-xl $spacing-xxl-10 $spacing-xxl-2 $spacing-xxl-10;
+
+
+    &__addLogoIco {
+        display: flex;
+        width: 1rem;
+        height: 1rem;
+        @include background-image('/movius/common/icons-all-photo.svg');
+    }
+}
+
+[data-title]:hover:after {
+    opacity: 1;
+    transition: all 0.1s ease 0.5s;
+    visibility: visible;
+}
+
+[data-title]:after {
+    content: attr(data-title);
+    background-color: #FFF;
+    color: #111;
+    font-size: 100%;
+    position: absolute;
+    padding: 5px 5px 5px 5px;
+    bottom: -1.6em;
+    left: 100%;
+    white-space: nowrap;
+    //box-shadow: 1px 1px 3px #222222;
+    opacity: 0;
+    //border: 1px solid #111111;
+    z-index: 99999;
+    visibility: hidden;
+}
+
+[data-title] {
+    position: relative;
+}
+
+.displayNone {
+    display: none;
+}
+
+movius-web-labeled-button{
+    position: absolute;
+    bottom: 20px;
+    left: 94px;
+}
+
+.width-55 {
+    width: 55vw;
+}
+
+.width-45 {
+    width: 45vw;
+}

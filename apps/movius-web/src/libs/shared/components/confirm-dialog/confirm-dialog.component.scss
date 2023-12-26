@@ -1,0 +1,146 @@
+@import 'scss/variables';
+@import 'scss/mixins';
+@import 'scss/app.scss';
+
+$confirm: 'confirm';
+
+.#{$confirm} {
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+
+    padding: $spacing-xl;
+    //background-color: var(--movius_text-gray-and-white);
+    color: var(--black);
+
+    &--centered {
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+
+        .#{$confirm}__controls {
+            display: flex;
+            align-items: stretch;
+            width: 60%;
+            margin: $spacing-xl 0 0 0;
+        }
+
+        .#{$confirm}__apply,
+        .#{$confirm}__cancel {
+            flex: 1;
+        }
+    }
+
+    &__title {
+        $testSize: 1.125rem;
+        margin: 0.375rem 0 0 0;
+        padding: 0;
+
+        line-height: $testSize;
+        @include font-bold($testSize);
+    }
+
+    &__subTitle {
+        padding: 0;
+        @include font-normal(0.875rem);
+    }
+
+    &__infoTitleTxt {
+        padding: 0;
+        font-weight: 800;
+        text-align: center;
+        margin: -30px 0 1rem 0;
+        padding: 12px;
+    }
+
+    &__subTitleShell {
+        $base: &;
+        display: inline-flex;
+
+        margin: $spacing-s 0 0 0;
+
+        &--emptyTitle {
+            @extend #{$base};
+            margin: 2.25rem 0 0 0;
+        }
+    }
+
+    &__controls {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+        margin: $spacing-xl 0 0 auto;
+        padding: 0;
+    }
+
+    &__cancel {
+        display: inline-flex;
+        align-content: center;
+        justify-content: center;
+        width: 93px;
+        height: 36px;
+        margin: 0 0 0 0;
+        padding: 8px 24px 9px;
+        @extend %sync-btn--cancel;
+        white-space: nowrap;
+        background: var(--movius-cancel-btn-bgclr);
+        color: var(--black);
+    }
+
+    &__apply {
+        display: inline-flex;
+        align-content: center;
+        justify-content: center;
+        width: 93px;
+        height: 36px;
+        margin: 0 0 0 $spacing-l;
+        padding: 8px 24px 9px;
+        @extend %sync-btn--teams;
+        color: var(--black);
+        &:only-child {
+            margin: 0;
+        }
+
+        white-space: nowrap;
+    }
+
+    &__apply-center {
+        display: inline-flex;
+        align-content: center;
+        justify-content: center;
+        width: auto;
+        height: 36px;
+        margin: auto;
+        padding: 8px 24px 9px;
+        @extend %sync-btn--apply;
+
+        &:only-child {
+            margin: 0;
+        }
+
+        white-space: nowrap;
+    }
+
+    &__error {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-self: center;
+        margin: 0 1rem 0 1rem;
+
+        & > span {
+            display: block;
+        }
+    }
+
+}
+
+@media only screen and (max-width: 414px) {
+    .confirm__controls {
+        margin-right: 25px !important;
+    }
+}
+

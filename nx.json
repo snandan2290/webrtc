@@ -1,0 +1,37 @@
+{
+    "npmScope": "movius-web",
+    "affected": { "defaultBase": "master" },
+    "implicitDependencies": {
+        "angular.json": "*",
+        "package.json": { "dependencies": "*", "devDependencies": "*" },
+        "tsconfig.base.json": "*",
+        "tslint.json": "*",
+        "nx.json": "*"
+    },
+    "tasksRunnerOptions": {
+        "default": {
+            "runner": "@nrwl/workspace/tasks-runners/default",
+            "options": {
+                "cacheableOperations": ["build", "lint", "test", "e2e"]
+            }
+        }
+    },
+    "projects": {
+        "sip-client": { "tags": [] },
+        "sip-client-e2e": {
+            "tags": [],
+            "implicitDependencies": ["sip-client"]
+        },
+        "sip": { "tags": [] },
+        "movius-web": { "tags": [] },
+        "movius-web-e2e": {
+            "tags": [],
+            "implicitDependencies": ["movius-web"]
+        },
+        "domain": { "tags": [] },
+        "msgarph": { "tags": [] },
+        "encrypt": { "tags": [] },
+        "electron": { "tags": [] },
+        "ts-logger": { "tags": [] }
+    }
+}

@@ -1,0 +1,36 @@
+<ng-container *ngIf="session$ | async as session">
+    <movius-web-active-call
+        *ngIf="
+            getActiveCall(session, session.ongoingSessionsCount) as activeCall;
+            else inactiveCall
+        "
+        [peer]="session.peer"
+        [call]="activeCall"
+        [isAnonymous]="session.isAnonymous"
+        (cancel)="onCancel(activeCall)"
+        (accept)="onAccept(activeCall)"
+        (swap)="onSwap(activeCall)"
+        [isHold]="activeCall.isHold"
+        [isMute]="activeCall.isMuted"
+        (mute)="onMute(activeCall, $event)"
+        (hold)="onHold(activeCall, $event)"
+        (keyClicked)="onKeyClicked(activeCall, $event)"
+    >
+    </movius-web-active-call>
+    <ng-template #inactiveCall>
+        <movius-web-inactive-call
+            [peer]="session.peer"
+            [callingStatus]="session.callingStatus"
+            [messagingStatus]="session.messagingStatus"
+            [history]="session.history"
+            [isAnonymous]="session.isAnonymous"
+            (call)="onStartCall(session)"
+            (clearHistory)="onClearHistory(session.peer.multiLine)"
+            (deleteHistoryItem)="
+                onDeleteHistoryItem(session.peer.multiLine, $event)
+            "
+            (addToExistentContact)="onAddToExistentContact(session.peer.id)"
+        >
+        </movius-web-inactive-call>
+    </ng-template>
+</ng-container>

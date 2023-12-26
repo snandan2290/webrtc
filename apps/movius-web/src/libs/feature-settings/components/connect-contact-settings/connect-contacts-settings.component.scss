@@ -1,0 +1,58 @@
+@import 'scss/app.scss';
+@import 'scss/variables';
+@import 'scss/mixins';
+@import '../common/settings-common.scss';
+
+.syncCnt {
+
+    @include settings-layouts;
+
+    height: unset;
+
+    &__shell {
+        margin: $spacing-l 0 0 0;
+    }
+
+    &__main {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+
+    &__captionTxt {
+        margin: 0;
+        @include font-normal(0.875rem);
+    }
+
+    &__caption {
+        margin: 0 0 $spacing-xxl-2 0;
+    }
+
+
+    &__controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__syncBtn {
+        width: 19.25rem;
+        height: 2.25rem;
+        @extend %sync-btn--apply;
+
+        &:only-child {
+            margin: 0;
+        }
+    }
+
+    &__syncing, &__error {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.centered {
+    margin: auto;
+}

@@ -1,0 +1,36 @@
+<div class="searchbar searchbar-container">
+    <nz-input-group id="test" class="searchbar__body" [nzSuffix]="suffixIconSearch">
+        <input
+            id="input"
+            class="searchbar__input"
+            #searchInput
+            data-cy="search-input"
+            type="text"
+            (focus)="focused()"
+            (blur)="blured()"
+            [(ngModel)]="searchTerm"
+            (keydown.enter)="handleChange(searchTerm)"
+            nz-input
+            (click)="onActivate()"
+            (keyup)="checkFilterValue(searchTerm, $event)"
+            placeholder="Search" />
+            <div class="searchbar__remove" *ngIf="searchTerm?.length > 0" (click)="clearAll()"></div>
+    </nz-input-group>
+    <ng-template #suffixIconSearch>
+        <i *ngIf="searchTerm?.length > 0; then suffixIconDummy; else suffixIcon"></i>
+    </ng-template>
+    <ng-template #suffixIcon>
+        <i nz-icon nzType="search"></i>
+    </ng-template>
+    <ng-template #suffixIconDummy>
+        <i nzType="search"></i>
+    </ng-template>
+    <!-- <div *ngIf="isActivated | async" class="searchbar__cancel" (click)="onClose()">
+        <p class="searchbar__cancelTxt">Cancel</p>
+    </div> -->
+    <div *ngIf="searchTerm?.length > 0 && showSuggetion" class="searchbar_suggession">
+        <div>
+            Press 'Enter' to view the results &nbsp;
+        </div>
+    </div>
+</div>

@@ -1,0 +1,208 @@
+@import '../../../../assets/scss/variables';
+@import '../../../../assets/scss/app';
+@import '../common/settings-common.scss';
+
+::ng-deep .ant-divider-horizontal {
+    margin: 1.25rem 0;
+}
+
+.cntSettings {
+    $base: &;
+    @include settings-layouts;
+
+    display: flex;
+    flex-direction: column;
+    height: unset;
+    justify-content: space-between;
+
+    //#region Initial
+
+    &__pane {
+        padding: 2rem 5rem 2rem 3.25rem;
+    }
+
+    &__main {
+        margin: $spacing-l 0 0 0;
+        &.centered {
+            margin: auto;
+        }
+    }
+
+    &__initTitle {
+        margin: $spacing-l 0 $spacing-xxl-4 0;
+        @include font-normal(0.875rem);
+        vertical-align: middle;
+    }
+
+    &__form {
+        height: inherit;
+        margin-top: 3rem;
+    }
+
+    &__inputPair {
+        align-items: center;
+        margin: $spacing-xs 0 0 0;
+    }
+
+    &__serverInput {
+        padding: 0 0 $spacing-s 0;
+        line-height: 2rem;
+
+        border: none;
+        border-bottom: 0.0625rem solid var(--movius_text-gray);
+        box-shadow: none;
+        border-radius: 0;
+
+        @include font-normal(0.875rem);
+    }
+
+    &__serverNotif {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-end;
+    }
+
+    &__serverNotifIco {
+        margin: 0 0.5rem 0 0;
+    }
+
+    &__serverNotifTxt {
+        width: 100%;
+        //margin: 0.063rem 0 0.063rem 0.5rem;
+        padding: 0.438rem 7.75rem 0.438rem 0.5rem;
+        border-radius: 0.3125rem;
+        color: var(--movius_invalid-red)-pale;
+        background-color: var(--movius_pale-sand);
+    }
+
+    &__cancel {
+        @extend %sync-btn--cancel;
+        width: 5rem;
+        margin: 1rem;
+    }
+    &__add {
+        @extend %sync-btn--apply;
+        width: 5rem;
+        margin: 1rem;
+    }
+    //#endregion Initial
+
+    //#region Ready
+    &__caption {
+        display: flex;
+        flex-direction: row;
+        height: 2.5rem;
+        margin: $spacing-l 0 0 0;
+        padding: 0 0 0 1.875rem;
+    }
+
+    /*&__capTitle {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+    }*/
+
+    &__capSubTitle {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        position: relative;
+        //justify-content: center;
+    }
+
+    &__capTxt {
+        display: flex;
+    }
+
+    &__info {
+        margin: $spacing-xxs 0 0 0;
+        @include font-normal(0.75rem);
+        color: var(--movius_text-gray);
+        &--header {
+            margin: 0;
+            line-height: 1rem;
+            @include font-semi-bold-600(0.875rem);
+            color: var(--movius_black);
+        }
+    }
+
+    &__link {
+        margin: $spacing-xxs $spacing-xxs 0 $spacing-xxs;
+        @include font-normal(0.75rem);
+        color: var(--movius_black);
+        text-decoration: underline;
+    }
+
+    &__checkmark {
+        display: inline-block;
+        position: absolute;
+        top: 0;
+        left: -1.875rem;
+        width: 1rem;
+        height: 1rem;
+        @include background-image(
+            '/movius/settings/icons-all-checked-green.svg'
+        );
+    }
+
+    &__manSyncBtn {
+        $base: &;
+        width: 8.375rem;
+        height: 2.25rem;
+        @extend %sync-btn--apply;
+        margin: $spacing-s 0 $spacing-xl 0;
+
+        &--logout {
+            @extend #{$base};
+            @extend %sync-btn--cancel;
+        }
+    }
+
+    &__options {
+        width: 100%;
+    }
+
+    &__option {
+        display: flex;
+        align-items: center;
+        height: 3rem;
+        width: 100%;
+        padding: $spacing-s $spacing-m $spacing-s $spacing-m;
+
+        border-left: 1px var(--movius_darkgray) solid;
+        border-right: 1px var(--movius_darkgray) solid;
+        border-bottom: 1px var(--movius_darkgray) solid;
+        border-top: none;
+        &:first-of-type {
+            border-top: 1px var(--movius_darkgray) solid;
+        }
+    }
+
+    &__optTxt {
+        display: block;
+        width: 100%;
+    }
+
+    &__intervals {
+        margin-top: $spacing-m;
+    }
+    //#endregion Ready
+
+    //#region Established
+    &__established {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        #{$base} {
+            height: 100%;
+        }
+    }
+
+    &__estabShell {
+    }
+    //#endregion Established
+}

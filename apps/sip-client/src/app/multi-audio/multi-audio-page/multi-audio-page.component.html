@@ -1,0 +1,9 @@
+<div class="content">
+    <div class="user" *ngFor="let user of users">
+        <h2>{{ user.name }}</h2>
+        <movius-web-multi-audio-panel
+            [user]="user"
+            [peers]="getPeers(user.id)"
+        ></movius-web-multi-audio-panel>
+    </div>
+</div>

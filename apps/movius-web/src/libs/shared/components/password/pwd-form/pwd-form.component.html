@@ -1,0 +1,118 @@
+<form class="pwd pwd__form" [formGroup]="passwordForm">
+    <div class="pwd__inputs">
+        <div
+            *ngIf="!ignoreOldPassword"
+            class="authInputBlock pwd__inputBlock"
+        >
+            <input
+                data-cy="old-password-input"
+                #oldInputEl
+                class="pwd__input authInput"
+                type="{{ isOldPwdVisible ? 'text' : 'password' }}"
+                placeholder="Old password"
+                formControlName="oldPassword"
+                [ngClass]="{
+                    'pwd__input--bare': style === 'NoBorders'
+                }"
+                (keyup)="validError($event)"
+            />
+            <div
+                class="authInputHide"
+                [class.authInputHide--active]="!isOldPwdVisible"
+                (click)="isOldPwdVisible = !isOldPwdVisible"
+            >
+            </div>
+        </div>
+        <div class="authInputBlock pwd__inputBlock">
+            <input
+                data-cy="password-input"
+                #newInputEl
+                class="pwd__input authInput"
+                type="{{ isPwdVisible ? 'text' : 'password' }}"
+                placeholder="Set new password"
+                formControlName="password"
+                [ngClass]="{
+                    'pwd__input--bare': style === 'NoBorders'
+                }"
+                (keyup)="validError($event)"
+            />
+            <div
+                class="authInputHide"
+                [class.authInputHide--active]="!isPwdVisible"
+                (click)="isPwdVisible = !isPwdVisible"
+            >
+            </div>
+        </div>
+        <movius-web-pwd-strength
+            class="pwd__strength"
+            [passedValidatorsPct]="passedValidatorsPct$ | async"
+        ></movius-web-pwd-strength>
+        <div class="authInputBlock pwd__inputBlock">
+            <input
+                data-cy="confirm-password-input"
+                class="pwd__input authInput"
+                type="{{ isPwdConfirmVisible ? 'text' : 'password' }}"
+                placeholder="Confirm new password"
+                formControlName="confirmPassword"
+                [ngClass]="{
+                    'pwd__input--bare': style === 'NoBorders'
+                }"
+                (keyup)="validError($event)"
+            />
+            <div
+                class="authInputHide"
+                [class.authInputHide--active]="!isPwdConfirmVisible"
+                (click)="isPwdConfirmVisible = !isPwdConfirmVisible"
+            >
+            </div>
+        </div>
+        <div class="pwd__validationSimple">
+            <span *ngIf="this.passwordForm.dirty && (this.passwordForm?.controls['confirmPassword'].hasError('mismatch') || this.passwordForm?.controls['password'].hasError('mismatch'))">
+                {{ 'Passwords do not match' }}
+            </span>
+        </div>
+        <div class="pwd__validationSimple">
+            <span *ngIf="resetPasswordDataAccess.passwordInvalid">
+                Invalid Password
+            </span>
+        </div>
+    </div>
+
+    <div class="pwd__validation" [class.wide]="validation === 'Wide'">
+        <div class="pwd__valHeader">
+            <img
+                class="pwd__valHIco"
+                src="assets/icons/movius/checkboard.svg"
+                alt=""
+            />
+            <span class="pwd__valHText"
+                >Your password must contain at least,</span
+            >
+        </div>
+        <div class="pwd__valContent">
+            <div
+                class="pwd__valItem"
+                *ngFor="let vld of validatorErrorInfo$ | async"
+            >
+                <span
+                    [ngClass]="{
+                        'pwd__valItemIco--valid': vld.isValid,
+                        'pwd__valItemIco--invalid': !vld.isValid,
+                        'pwd__valItemIco--info': passwordForm.pristine
+                    }"
+                ></span>
+                <span
+                    class="pwd__valItemText{{
+                        vld.isValid ? '--valid' : '--invalid'
+                    }} pwd__valItemText{{
+                        passwordForm.pristine ? '--info' : ''
+                    }}"
+                    >{{ mapValidatorToFriendlyName(vld.information) }}</span
+                >
+            </div>
+        </div>
+        <div class="pwd__valNote">Note: Do not use '&' and '|' special characters in the password</div>
+    </div>
+
+    <ng-content select="[buttons]"></ng-content>
+</form>

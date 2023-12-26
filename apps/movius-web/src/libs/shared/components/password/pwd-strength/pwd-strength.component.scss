@@ -1,0 +1,82 @@
+@import '../../../../../assets/scss/mixins';
+@import '../../../../../assets/scss/variables';
+@import '../../../../../assets/scss/auth.scss';
+
+:host {
+    display: block;
+}
+
+$pwd_strength_margin_val: 0.075rem;
+$pwd_strength_margin: 0 $pwd_strength_margin_val;
+
+$satPct: 75;
+$lightPct: 65;
+$startHue: 0;
+$endHue: 130;
+$totalBlocksCount: 9;
+
+%__block {
+    display: block;
+    margin: $pwd_strength_margin;
+
+    background: var(--movius_gray);
+
+    &:first-child, &:last-child{
+    //    margin: 0;
+    }
+}
+
+.strength {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-content: flex-start;
+    justify-content: space-evenly;
+    margin: 0 -#{$pwd_strength_margin_val} 0 -#{$pwd_strength_margin_val};
+
+    //max-width: 25vw;
+    @include screen-mobile {
+        max-width: unset;
+    }
+    height: 0.25rem;
+
+    &__block{
+        @extend %__block;
+
+        &--active{
+            @extend %__block;
+
+            $blockHueStep: ($endHue - $startHue)/$totalBlocksCount;
+            @for $i from 1 through $totalBlocksCount {
+                &:nth-child(#{$i}){
+                    $prev: $i - 1;
+                    $startBlockHue: $startHue + $prev * $blockHueStep;
+                    $endBlockHue: $startBlockHue + $blockHueStep;
+                    background: linear-gradient(to right, hsl($startBlockHue, $satPct, $lightPct), hsl($startBlockHue, $satPct, $lightPct));
+                }
+              }
+        }
+    }
+
+}
+
+.desc {
+    display: flex;
+    @include font-semi-bold-600(0.563rem);
+
+    &__weak {
+        color: var(--movius_gray);
+        &--active{
+            color: var(--black);
+        }
+    }
+
+    &__strong {
+        margin-left: auto;
+        color: var(--movius_gray);
+        &--active{
+            margin-left: auto;
+            color: var(--black);
+        }
+    }
+}

@@ -1,0 +1,37 @@
+<pane-frame [includeDefaultHeader]="false">
+    <movius-web-contact-header
+        *ngIf="{
+            title: getContactCallTitleAndSubtitle(peer, isAnonymous)
+        } as data"
+        headingCustom
+        class="incoming__heading"
+        [srcContactName]="(data?.title)[0]"
+        [srcContactAddress]="(data?.title)[1]"
+        [addCustomLogo]="true"
+    >
+        <movius-web-contact-logo
+            customLogo
+            class="contact-logo"
+            [peer]="peer"
+            alt="Peer Logo"
+            [doZoomLetters]="true"
+        ></movius-web-contact-logo>
+    </movius-web-contact-header>
+
+    <div mainCustom class="in-controls incoming__controls">
+        <movius-web-call-control-button
+            class="incoming__button accept"
+            [doShowText]="true"
+            [type]="callControlTypes.Accept"
+            [isDisabled]="call.isAccepted"
+            (clicked)="accept.emit()"
+        >
+        </movius-web-call-control-button>
+        <movius-web-call-control-button
+            class="incoming__button reject"
+            [doShowText]="true"
+            [type]="callControlTypes.Reject"
+            (clicked)="reject.emit()"
+        ></movius-web-call-control-button>
+    </div>
+</pane-frame>

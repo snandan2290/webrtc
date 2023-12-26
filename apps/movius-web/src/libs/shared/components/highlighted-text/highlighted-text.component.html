@@ -1,0 +1,4 @@
+<ng-container *ngFor="let match of result">
+    <span class="match" *ngIf="(toFind ? match.toUpperCase() === toFind.toUpperCase() : false); else nomatch">{{match}}</span>
+    <ng-template #nomatch>{{match}}</ng-template>
+</ng-container>

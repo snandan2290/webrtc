@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?><root>
+<gdpr_compliant>false</gdpr_compliant>
+<gdpr_deferred>true</gdpr_deferred>
+<gdpr_deferred_timestamp>2020-11-12 13:21:41.200425+00</gdpr_deferred_timestamp>
+<number_of_ids_allowed>1</number_of_ids_allowed>
+<current_time>1605280068</current_time>
+<sls_num_data><sls_number>12129195056</sls_number>
+<sls_sms_enabled>true</sls_sms_enabled>
+<sls_enable>true</sls_enable>
+<tui_password></tui_password>
+<orgid>2000</orgid>
+<organization_id>2</organization_id>
+<prepaid>false</prepaid>
+<voicemail_allowed>true</voicemail_allowed>
+<vvm_enabled>true</vvm_enabled>
+<e911_support_enable>false</e911_support_enable>
+<allow_call_transfer>true</allow_call_transfer>
+<sms_only>false</sms_only>
+<call_forwarding_required_while_onboard>false</call_forwarding_required_while_onboard>
+<brandings_last_updated>2020-09-16 04:51:50.091856+00</brandings_last_updated>
+<mos_threshold>3.5</mos_threshold>
+<mos_occurrence_threshold>10</mos_occurrence_threshold>
+<message_popup>
+</message_popup>
+<inbound_calls_allow_data>true</inbound_calls_allow_data>
+<inbound_calls_allow_minutes>true</inbound_calls_allow_minutes>
+<inbound_calls_allow_fallback>true</inbound_calls_allow_fallback>
+<outbound_calls_allow_data>true</outbound_calls_allow_data>
+<outbound_calls_allow_minutes>true</outbound_calls_allow_minutes>
+<outbound_calls_allow_choose_on_dialer>true</outbound_calls_allow_choose_on_dialer>
+<outbound_calls_hide_tdm>false</outbound_calls_hide_tdm>
+<default_inbound_calling>minutes</default_inbound_calling>
+<default_outbound_calling>minutes</default_outbound_calling>
+<contacts_allow_use_native>true</contacts_allow_use_native>
+<contacts_allow_import_native>true</contacts_allow_import_native>
+<contacts_allow_exchange>true</contacts_allow_exchange>
+<allow_line_name_change>true</allow_line_name_change>
+<allow_call_forwarding>true</allow_call_forwarding>
+<allow_time_of_day_scheduling>true</allow_time_of_day_scheduling>
+<allow_cli_restriction>true</allow_cli_restriction>
+<allow_broadcast_calling>true</allow_broadcast_calling>
+<allow_zombie_wifi>true</allow_zombie_wifi>
+<allow_blacklist>true</allow_blacklist>
+<vvm_allow_spoken_name_recording>true</vvm_allow_spoken_name_recording><vvm_allow_custom_greeting_recording>true</vvm_allow_custom_greeting_recording><v2t_allow>false</v2t_allow><number_of_sms_recipients>1</number_of_sms_recipients><gdpr_suspended>false</gdpr_suspended><gdpr_suspended_timestamp>2020-11-12 13:21:41.200425+00</gdpr_suspended_timestamp><forwarding_number></forwarding_number><suspended>false</suspended><enable_picture_message>true</enable_picture_message><enable_group_message>true</enable_group_message><external_invoke_apps>SalesforceMobile|Chime</external_invoke_apps><e911_last_called></e911_last_called><whatsapp_config></whatsapp_config></sls_num_data><number_of_participants>11</number_of_participants><max_mms_size>5</max_mms_size><max_api_msg_count>200</max_api_msg_count><hide_terms_privacy_policy>false</hide_terms_privacy_policy><return>0</return><desc>Success</desc></root>

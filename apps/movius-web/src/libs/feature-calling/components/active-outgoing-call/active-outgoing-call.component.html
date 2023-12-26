@@ -1,0 +1,45 @@
+<pane-frame [includeDefaultHeader]="false">
+    <movius-web-contact-header
+        headingCustom
+        class="dial__heading"
+        [srcContactName]="getContactCallTitle(peer)"
+        [srcContactAddress]="getContactRealNumber(peer)"
+        [srcContactStatus]="regStatusTest"
+        [addCustomLogo]="true"
+    >
+        <movius-web-contact-logo
+            customLogo
+            class="contact-logo"
+            [peer]="peer"
+            [alt]="'Peer Logo'"
+            [doZoomLetters]="true"
+        ></movius-web-contact-logo>
+    </movius-web-contact-header>
+
+    <div mainCustom class="out-controls dial__keyboard">
+        <movius-web-call-control-button
+            class="dial__button mute"
+            [doShowText]="true"
+            [type]="callControlTypes.Mute"
+            [isDisabled]="true"
+        ></movius-web-call-control-button>
+        <movius-web-call-control-button
+            class="dial__button keypad"
+            [doShowText]="true"
+            [type]="callControlTypes.Keypad"
+            [isDisabled]="true"
+        ></movius-web-call-control-button>
+        <movius-web-call-control-button
+            class="dial__button hold"
+            [doShowText]="true"
+            [type]="callControlTypes.Hold"
+            [isDisabled]="true"
+        ></movius-web-call-control-button>
+        <movius-web-call-control-button
+            data-cy="hang-up-button"
+            class="dial__button endCall"
+            [type]="callControlTypes.Stop"
+            (click)="cancel.emit()"
+        ></movius-web-call-control-button>
+    </div>
+</pane-frame>

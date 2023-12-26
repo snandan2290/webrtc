@@ -1,0 +1,301 @@
+@import 'scss/variables';
+@import 'scss/mixins';
+
+$contSelector: 'contSelector';
+
+$componentWidth: 25vw;
+
+:host {
+    display: block;
+    position: relative;
+    padding-top: 1rem;
+    background: var(--white);
+    // height: 2.0625rem;
+}
+
+%focused-text {
+    box-shadow: none;
+}
+
+.#{$contSelector} {
+    $base: &;
+    display: flex;
+    flex-direction: row;
+    margin-left: 36px;
+    margin-right: 36px;
+    border-bottom: 1px solid #eaeaea;
+    width: 100%;
+
+}
+
+.align_item {
+    display: flex;
+    height: 20px;
+    align-items: center;
+    position: absolute;
+    margin: 4px -40px;
+    cursor: pointer;
+}
+
+.to-header-allign {
+    display: flex;
+    position: relative;
+
+    .contSelector__contactInput {
+        font-family: OpenSans, sans-serif;
+        font-size: 16px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: black;
+        margin: 3px 0 0 8px;
+
+    }
+}
+
+.profile-card {
+    padding: 0 8px 0 0;
+    border-radius: 14px;
+    //background-color: #edeff1;
+    background-color: var(--movius_num-input-gray-and-white);
+    display: flex;
+    color: var(--black);
+
+    .profile-iconsavatar {
+        width: 28px;
+        height: 28px;
+        margin: 0 5px 0 0;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        align-self: center;
+        border-radius: 50%;
+    }
+
+    .letters-card {
+        width: 28px;
+        height: 28px;
+        margin: 0 5px 0 0;
+        border-radius: 50%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        @include font-semi-bold-600(1rem);
+
+        background: var(--movius_avatar-gray);
+        color: var(--movius_white);
+    }
+
+    .letterOne-card, .letterTwo-card {
+    }
+
+    .title-name-number {
+        margin: 3px 5px 3px 5px;
+        font-family: OpenSans, sans-serif;
+        font-size: 16px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        //color: #000000;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 220px;
+    }
+
+    .card-iconsallclose {
+        cursor: pointer;
+        height: 8px;
+        margin: 5px 5px 5px 10px;
+        object-fit: contain;
+    }
+}
+
+  ::ng-deep .mat-app-background,.basic-container{
+    margin: 0px 16px ;
+
+    ::ng-deep .mat-chip-list-wrapper {
+        // position: absolute !important;
+        width: 100% !important;
+        // height: 100%;
+    }
+
+
+    .mat-cont {
+        display: flex;
+    }
+
+    .to-header {
+        margin: 3px 0px 0px 0px;
+        font-family: OpenSans, sans-serif;
+        font-size: 16px;
+        color: #808080;
+    }
+
+    ::ng-deep .mat-form-field {
+
+          .action_lft {
+                float: right !important;
+                display: block;
+                width: auto;
+                text-align: bottom;
+
+
+                .participants-count {
+                    margin-bottom: 4px;
+                    font-size: 12px;
+                    color: #808080;
+                }
+          }
+
+    }
+    .mat-chip-list {
+        display: inline-block;
+        min-height: 40px;
+        width: 100%;
+        height: auto;
+        margin-bottom: 2px;
+    }
+
+    .mat-chip-list-mobile {
+        display: inline-block;
+        min-height: 32px;
+        width: 100%;
+        height: auto;
+        margin-bottom: 2px;
+    }
+}
+
+::ng-deep .mat-form-field-label {
+    margin-top: 6px;
+    margin-left: 5px;
+    color: #808080;
+    font-size: 16px;
+    font-family: OpenSans, sans-serif;
+}
+
+ .mat-form-field-input {
+    font-size: 24px;
+}
+
+::ng-deep .mat-form-field {
+    width: 100%;
+    border-bottom: 2px solid #a8a7a7 !important;
+  }
+
+::ng-deep .mat-focused, .mat-form-field-label { // on input focus it make the line darker
+    width: 100%;
+    border-bottom: 2px solid var(--movius_color-teams-theme-blue-dark) !important;
+  }
+
+::ng-deep .mat-autocomplete-panel {
+    border-left: 2px solid var(--movius-autofill-dropdown-border-clr) !important;
+    border-right: 2px solid var(--movius-autofill-dropdown-border-clr) !important;
+    border-bottom: 2px solid var(--movius-autofill-dropdown-border-clr) !important;
+    box-shadow: 1px 1px var(--movius-autofill-dropdown-border-clr);
+    border-bottom-left-radius: 1rem !important;
+    border-bottom-right-radius: 1rem !important;
+    max-height: 34.84vh !important;
+    //background-color: var(--movius_white) !important;
+    background-color: var(--add-user-popup-bgcolor-white-dark) !important;
+    // padding: 12px 0px 0px 0px !important;
+    margin-top: 2px !important;
+    color: var(--black);
+
+        // double default max-height
+    }
+
+::ng-deep .mat-option{
+    height: 60px !important;
+}
+
+::ng-deep .mat-option:hover {
+    //background-color: #e2e1e1!important;
+    background-color: var(--movius-autofill-dropdown-hover-clr) !important;
+}
+
+::ng-deep .mat-option.mat-active {
+    //background-color: #eaeaea !important;
+    background-color: var(--movius-autofill-dropdown-hover-clr) !important;
+}
+
+::ng-deep .mat-chip{
+    margin-left: 10px !important;
+    margin-right: 0px !important;
+    min-height: 28px !important;
+}
+
+.drop-down-temp{
+    display: flex;
+
+    .profile-iconsavatar-drop {
+        width: 40px;
+        height: 40px;
+        margin: 14px 24px 2px 0;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-position: center;
+        align-self: center;
+        border-radius: 50%;
+    }
+    .letters-drop {
+        width: 40px;
+        height: 40px;
+        margin: 8px 14px 2px 0;
+        border-radius: 50%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        @include font-semi-bold-600(1rem);
+
+        background: var(--movius_avatar-gray);
+        color: var(--movius_white);
+    }
+
+    .letterOne-drop, .letterTwo-drop {
+    }
+    .user-info-temp {
+        display: grid;
+    }
+}
+
+.input {
+    margin-left: 10px !important;
+    font-size: 24px !important;
+    font-style: normal !important;
+    font-stretch: normal !important;
+    letter-spacing: normal !important;
+    color: var(--black) !important;
+}
+
+.input-mobile {
+    margin: 7px 0 0 10px !important;
+    font-size: 16px !important;
+    font-style: normal !important;
+    font-stretch: normal !important;
+    letter-spacing: normal !important;
+    //color: #000000 !important;
+    color: var(--black) !important;
+}
+
+.cntName {
+    @include font-semi-bold-600(1rem);
+    text-overflow: ellipsis;
+    width: auto;
+    overflow: hidden;
+    margin: 8px 0px 0 1rem;
+}
+
+.cntPhone {
+    @include font-normal(0.875rem);
+    color: var(--movius_text-gray);
+    margin: $spacing-xxs 0 0 $spacing-m;
+}

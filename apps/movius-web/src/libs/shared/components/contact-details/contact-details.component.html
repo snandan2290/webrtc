@@ -1,0 +1,23 @@
+<div class="cntDetails__library">
+    <p class="cntDetails__libCaption">Details</p>
+    <div
+        nz-row
+        *ngFor="let item of userInfoFields | keyvalue: originalOrder"
+        class="cntDetails__item"
+    >
+        <div class="cntDetails__column" nz-col [nzSpan]="8">
+            <span class="cntDetails__description">{{ capitalizeFirstLetter(item.key) }} </span>
+        </div>
+        <div class="cntDetails__column" nz-col [nzSpan]="16">
+            <span class="cntDetails__data">{{ getDetailsValue(item.value)}}</span>
+        </div>
+    </div>
+    <div *ngIf="keys(userInfoFields).length == 0">
+      <div class="cntDetails__column" nz-col [nzSpan]="8">
+        <span class="cntDetails__description">BusinessPhone</span>
+    </div>
+    <div class="cntDetails__column" nz-col [nzSpan]="16">
+        <span class="cntDetails__data"></span>
+    </div>
+    </div>
+</div>

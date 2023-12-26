@@ -1,0 +1,49 @@
+@import '../../../../assets/scss/mixins';
+@import '../../../../assets/scss/variables';
+@import '../../../../assets/scss/app.scss';
+
+.settings {
+    display: flex;
+    height: 100%;
+
+    @include verticalToHorizontalWorkspace();
+
+    &__listItem {
+        @extend %history-item;
+        display: flex;
+        align-items: center;
+        border-bottom: none;
+    }
+
+    &__menuDelimeter {
+        margin: $spacing-xxl-5 auto $spacing-m auto;
+        width: calc(100% - #{$spacing-xxl-10});
+        padding: 0 0 0 0.688rem;
+
+        @include font-normal(0.875rem);
+        color: var(--movius_text-gray);
+    }
+
+    &__pane{
+    }
+
+    &__main{
+    }
+
+    &__search{
+        min-height: 2rem;
+    }
+
+    &__heading {
+        min-height: 2rem;
+        font-size: large;
+    }
+
+    &__liText {
+        @include font-semi-bold-600(1rem);
+    }
+
+    @include leftWorkspaceGeneralMarkup();
+
+    @include generalFailure();
+}

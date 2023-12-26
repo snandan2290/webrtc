@@ -1,0 +1,119 @@
+<pane-frame class="emergency emergency__pane" *ngIf="view$ | async as view" [includeDefaultHeader]=false [includeDefaultFooter]=false>
+    <div class="emergency__header" headingCustom>
+        <div class="emergency__headerTxt">E911</div>
+    </div>
+    <div mainCustom class="emergency__main">
+        <div class="emergency__caption">
+            <p class="emergency__captionTxt">
+                This address is given to dispatchers when you call 911 using Wi-Fi. It's necessary to help first responders find you if you're unable to tell them where you are.
+            </p>
+            <p class="emergency__captionTxt">
+                
+                Please note that location should be enabled while dialing or messaging 911.
+            </p>
+        </div>
+        <ng-container [ngSwitch]="view.isEdit">
+            <div class="emergency__edit" *ngSwitchCase="true">
+                <section class="emergency__addresses" *ngIf="view?.addresses?.length > 1" nz-row>
+                    <nz-radio-group class="emergency__options" [(ngModel)]="view.activeId">
+                        <label 
+                            class="emergency__option"
+                            [class.is-active]="view.activeId === item.id"
+                            *ngFor="let item of view.addresses" 
+                            nz-radio 
+                            [nzValue]="item.id">
+                            {{item.street}}
+                        </label>
+                      </nz-radio-group>
+                </section>
+                <form
+                    class="emergency__form"
+                    [formGroup]="addressForm"
+                >
+                <section class="emergency__main">
+                    <div nz-row>
+                        <div nz-col [nzSpan]="24">
+                            <movius-web-ui-slide-input [inputFormControlName]="'street'" [uiTitle]="'Street 1'">
+                            </movius-web-ui-slide-input>
+                        </div>
+                    </div>
+                    <div nz-row>
+                        <div nz-col [nzSpan]="24">
+                            <movius-web-ui-slide-input [inputFormControlName]="'street2'" [uiTitle]="'Street 2 (optional)'">
+                            </movius-web-ui-slide-input>
+                        </div>
+                    </div>
+                    <div nz-row>
+                        <div nz-col [nzSpan]="12">
+                            <movius-web-ui-slide-input [inputFormControlName]="'city'" [uiTitle]="'City'">
+                            </movius-web-ui-slide-input>
+                        </div>
+                        <div nz-col [nzSpan]="12">
+                            <movius-web-ui-slide-input [inputFormControlName]="'state'" [uiTitle]="'State (optional)'">
+                            </movius-web-ui-slide-input>
+                        </div>
+                    </div>
+                    <div nz-row>
+                        <div nz-col [nzSpan]="12">
+                            <movius-web-ui-slide-input [inputFormControlName]="'postal'" [uiTitle]="'Zip / Postal Code'">
+                            </movius-web-ui-slide-input>
+                        </div>
+                        <div nz-col [nzSpan]="12">
+                            <movius-web-ui-slide-input [inputFormControlName]="'country'" [uiTitle]="'Country (optional)'">
+                            </movius-web-ui-slide-input>
+                        </div>
+                    </div>
+                </section>
+                <div nz-row class="emergency__controls" [nzJustify]="'end'">
+                    <div nz-col>
+                        <button
+                            nz-button
+                            nzType="text"
+                            class="emergency__cancel"
+                            (click)="onCancel(view)"
+                        >
+                            Cancel
+                        </button>
+                    </div>
+                    <div nz-col>
+                        <button
+                            nz-button
+                            nzType="text"
+                            class="emergency__add"
+                            (click)="onSave(view)"
+                        >
+                            {{ view.isEdit ? 'Save' : 'Continue' }}
+                        </button>
+                    </div>
+                </div>
+            </form>
+            </div>
+            <div class="emergency__review" *ngSwitchCase="false">
+                <div class="emergency__summary">
+                    <div *ngIf="!!view.selectedAddress">
+                        <p class="emergency__sumTitle">Address you entered:</p>
+                        <div class="emergency__sumAddr">
+                            {{ view.selectedAddress.street }}
+                        </div>
+                        <p class="emergency__sumTitle">
+                            Do you want to update or change the address?
+                        </p>
+                    </div>
+                    <button class="emergency__goEdit" (click)="onEdit()">
+                        {{
+                            !!view.selectedAddress
+                                ? 'Update address'
+                                : 'Add address'
+                        }}
+                    </button>
+                </div>
+                <div class="emergency__terms">
+                    <span class="emergency__info"
+                        >To review the E911 Terms & Conditions</span
+                    ><span class="emergency__info--link" (click)="onE911TermsClicked()">Click here</span>
+                </div>
+            </div>
+            <div *ngSwitchDefault></div>
+        </ng-container>
+    </div>
+</pane-frame>

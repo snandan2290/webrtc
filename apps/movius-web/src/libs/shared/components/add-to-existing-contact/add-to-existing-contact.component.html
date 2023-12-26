@@ -1,0 +1,22 @@
+<pane-frame class="addToExs" [includeDefaultHeader]="false" [includeDefaultFooter]="false">
+    <div mainCustom class="addToExs__main">
+        <section class="addToExs__header">
+            <div class="addToExs__hCaption">Add to existing contact</div>
+            <div class="addToExs__hClose" (click)="onClose()"></div>
+        </section>
+        <section class="addToExs__section">
+            <div class="addToExs__title">
+                <input class="addToExs__search" [(ngModel)]="searchTerm" (ngModelChange)="handleSearch($event)">
+            </div>
+            <div class="addToExs__part">
+                <div class="addToExs__cntShell" *ngFor="let contact of filteredData; let i = index">
+                    <movius-web-contact-logo class="addToExs__cntLogo" [peer]="contact" [doZoomLetters]="true" [alt]="'Contact logo'"></movius-web-contact-logo>
+                    <div class="addToExs__cntName">{{ getContactFriendlyName(contact.contact) }}</div>
+                    <button class="addToExs__cntAdd" *ngIf="{isDisabled: $any(contact).isAdded } as cond" [disabled]="cond.isDisabled" (click)="handleAdd(i)">Add</button>
+                </div>
+            </div>
+        </section>
+    </div>
+</pane-frame>
+<!-- <div class="addToExs__controls" *nzModalFooter>
+</div> -->

@@ -1,0 +1,79 @@
+@import 'scss/variables';
+@import 'scss/mixins';
+
+:host[ng-reflect-is-disabled=true] {
+    pointer-events: none;
+    cursor: default;
+}
+
+$el: 'cta-btn';
+
+.#{$el} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+
+    // background-color: var(--movius_color-teams-theme-blue-dark);
+    background-color: var(--movius-blue);
+
+    border-width: 0;
+    border-radius: 50%;
+    cursor: pointer;
+
+    &.disabled {
+        background-color: var(--movius_btn-cta-disabled);
+    }
+
+    &.call {
+        %cll-base {
+            width: 1.125rem;
+            height: 1.125rem;
+        }
+        .#{$el}__ico {
+            @extend %cll-base;
+            @include background-image('/movius/calls/btn-new-call.svg');
+        }
+
+        .#{$el}__ico.disabled {
+            @extend %cll-base;
+            @include background-image('/movius/calls/btn-new-call.svg');
+        }
+    }
+
+    &.message {
+        %msg-base {
+            width: 1.125rem;
+            height: 1.125rem;
+        }
+        .#{$el}__ico {
+            @extend %msg-base;
+            @include background-image('/movius/messages/btn-new-message.svg');
+        }
+
+        .#{$el}__ico.disabled {
+            @extend %msg-base;
+            @include background-image('/movius/messages/btn-new-message.svg');
+        }
+    }
+
+    &.contact {
+        %cnt-base {
+            width: 1.25rem;
+            height: 1rem;
+        }
+        .#{$el}__ico {
+            @extend %cnt-base;
+            @include background-image('/movius/contacts/btn-add-new-contact.svg');
+        }
+
+        .#{$el}__ico.disabled {
+            @extend %cnt-base;
+            @include background-image('/movius/contacts/btn-add-new-contact.svg');
+        }
+    }
+    &:hover{
+        background-color: $movius-dark-blue;
+    }
+}

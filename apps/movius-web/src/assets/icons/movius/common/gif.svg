@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group 344</title>
+    <defs>
+        <path d="M16,0 C24.837,0 32,7.1634 32,16 C32,24.8366 24.837,32 16,32 C7.163,32 0,24.8366 0,16 C0,7.1634 7.163,0 16,0 Z" id="path-1"></path>
+        <path d="M4.014,0 C6.012,0 7.482,1.1543 7.729,2.9121 L5.971,2.9121 C5.707,2.0566 4.998,1.5586 4.014,1.5586 C2.648,1.5586 1.811,2.6426 1.811,4.418 C1.811,6.2285 2.689,7.3301 4.084,7.3301 C5.244,7.3301 6.047,6.6445 6.082,5.625 L6.088,5.4727 L4.254,5.4727 L4.254,4.1426 L7.805,4.1426 L7.805,5.2207 C7.805,7.4824 6.363,8.8887 4.055,8.8887 C1.541,8.8887 0,7.2012 0,4.4355 C0,1.7109 1.553,0 4.014,0 Z M11.768,0.2168 L11.768,8.6719 L9.998,8.6719 L9.998,0.2168 L11.768,0.2168 Z M19.855,0.2168 L19.855,1.7285 L16.088,1.7285 L16.088,3.9316 L19.527,3.9316 L19.527,5.3789 L16.088,5.3789 L16.088,8.6719 L14.318,8.6719 L14.318,0.2168 L19.855,0.2168 Z" id="path-3"></path>
+    </defs>
+    <g id="M2022-519(Sending-Pictures&amp;GIF)" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Messages:-MMS-GIF_Upload" transform="translate(-1164.000000, -522.000000)">
+            <g id="Group-344" transform="translate(1164.000000, 522.000000)">
+                <g id="Group-340">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="Clip-339"></g>
+                    <polygon id="Fill-338" fill-opacity="0.75" fill="#FFFFFF" mask="url(#mask-2)" points="-1 33 33 33 33 -1 -1 -1"></polygon>
+                </g>
+                <g id="Group-343" transform="translate(6.000000, 12.000000)">
+                    <mask id="mask-4" fill="white">
+                        <use xlink:href="#path-3"></use>
+                    </mask>
+                    <g id="Clip-342"></g>
+                    <polygon id="Fill-341" fill-opacity="0.75" fill="#000000" mask="url(#mask-4)" points="-1 9.8887 20.855 9.8887 20.855 -1 -1 -1"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

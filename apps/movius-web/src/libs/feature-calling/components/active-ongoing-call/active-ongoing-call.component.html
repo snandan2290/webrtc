@@ -1,0 +1,76 @@
+<pane-frame
+    [includeDefaultHeader]="false"
+    *ngIf="{ title: getContactCallTitleAndSubtitle(peer, isAnonymous) } as data"
+>
+    <movius-web-contact-header
+        *ngIf="timer$ | async as timer"
+        headingCustom
+        class="dial__heading"
+        [srcContactName]="(data?.title)[0]"
+        [srcContactAddress]="(data?.title)[1]"
+        [srcContactStatus]="getTimeFromTimer(timer)"
+        srcContactStatus="calling"
+        [addCustomLogo]="true"
+    >
+        <movius-web-contact-logo
+            customLogo
+            class="contact-logo"
+            [peer]="peer"
+            alt="Peer Logo"
+            [doZoomLetters]="true"
+        ></movius-web-contact-logo>
+    </movius-web-contact-header>
+
+    <div mainCustom class="dial__keyboardShell">
+        <div class="dial__keyboard">
+            <div class="dial__keypadShell" *ngIf="isKbrdOpen">
+                <movius-web-phone-keyboard
+                    class="dial__keypad"
+                    [isSimple]="true"
+                    (clicked)="keyClicked.emit($event)"
+                ></movius-web-phone-keyboard>
+                <div
+                    class="dial__hideKeypad"
+                    (click)="isKbrdOpen = !isKbrdOpen"
+                >
+                    <span>Hide</span>
+                </div>
+            </div>
+            <div
+                class="out-controls{{
+                    isKbrdOpen ? '--reduced' : ''
+                }} dial__keyboard"
+            >
+                <movius-web-call-control-button
+                    class="dial__button mute"
+                    *ngIf="!isKbrdOpen"
+                    [doShowText]="true"
+                    [type]="callControlTypes.Mute"
+                    [isActive]="isMute"
+                    (click)="onMute(!isMute)"
+                ></movius-web-call-control-button>
+                <movius-web-call-control-button
+                    class="dial__button keypad"
+                    *ngIf="!isKbrdOpen"
+                    [doShowText]="true"
+                    [type]="callControlTypes.Keypad"
+                    (click)="isKbrdOpen = !isKbrdOpen"
+                ></movius-web-call-control-button>
+                <movius-web-call-control-button
+                    class="dial__button hold"
+                    *ngIf="!isKbrdOpen"
+                    [doShowText]="true"
+                    [type]="callControlTypes.Hold"
+                    [isActive]="isHold"
+                    (click)="onHold(!isHold)"
+                ></movius-web-call-control-button>
+                <movius-web-call-control-button
+                    data-cy="hang-up-button"
+                    class="dial__button endCall"
+                    [type]="callControlTypes.Stop"
+                    (click)="reject.emit()"
+                ></movius-web-call-control-button>
+            </div>
+        </div>
+    </div>
+</pane-frame>

@@ -1,0 +1,88 @@
+<div class="addPhoto">
+    <div class="addPhoto__header">
+        Add Photo
+    </div>
+    <div class="addPhoto__dnd">
+        <nz-upload
+            class="avatar-uploader"
+            nzType="drag"
+            [nzMultiple]="false"
+            nzAccept=".gif,.png,.jpg,.jpeg"
+            nzFileType="image/png,image/jpeg,image/gif,image/bmp"
+            [nzBeforeUpload]="onBeforeUpload"
+            [nzCustomRequest]="onUpload"
+            [nzShowUploadList]="false"
+            (nzChange)="handleChange($event)"
+        >
+            <img
+                class="addPhoto__image"
+                *ngIf="img; else emptyImage"
+                [src]="img"
+            />
+            <ng-template #emptyImage>
+                <div class="addPhoto__dndShell">
+                    <div class="addPhoto__dndCrcl">
+                        <p>Drag your photo here</p>
+                    </div>
+                </div>
+            </ng-template>
+        </nz-upload>
+    </div>
+
+    <div class="addPhoto__or"><span>or</span></div>
+    <nz-upload class="addPhoto__orUpload"
+        [nzMultiple]="false"
+        nzAccept=".gif,.png,.jpg,.jpeg"
+        nzFileType="image/png,image/jpeg,image/gif,image/bmp"
+        [nzBeforeUpload]="onBeforeUpload"
+        [nzCustomRequest]="onUpload"
+        [nzShowUploadList]="false"
+        (nzChange)="handleChange($event)"
+    >
+        <div class="addPhoto__upload">
+            <div class="addPhoto__uploadIco" *ngIf="GetTheme() == 'Dark'">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="13" viewBox="0 0 12 13">
+                    <g fill="none" fill-rule="evenodd">
+                        <g fill="#FFFFFF" fill-rule="nonzero">
+                            <g>
+                                <g>
+                                    <path d="M6.938 9H5.063C4.75 9 4.5 8.749 4.5 8.437V4.499H2.445c-.418 0-.626-.504-.33-.8L5.678.133c.176-.176.464-.176.64 0L9.886 3.7c.295.295.087.799-.33.799H7.5v3.938c0 .312-.25.563-.563.563zM12 8.812v2.625c0 .312-.25.563-.563.563H.563C.25 12 0 11.75 0 11.437V8.812c0-.312.25-.563.563-.563H3.75v.188c0 .724.588 1.313 1.313 1.313h1.875c.724 0 1.312-.589 1.312-1.313v-.188h3.188c.311 0 .562.251.562.563zm-2.906 2.063c0-.258-.211-.469-.469-.469s-.469.211-.469.469.211.469.469.469.469-.211.469-.47zm1.5 0c0-.258-.211-.469-.469-.469s-.469.211-.469.469.211.469.469.469.469-.211.469-.47z" transform="translate(-578 -558) translate(578 554) translate(0 4.075)"/>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+            </div>
+            <div class="addPhoto__uploadIco" *ngIf="GetTheme() == null">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="13" viewBox="0 0 12 13">
+                    <g fill="none" fill-rule="evenodd">
+                        <g fill="#1F1E33" fill-rule="nonzero">
+                            <g>
+                                <g>
+                                    <path d="M6.938 9H5.063C4.75 9 4.5 8.749 4.5 8.437V4.499H2.445c-.418 0-.626-.504-.33-.8L5.678.133c.176-.176.464-.176.64 0L9.886 3.7c.295.295.087.799-.33.799H7.5v3.938c0 .312-.25.563-.563.563zM12 8.812v2.625c0 .312-.25.563-.563.563H.563C.25 12 0 11.75 0 11.437V8.812c0-.312.25-.563.563-.563H3.75v.188c0 .724.588 1.313 1.313 1.313h1.875c.724 0 1.312-.589 1.312-1.313v-.188h3.188c.311 0 .562.251.562.563zm-2.906 2.063c0-.258-.211-.469-.469-.469s-.469.211-.469.469.211.469.469.469.469-.211.469-.47zm1.5 0c0-.258-.211-.469-.469-.469s-.469.211-.469.469.211.469.469.469.469-.211.469-.47z" transform="translate(-578 -558) translate(578 554) translate(0 4.075)"/>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </svg>                
+            </div>
+            <button class="addPhoto__uploadTxt">Upload a photo</button>
+        </div>
+    </nz-upload>
+
+    <div class="addPhoto__controls">
+        <button
+            class="addPhoto__cancel"
+            (click)="onCancel()"
+        >
+            Cancel
+        </button>
+        <button
+            class="addPhoto__add"
+            [disabled]="!file || (isUploading$ | async)"
+            (click)="onApply()"
+        >
+            <span [ngClass]="{'spinnered' : isUploading$ | async }">Apply</span>
+        </button>
+    </div>
+</div>

@@ -1,0 +1,270 @@
+<div
+    class="emoji"
+    contenteditable="true"
+    *ngIf="isEmojiActive"
+    (keydown.enter)="handleSendButton($event, myTextarea)"
+>
+    <emoji-mart
+        #emojiKeypad
+        title=""
+        emoji=" "
+        enableFrequentEmojiSort="true"
+        [exclude]="[]"
+        native="true"
+        theme="light"
+        sheetSize="32"
+        [style]="{ width: '100%', height: '100%'}"
+        (emojiClick)="addEmoji($event)"
+        [emojisToShowFilter]="filterEmoji"
+        contenteditable="false"
+        [include]="includeArrayEmojisList()"
+    ></emoji-mart>
+</div>
+<div class="text-danger" *ngIf="disabledInputBox() && showInfoMsg">
+    <span class="user-info">
+        <svg _ngcontent-hnq-c454="" class='profile-info' width="5px" height="8px" viewBox="0 0 5 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="profile-info"><title _ngcontent-hnq-c454=""></title><g _ngcontent-hnq-c454="" id="Messages" stroke="none" stroke-width="1" fill="#FFF" fill-rule="evenodd"><g _ngcontent-hnq-c454="" id="Group-Messages:-Group-Participants" transform="translate(-1156.000000, -187.000000)" fill="#FFFFFF"><g _ngcontent-hnq-c454="" id="user" transform="translate(676.500000, 159.000000)"><g _ngcontent-hnq-c454="" id="Combined-Shape" transform="translate(479.500000, 28.000000)"><path _ngcontent-hnq-c454="" d="M3.57717846,4.31641868 L3.57717846,10.8224554 L5,10.8224554 L5,13 L9.9998e-05,13 L-1.33226763e-14,10.8451374 L1.4150217,10.8451374 L1.4150217,6.48605741 L-1.33226763e-14,6.48605741 L-1.33226763e-14,4.31641868 L3.57717846,4.31641868 Z M2.1602068,7.10542736e-15 C2.94924102,0.00493294889 3.58595328,0.652169689 3.58790324,1.44939788 C3.57423102,2.26241252 2.91701666,2.91359713 2.11235775,2.91163144 C1.3301484,2.88991999 0.708085838,2.24071563 0.712932284,1.44939788 C0.729562909,0.651184615 1.3701726,0.0098760011 2.1602068,7.10542736e-15 Z"></path></g></g></g></g></svg>
+    </span>
+    <span>{{infoMessage}}</span>
+</div>
+
+<form
+    #messageFormAnchor
+    [ngClass]="getFormAnchorStyle()"
+    [formGroup]="messageForm"
+    (keydown.enter)="handleSendButton($event, myTextarea)"
+>
+<div [ngClass]="isAnonymous === false && !disabledInputBox() ? 'msgForm__emoji' : 'msgForm__emoji-disabled'">
+    <!-- <div class="msgForm__emojiImg" *ngIf="isEmojiActive" (click)="isEmojiActive = !isEmojiActive" (click)="enableEmojis()">
+        <svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink">
+            <g id="Artboard-Copy-6" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                <g id="close_FILL0_wght300_GRAD0_opsz48" transform="translate(4.000000, 4.000000)" fill="#000000" class="msgForm__cancel-icons" opacity="0.504417783"
+                    fill-rule="nonzero">
+                    <path
+                        d="M8,9.01522488 L1.23975523,15.7754697 C1.09821154,15.9170345 0.931043189,15.9898474 0.738250189,15.9939085 C0.545436038,15.9979695 0.37419609,15.9251566 0.224530345,15.7754697 C0.0748434482,15.6258039 0,15.4566051 0,15.2678731 C0,15.0791411 0.0748434482,14.9099317 0.224530345,14.7602448 L6.98477512,8 L0.224530345,1.23975523 C0.0829655011,1.09821154 0.0101525661,0.931043189 0.00609153966,0.738250189 C0.00203051322,0.545436038 0.0748434482,0.37419609 0.224530345,0.224530345 C0.37419609,0.0748434482 0.543394949,0 0.732126923,0 C0.920858897,0 1.09006833,0.0748434482 1.23975523,0.224530345 L8,6.98477512 L14.7602448,0.224530345 C14.9017885,0.0829655011 15.0689568,0.0101525661 15.2617498,0.00609153966 C15.454564,0.00203051322 15.6258039,0.0748434482 15.7754697,0.224530345 C15.9251566,0.37419609 16,0.543394949 16,0.732126923 C16,0.920858897 15.9251566,1.09006833 15.7754697,1.23975523 L9.01522488,8 L15.7754697,14.7602448 C15.9170345,14.9017885 15.9898474,15.0689568 15.9939085,15.2617498 C15.9979695,15.454564 15.9251566,15.6258039 15.7754697,15.7754697 C15.6258039,15.9251566 15.4566051,16 15.2678731,16 C15.0791411,16 14.9099317,15.9251566 14.7602448,15.7754697 L8,9.01522488 Z"
+                        id="Path"></path>
+                </g>
+            </g>
+        </svg>
+    </div> -->
+    <span
+        *ngIf="(peerData.messageChannelType == null || peerData.messageChannelType == 'normalMsg' || peerData.messageChannelType == 'whatsapp') && selectedContactMultiline != '911'"
+        (click)="!disabledInputBox()" id="picimg" nz-tooltip [nzTooltipPlacement]="['topLeft', 'leftTop']"
+        nzTooltipTitle="Picture message feature is not enabled. Please contact your administrator."
+        [nzTooltipTrigger]="picImgTTipStatus()">
+            <span [ngClass]="getPicMsgStatus()" (click)="fileInput.click()">
+                <!-- <img class="msgForm__sendImg" src="assets/icons/movius/messages/icons-select-image.svg" alt="pic" /> -->
+                <!-- <svg width="24px"  class="msgForm__sendImg" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <title></title>
+                    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="Group-57" transform="translate(1.000000, 3.000000)" fill-rule="nonzero">
+                            <g id="Group-3">
+                                <g id="Path-3" fill="#000000" opacity="0.504417783" stroke="#FFFFFF" class="smile_emoji">
+                                    <path d="M19.3532926,17.875 C20.2268506,17.875 20.8863581,17.6622208 21.3318148,17.2366623 C21.7772716,16.8111038 22,16.1811653 22,15.3468468 L22,7.26683549 C22,6.43251693 21.7772716,5.80257842 21.3318148,5.37701996 C20.8863581,4.9514615 20.2268506,4.73868227 19.3532926,4.73868227 L17.572206,4.73901824 L17.0884052,2.11813807 C16.9322061,1.30061787 16.5995598,0.718274715 16.0904664,0.371108603 C15.5813729,0.0239424905 14.8958323,-0.0796473978 14.0338445,0.0603389377 L2.20609949,2.09294053 C1.34411171,2.23852632 0.735224376,2.5562953 0.379437475,3.04624748 C0.0236505743,3.53619965 -0.0819284654,4.19553529 0.0627003561,5.0242544 L1.50320342,12.978278 C1.64783224,13.8013976 1.97758595,14.3851407 2.49246456,14.729507 C3.00734316,15.0738734 3.69866893,15.170464 4.56644186,15.0192788 L4.69639953,14.9975753 L4.6966078,15.3468468 C4.6966078,16.1811653 4.91933618,16.8111038 5.36479295,17.2366623 C5.81024972,17.6622208 6.46975715,17.875 7.34331523,17.875 L19.3532926,17.875 Z" id="Path"></path>
+                                </g>
+                                <path d="M3.42965932,13.4444325 C3.1866829,13.2848481 3.0275912,13.009075 2.95238421,12.6171132 L1.54659206,4.87306915 C1.47138508,4.48670687 1.52055888,4.17733707 1.69411346,3.94495975 C1.86766805,3.71258243 2.14824796,3.56279705 2.5358532,3.49560361 L14.2247546,1.49659874 C14.6065746,1.43500475 14.9189729,1.48539983 15.1619493,1.64778398 C15.4049257,1.81016813 15.5640174,2.08734108 15.6392244,2.47930282 L16.0515901,4.73901824 L7.34331523,4.73868227 C6.46975715,4.73868227 5.81024972,4.95006164 5.36479295,5.37282037 C4.91933618,5.79557911 4.6966078,6.42691748 4.6966078,7.26683549 L4.69639953,13.5386713 L4.37553181,13.5914181 C3.98792657,13.6530121 3.67263574,13.6040169 3.42965932,13.4444325 Z" id="Path" fill="#FFFFFF"></path>
+                                <path d="M6.1970219,14.3181152 L6.19785496,7.37602483 C6.19785496,6.97846364 6.30198772,6.68029275 6.51025322,6.48151215 C6.71851872,6.28273155 7.01934667,6.18334125 7.41273706,6.18334125 L19.2838707,6.18334125 C19.6772611,6.18334125 19.9795354,6.28273155 20.1906934,6.48151215 C20.4018515,6.68029275 20.5074306,6.97846364 20.5074306,7.37602483 L20.5068058,13.6623072 L17.5570026,10.9708739 C17.3776629,10.8196887 17.1867528,10.7035 16.9842725,10.622308 C16.7817921,10.5411159 16.570634,10.5005198 16.3507982,10.5005198 C16.1309624,10.5005198 15.9226969,10.5383162 15.7260017,10.6139088 C15.5293065,10.6895014 15.3383965,10.8056901 15.1532716,10.9624748 L11.5606917,14.0449739 L10.1201886,12.793496 C9.95241917,12.6535097 9.77886458,12.5443203 9.59952485,12.465928 C9.42018511,12.3875356 9.23216764,12.3483395 9.03547244,12.3483395 C8.8561327,12.3483395 8.68257812,12.3847359 8.51480868,12.4575288 C8.34703925,12.5303217 8.17926982,12.6395111 8.01150039,12.7850968 L6.1970219,14.3181152 Z" id="Path" fill="#FFFFFF"></path>
+                                <path d="M10.3110986,11.1892526 C10.6582078,11.1892526 10.9763912,11.1066607 11.2656489,10.9414768 C11.5549065,10.7762929 11.7863126,10.5537147 11.9598672,10.273742 C12.1334218,9.99376931 12.2201991,9.68299964 12.2201991,9.34143298 C12.2201991,9.01106523 12.1334218,8.70589502 11.9598672,8.42592235 C11.7863126,8.14594968 11.5549065,7.92197154 11.2656489,7.75398794 C10.9763912,7.58600434 10.6582078,7.50201254 10.3110986,7.50201254 C9.96398948,7.50201254 9.64725236,7.58600434 9.36088729,7.75398794 C9.07452222,7.92197154 8.84600869,8.14594968 8.67534668,8.42592235 C8.50468467,8.70589502 8.41935366,9.01106523 8.41935366,9.34143298 C8.41935366,9.68299964 8.50468467,9.99376931 8.67534668,10.273742 C8.84600869,10.5537147 9.07452222,10.7762929 9.36088729,10.9414768 C9.64725236,11.1066607 9.96398948,11.1892526 10.3110986,11.1892526 Z" id="Path" fill="#000000" opacity="0.504417783"></path>
+                            </g>
+                        </g>
+                    </g>
+                </svg> -->
+
+                <svg class="msgForm__gallery" *ngIf="GetTheme() == null" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <mask id="mask0_1_14690" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+                    <rect width="24" height="24" fill="#D9D9D9" class="opacity" opacity="0.5"/>
+                    </mask>
+                    <g mask="url(#mask0_1_14690)">
+                    <path d="M9 13H19L15.55 8.5L13.25 11.5L11.7 9.5L9 13ZM3 21C2.45 21 1.97917 20.8042 1.5875 20.4125C1.19583 20.0208 1 19.55 1 19V6H3V19H20V21H3ZM7 17C6.45 17 5.97917 16.8042 5.5875 16.4125C5.19583 16.0208 5 15.55 5 15V4C5 3.45 5.19583 2.97917 5.5875 2.5875C5.97917 2.19583 6.45 2 7 2H12L14 4H21C21.55 4 22.0208 4.19583 22.4125 4.5875C22.8042 4.97917 23 5.45 23 6V15C23 15.55 22.8042 16.0208 22.4125 16.4125C22.0208 16.8042 21.55 17 21 17H7ZM7 15H21V6H13.175L11.175 4H7V15Z" class="color" fill="#1C1B1F"/>
+                    </g>
+                </svg>
+
+                <svg class="msgForm__gallery" *ngIf="GetTheme() == 'Dark'" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <mask id="mask0_1_14703" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+                    <rect width="24" height="24" fill="#FFFFFF" class="opacity" opacity=""/>
+                    </mask>
+                    <g mask="url(#mask0_1_14703)">
+                    <path d="M9 13H19L15.55 8.5L13.25 11.5L11.7 9.5L9 13ZM3 21C2.45 21 1.97917 20.8042 1.5875 20.4125C1.19583 20.0208 1 19.55 1 19V6H3V19H20V21H3ZM7 17C6.45 17 5.97917 16.8042 5.5875 16.4125C5.19583 16.0208 5 15.55 5 15V4C5 3.45 5.19583 2.97917 5.5875 2.5875C5.97917 2.19583 6.45 2 7 2H12L14 4H21C21.55 4 22.0208 4.19583 22.4125 4.5875C22.8042 4.97917 23 5.45 23 6V15C23 15.55 22.8042 16.0208 22.4125 16.4125C22.0208 16.8042 21.55 17 21 17H7ZM7 15H21V6H13.175L11.175 4H7V15Z" class="color" fill="#FFFFFF"/>
+                    </g>
+                </svg>
+
+
+
+                <input type='file' [disabled]="getConnectionErrorValue == true"
+                    style="display: none; visibility: hidden; float: left;" id="imageUpload" accept=".jpeg, .gif, .jpg"
+                    #fileInput (change)="uploadFile($event)" (click)="$event.target.value=null" />
+            </span>
+    </span>
+    <!-- <img class="msgForm__emojiImg" (click)="enableEmojis()" src="assets/icons/movius/messages/icons-all-emoji-new.svg"
+        alt="pic" /> -->
+
+    <svg class="msgForm__emojiImg" *ngIf="GetTheme() == null" (click)="enableEmojis()" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink">
+        <title></title>
+        <g id="Artboard-Copy" class="smile_emoji" [ngClass]="{ 'msgForm__smile_active': isEmojiActive}" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.5">
+            <g id="icons/all/emoji-copy" transform="translate(2.000000, 2.000000)" fill-rule="nonzero">
+                <path
+                    d="M10,0 C4.486,0 0,4.486 0,10 C0,15.514 4.486,20 10,20 C15.514,20 20,15.514 20,10 C20,4.486 15.514,0 10,0 Z"
+                    id="Path" stroke="#000000" class="stroke"></path>
+                <circle id="Oval" fill="#000000" cx="13.9464444" cy="8.13311111" r="1.26288889"></circle>
+                <circle id="Oval" fill="#000000" cx="6.05355556" cy="8.13311111" r="1.26288889"></circle>
+                <path
+                    d="M13.5766667,12.0013333 C11.5711111,13.7891111 8.42888889,13.7891111 6.42333333,12.0013333 C6.19444444,11.7971111 5.84311111,11.8171111 5.63888889,12.0464444 C5.43466667,12.2755556 5.45488889,12.6266667 5.684,12.8308889 C6.894,13.9093333 8.44711111,14.4488889 10,14.4488889 C11.5528889,14.4488889 13.106,13.9095556 14.316,12.8308889 C14.5451111,12.6266667 14.5653333,12.2755556 14.3611111,12.0464444 C14.1568889,11.8171111 13.8055556,11.7971111 13.5766667,12.0013333 Z"
+                    id="Path" fill="#000000"></path>
+            </g>
+        </g>
+</svg>
+
+<svg class="msgForm__emojiImg" *ngIf="GetTheme() == 'Dark'" (click)="enableEmojis()" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg"
+xmlns:xlink="http://www.w3.org/1999/xlink">
+<title></title>
+<g id="Artboard-Copy" class="smile_emoji" [ngClass]="{ 'msgForm__smile_active': isEmojiActive}" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="">
+    <g id="icons/all/emoji-copy" transform="translate(2.000000, 2.000000)" fill-rule="nonzero">
+        <path
+            d="M10,0 C4.486,0 0,4.486 0,10 C0,15.514 4.486,20 10,20 C15.514,20 20,15.514 20,10 C20,4.486 15.514,0 10,0 Z"
+            id="Path" stroke="#FFFFFF" class="stroke"></path>
+        <circle id="Oval" fill="#FFFFFF" cx="13.9464444" cy="8.13311111" r="1.26288889" class="line"></circle>
+        <circle id="Oval" fill="#FFFFFF" cx="6.05355556" cy="8.13311111" r="1.26288889" class="line"></circle>
+        <path
+            d="M13.5766667,12.0013333 C11.5711111,13.7891111 8.42888889,13.7891111 6.42333333,12.0013333 C6.19444444,11.7971111 5.84311111,11.8171111 5.63888889,12.0464444 C5.43466667,12.2755556 5.45488889,12.6266667 5.684,12.8308889 C6.894,13.9093333 8.44711111,14.4488889 10,14.4488889 C11.5528889,14.4488889 13.106,13.9095556 14.316,12.8308889 C14.5451111,12.6266667 14.5653333,12.2755556 14.3611111,12.0464444 C14.1568889,11.8171111 13.8055556,11.7971111 13.5766667,12.0013333 Z"
+            id="Path" fill="#FFFFFF" class="line"></path>
+    </g>
+</g>
+</svg>
+</div>
+
+    <movius-web-whatsapp-template
+        [visible]="isTemplateVisible"
+        (onSelectTemplate)="handleTemplateSelection($event, msgTextArea)">
+    </movius-web-whatsapp-template>
+
+    <div class="msgForm__writeFieldWrapper" #writeFieldWrapper>
+        <span [ngClass]="peerData.isGroup && peerData.messageChannelType == 'whatsapp' && !isWhatsAppGroupEnabled ? 'msgForm__templateWrapperDisabled':'msgForm__templateWrapper'"
+                [ngStyle]="{'padding-top': isMobileDevice ? '8px' : '10px' }"
+                *ngIf="peerData.messageChannelType == 'whatsapp' && optInRequestStatus?.toString() == '3' && getConnectionErrorValue == false">
+            <span *ngIf="!isTemplateVisible" class="msgForm__optInTemplate" (click)="toggleTemplate()">
+                <svg width="24px" height="24px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <defs>
+                        <path d="M16,0 C24.8366,0 32,7.1634 32,16 C32,24.83656 24.8366,32 16,32 C7.1634,32 0,24.83656 0,16 C0,7.1634 7.1634,0 16,0 Z" id="path-1"></path>
+                        <path d="M9.7401,0 C15.1107,0 19.4801,3.7995 19.4801,8.46962 C19.4801,13.13977 15.1107,16.93925 9.7401,16.93925 C8.9316,16.93925 8.1296,16.85328 7.3529,16.68346 C6.8422,17.22298 5.2876,18.63317 2.9872,18.63317 L2.9872,18.63317 L2.15,18.62936 L2.618,17.96577 C3.509,16.7021 3.7343,15.62307 3.7906,15.17714 C1.4119,13.57892 0,11.0897 0,8.46962 C0,3.7995 4.3695,0 9.7401,0 Z" id="path-3"></path>
+                    </defs>
+                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="Group-369" transform="translate(-651.000000, -796.000000)">
+                            <g id="Group-10" transform="translate(651.000000, 796.000000)">
+                                <g id="Group-256">
+                                    <mask id="mask-2" fill="white">
+                                        <use xlink:href="#path-1"></use>
+                                    </mask>
+                                    <g id="Clip-255"></g>
+                                    <polygon id="Fill-254" fill="#444444" mask="url(#mask-2)" points="-1 33 33 33 33 -1 -1 -1"></polygon>
+                                </g>
+                                <g id="Group-5" transform="translate(6.400000, 6.400000)">
+                                    <g id="Group-259">
+                                        <mask id="mask-4" fill="white">
+                                            <use xlink:href="#path-3"></use>
+                                        </mask>
+                                        <g id="Clip-258"></g>
+                                        <polygon id="Fill-257" fill="#FFFFFF" mask="url(#mask-4)" points="-1 19.63317 20.4801 19.63317 20.4801 -1 -1 -1"></polygon>
+                                    </g>
+                                    <g id="Group-264" transform="translate(4.884200, 6.461402)" stroke="#444444">
+                                        <path d="M0,0.5 C5.239766,0.5 7.859649,0.5 7.859649,0.5" id="Stroke-260"></path>
+                                        <path d="M2.3579,3.64386 C7.597666,3.64386 10.217549,3.64386 10.217549,3.64386" id="Stroke-262"></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+            </span>
+            <span *ngIf="isTemplateVisible" class="msgForm__optInTemplate" (click)="toggleTemplate()">
+                <svg width="24px" height="24px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <defs>
+                        <path d="M16,0 C24.8366,0 32,7.1634 32,16 C32,24.83656 24.8366,32 16,32 C7.1634,32 0,24.83656 0,16 C0,7.1634 7.1634,0 16,0 Z" id="path-1"></path>
+                        <polygon id="path-3" points="10.08 0 11.2 1.11997 6.72 5.59997 11.2 10.07997 10.08 11.19997 5.6 6.71997 1.12 11.19997 0 10.07997 4.48 5.59997 0 1.11997 1.12 0 5.6 4.47997"></polygon>
+                    </defs>
+                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="Group-398" transform="translate(-651.000000, -796.000000)">
+                            <g id="Group-11" transform="translate(651.000000, 796.000000)">
+                                <g id="Group-267">
+                                    <mask id="mask-2" fill="white">
+                                        <use xlink:href="#path-1"></use>
+                                    </mask>
+                                    <g id="Clip-266"></g>
+                                    <polygon id="Fill-265" fill="#1F1E33" mask="url(#mask-2)" points="-1 33 33 33 33 -1 -1 -1"></polygon>
+                                </g>
+                                <g id="Group-270" transform="translate(10.400000, 10.666700)">
+                                    <mask id="mask-4" fill="white">
+                                        <use xlink:href="#path-3"></use>
+                                    </mask>
+                                    <g id="Clip-269"></g>
+                                    <polygon id="Fill-268" fill="#EFEFEF" mask="url(#mask-4)" points="-1 12.19997 12.2 12.19997 12.2 -1 -1 -1"></polygon>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+            </span>
+        </span>
+
+        <fieldset class="msgForm__fieldset"
+                [ngStyle]="{'border-radius': peerData.messageChannelType == 'whatsapp' && optInRequestStatus?.toString() == '3' ? '0px 8px 8px 0px' : '8px' }">
+                <textarea
+                    #msgTextArea
+                    [attr.disabled]="disabledInputBox() ? 'disabled' : null"
+                    [class.disabledTextTemplate]="touchedTemplate"
+                    [(ngModel)]="myTextarea"
+                    (ngModelChange)="saveDraftedMsg(myTextarea)"
+                    data-cy="send-message-input"
+                    class="msgForm__writeField"
+                    [ngStyle]="{'padding':peerData.messageChannelType == 'whatsapp' && optInRequestStatus?.toString() == '3' ?
+                                touchedTemplate ? '8px 8px 4px 1rem' :
+                                isMobileDevice ? '10px 10px 0 0.5rem' : '8px 8px 4px 1rem'  : isMobileDevice ? '10px 8px 0 1rem' : '8px 8px 4px 1rem',
+                                opacity: 2.5,
+                                'border-radius': peerData.messageChannelType == 'whatsapp' && optInRequestStatus?.toString() == '3' ? '0px 8px 8px 0px' : '8px',
+                                'height' : isMobileDevice ? '36px' : '38px',
+                                'min-height':isMobileDevice ? '36px' : '38px'
+                                }"
+                    placeholder="Type a message"
+                    formControlName="message"
+                    contenteditable="true"
+                    [class.no-scroll]="!isOverflowed"
+                    (input)="autoGrow(msgTextArea)"
+                    (keyup)="preventMaxChar(msgTextArea)"
+                    (paste)="onPaste($event, peerData.messageChannelType)"
+                    (focus)="onFocusTextArea(selectedContactMultiline,$event)"
+                    (blur)="onBlurTextArea($event)">
+                </textarea>
+        </fieldset>
+        </div>
+    <!-- <button
+
+        > -->
+        <div class="msgForm__sendImg-div">
+            <img
+            #sendBtn
+            data-cy="send-message-button"
+            (click)="handleSendButton($event, msgTextArea)"
+            *ngIf="!(!!messageError && imgURL == null)"
+            class="msgForm__sendImg-active"
+            src="assets/icons/movius/messages/icons_btn_send_fill.svg"
+            alt=""
+        />
+        <img
+            [disabled]="!!messageError && imgURL == null"
+            *ngIf="!!messageError && imgURL == null"
+            class="msgForm__sendImg"
+            [src]="GetTheme()=='Dark' ? 'assets/icons/dark_theme_icons/send_dark.svg' : 'assets/icons/movius/messages/icons_btn_send_outline.svg' "
+            alt=""
+        />
+        </div>
+
+    <!-- </button> -->
+
+</form>
+
+
+<movius-web-general-failure class="displayNone"
+    (passConnectionError)="getConnectionError($event)">
+</movius-web-general-failure>
+
+<!-- [disabled]="isGroupMessageEnabled === false" -->

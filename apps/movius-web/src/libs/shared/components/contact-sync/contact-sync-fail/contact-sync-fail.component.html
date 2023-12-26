@@ -1,0 +1,18 @@
+<div class="syncCntFail syncCntFail__loadingCap">
+    <div class="syncCntFail__loadingCapIco--fail"></div>
+    <div class="syncCntFail__loadingCapTxt--fail">
+        Establishing Connection Failed
+    </div>
+    <div class="syncCntFail__loadingCapSubTxt">
+        Please check your username & password again. If it still fails, contact your IT administrator.
+    </div>
+    <div class="syncCntFail__loadingControls">
+        <button
+            data-cy="try-again-button"
+            class="syncCntFail__syncBtn syncCntFail__failBtn"
+            (click)="tryAgain.emit()"
+        >
+            Ok
+        </button>
+    </div>
+</div>

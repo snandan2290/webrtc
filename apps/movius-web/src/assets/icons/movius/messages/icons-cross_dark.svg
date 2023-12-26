@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group 11</title>
+    <defs>
+        <path d="M16,0 C24.8366,0 32,7.1634 32,16 C32,24.83656 24.8366,32 16,32 C7.1634,32 0,24.83656 0,16 C0,7.1634 7.1634,0 16,0 Z" id="path-1"></path>
+        <polygon id="path-3" points="10.08 0 11.2 1.11997 6.72 5.59997 11.2 10.07997 10.08 11.19997 5.6 6.71997 1.12 11.19997 0 10.07997 4.48 5.59997 0 1.11997 1.12 0 5.6 4.47997"></polygon>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-398" transform="translate(-651.000000, -796.000000)">
+            <g id="Group-11" transform="translate(651.000000, 796.000000)">
+                <g id="Group-267">
+                    <mask id="mask-2" fill="white">
+                        <use xlink:href="#path-1"></use>
+                    </mask>
+                    <g id="Clip-266"></g>
+                    <polygon id="Fill-265" fill="#1F1E33" mask="url(#mask-2)" points="-1 33 33 33 33 -1 -1 -1"></polygon>
+                </g>
+                <g id="Group-270" transform="translate(10.400000, 10.666700)">
+                    <mask id="mask-4" fill="white">
+                        <use xlink:href="#path-3"></use>
+                    </mask>
+                    <g id="Clip-269"></g>
+                    <polygon id="Fill-268" fill="#EFEFEF" mask="url(#mask-4)" points="-1 12.19997 12.2 12.19997 12.2 -1 -1 -1"></polygon>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

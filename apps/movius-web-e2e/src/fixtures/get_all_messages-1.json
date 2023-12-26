@@ -1,0 +1,88 @@
+{
+    "thread": { "id": "5c4c027c-064b-4647-a469-c952300d0e99" },
+    "messages": [
+        {
+            "ts": "2020-11-18 19:40:12.931803",
+            "id": "089e3569-dad9-4c98-b8b1-3539f6bd6c05",
+            "seq": 17,
+            "seq_a": 9,
+            "from": "12129195056",
+            "body": "xxx",
+            "multimedia_id": "",
+            "multimedia_content_type": ""
+        },
+        {
+            "ts": "2020-11-18 19:38:13.041741",
+            "id": "ad4cf97c-d086-48a1-b0be-1e6f4a593e62",
+            "seq": 15,
+            "seq_a": 8,
+            "from": "12129195056",
+            "body": "ffff",
+            "multimedia_id": "",
+            "multimedia_content_type": ""
+        },
+        {
+            "ts": "2020-11-13 16:07:46.249066",
+            "id": "cd4421f8-fc1b-4fbc-8f6e-3b5f87e4c39a",
+            "seq": 13,
+            "seq_a": 7,
+            "from": "12129195056",
+            "body": "lolqqqqqqqqqqqqqqqqqq",
+            "multimedia_id": "",
+            "multimedia_content_type": ""
+        },
+        {
+            "ts": "2020-11-13 16:07:17.724427",
+            "id": "b26fc6f3-41e6-4f89-942f-0a953e4f7bc6",
+            "seq": 11,
+            "seq_a": 6,
+            "from": "12129195056",
+            "body": "lol",
+            "multimedia_id": "",
+            "multimedia_content_type": ""
+        },
+        {
+            "ts": "2020-11-13 16:06:54.454377",
+            "id": "419079e8-38d0-4c8e-9bd2-613a62459d24",
+            "seq": 9,
+            "seq_a": 5,
+            "from": "14156789020",
+            "body": "[Automated Message]: This message is redacted as it contains restricted content.",
+            "multimedia_id": "",
+            "multimedia_content_type": "",
+            "stype": 102
+        },
+        {
+            "ts": "2020-11-13 16:06:53.024004",
+            "id": "537e14e1-008c-40b2-8fda-40e3e1c24d91",
+            "seq": 5,
+            "seq_a": 3,
+            "from": "12129195056",
+            "body": "test",
+            "multimedia_id": "",
+            "multimedia_content_type": ""
+        },
+        {
+            "ts": "2020-11-13 14:32:21.450617",
+            "id": "20037af9-cbd6-41bb-b0f0-93f3d9fefad8",
+            "seq": 3,
+            "seq_a": 2,
+            "from": "12129195056",
+            "body": "zzzzzzssss",
+            "multimedia_id": "",
+            "multimedia_content_type": ""
+        },
+        {
+            "ts": "2020-11-13 14:32:02.490097",
+            "id": "22731812-fcdd-40ff-b788-c831b3c25543",
+            "seq": 1,
+            "seq_a": 1,
+            "from": "12129195056",
+            "body": "zzzzzz",
+            "multimedia_id": "",
+            "multimedia_content_type": ""
+        }
+    ],
+    "return": 0,
+    "desc": "Success"
+}

@@ -1,0 +1,21 @@
+<div class="help__box">
+    <p class="help__subTitle">Report an issue</p>
+    <div class="help__message-wrapper">
+        <textarea 
+            class="help__message" 
+            #msgTextAreaInfo 
+            [(ngModel)]="value" 
+            (ngModelChange)="valueChange(value)" 
+            placeholder="Please describe the issue you are experiencing here" 
+            maxlength="250">
+        </textarea>
+    </div>
+    <div class="help__remaning-char">{{messageTextLength}}/{{remainingText}}</div>
+    <button [disabled]="messageTextLength === 0 || getConnectionErrorValue === false" class="help__submit" (click)="submitDetailsELKServer()">
+        Submit
+    </button>
+</div>
+
+<movius-web-general-failure class="help__display-none"
+(passConnectionError)="getConnectionError($event)">
+</movius-web-general-failure>

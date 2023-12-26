@@ -1,0 +1,183 @@
+@import '../../../../../assets/scss/variables';
+@import '../../../../../assets/scss/mixins';
+@import '../../../../../assets/scss/auth.scss';
+
+$inputs-width: 100%;
+$pwd: 'pwd';
+
+.#{$pwd} {
+    &__form {
+        position: relative;
+        width: $inputs-width;
+        //min-width: 75vw;
+    }
+
+    &__inputBlock {
+        // TODO CB:02Mar2021: Check spacings here! 0.625rem==10px is extracted as is from inline-style
+        margin: $spacing-m 0 0.625rem 0;
+        &:first-of-type {
+            margin: 0;
+        }
+    }
+
+    &__input {
+        $self: &;
+        width: $inputs-width;
+        @include screen-mobile {
+            //width: calc(#{$inputs-width} * 2);
+            width: calc(#{$inputs-width} / 2);
+        }
+        padding: 0.65625rem $spacing-m 0.65625rem $spacing-m;
+
+        &--bare {
+            @extend #{$self};
+            border-top: none;
+            border-left: none;
+            border-right: none;
+        }
+    }
+
+    &__notification {
+        //CB: 21Apr2021 TECH-DEBT: It this class obsolete?
+        width: $buttons-width;
+        @include font-normal(14px);
+        color: var(--movius_notify-green);
+    }
+
+    &__validationSimple {
+        margin: $spacing-xs 0 0 0;
+        height: 1rem;
+        color: var(--red);
+        text-align: center;
+    }
+
+    &__validation {
+        $parent: &;
+        $val-width: 21.875rem;
+        display: flex;
+        flex-direction: column;
+        //height: 100%;
+        width: $val-width;
+
+        position: absolute;
+        right: calc(-#{$val-width} - 1vw);
+        top: 0%;
+
+        margin: auto;
+        padding: 0.625rem 0 0.8125rem $spacing-s;
+
+        background: var(--movius_sand);
+        border-radius: 0.5rem;
+        box-shadow: 0 0 0.25rem rgba(0, 0, 0, 0.3);
+
+        overflow-y: scroll;
+        @include scrollbars(0.15rem, var(--movius_darkgray), var(--movius_sand));
+
+        @include screen-mobile {
+            overflow: scroll;
+            position: static;
+            height: 10vh;
+            width: 25vw;
+        }
+
+        &.wide {
+            $wide-width: 20.25rem;
+            width: $wide-width;
+            right: calc(-#{$wide-width} - #{$spacing-s});
+            top: 30%;
+
+            .#{$pwd}__valItem {
+                margin-left: 0.1875rem;
+            }
+
+            .#{$pwd}__valItemText {
+                margin-left: 0.5rem;
+            }
+        }
+    }
+
+    &__valContent {
+        @include font-normal(0.75rem);
+        margin: 1.125rem 0 0 0;
+    }
+
+    &__valHeader {
+        @include font-normal(0.75rem);
+        margin-right: auto;
+    }
+
+    &__valHIco {
+        display: inline-block;
+    }
+
+    &__valHText {
+        margin-left: $spacing-s;
+    }
+
+    &__valItem {
+        $self: &;
+        text-align: left;
+        margin-left: 1rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    &__valItemIco {
+        $self: &;
+        $valIco_size: 0.5rem;
+        width: $valIco_size;
+        height: $valIco_size;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        display: inline-block;
+
+        &--valid {
+            @extend #{$self};
+            background-image: url('../../../../../assets/icons/movius/checkmark.svg');
+        }
+
+        &--invalid,
+        &--info {
+            @extend #{$self};
+            background-image: url('../../../../../assets/icons/movius/circle_dot.svg');
+        }
+    }
+    &__valItemText {
+        $self: &;
+        margin-left: $spacing-xs;
+
+        &--valid {
+            @extend #{$self};
+            color: var(--movius_leafy-green);
+        }
+
+        &--invalid {
+            @extend #{$self};
+            color: var(--movius_invalid-red)-pale;
+        }
+
+        &--info {
+            @extend #{$self};
+            color: var(--movius_black);
+            @include font-bold(0.75rem);
+        }
+    }
+
+    &__strength {
+        width: $inputs-width;
+        @include screen-mobile {
+            //width: calc(#{$inputs-width} * 2);
+            width: calc(#{$inputs-width} / 2);
+        }
+        margin: 0.313rem auto 0 auto;
+    }
+}
+
+.pwd__valNote {
+    color: red;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: left;
+    margin-top: 5px;
+}

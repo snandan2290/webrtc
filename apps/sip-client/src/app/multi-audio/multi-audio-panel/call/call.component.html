@@ -1,0 +1,21 @@
+<movius-web-ongoing-call
+    *ngIf="call.state === 'Established'; else notEstablished"
+    [type]="call.kind === 'IncomingCallSession' ? 'incoming' : 'outgoing'"
+    [peerName]="call.peer.name"
+    (hangUp)="hangUp.emit()"
+    (mute)="mute.emit($event)"
+    (hold)="hold.emit($event)"
+></movius-web-ongoing-call>
+<ng-template #notEstablished>
+    <movius-web-incoming-call
+        [peerName]="call.peer.name"
+        *ngIf="call.kind === 'IncomingCallSession'"
+        (accept)="accept.emit()"
+        (reject)="hangUp.emit()"
+    ></movius-web-incoming-call>
+    <movius-web-outgoing-call
+        [peerName]="call.peer.name"
+        *ngIf="call.kind === 'OutgoingCallSession'"
+        (hangUp)="hangUp.emit()"
+    ></movius-web-outgoing-call>
+</ng-template>

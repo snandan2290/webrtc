@@ -1,0 +1,174 @@
+<div
+    class="contacts"
+    [class.contacts--topSpaced]="getConnectionErrorValue === true"
+    *ngIf="view$ | async as view"
+>
+    <movius-web-general-failure
+        (passConnectionError)="getConnectionError($event)"
+    ></movius-web-general-failure>
+
+    <movius-web-sync-contacts
+        *ngIf="view.showSyncContactsPlaceholder && isContactSync === false else contactsContent"
+    >
+    </movius-web-sync-contacts>
+    <ng-template #contactsContent>
+        <div
+            class="contacts__splitter contacts__splitter--first contacts__general"
+        >
+            <pane-frame
+                class="contacts__pane"
+                [includeDefaultHeader]="false"
+                [includeDefaultFooter]="false"
+                [isBodyCentered]="view.isContactsEmpty"
+            >
+                <div headingCustom class="contacts__heading">
+                    <div
+                        class="contacts__caption"
+                        [class.hidden]="view.isSearchBarActivated"
+                    >
+                        Contacts
+                    </div>
+                    <div
+                        class="contacts__headingRight"
+                        [class.active]="view.isSearchBarActivated"
+                    >
+                        <movius-web-search-bar
+                            #searchBar
+                            headingRight
+                            class="contacts__search"
+                            [class.active]="view.isSearchBarActivated"
+                            (isActivated)="
+                                onSearchBarIsActivatedChanged($event)
+                            "
+                            (changed)="updateSearch($event)"
+                        ></movius-web-search-bar>
+                        <movius-web-ui-cta-button
+                            #rla="routerLinkActive"
+                            *ngIf="!view.isSearchBarActivated"
+                            class="contacts__topControl"
+                            data-cy="add-contact-button"
+                            [btnType]="'Contact'"
+                            [isDisabled]="rla?.isActive"
+                            [routerLink]="['./add']"
+                            routerLinkActive
+                        >
+                        </movius-web-ui-cta-button>
+                    </div>
+                </div>
+                <div class="contacts__main" main>
+                    <!-- <ng-container
+                        *ngTemplateOutlet="
+                            contactsList;
+                            context: {
+                                $implicit: view.frequentlyUsedContacts,
+                                title: 'Frequent Contacts',
+                                viewportHeight:view.viewPortHeights.frequentlyUsedContacts
+                            }
+                        "
+                    ></ng-container> -->
+                    <ng-container
+                        *ngTemplateOutlet="
+                            contactsList;
+                            context: {
+                                $implicit: view.privateContacts,
+                                title: 'All Contacts',
+                                viewportHeight:view.viewPortHeights.privateContacts,
+                                freqindex: view.freqindex,
+                                galCntIndex: view.galCntIndex,
+                                freqContactsLength: view.freqContactsLength,
+                                galContactsLength: view.galContactsLength
+                            }
+                        "
+                    ></ng-container>
+                    <!-- <ng-container
+                        *ngTemplateOutlet="
+                            contactsList;
+                            context: {
+                                $implicit: view.galContacts,
+                                title: 'Exchange Directory',
+                                viewportHeight: view.viewPortHeights.galContacts
+                            }
+                        "
+                    ></ng-container> -->
+
+                    <div
+                        class="contacts__emptyShell"
+                        *ngIf="view.isContactsEmpty"
+                    >
+                        <div class="contacts__emptyIco"></div>
+                        <div class="contacts__emptyTxt">No contacts</div>
+                    </div>
+                </div>
+            </pane-frame>
+        </div>
+        <div
+            class="contacts__splitter contacts__splitter--second contacts__details"
+        >
+            <router-outlet></router-outlet>
+        </div>
+    </ng-template>
+</div>
+
+<ng-template
+    #contactsList
+    let-contacts
+    let-title="title"
+    let-height="viewportHeight"
+    let-freqindex="freqindex"
+    let-galCntIndex="galCntIndex"
+    let-freqContactsLength="freqContactsLength"
+    let-galContactsLength="galContactsLength"
+>
+    <section *ngIf="contacts.length > 0" class="contacts__all">
+
+
+        <cdk-virtual-scroll-viewport [itemSize]="64" class="contacts__viewport"  >
+            <ng-container *cdkVirtualFor="let contact of contacts;trackBy: trackByContact;let indexOfelement = index;">
+
+                <div *ngIf="indexOfelement == freqindex && freqContactsLength >= 1">
+                    <p class="contacts__subCaption">
+                        Frequent Contacts
+                        <ng-container *ngIf="contacts.length > 0"
+                            >({{ freqContactsLength }})</ng-container
+                        >
+                    </p>
+                </div>
+
+                <div *ngIf="indexOfelement == galCntIndex && galContactsLength >= 1">
+                    <p class="contacts__subCaption">
+                        Exchange Directory
+                        <ng-container *ngIf="contacts.length > 0"
+                            >({{ galContactsLength }})</ng-container
+                        >
+                    </p>
+                </div>
+
+                <div *ngIf="indexOfelement == freqContactsLength + galContactsLength">
+                    <p class="contacts__subCaption">
+                        {{ title }}
+                        <ng-container *ngIf="contacts.length > 0"
+                            >({{ contacts.length - freqContactsLength - galContactsLength }})</ng-container
+                        >
+                    </p>
+                </div>
+
+                <communication-item
+                data-cy="contact-item"
+                class="contacts__contactItem"
+                [peer]="contact"
+                (click)="$event.preventDefault(); onContactClicked(contact)"
+                [routerLink]="['.', contact.id || contact.msGraphId]"
+                [routerLinkActive]="['is-active']"
+            >
+                <div title class="contacts__title">
+                    <div class="contacts__titleTxt">
+                        {{ getContactFriendlyName(contact) }}
+                    </div>
+                </div>
+            </communication-item>
+            </ng-container>
+        </cdk-virtual-scroll-viewport>
+
+
+    </section>
+</ng-template>

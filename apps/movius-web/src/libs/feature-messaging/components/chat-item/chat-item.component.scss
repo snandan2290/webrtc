@@ -1,0 +1,506 @@
+@import '../../../../assets/scss/variables';
+@import '../../../../assets/scss/mixins';
+
+:host {
+    display: inherit;
+
+    &::ng-deep .ant-popover-inner .ant-popover-inner-content {
+        padding: 0;
+    }
+}
+
+@mixin before-after-lines($width, $color, $margin) {
+    &:before,
+    &:after {
+        content: '';
+        flex: 1 1;
+        border-bottom: $width solid $color;
+        margin: auto;
+    }
+    &:before {
+        margin-right: $margin;
+    }
+    &:after {
+        margin-left: $margin;
+    }
+}
+
+
+//#region Date
+.chat-date {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+    color: var(--movius_text-gray);
+    @include font-normal(0.75rem);
+
+    @include before-after-lines(1px, var(--movius_border-gray)-2, 1.125rem);
+}
+//#endregion Date
+
+//#region Unread
+.chat-unread-frame {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+
+    &__unread-item {
+        margin: 0 auto 0 auto;
+    }
+
+    &__unread-item-liner {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: $spacing-l auto $spacing-l auto;
+
+        @include before-after-lines(1px, var(--movius_papaya), 0.6875rem);
+    }
+}
+
+.chat-unread {
+    $parent: &;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+    min-width: 10.6875rem;
+    height: 2rem;
+
+    padding: $spacing-xs $spacing-l $spacing-xs $spacing-l;
+
+    border-radius: 1rem;
+    background-color: var(--movius_papaya);
+    color: var(--movius_white);
+
+    @include font-bold(0.75rem);
+
+    &__arrow {
+        width: 0.5rem;
+        height: 0.6875rem;
+        @include background-image('/movius/messages/icons-arrow-down.svg');
+    }
+
+    &__text {
+        margin: 0 0 0 $spacing-xs;
+    }
+
+    &--floating {
+        @extend #{$parent};
+        box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.09);
+    }
+}
+//#endregion Unread
+
+.chat-frame {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+}
+
+.chat-message {
+    $self: &;
+    $border-radius: 0.375rem;
+    $timeStampHeight: 1rem;
+
+    $dropDownIcoSize: 1rem;
+    $dropDownIcoMargin: 0.5rem;
+
+    display: flex;
+    width: 100%;
+
+    &__itemFrame {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        max-width: 80%;
+        // max-width: calc(70% + #{$dropDownIcoSize} + 2 * #{$dropDownIcoMargin});
+        padding: 0.5rem 0 0 0;
+
+        &--self {
+            padding: 0.5rem 0 0 0;
+            margin: 0 0 0 auto;
+        }
+
+        @include screen-mobile() {
+            max-width: 100%;
+        }
+    }
+
+    &__infoicon-textFrame {
+        display: flex;
+        border: solid 1px #979797;
+        border-radius: 8px;
+    }
+
+    &__infoicon-textFrame-cont {
+        display: contents;
+    }
+
+    &__item {
+        display: inline-block;
+
+        order: 1;
+        white-space: pre-line;
+
+        color: var(--black);
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        #{$self}__text {
+            background: var(--movius_white);
+            border-top-left-radius: 0;
+        }
+
+        #{$self}__text--mobile {
+            //background: #f3f2f0;
+            //color: var(--movius_black);
+            background: var(--movius_white);
+            color: var(--black);
+            border-radius: 5px;
+            padding: 0.5rem;
+        }
+
+        #{$self}__text--systemMsg {
+            background: var(--movius_white);
+            border-radius: 0px 8px 8px 0px;
+            padding: 0.5rem;
+        }
+
+        #{$self}__infoicon {
+            padding: 8px;
+            background-color: var(--movius_white);
+            // border-bottom-left-radius: $border-radius;
+            //border-radius: 8px;
+            border-radius: 8px 0px 0px 8px;
+        }
+
+        &--self {
+            order: 2;
+            color: $movius-white;
+
+            #{$self}__text {
+                background: var(--movius_right_chat_color);
+                color: var(--black);
+                border-top-right-radius: 0;
+                border-top-left-radius: $border-radius;
+            }
+
+            #{$self}__text--mobile {
+                background: var(--movius_color-teams-theme-blue-dark);
+                color: $white;
+                border-radius: 5px;
+                word-break: break-word;
+            }
+
+            #{$self}__picture {
+                background: var(--movius_colors-primary-green-2);
+            }
+        }
+
+        &--system {
+            #{$self}__text {
+                //background-color: #fff5d9;
+                background-color: var(--movius-system-msg-bgclr);
+                border-bottom-left-radius: 0;
+            }
+        }
+
+        &--system--whatsapp {
+            #{$self}__text {
+                background-color: $movius-white;
+                border-bottom-left-radius: 0;
+            }
+        }
+
+    }
+
+    &__sms-query-text-frame {
+        display: flex;
+        padding: 8px;
+        //background-color: $movius-white;
+        background: var(--movius_white);
+        border-radius: 5px;
+        border: solid 1px #979797;
+
+    }
+
+    &__sms-query-text {
+        margin: 0 0 0 16px;
+    }
+
+    &__timestamp {
+        display: flex;
+        flex-direction: row;
+        height: $timeStampHeight;
+        margin: 0 0 $spacing-xxs 0;
+
+        @include font-normal(0.75rem);
+        color: var(--movius_text-gray);
+        white-space: nowrap;
+
+        #{$self}__timeValue {
+        }
+
+        &--self {
+            #{$self}__timeValue {
+                margin: 0 0 0 auto;
+            }
+        }
+    }
+
+    &__timeValue {
+        display: flex;
+        @include font-normal(0.75rem);
+        background: var(--movius_text-gray);
+    }
+
+    &__textFrame {
+        //position: relative;
+    }
+    &__optInReqButton {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        //background: #C3C7CB;
+        background-color: var(--movius-optin-reqbtn-clr);
+        padding: 8px;
+        margin-top: -3px;
+        font-weight: bold;
+        border: 0;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+        width: 100%;
+        cursor: pointer;
+        border: solid 1px #979797;
+    }
+
+    &__text-input {
+        margin-bottom: 0;
+    }
+
+    &__text {
+        border-radius: $border-radius;
+        padding: 0.5rem;
+        word-break: break-word;
+
+        ::ng-deep a {
+            color: var(--movius_papaya);
+        }
+    }
+    &__loading{
+        width: 128px;
+        height: 128px;
+    }
+
+    &__picture {
+        position: relative;
+        background: #edeff1;
+    }
+
+    &__gif-size{
+        width: 128px;
+        height: 128px;
+    }
+    &__image-size{
+        width: 100%;
+        height: auto;
+        max-height: 450px;
+        max-width: 300px;
+        transition-duration: 0.2s;
+        .chat-message__img{
+            max-height: 450px;
+            max-width: 300px;
+            min-height: 120px;
+            object-fit: initial;
+        }
+    }
+
+    @mixin screen-laptop-above {
+        @media only screen and (min-width: 1440px) {
+            @content;
+        }
+    }
+
+    @include screen-teams-one-laptop-above{
+        &__image-size {
+            width: 100%;
+            height: auto;
+            max-height: 450px;
+            max-width: 300px;
+            transition-duration: 0.2s;
+            .chat-message__img{
+                max-height: 450px;
+                max-width: 300px;
+                min-height: 120px;
+                object-fit: initial;
+            }
+        }
+    }
+
+    @include screen-laptop-above{
+        &__image-size {
+            width: 100%;
+            height: auto;
+            max-height: 600px;
+            max-width: 400px;
+            transition-duration: 0.2s;
+            .chat-message__img{
+                max-height: 600px;
+                max-width: 400px;
+                min-height: 120px;
+                object-fit: initial;
+            }
+        }
+    }
+    @media only screen and (max-width: 414px) {
+        &__image-size {
+            width: 100%;
+            height: auto;
+            max-height: 300px;
+            max-width: 200px;
+            transition-duration: 0.2s;
+            .chat-message__img{
+                max-height: 300px;
+                max-width: 200px;
+                min-height: 120px;
+                object-fit: initial;
+            }
+        }
+    }
+
+    &__spinner {
+        position: absolute;
+        margin: 50px;
+    }
+
+    &__img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
+    &__dropdown {
+        width: $dropDownIcoSize;
+        height: $dropDownIcoSize;
+        margin: calc(#{$timeStampHeight} + #{$dropDownIcoMargin})
+            $dropDownIcoMargin $dropDownIcoMargin $dropDownIcoMargin;
+        order: 2;
+
+        flex-shrink: 0;
+
+        @include background-image(
+            '/movius/messages/icons-all-message-more.svg'
+        );
+        cursor: pointer;
+
+        &:hover {
+            @include background-image(
+                '/movius/messages/icons-all-message-more-hover.svg'
+            );
+        }
+
+        &--self {
+            order: 1;
+        }
+    }
+
+    &__error-frame {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        margin: $spacing-xs 0 0 0;
+    }
+
+    &__error-msg {
+        color: var(--movius_invalid-red);
+    }
+
+    %bulb {
+        width: 0.875rem;
+        height: 0.875rem;
+        //position: absolute;
+
+        cursor: initial;
+
+        //@include background-image('/movius/messages/icons-all-not-sent.svg');
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FD5050'%3E%3Cpath d='M14 7c0-3.863-3.137-7-7-7S0 3.137 0 7s3.137 7 7 7 7-3.137 7-7zM6.239 3.845c0-.417.344-.761.761-.761.417 0 .762.344.762.761v3.028c0 .417-.345.762-.762.762-.417 0-.761-.345-.761-.762V3.845zm.054 5.748c0-.38.308-.707.707-.707.381 0 .707.309.707.707 0 .381-.308.707-.707.707-.381 0-.707-.308-.707-.707z' transform='translate(-1252 -389) translate(1252 389)'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E%0A");
+    }
+
+    &__error-bulb {
+        @extend %bulb;
+        margin: 0 $spacing-xs 0 0;
+        //top: 0;
+        //right: -$spacing-l;
+
+        &--self {
+            @extend %bulb;
+            //top: 0;
+            //left: -$spacing-l;
+            margin: 0 $spacing-xs 0 auto;
+        }
+    }
+
+    &__notSent {
+        width: 18.82vw;
+        max-width: 18.82vw;
+
+        padding: $spacing-m $spacing-m $spacing-m $spacing-l;
+    }
+
+    &__notSent-mobile {
+        width: 55vw;
+        max-width: 55vw;
+        padding: 5px;
+    }
+
+    &__notSentTitle {
+        @include font-semi-bold-600(0.875rem);
+        color: var(--movius_colors-primary-green-2);
+    }
+
+    &__notSentDisplayNone {
+        display: none;
+    }
+
+    &__notSentMsg {
+        @include font-normal(0.875rem);
+        color: var(--movius_black)-two;
+    }
+
+    &__notSentMsg-mobile {
+        @include font-normal(0.875rem);
+        color: var(--movius_black)-two;
+        margin: 0;
+    }
+
+    @include dropDownMenu;
+
+    &__displayNone {
+        display: none;
+    }
+
+    &__optInReqButton-input {
+        width: 50%;
+        border:0;
+        //background: #C3C7CB;
+        background-color: var(--movius-optin-reqbtn-clr);
+        cursor: pointer;
+        font-weight: 800;
+    }
+
+    &__dividerLine {
+        border-left: 1px solid grey;
+        height: 20px;
+      }
+}

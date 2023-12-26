@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="4.2391mm" height="2.7694mm" version="1.1" viewBox="0 0 4.2391 2.7694" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+ <defs>
+  <clipPath id="clipPath2449">
+   <path d="m593.81 647.66c-1.1763 2.0412-3.3702 3.4054-5.8697 3.4054-2.5004 0-4.6937-1.3652-5.8695-3.4054-0.1848-0.3208-0.1848-0.7189 0-1.0397 1.1763-2.0411 3.3702-3.4053 5.8695-3.4053 2.5006 0 4.6939 1.3651 5.8697 3.4053 0.1848 0.3208 0.1848 0.7189 0 1.0397zm-5.8697-3.421c-2.1394 0-4.0073 1.1668-5.0068 2.9012 0.9212 1.5985 2.5802 2.715 4.5096 2.88 0.2044-0.2151 0.3304-0.5085 0.3304-0.8321 0-0.6598-0.523-1.1946-1.1682-1.1946-0.6453 0-1.1683 0.5348-1.1683 1.1946v9e-4c-0.2129-0.4072-0.3338-0.8722-0.3338-1.3662 0-1.6023 1.2702-2.9013 2.8371-2.9013 1.567 0 2.8373 1.299 2.8373 2.9013 0 0.662-0.217 1.2721-0.5819 1.7603 1.1598-0.4939 2.1258-1.3572 2.7516-2.4429-0.9995-1.7344-2.8674-2.9012-5.007-2.9012z"/>
+  </clipPath>
+  <clipPath id="clipPath2455">
+   <path d="m349.46 493.07h558.23v288.89h-558.23z"/>
+  </clipPath>
+ </defs>
+ <metadata>
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:title/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g transform="matrix(.35278 0 0 -.35278 -205.29 229.68)">
+  <g clip-path="url(#clipPath2449)">
+   <g clip-path="url(#clipPath2455)">
+    <path d="m578.17 639.45h19.54v15.374h-19.54z" fill-opacity=".8"/>
+   </g>
+  </g>
+ </g>
+</svg>

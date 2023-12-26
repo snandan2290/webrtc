@@ -1,0 +1,23 @@
+<div class="emergency__review">
+    <div class="emergency__summary" [class.empty]="!address">
+        <div *ngIf="!!address">
+            <p class="emergency__sumTitle">Address you entered:</p>
+            <div class="emergency__sumAddr">
+                {{ addressString }}
+            </div>
+            <p class="emergency__sumTitle">
+                Do you want to update or change the address?
+            </p>
+        </div>
+        <button class="emergency__goEdit" (click)="onEdit()">
+            {{ !!address ? 'Update address' : 'Add address' }}
+        </button>
+    </div>
+    <div class="emergency__terms">
+        <span class="emergency__info"
+            >To review the E911 Terms & Conditions</span
+        ><span class="emergency__info--link" (click)="onE911TermsClicked()"
+            >Click here</span
+        >
+    </div>
+</div>

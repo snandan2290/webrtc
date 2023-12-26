@@ -1,0 +1,84 @@
+@import '../../../../assets/scss/variables';
+@import '../../../../assets/scss/app';
+@import '../common/settings-common.scss';
+
+$block-width: 36.75rem;
+
+.privacy-sets {
+
+    @include settings-layouts;
+
+    height: unset;
+
+    &__main {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        margin: $spacing-l 0 0 0;
+    }
+
+    &__controls {
+        display: flex;
+        flex-direction: row;
+        width: $block-width;
+        padding: 1.25rem 1.75rem;
+
+        background-color: var(--movius_settings-light-gray);
+        @include font-normal(1rem);
+    }
+
+    &__cntName {
+        margin-right: auto;
+    }
+
+    &__cntCtrl {
+        position: relative;
+        margin-left: auto;
+    }
+
+    &__cntCtrl-disabled {
+        position: relative;
+        margin-left: auto;
+        pointer-events:none;
+    }
+
+    &__termsBlock {
+        width: $block-width;
+        margin: $spacing-l 0 0 0;
+        @include font-normal(0.875rem);
+        color: var(--movius_text-gray);
+    }
+
+    &__termsLink {
+        @include font-bold(0.875rem);
+        color: var(--movius_black);
+        text-decoration: underline;
+    }
+
+    &__switch {
+        pointer-events: none;
+    }
+
+    &__switchCheck {
+        position: absolute;
+        width: 0.875rem;
+        height: 0.625rem;
+        left: 0.5rem;
+        top: 0.5rem;
+        @include background-image('/movius/calls/icons-accept.svg');
+    }
+
+    &::ng-deep {
+        .ant-switch {
+            width: 3.375rem;
+        }
+        .ant-switch-checked {
+            background-color: var(--movius_colors-primary-green-2);
+        }
+    }
+}
+
+.error-class {
+    display: none;
+}

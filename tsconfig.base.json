@@ -1,0 +1,30 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+        "rootDir": ".",
+        "sourceMap": true,
+        "declaration": false,
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "importHelpers": true,
+        "target": "es2015",
+        "module": "esnext",
+        "typeRoots": ["node_modules/@types"],
+        "lib": ["es2017", "dom"],
+        "skipLibCheck": true,
+        "skipDefaultLibCheck": true,
+        "baseUrl": ".",
+        "paths": {
+            "@scalio/sip": ["libs/sip/src/index.ts"],
+            "@movius/domain": ["libs/domain/src/index.ts"],
+            "@movius/msgraph": ["libs/msgarph/src/index.ts"],
+            "@movius/encrypt": ["libs/encrypt/src/index.ts"],
+            "@movius/ts-logger": ["libs/ts-logger/src/index.ts"]
+        }
+    },
+    "angularCompilerOptions": {
+        "strictTemplates": true
+    },
+    "exclude": ["node_modules", "tmp"]
+}

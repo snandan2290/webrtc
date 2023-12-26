@@ -1,0 +1,143 @@
+@import '../../../../../assets/scss/mixins';
+@import '../../../../../assets/scss/variables';
+@import '../../../../../assets/scss/app.scss';
+
+.call-control {
+    margin: auto;
+    overflow: hidden;
+
+    & > * {
+        border: none;
+        * {
+            border: none;
+        }
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__logo {
+        display: inline-block;
+        //width: 30%;
+        //height: 30%;
+
+        &.small {
+            width: auto;
+            height: 50%;
+        }
+    }
+
+    &__text {
+        margin-top: 4px !important;
+        display: inline-block;
+        font-size: 0.7rem;
+        background: transparent;
+    }
+
+    &.small {
+        width: 2rem;
+        height: 2rem;
+        min-width: unset;
+        min-height: unset;
+        border: 2px solid #cccccc;
+    }
+}
+
+%buttonDefaults {
+    display: block;
+    margin: auto;
+}
+
+.hold {
+    @extend %buttonDefaults;
+
+    &:not(:disabled):hover{
+        background: var(--movius_phone-button-darkgray);
+    }
+
+    &--active {
+        @extend %buttonDefaults;
+        background: var(--movius_menu-primary);
+        color: var(--movius_white);
+    }
+}
+
+.keypad {
+    @extend %buttonDefaults;
+
+    &:not(:disabled):hover{
+        background: var(--movius_phone-button-darkgray);
+    }
+}
+
+.mute, .swap {
+    @extend %buttonDefaults;
+
+    &:not(:disabled):hover{
+        background: var(--movius_phone-button-darkgray);
+    }
+
+    &--active {
+        @extend %buttonDefaults;
+        background: var(--movius_menu-primary);
+        color: var(--movius_white);
+    }
+}
+
+.start, .stop {
+    img {
+        &.small {
+            width: 100%;
+            height: auto;
+        }
+    }
+    &:disabled{
+        opacity: 0.5;
+    }
+    &.small {
+        border: 0;
+    }
+}
+
+.start {
+    img {
+        width: 2rem;
+        height: 2rem;
+    }
+    background: var(--movius_phone-button-green);
+}
+
+.stop {
+    img {
+        width: 2.813rem;
+        height: 2.813rem;
+
+        &.small {
+            width: 100%;
+            height: 1.375rem;
+        }
+    }
+    background: var(--movius_rejectRed);
+}
+
+.accept {
+    @extend %buttonDefaults;
+    color: var(--movius_white);
+    background: var(--movius_acceptGreen);
+}
+
+.reject {
+    @extend %buttonDefaults;
+    color: var(--movius_white);
+    background: var(--movius_rejectRed);
+}
+
+.accept, .reject {
+    &.small {
+        border: 0;
+    }
+}

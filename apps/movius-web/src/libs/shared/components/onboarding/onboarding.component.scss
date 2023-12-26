@@ -1,0 +1,482 @@
+@import 'scss/app.scss';
+@import 'scss/variables';
+@import 'scss/mixins';
+
+$inputBottomMargin: 0.9375rem;
+
+:host ::ng-deep {
+    $nz-select-top-control: 'nz-select-top-control';
+    $nz-select-item: 'nz-select-item';
+    $nz-select-top-control: 'nz-select-top-control';
+    $nz-select-arrow: 'nz-select-arrow';
+
+    #{$nz-select-top-control} {
+        width: inherit !important;
+        padding: 0 0.438rem 0 0.438rem !important;
+
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+        border-bottom: solid 0.0625rem var(--movius_very-light-pink) !important;
+        color: var(--movius_very-light-pink) !important;
+        border-radius: 0 !important;
+
+        @include font-normal(0.875rem);
+
+        &:focus {
+            color: var(--movius_black);
+            font-size: 1rem;
+        }
+    }
+
+    #{$nz-select-item} {
+        width: inherit !important;
+    }
+
+    #{$nz-select-top-control} {
+        margin: 0;
+        padding: 0 0.438rem 0.563rem 0.438rem;
+    }
+
+    #{$nz-select-arrow} {
+        display: none;
+    }
+}
+
+.onboarding {
+    $base: &;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5rem;
+
+    padding: $spacing-xxl-2 $spacing-xxl-9 $spacing-xxl-2 $spacing-xxl-9;
+
+    // color: var(--movius_black);
+    // background-color: var(--movius_color-white);
+    background-color: var(--movius_text-gray-and-white);
+    color: var(--black);
+    //background-image: linear-gradient(142deg, rgba(226, 108, 95, 0.1) 1%, var(--movius_colors-primary-green-2)), linear-gradient(to bottom, var(--movius_colors-primary-green-2), var(--movius_colors-primary-green-2)), linear-gradient(to bottom, var(--movius_color-white), var(--movius_color-white));
+    /*background-image:
+        linear-gradient(140deg, rgba(var(--movius_colors-primary-green-2), 0.1) 0%, rgba(226, 108, 95, 0.1) 20%, rgba(226, 108, 95, 0.1) 70%, var(--movius_colors-primary-green-2)),
+        linear-gradient(to bottom, var(--movius_colors-primary-green-2), var(--movius_colors-primary-green-2)),
+        linear-gradient(to bottom, var(--movius_color-white), var(--movius_color-white));*/
+
+    @include screen-mobile {
+        width: 100%;
+    }
+
+    &__error {
+        color: var(--movius_invalid-red);
+    }
+
+    &__validationSimple {
+        //margin: calc(-#{$inputBottomMargin} + 0.0625rem) 0 $inputBottomMargin 0;
+        height: 1rem;
+        color: var(--movius_invalid-red);
+        text-align: center;
+    }
+
+    &__steper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4.5rem;
+        height: 1.5rem;
+        background-color: var(--movius_fireorange);
+        border-top-left-radius: 0.4rem;
+        border-bottom-right-radius: 0.5rem;
+    }
+
+    &__steperTxt {
+        width: 4.5rem;
+        height: 1.5rem;
+        margin: 0;
+        padding: $spacing-xxs;
+        @include font-normal(0.75rem);
+        color: var(--movius_color-white);
+    }
+
+    &__heading {
+    }
+
+    &__cap {
+        $capSize: 1.75rem;
+        @include font-bold($capSize);
+        line-height: $capSize;
+        text-align: center;
+    }
+
+    &__picture {
+        display: flex;
+        align-self: center;
+        justify-items: center;
+        margin: $spacing-s auto auto auto;
+        width: 13.75rem;
+        height: 8.25rem;
+    }
+
+    &__subcap {
+        margin: $spacing-xl 0 0.75rem 0;
+        @include font-semi-bold-600(0.875rem);
+        text-align: center;
+        vertical-align: baseline;
+
+        > p {
+            margin: 0;
+        }
+    }
+
+    &__content {
+        width: 100%;
+    }
+
+    &__section {
+        height: 2.75rem;
+    }
+
+    &__input {
+        $self: &;
+        max-height: 1.5rem;
+        //margin: 0 0 $inputBottomMargin 0;
+        padding: 0 0.438rem 0.563rem 0.438rem;
+
+        background: transparent;
+        //color: var(--movius_text-gray);
+        color: var(--movius_text-gray-dropItemHeader);
+        border: none;
+        border-radius: 0;
+        border-bottom: solid 0.0625rem var(--movius_very-light-pink);
+
+        @include font-normal(0.875rem);
+
+        &--spaced {
+            @extend #{$self};
+            margin-right: 0.625rem;
+        }
+
+        &:focus {
+            @extend #{$self};
+            //color: var(--movius_black);
+            color: var(--black);
+            box-shadow: none;
+            font-size: 1rem;
+        }
+    }
+
+    &__dropdown {
+        width: 100%;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 30%;
+            right: 0;
+
+            width: 0.5rem;
+            height: 0.3125rem;
+
+            @include background-image('/movius/common/icons-arrow-down.svg');
+        }
+    }
+
+    &__dropOption {
+
+    }
+
+    //#region Emergency
+    &__emergency {
+        width: 100%;
+        margin: 1.875rem 0 0 0;
+    }
+
+    &__emergencyRow {
+        margin: 0 0 $inputBottomMargin 0;
+        flex-wrap: nowrap;
+
+        &:last-of-type {
+            margin: 0 0 0 0;
+            // #{$base}__input {
+            //     margin-bottom: 0;
+            // }
+        }
+    }
+
+    &__emergencyCol {
+        flex-wrap: nowrap;
+
+        margin: 0 0.625rem 0 0;
+        &:last-child {
+            margin: 0;
+        }
+    }
+
+    &__e911terms {
+        margin: $spacing-xxl-2 0 0 0;
+        @include font-normal(0.75rem);
+        text-align: center;
+    }
+
+    &__link {
+        @include font-normal(0.75rem);
+        text-decoration: underline;
+        cursor: pointer;
+    }
+    //#endregion Emergency
+
+    //#region Address
+
+    &__addrFolder {
+        $self: &;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-items: center;
+
+        height: 4.5rem;
+        min-height: 4.5rem;
+
+        padding: 0.875rem $spacing-xl 0.875rem $spacing-xl;
+        margin: 0 0 $spacing-xs 0;
+
+        border-radius: 0.25rem;
+        border: solid 0.0625rem var(--movius_colors-secondary-2);
+
+        &.active {
+            //background-color: var(--movius_phone-button-gray);
+            background-color: var(--movius-addrfolder-bg-clr);
+        }
+
+        &.inactive {
+            //background-color: var(--movius_color-white);
+            background-color: var(--movius-addrfolder-inactive-bg-clr);
+        }
+    }
+
+    &__checkmark {
+        $self: &;
+        min-width: 1.5rem;
+        min-height: 1.5rem;
+
+        &.active {
+            @include background-image(
+                'movius/onboarding/radiobutton-white-selected-light.svg'
+            );
+        }
+
+        &.inactive {
+            @include background-image(
+                'movius/onboarding/radiobutton-white-normal-light.svg'
+            );
+        }
+    }
+
+    &__addrData {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-items: center;
+
+        margin: 0 0 0 $spacing-m;
+    }
+    //#endregion Address
+
+    //#region ExchangeSync
+    &__syncFolder {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-items: center;
+
+        margin: 0.75rem 0 0 0;
+
+        &:empty {
+            margin: 0;
+        }
+    }
+
+    &__syncNotif {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-items: center;
+
+        margin: $spacing-m 0 $spacing-m 0;
+
+        background-color: var(--movius_plum);
+        padding: 0.625rem;
+    }
+
+    &__syncPic {
+        width: 0.875rem;
+        height: 1rem;
+        margin: auto;
+        @include background-image('/movius/onboarding/icons-bulb-yellow.svg');
+    }
+
+    &__syncTxt {
+        margin: auto;
+        @include font-semi-bold-600(0.688rem);
+        color: var(--movius_light-papaya);
+    }
+
+    &__exch {
+    }
+
+    &__exchForm {
+        margin: auto;
+        width: 90%;
+
+        > * input {
+            margin: auto;
+        }
+    }
+    //#endregion ExchangeSync
+
+    &__controls {
+        $self: &;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        &--vert {
+            @extend #{$self};
+            flex-direction: column;
+        }
+    }
+
+    &__cancel,
+    &__continue {
+        //TODO: CB:15Mar2021 - TECH - Refactor - use common buttons.
+        //TODO: CB:15Mar2021 - TECH - Refactor - Cleanup if ok.
+        //$self: &;
+        display: flex;
+        align-items: center;
+        justify-items: center;
+        width: 12.25rem;
+        height: 2rem;
+
+        @include bordered-rounded-btn-teams();
+
+        margin-right: $spacing-xs;
+
+        @include generalFont;
+        @include font-semi-bold-600(0.875rem);
+        //border: solid 1px var(--movius_colors-primary-green-2);
+        //border-radius: 1.5rem;
+        cursor: pointer;
+
+        > p {
+            display: inline-flex;
+            margin: auto;
+        }
+
+        //&[disabled] {
+        //    border: none;
+        //    color: var(--movius_btn-disabled-font);
+        //    background-color: var(--movius_btn-disabled-bgr);
+        //}
+    }
+
+    &__cancel {
+        //border: solid 1px var(--movius_white);
+    }
+
+    &__continue {
+        //color: var(--movius_white);
+        //background: var(--movius_colors-primary-green-2);
+        @include font-semi-bold-600(0.875rem);
+
+        //&.bare {
+        //    color: var(--movius_colors-primary-green-2);
+        //    border: solid 1px var(--movius_colors-primary-green-2);
+        //    background: transparent;
+        //}
+    }
+
+    &__later {
+        margin: $spacing-m 0 0 0;
+        @include font-normal(0.875rem);
+        color: var(--movius_black);
+        text-decoration: underline;
+        text-align: center;
+        cursor: pointer;
+    }
+
+
+    &__later-disabled {
+        margin: $spacing-m 0 0 0;
+        @include font-normal(0.875rem);
+        color: var(--movius_black);
+        text-decoration: underline;
+        text-align: center;
+        cursor: default;
+        pointer-events: none;
+        opacity: 0.5;
+    }
+
+    &__msExchange {
+        width: 19.25rem;
+    }
+}
+
+.step1 {
+    width: 10.625rem;
+    height: 6.375rem;
+    // @include background-image(
+    //     '/movius/onboarding/icons-onboarding-1-step-light.svg'
+    // );
+}
+
+.step2 {
+    width: 6.75rem;
+    height: 6.375rem;
+    @include background-image(
+        '/movius/onboarding/icons-onboarding-2-step-light.svg'
+    );
+}
+
+.emergencySection, .addressSection, .exchangeSection, .finalSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.emergencySection {
+    margin: 0 0 0.875rem 0;
+}
+
+.addressSection {
+    margin: 0 0 $spacing-xl 0;
+}
+
+.exchangeSection {
+    margin: 0 0 $spacing-xxl-2 0;
+}
+
+.finalSection {
+    margin: 0 0 $spacing-xl 0;
+}
+
+.subCapExchange {
+    width: 27.125rem;
+}
+
+.subCapEmergency {
+    width: 25rem;
+}
+
+.subCapFinal {
+    width: 23.25rem;
+}
+
+
+
+

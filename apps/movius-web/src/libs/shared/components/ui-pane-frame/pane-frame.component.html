@@ -1,0 +1,62 @@
+<div class="pane" [ngStyle]="{'padding-right': isComposeMessageScreen ? '0px' : '0.3125rem' }">
+    <!-- <div *ngIf="isMobileDevice">
+        <svg
+            _ngcontent-iwx-c156=""
+            width="24px"
+            height="24px"
+            margin-right="15px"
+            viewBox="0 0 24 24"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            class="svg_arrow_back"
+            (click)="backToChatList()"
+        >
+            <g
+                _ngcontent-iwx-c156=""
+                id="btn/back_arrow"
+                stroke="none"
+                stroke-width="1"
+                fill="none"
+                fill-rule="evenodd"
+            >
+                <path
+                    _ngcontent-iwx-c156=""
+                    d="M22,12.0105072 C22,12.7988967 21.3566217,13.4111157 20.579702,13.4111157 L6.70613584,13.4111157 L11.0573301,17.7019898 C11.5897199,18.2269991 11.5897199,19.0812337 11.0573301,19.606243 C10.5249404,20.1312523 9.65869709,20.1312523 9.12630731,19.606243 L2.39929233,12.9521266 C1.86690256,12.4271173 1.86690256,11.5728827 2.39929233,11.0478734 L9.14695118,4.39375698 C9.67934095,3.86874767 10.5455842,3.86874767 11.077974,4.39375698 C11.6103638,4.91876628 11.6103638,5.7730009 11.077974,6.2980102 L6.70613584,10.6101175 L20.579702,10.6101175 C21.3783089,10.6101175 22,11.2223584 22,12.0107261 L22,12.0105072 Z"
+                    id="Fill-1"
+                    fill="#1F1E33"
+                ></path>
+            </g>
+        </svg>
+    </div> -->
+
+    <div
+        class="{{ 'pane__heading' + (emphasizeHeader ? '--emph' : '') }}"
+        *ngIf="includeDefaultHeader"
+    >
+        <div class="pane__headingLeft">
+            <ng-content select="[headingLeft]"></ng-content>
+        </div>
+        <div class="pane__headingRight">
+            <ng-content select="[headingRight]"></ng-content>
+        </div>
+    </div>
+    <div class="pane__errorTextSample">
+        <ng-content select="[errorTextSample]"></ng-content>
+    </div>
+    <ng-content
+        class="pane__headingCustom"
+        select="[headingCustom]"
+    ></ng-content>
+    <div
+    class="pane__body{{isBodyCentered ? '--centered':'' }} {{ ' ' + scrollClass}}"
+        *ngIf="includeDefaultBody"
+    >
+        <ng-content class="pane__contnet" select="[main]"></ng-content>
+    </div>
+    <ng-content class="pane__bodyCustom" select="[mainCustom]"></ng-content>
+    <div [ngClass]="getFooterStyle()" *ngIf="includeDefaultFooter">
+        <ng-content select="[footer]"></ng-content>
+    </div>
+    <ng-content class="pane__footerCustom" select="[footerCustom]"></ng-content>
+</div>

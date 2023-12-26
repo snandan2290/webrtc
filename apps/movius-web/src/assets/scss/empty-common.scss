@@ -1,0 +1,49 @@
+@import 'scss/app.scss';
+@import 'scss/variables';
+@import 'scss/mixins';
+
+@mixin empty {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: var(--movius_white);
+
+    &__caption {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-items: center;
+        min-width: 43.42%;
+        max-width: 43.42%;
+    }
+
+    &__captionIco {
+        //@include background-image('/movius/calls/icons-calls-empty.svg');
+        width: 6.125rem;
+        height: 5.625rem;
+        margin: 0 0 $spacing-xxl-2 0;
+    }
+
+    &__captionTxt {
+        @include font-semi-bold-600(1rem);
+        width: 23.9375rem;
+        //color: var(--movius_black);
+        color: var(--black);
+        text-align: center;
+    }
+
+    &__controls {
+        margin: 0 auto;
+    }
+
+    &__callBtn {
+        width: 12.25rem;
+        height: 2.25rem;
+        margin: $spacing-xxl-3 0 1.9375rem 0;
+        @extend %sync-btn--start-chat;
+    }
+
+}

@@ -1,0 +1,26 @@
+@import 'scss/variables';
+@import 'scss/mixins';
+@import 'scss/app';
+
+.cntInfo {
+    @extend %scroll;
+
+    &__header {
+        min-width: 8rem;
+        margin: $cnt-details-top-margin 0 0 0;
+    }
+
+    &__selfLogo {
+        width: $logo-avatar-size;
+        height: $logo-avatar-size;
+    }
+
+    &__container {
+        height: 50%;
+        margin: $spacing-xxl-7 0 auto 0;
+    }
+
+    @include btnHoverDropMenu();
+
+    @include dropDownMenu;
+}

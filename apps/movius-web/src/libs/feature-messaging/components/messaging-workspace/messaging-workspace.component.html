@@ -1,0 +1,371 @@
+<div
+    [ngClass]="getMessageWidth()"
+    [class.messages--topSpaced]="getConnectionErrorValue === true"
+    *ngIf="view$ | async as view">
+    <movius-web-general-failure
+        (passConnectionError)="getConnectionError($event)"
+    ></movius-web-general-failure>
+
+    <movius-web-empty-messages
+        *ngIf="view.showEmptyListPlaceholder; else messagingContent">
+    </movius-web-empty-messages>
+
+    <ng-template #messagingContent>
+        <!-- <div
+            class="messages__splitter messages__splitter--first messages__general"
+        > -->
+<!--        [ngClass]="classesForList" [ngStyle]="stylesForList">-->
+<!--         <div><h1>{{isHideChatList}}</h1></div>-->
+<div [ngClass]="getMessageStyle()">
+        <div [ngClass] = "isHidden()" >
+            <div *ngIf="appEmbededStatus == 'messaging'">
+                <movius-web-header [composeMessageType]="composeMessageType" [popOverContent]="popOverContent"
+                    [teamsLocationEnabled]="teamsLocationEnabled" [is911Message]="is911Message" [isLocationEnabled]="isLocationEnabled"
+                    [showHeader]="showHeader" [isCollapsed]="isCollapsed" [userInfo]="userInfo" [view]="feature"
+                    (MuteStatus)="changeMuteStatus($event)" [MuteinboundCallAndMsgSound]="MuteinboundCallAndMsgSound">
+                </movius-web-header>
+            </div>
+            <div class="messages___body" [ngClass]="{'messages___mldt-body':appEmbededStatus !== 'messaging'}">
+                <pane-frame
+                class="messages__pane"
+                [isChatHeight] = "this.chatHeight"
+                [includeDefaultHeader]="false"
+                [includeDefaultFooter]="false"
+                [isBodyCentered]="view.isEmptySearch"
+                (isBackBtnClicked)="backBtnClicked($event)"
+                scrollClass = "threadscroll"
+                >
+                <div headingCustom class="messages__heading"
+                    *ngIf="appEmbededStatus !== 'messaging'">
+                    <div class="messages__caption" [class.hidden]="view.isSearchBarActivated">
+                        Messages
+                    </div>
+                    <div class="messages__headingRight" [class.active]="view.isSearchBarActivated">
+                        <movius-web-search-bar
+                            headingRight
+                            class="messages__search"
+                            [class.active]="view.isSearchBarActivated"
+                            (changed)="updateSearch($event)"
+                            (isActivated)="onSearchBarActivated($event)">
+                        </movius-web-search-bar>
+                        <movius-web-ui-cta-button
+                            data-cy="new-message-button"
+                            *ngIf="!view.isSearchBarActivated"
+                            [ngClass]="messages__topControl"
+                            btnType="Message"
+                            [isDisabled]="view.status !== 'allowed'"
+                            (clicked)="messageComposeRedirect($event)"
+                            [routerLink]="['./chat/new']" >
+                        </movius-web-ui-cta-button>
+                    </div>
+                </div>
+                <div
+                    headingCustom
+                    class="messages__heading"
+                    *ngIf="appEmbededStatus === 'messaging'">
+                    <movius-web-search-bar-message-login
+                        class="messages__search"
+                        [class.active]="true"
+                        (changed)="updateSearch($event)"
+                        (isActivated)="onSearchBarActivated($event)">
+                    </movius-web-search-bar-message-login>
+                </div>
+                <ng-container main>
+                    <ng-container *ngIf="searchText.length < 2; else searchContent">
+                        <ng-container *ngFor="let session of view.sessions; trackBy: trackByFun">
+                            <ng-container *ngIf="session?.peer?.id ? true : false">
+                                <communication-item data-cy="message-list-item" class="messages__historyItem" [peer]="session.peer"
+                                    [isMuted]="session.isMuted" [isGroup]="session.isGroup" [isFullWidth]="true"
+                                    [routerLink]="['/messaging/chat/', isMobileDevice ? '' : session.messageChannelType != 'normalMsg' ? session.threadId : session.peerId]"
+                                    [routerLinkActive]="['is-active']" (click)="onClickMessagingWorkspace(session)">
+                                    <div class="messages__hstAround" title>
+                                        <div class="messages__hstTwoLiner">
+                                            <div class="messages__hstFirstLine">
+                                                <div class="messages__hstName" [class.unread--name]="session.newCount > 0">
+                                                    <message-channel-type-icon [messageChannelType]="session.messageChannelType"
+                                                        [alt]="'img'">
+                                                    </message-channel-type-icon>
+                                                    <!-- <img
+                                                                *ngIf="session.isWhatsAppThread"
+                                                                src="assets/icons/movius/contacts/icons-whatsapp.svg"
+                                                                alt="img"/> -->
+                                                    <!-- {{ getCallTitle(session) }} -->
+                                                    {{session | contactTitle: savedContact}}
+                                                </div>
+                                                <div class="messages__hstDate" [class.unread--date]="
+                                                                session.newCount > 0
+                                                            ">
+                                                    {{
+                                                    formatHistoryTime(
+                                                    session.messages[0]
+                                                    ?.sentTime
+                                                    )
+                                                    }}
+                                                </div>
+                                            </div>
+                                            <div class="messages__hstSecondLine">
+                                                <div class="messages__hstPreview" *ngIf="
+                                                                session
+                                                                    .messages[0] as latestMessage
+                                                            ">
+                                                    <span *ngIf="
+                                                                    latestMessage.from === 'me'
+                                                                ">You:
+                                                    </span>
+                                                    <span *ngIf="
+                                                                    latestMessage.messageType !==
+                                                                    'picture'
+                                                                ">
+                                                        <img class="vm-img" *ngIf="
+                                                                        latestMessage.content ===
+                                                                        'Voicemail'
+                                                                    " src="assets/icons/movius/audio/icon-vm.svg" alt="vvm" />
+                                                        {{ latestMessage.content }}
+                                                    </span>
+                                                    <span *ngIf="
+                                                                    latestMessage.messageType ===
+                                                                    'picture'
+                                                                ">
+                                                        <img class="pic-img" src="{{GetTheme() == 'Dark' ? 'assets/icons/dark_theme_icons/dark-icons-photo-img.svg': 'assets/icons/movius/messages/icons-photo-img.svg'}}"
+                                                            alt="vvm" />
+                                                        Photo
+                                                    </span>
+                                                </div>
+                                                <div data-cy="new-messages-count" class="messages__unreadCount" [ngClass]="{'messages__blurred':session.isMuted}"  [style.visibility]="
+                                                                session.newCount === 0
+                                                                    ? 'hidden'
+                                                                    : 'visible'
+                                                            ">
+                                                    {{
+                                                    session.newCount > 99
+                                                    ? '99+'
+                                                    : session.newCount
+                                                    }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </communication-item>
+                            </ng-container>
+                        </ng-container>
+                        <div class="loading-container" *ngIf="view.sessions.length >= messagingDataAccessService.getHistoryPageSize()" moviusWebThreadScroll (appInfiniteScroll)="nextThreads()"></div>
+                        <div *ngIf="!loadedThread">
+                            <movius-web-spinner></movius-web-spinner>
+                        </div>
+                    </ng-container>
+                    <ng-template #searchContent>
+                        <ng-container
+                            *ngTemplateOutlet="
+                                messagesList;
+                                context: {
+                                    $implicit: view.contacts,
+                                    title: 'Contacts',
+                                    viewportHeight:
+                                        view.viewPortHeights.contactsLength
+                                }
+                            "
+                        ></ng-container>
+                        <ng-container
+                            *ngTemplateOutlet="
+                                messagesList;
+                                context: {
+                                    $implicit: view.galContacts,
+                                    title: 'Exchange Directory',
+                                    viewportHeight:
+                                        view.viewPortHeights.galContactsLength,
+                                    isGalContact: true
+                                }
+                            "
+                        ></ng-container>
+                        <ng-container
+                            *ngTemplateOutlet="
+                                messagesList;
+                                context: {
+                                    $implicit: view.sessions,
+                                    title: 'Conversation',
+                                    viewportHeight:
+                                        view.viewPortHeights.conversationsLength
+                                }
+                            "
+                        ></ng-container>
+                    </ng-template>
+                    <div
+                        class="messages__emptyShell"
+                        *ngIf="view.isEmptySearch"
+                    >
+                        <div class="messages__emptyIco"></div>
+                        <div class="messages__emptyTxt">No Results Found</div>
+                    </div>
+                    <movius-web-ui-cta-button
+                        data-cy="new-message-button"
+                        *ngIf="
+                            appEmbededStatus === 'messaging' &&
+                            isWhatsAppEnabledByOrg
+                        "
+                        [ngClass]="getChatButtonStyle()"
+                        btnType="Message"
+                        nz-dropdown
+                        [nzDropdownMenu]="messageMenu"
+                        nzPlacement="topRight"
+                        [isDisabled]="view.status !== 'allowed'"
+                    ></movius-web-ui-cta-button>
+                    <movius-web-ui-cta-button
+                        data-cy="new-message-button"
+                        *ngIf="
+                            appEmbededStatus === 'messaging' &&
+                            !isWhatsAppEnabledByOrg
+                        "
+                        [ngClass]="getChatButtonStyle()"
+                        btnType="Message"
+                        [routerLink]="['./chat/new']"
+                        (click)="messageComposeRedirect('message')"
+                        [isDisabled]="view.status !== 'allowed'"
+                    ></movius-web-ui-cta-button>
+                </ng-container>
+            </pane-frame>
+            </div>
+
+        </div>
+        <!-- class="messages__splitter messages__splitter--second messages__details" -->
+<!--         <div><h1>His - {{isHideChatHistory}}</h1></div>-->
+        <div class="messages__splitter messages__splitter--second messages__details" [ngClass]="isMessaging()"
+            *ngIf="isHideChatHistory" (isBackBtnClicked)="backBtnClicked($event)">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+
+    </ng-template>
+</div>
+
+
+
+<ng-template #messagesList let-messages let-isGalContact="isGalContact" let-title="title" let-height="viewportHeight">
+        <section *ngIf="messages && messages.length > 0" class="messages__all">
+            <div>
+                <p class="messages__subCaption">
+                    {{ title }}
+                </p>
+            </div>
+            <div class="messages__spinner_icon" *ngIf="title === 'Exchange Directory' && messages.length === 0">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                    y="0px" viewBox="0 0 2400 2400" xml:space="preserve" width="24" height="24">
+                    <g stroke-width="200" stroke-linecap="round" stroke="#6b6868" fill="none" id="spinner">
+                        <line x1="1200" y1="600" x2="1200" y2="100" />
+                        <line opacity="0.5" x1="1200" y1="2300" x2="1200" y2="1800" />
+                        <line opacity="0.917" x1="900" y1="680.4" x2="650" y2="247.4" />
+                        <line opacity="0.417" x1="1750" y1="2152.6" x2="1500" y2="1719.6" />
+                        <line opacity="0.833" x1="680.4" y1="900" x2="247.4" y2="650" />
+                        <line opacity="0.333" x1="2152.6" y1="1750" x2="1719.6" y2="1500" />
+                        <line opacity="0.75" x1="600" y1="1200" x2="100" y2="1200" />
+                        <line opacity="0.25" x1="2300" y1="1200" x2="1800" y2="1200" />
+                        <line opacity="0.667" x1="680.4" y1="1500" x2="247.4" y2="1750" />
+                        <line opacity="0.167" x1="2152.6" y1="650" x2="1719.6" y2="900" />
+                        <line opacity="0.583" x1="900" y1="1719.6" x2="650" y2="2152.6" />
+                        <line opacity="0.083" x1="1750" y1="247.4" x2="1500" y2="680.4" />
+                        <animateTransform attributeName="transform" attributeType="XML" type="rotate"
+                            keyTimes="0;0.08333;0.16667;0.25;0.33333;0.41667;0.5;0.58333;0.66667;0.75;0.83333;0.91667"
+                            values="0 1199 1199;30 1199 1199;60 1199 1199;90 1199 1199;120 1199 1199;150 1199 1199;180 1199 1199;210 1199 1199;240 1199 1199;270 1199 1199;300 1199 1199;330 1199 1199"
+                            dur="0.83333s" begin="0s" repeatCount="indefinite" calcMode="discrete" />
+                    </g>
+                </svg>
+            </div>
+            <communication-item data-cy="message-list-item" class="messages__historyItem" *ngFor="
+                    let message of messages;
+                    trackBy: trackByFun
+                " [peer]="message.peer" [isGroup]="message.isGroup" [isMuted]="message.isMuted"
+                [routerLink]="activeRouteUrl(message,isGalContact)"
+                [routerLinkActive]="['is-active']" [isFullWidth]="true"
+                (click)="onClickMessagingWorkspace(message, isGalContact)">
+                <div class="messages__hstAround" title>
+                    <div class="messages__hstTwoLiner">
+                        <div class="messages__hstFirstLine">
+                            <div class="messages__hstName" [class.unread--name]="
+                                    message.newCount > 0
+                                ">
+                                <!-- commenting pipe as not getting the expected output -->
+                                <!-- [innerHTML]="session | highlighText: searchText" -->
+                                <message-channel-type-icon
+                                    [messageChannelType]="message.messageChannelType"
+                                    [alt]="'img'">
+                                </message-channel-type-icon>
+                                <!-- <img src="assets/icons/movius/contacts/icons-whatsapp.svg" alt="img"
+                                    *ngIf="message.isWhatsAppThread"> -->
+                                <span [innerHTML]=" message  | contactTitle : savedContact "
+                                    *ngIf="!highlightUnsavedContact(message)"> {{ message | contactTitle : savedContact }}
+                                </span>
+                                <span [innerHTML]=" message  | contactTitle : savedContact | highlighText: searchText"
+                                    *ngIf="highlightUnsavedContact(message)"> {{ message | contactTitle : savedContact
+                                    }}</span>
+                            </div>
+                            <div class="messages__hstDate" [class.unread--date]="
+                                    message.newCount > 0
+                                ">
+                                {{
+                                formatHistoryTime(
+                                message.latestMessage?.sentTime
+                                )
+                                }}
+                            </div>
+                        </div>
+                        <div class="messages__hstSecondLine">
+                            <div class="messages__hstPreview" *ngIf="message.latestMessage as latestMessage">
+                                <strong *ngIf="latestMessage.from === 'me'">You:
+                                </strong>
+                                <span *ngIf="latestMessage.messageType !== 'picture'"
+                                    [innerHTML]="latestMessage.content | highlighText: searchText">
+                                    <img class="vm-img" *ngIf="latestMessage.content === 'Voicemail'"
+                                        src="assets/icons/movius/audio/icon-vm.svg" alt="vvm">
+                                </span>
+                                <span *ngIf="latestMessage.messageType === 'picture'">
+                                    <img class="pic-img" src="{{GetTheme() == 'Dark' ? 'assets/icons/dark_theme_icons/dark-icons-photo-img.svg': 'assets/icons/movius/messages/icons-photo-img.svg'}}" alt="vvm">
+                                    Photo
+                                </span>
+                            </div>
+                            <div data-cy="new-messages-count" class="messages__unreadCount" [style.visibility]="
+                                    message.newCount === 0
+                                        ? 'hidden'
+                                        : 'visible'
+                                ">
+                                {{
+                                message.newCount > 99
+                                ? '99+'
+                                : message.newCount
+                                }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </communication-item>
+        </section>
+    </ng-template>
+
+<nz-dropdown-menu #messageMenu="nzDropdownMenu">
+    <ul nz-menu class="messages__dropMenu">
+        <li
+            nz-menu-item
+            class="messages__dropMenuItem"
+            (click)="messageComposeRedirect('whatsapp')"
+            [routerLink]="['./chat/new']"
+        >
+            <img
+                class="messages__icon-img"
+                src="assets/icons/movius/contacts/icons-whatsapp.svg"
+                alt="img"
+            />
+            WhatsApp
+        </li>
+        <li
+            nz-menu-item
+            class="messages__dropMenuItem"
+            (click)="messageComposeRedirect('message')"
+            [routerLink]="['./chat/new']"
+        >
+            <img
+                class="messages__icon-img"
+                src="assets/icons/movius/common/icons-contact-message-black.svg"
+                alt="img"
+            />
+            Message
+        </li>
+    </ul>
+</nz-dropdown-menu>

@@ -1,0 +1,5 @@
+<ng-container *ngIf="timer$ | async as timer">
+    {{ getTimeFromTimer(timer) }}
+    <!-- CB:28May2021: INFO: Working solution. Changed to be generalized. Remove in case no need. -->
+    <!-- {{ getHours(timer) + ':' + getMinutes(timer) + ':' + getSeconds(timer) }} -->
+</ng-container>

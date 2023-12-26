@@ -1,0 +1,21 @@
+<div class="content">
+    <div class="user">
+        <h2>Alice</h2>
+        <movius-web-audio-panel
+            userId="alice"
+            userName="Alice"
+            (userConnected)="onUserConnected($event)"
+            (userDisconnected)="onUserDisconnected($event)"
+        ></movius-web-audio-panel>
+    </div>
+
+    <div class="user">
+        <h2>Bob</h2>
+        <movius-web-audio-panel
+            userId="bob"
+            userName="Bob"
+            (userConnected)="onUserConnected($event)"
+            (userDisconnected)="onUserDisconnected($event)"
+        ></movius-web-audio-panel>
+    </div>
+</div>

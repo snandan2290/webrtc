@@ -1,0 +1,44 @@
+<div class="contSelector" nz-row>
+
+    <div class="contSelector__contact">
+        <input #inputPhoneNumber
+            data-cy="message-new-number-input"
+            class="contSelector__contactInput{{isDigitalInput(uiContactSelectorInput) ? '--padded' : '' }}"
+            placeholder="Enter Name or Number"
+            nz-input
+            required="required"
+            [(ngModel)]="uiContactSelectorInput"
+            [nzAutocomplete]="autoPhoneNumber"
+            (ngModelChange)="$event.length === 0 ? clearAll() : onPhoneInputChange($event)"
+            (paste)="onPasteNumber($event)"
+            (keypress)="onKeyPress($event)"
+            maxlength="16"
+        />
+        <nz-autocomplete class="contSelector__contactDropdown" #autoPhoneNumber [nzOverlayClassName]="'autoDropdown'">
+                <nz-auto-option class="contSelector__option" *ngFor="let cont of filteredContacts" nzValue="{{ cont.multiLine }}" nzLabel="{{ cont.name }}">
+                    <communication-item [peer]="cont">
+                        <highlighted-text class="contSelector__cntName" [fullText]="cont.name" [toFind]="uiContactSelectorInput" title></highlighted-text>
+                        <highlighted-text class="contSelector__cntPhone" [fullText]="getContactRealNumber(cont)" [toFind]="cleanPhoneNumber(uiContactSelectorInput)" title></highlighted-text>
+                        <small class="contSelector__cntPhoneType" title>{{
+                            capitalizeFirstLetter(toSpacedCamelCase(cont.multiLineType))
+                        }}</small>
+                    </communication-item>
+                </nz-auto-option>
+        </nz-autocomplete>
+    </div>
+
+    <movius-web-country-selector class="contSelector__countries" #countrySelector
+        [style.visibility]="isDigitalInput(uiContactSelectorInput) ? 'visible' : 'hidden' "
+        [enableAutoCountrySelect]="true"
+        [selectFirstCountry]="true"
+        [preferredCountries]="[uiContactSelectorCountryCode]"
+        (countryChange)="onCountryChange($event.dialCode, $event.iso2)">
+    </movius-web-country-selector>
+
+    <div
+        class="contSelector__clear"
+        [class.contSelector__clear--disabled]="!uiContactSelectorInput || uiContactSelectorInput.length === 0"
+    >
+        <div class="contSelector__clearBtn" (click)="clearAll()"></div>
+    </div>
+</div>

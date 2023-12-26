@@ -1,0 +1,53 @@
+@import 'scss/variables';
+@import 'scss/mixins';
+
+:host {
+    display: flex;
+    position: relative;
+}
+
+.clogo {
+
+    &__letters {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        @include font-semi-bold-600(0.8rem);
+
+        background: $movius_avatar-gray;
+        color: $black;
+    }
+
+    &__letterOne, &__letterTwo {
+    }
+
+    &__letters, &__hasLogo, &__hasNoLogo {
+        width: 100%;
+        height: 100%;
+    }
+
+    &__hasLogo, &__hasNoLogo, &__mutedIco {
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
+
+    &__muted {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: inherit;
+        height: inherit;
+        position: absolute;
+
+        background-color: var(--movius_mute-logo);
+    }
+
+    &__mutedIco {
+        width: 1.125rem;
+        height: 1.25rem;
+    }
+}

@@ -1,0 +1,330 @@
+//#region Functions
+@function strip-unit($number) {
+    @if type-of($number) == 'number' and not unitless($number) {
+      @return $number / ($number * 0 + 1);
+    }
+
+    @return $number;
+}
+//#endregion Functions
+
+//Default Colors
+//#region Scalio colors
+$white:                     #ffffff !default;
+$black:                     #161616 !default;
+$red:                       #d5333e !default;
+$orange:                    #d35400 !default;
+$gold:                      #f39c12 !default;
+$green:                     #27ae60 !default;
+$blue:                      #3D97D3 !default;
+$cyan:                      #00c9a7 !default;
+$purple:                    #8e44ad !default;
+$magenta:                   #eb2f96 !default;
+$volcano:                   #fa541c !default;
+$lime:                      #a0d911 !default;
+$geekblue:                  #2f54eb !default;
+
+$gray-dark:                 #2a2a2a !default;
+$gray:                      #53535f !default;
+$gray-light:                #72849a !default;
+$gray-lighter:              #ededed !default;
+$gray-lightest:             #f1f2f3 !default;
+$hyperlink:                 #7f85f5 !default;
+
+//#endregion Scalio colors
+
+//#region Movius initial-mockups colors
+//$movius_menu-primary:                   #769882 !default;
+//$movius_menu-secondary:                 #98b2a1 !default;
+$movius_lightgray:                      #f5f5f5 !default;
+$movius_darkgray:                         darken($movius_lightgray, 10) !default;
+$movius_white:                          #ffffff !default;
+$movius_gray:                             darken($movius_lightgray, 15) !default;
+$movius_darkgray:                         darken($movius_lightgray, 20) !default;
+$movius_scroll_darkgray:                         darken($movius_lightgray, 20) !default;
+$movius_lightestgreen:                  #e9f0ec !default;
+
+$movius_teams_LHS_gray:                 #f0f0f0 !default;
+
+$movius_acceptGreen:                    #67a958 !default;
+$movius_rejectRed:                      #cd412d !default;
+$movius_sand:                           #fff5d9 !default;
+//#endregion Movius initial-mockups colors
+
+//#region Movius final-Zeplin colors
+//TODO CB: 23Nov2020: Disclaimer - Used-as-is - This set of color has logical mismatches betw color and value. Consider to refactor.
+$movius-purple:                         #19182e !default;
+$movius-lightpurple:                    #565665 !default;
+
+$movius_colors-secondary-gray:          #f1f1f1 !default;
+$movius_orangey-red:                    #ff3939 !default;
+$movius_leafy-green:                    #50a735 !default;
+$movius_black:                          #111111 !default;
+$movius_color-white:                    #ffffff !default;
+$movius_vermillion:                     #e02020 !default;
+$movius_black-two:                      #000000 !default;
+$movius_very-light-pink:                #bbbbbb !default;
+$movius_very-light-pink-two:            #dddddd !default;
+$movius_colors-primary-green-2:         #1f1e33 !default;
+$movius_color-teams-theme-blue-dark_dark:    #5C5FC8 !default;
+$movius_color-teams-blue-light-chat:    #e8ebfa !default;
+$movius_colors-secondary-2:             #bcbcc2 !default;
+
+$movius_invalid-red:                    #fd5050 !default;
+$movius_invalid-red-pale:               #e26c5f !default;
+$movius_pale-green:                     #6d9980 !default;
+$movius_text-gray:                      #808080 !default;
+$movius_block-gray:                     #eeeeee !default;
+$movius_avatar-gray:                    #cccccc !default;
+$movius_notify-green:                   #229c41 !default;
+$movius_phone-button-gray:              #edeff1 !default;
+$movius_phone-button-gray-hover:        #d5d8dc !default;
+$movius_phone-button-gray-hover-second: #e0e4e6 !default;
+$movius_phone-button-darkgray:          #e7eaeb !default;
+$movius_phone-button-green:             #50a735 !default;
+$movius_border-gray:                    #dedfe0 !default;
+$movius_border-gray-2:                  #eaeaea !default;
+
+$movius_papaya:                         #ff9447 !default;
+$movius_light-papaya:                   #ffa565 !default;
+$movius_ripe-papaya:                    #ff9500 !default;
+$movius_plum:                           #221f34 !default;
+$movius_pale-sand:                      #fff5d9 !default;
+$movius_grapefruit:                     #e26c5f !default;
+$movius_fireorange:                     #ff4e3b !default;
+$movius_ginger-sand:                    #fae7cc !default;
+
+$movius_popup-call-reject:              #de301e !default;
+$movius_popup-call-accept:              #4eac4c !default;
+$movius_popup-gray:                     #f1f1f1 !default;
+$movius_popup-shadow:                   rgba(0, 0, 0, 0.09);
+$movius_settings-light-gray:            #f8f9fa !default;
+$movius_settings-gray:                  #dddddd !default;
+
+$movius_ocean:                          rgba(0, 139, 196, 0.33);
+$movius_dark-ocean:                     rgba(0, 139, 196, 0.1);
+
+$movius_btn-disabled-bgr:               #8f8e99 !default;
+$movius_btn-disabled-font:              #dddde0 !default;
+$movius_btn-cta-disabled:               #b0b1b9 !default;
+
+$movius_menu-text:                      #9493ad !default;
+$movius_mute-logo:                      #cccccc99 !default;
+$movius_swap-frame:                     #cccccc !default;
+$movius_text-highlight:                 #fff9b5 !default;
+$movius_search-gray:                    #bcbcc2 !default;
+$movius_separator:                      #e7e6e7 !default;
+$movius_general-failure:                #999999 !default;
+
+$movius_alert-success-border:           rgba(18, 156, 132, 0.33) !default;
+$movius_alert-success-color:            rgba(18, 156, 132, 0.1) !default;
+
+$movius_alert-info-border:              rgba(0, 139, 196, 0.33) !default;
+$movius_alert-info-color:               rgba(0, 139, 196, 0.1) !default;
+
+$movius_alert-warn-border:              rgba(255, 177, 0, 0.33) !default;
+$movius_alert-warn-color:               rgba(255, 177, 0, 0.1) !default;
+
+$movius_alert-error-border:             #ffbec1 !default;
+$movius_alert-error-color:              rgba(255, 34, 43, 0.11) !default;
+
+$movius_menu-primary: $movius-purple;
+$movius_menu-secondary: $movius-lightpurple;
+$movius-blue: #5C5FC8;
+$movius-placeholder-clr: #757575;
+$movius-autofill-dropdown-hover-clr: #e2e1e1;
+$movius-blue-disabled :  #5c60c889;
+
+
+//Dark Theme
+$white_dark:                     #161616 !default;
+$black_dark:                     #ffffff !default;
+$red_dark:                       #d5333e !default;
+$orange_dark:                    #d35400 !default;
+$gold_dark:                      #f39c12 !default;
+$green_dark:                     #27ae60 !default;
+$blue_dark:                      #3D97D3 !default;
+$cyan_dark:                      #00c9a7 !default;
+$purple_dark:                    #8e44ad !default;
+$magenta_dark:                   #eb2f96 !default;
+$volcano_dark:                   #fa541c !default;
+$lime_dark:                      #a0d911 !default;
+$geekblue_dark:                  #2f54eb !default;
+
+$gray-dark_dark:                 #2a2a2a !default;
+$gray_dark:                      #53535f !default;
+$gray-light_dark:                #72849a !default;
+$gray-lighter_dark:              #ededed !default;
+$gray-lightest_dark:             #f1f2f3 !default;
+//#endregion Scalio colors
+
+$movius_lightgray_dark:                      #f5f5f5 !default;
+$movius_darkgray_dark:                         darken($movius_lightgray, 10) !default;
+$movius_white_dark:                          #ffffff !default;
+$movius_gray_dark:                             darken($movius_lightgray, 15) !default;
+$movius_darkgray_dark:                         darken($movius_lightgray, 20) !default;
+$movius_scroll_darkgray_dark:                         darken($movius_lightgray, 20) !default;
+$movius_lightestgreen_dark:                  #e9f0ec !default;
+
+$movius_teams_LHS_gray_dark:                 #1f1e1e !default;
+
+$movius_acceptGreen_dark:                    #67a958 !default;
+$movius_rejectRed_dark:                      #cd412d !default;
+$movius_sand_dark:                           #fff5d9 !default;
+
+$movius-purple_dark:                         #19182e !default;
+$movius-lightpurple_dark:                    #565665 !default;
+
+$movius_colors-secondary-gray_dark:          #f1f1f1 !default;
+$movius_orangey-red_dark:                    #ff3939 !default;
+$movius_leafy-green_dark:                    #50a735 !default;
+$movius_black_dark:                          #111111 !default;
+$movius_color-white_dark:                    #ffffff !default;
+$movius_vermillion_dark:                     #e02020 !default;
+$movius_black-two_dark:                      #000000 !default;
+$movius_very-light-pink_dark:                #bbbbbb !default;
+$movius_very-light-pink-two_dark:            #dddddd !default;
+$movius_colors-primary-green-2_dark:         #1f1e33 !default;
+$movius_color-teams-theme-blue-dark:    #5C5FC8 !default;
+$movius_color-teams-blue-light-chat_dark:    #e8ebfa !default;
+$movius_colors-secondary-2_dark:             #bcbcc2 !default;
+
+$movius_invalid-red_dark:                    #fd5050 !default;
+$movius_invalid-red-pale_dark:               #e26c5f !default;
+$movius_pale-green_dark:                     #6d9980 !default;
+$movius_text-gray:                           #ffffff !default;
+$movius_text-gray-popup-hover:               #3d3d3d !default;
+$movius_text-gray_dark:                      #292929 !default;
+$movius_block-gray_dark:                     #eeeeee !default;
+$movius_avatar-gray_dark:                    #cccccc !default;
+$movius_notify-green_dark:                   #229c41 !default;
+$movius_phone-button-gray_dark:              #edeff1 !default;
+$movius_phone-button-gray-hover_dark:        #727272 !default;
+$movius_phone-button-gray-hover-second_dark: #e0e4e6 !default;
+$movius_phone-button-darkgray_dark:          #e7eaeb !default;
+$movius_phone-button-green_dark:             #50a735 !default;
+$movius_border-gray_dark:                    #dedfe0 !default;
+$movius_border-gray-2_dark:                  #eaeaea !default;
+
+$movius_papaya_dark:                         #ff9447 !default;
+$movius_light-papaya_dark:                   #ffa565 !default;
+$movius_ripe-papaya_dark:                    #ff9500 !default;
+$movius_plum_dark:                           #221f34 !default;
+$movius_pale-sand_dark:                      #fff5d9 !default;
+$movius_grapefruit_dark:                     #e26c5f !default;
+$movius_fireorange_dark:                     #ff4e3b !default;
+$movius_ginger-sand_dark:                    #fae7cc !default;
+
+$movius_popup-call-reject_dark:              #de301e !default;
+$movius_popup-call-accept_dark:              #4eac4c !default;
+$movius_popup-gray_dark:                     #f1f1f1 !default;
+$movius_popup-shadow_dark:                   rgba(0, 0, 0, 0.09);
+$movius_settings-light-gray_dark:            #f8f9fa !default;
+$movius_settings-gray_dark:                  #dddddd !default;
+
+$movius_ocean_dark:                          rgba(0, 139, 196, 0.33);
+$movius_dark-ocean_dark:                     rgba(0, 139, 196, 0.1);
+
+$movius_btn-disabled-bgr_dark:               #8f8e99 !default;
+$movius_btn-disabled-font_dark:              #dddde0 !default;
+$movius_btn-cta-disabled_dark:               #b0b1b9 !default;
+
+$movius_menu-text_dark:                      #9493ad !default;
+$movius_mute-logo_dark:                      #cccccc99 !default;
+$movius_swap-frame_dark:                     #cccccc !default;
+$movius_text-highlight_dark:                 #fff9b5 !default;
+$movius_search-gray_dark:                    #bcbcc2 !default;
+$movius_separator_dark:                      #e7e6e7 !default;
+$movius_general-failure_dark:                #999999 !default;
+
+$movius_alert-success-border_dark:           rgba(18, 156, 132, 0.33) !default;
+$movius_alert-success-color_dark:            rgba(18, 156, 132, 0.1) !default;
+
+$movius_alert-info-border_dark:              rgba(0, 139, 196, 0.33) !default;
+$movius_alert-info-color_dark:               rgba(0, 139, 196, 0.1) !default;
+
+$movius_alert-warn-border_dark:              rgba(255, 177, 0, 0.33) !default;
+$movius_alert-warn-color_dark:               rgba(255, 177, 0, 0.1) !default;
+
+$movius_alert-error-border_dark:             #ffbec1 !default;
+$movius_alert-error-color_dark:              rgba(255, 34, 43, 0.11) !default;
+
+$movius_active_tab:                         #d3d3d3;
+$movius_active_tab_hover_default:           #F5F5F5;
+
+$movius_border_color_dark:#3c3c3c;
+$movius_border_color:#cfcfcf;
+
+$movius_chat_color_dark:#2B2B40;
+$movius_chat_color:#E8EBFA;
+
+$movius_menu-primary_dark: $movius-purple;
+$movius_menu-secondary_dark: $movius-lightpurple;
+
+$movius-blue_dark: #5C5FC8;
+
+$movius-dark-blue:#3d3e78;
+$movius-blue-disabled :  #5c60c889;
+$movius-placeholder-clr: #FFFFFF;
+$movius-autofill-dropdown-hover-clr: #3d3d3d;
+$movius-forward-label: #757171;
+$movius-cancel-btn-hoverclr: #696363;
+//TODO CB: 23Nov2020: Disclaimer - Used-as-is - This set of color has logical mismatches betw color and value. Consider to refactor.
+//#endregion Movius final-Zeplin colors
+
+//#region Spacings
+$spacing-xxs: 0.25rem;
+$spacing-xs: 0.5rem;
+$spacing-s: 0.75rem;
+$spacing-m: 1rem;
+$spacing-l: 1.25rem;
+$spacing-xl: 1.5rem;
+$spacing-xxl: 1.75rem;
+$spacing-xxl-2: 2rem;
+$spacing-xxl-3: 2.25rem;
+$spacing-xxl-4: 2.5rem;
+$spacing-xxl-5: 2.75rem;
+$spacing-xxl-6: 3rem;
+$spacing-xxl-7: 3.25rem;
+$spacing-xxl-8: 3.5rem;
+$spacing-xxl-9: 3.75rem;
+$spacing-xxl-10: 4rem;
+//#endregion Spacings
+
+//#region General
+$header-height: 3.875rem;
+$footer-height: 3.375rem;
+$std-logo-radius: 2rem;
+$std-logo-radius-mobile: 2.6rem;
+
+$logo-avatar-size: 5.625rem;
+
+$inputs-width: 25vw !default;
+$inputs-height: 40px !default;
+$buttons-width: calc(#{$inputs-width} * 0.75) !default;
+$buttons-height: 36px !default;
+
+$scrollbar-padding: 0.3125rem;
+$historyItemTitleFontSize: 1rem;
+$generalFailureNotifHeight: 1.875rem;
+//#endregion General
+
+//#region Calls
+$keypad-button-size: 4.5rem;
+$keypad-button-size-small: 3rem;
+//#region Calls
+
+$cnt-details-def-width: calc(100% - 15.22%*2);
+$cnt-details-def-width-mobile: calc(100% - 15.22%);
+
+$cnt-details-top-margin: $spacing-xxl-8;
+$list-item-content-height: $std-logo-radius;
+
+//#region Ng-zorro
+$ng-zorro-df-modal-zIndex: 1000;
+//#endregion Ng-zorro
+
+//#region Modals
+$dnd-border-rad: 0.3125rem;
+//#endregion Modals
+

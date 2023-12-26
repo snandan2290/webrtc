@@ -1,0 +1,56 @@
+@import 'scss/mixins';
+@import 'scss/variables';
+@import 'scss/app.scss';
+
+$def-width: calc(100% - #{$spacing-xxl-10});
+$def-margin: $spacing-s auto $spacing-s auto;
+
+.contacts {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+
+    @include verticalToHorizontalWorkspace();
+
+    &__contactItem  {
+        @extend %history-item;
+        width: auto;
+    }
+
+    &__subCaption {
+        @include font-normal(0.875rem);
+        color: var(--movius_text-gray);
+        width: $def-width;
+        margin: $def-margin;
+    }
+
+    &__title{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        min-height: 2rem;
+        margin: auto 0 auto $spacing-xl;
+    }
+
+    &__titleTxt {
+        @include font-semi-bold-600(1rem);
+
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
+
+    &__viewport {
+        height: calc(100vh - 8.87rem);
+        width: 100%;
+        overflow: none;
+        @extend %scroll;
+    }
+
+    @include leftWorkspaceGeneralMarkup();
+
+    @include emptySearch('../icons/movius/contacts/icons-contact-illus.svg');
+
+    @include generalFailure();
+}

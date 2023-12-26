@@ -1,0 +1,41 @@
+<ng-container class="clogo" *ngIf="this.view as mainView">
+    <div
+        *ngIf="mainView.hasImage"
+        class="clogo__hasLogo logo-avatar"
+        [class]="externalStyleClass"
+        [style.backgroundImage]="'url(' + mainView.img + ')'"
+    ></div>
+    <div
+        *ngIf="!mainView.hasImage && mainView.hasAnyName && !isGroup"
+        class="clogo__letters logo-avatar"
+        [class]="externalStyleClass"
+        [style.zoom]="getZoom()"
+        [style.background-color]="getColorForName(mainView.firstName)"
+    >
+        <div class="clogo__letterOne" *ngIf="mainView.hasFirstName">
+            {{mainView.firstName?.trim().substring(0, 1).toLocaleUpperCase()}}
+        </div>
+        <div class="clogo__letterTwo" *ngIf="mainView.hasLastName">
+            {{mainView.lastName?.trim().substring(0, 1).toLocaleUpperCase()}}
+        </div>
+    </div>
+    <div
+        *ngIf="!mainView.hasImage && !mainView.hasAnyName && !isGroup"
+        class="clogo__hasNoLogo logo-avatar"
+        [class]="externalStyleClass"
+        [style.backgroundImage]="GetTheme() == 'Dark' ? 'url(\'assets/icons/dark_theme_icons/avatar.svg\')':'url(\'assets/icons/movius/common/icons-avatar.svg\')'"
+    ></div>
+    <div
+        *ngIf="isGroup"
+        class="clogo__hasNoLogo logo-avatar"
+        [class]="externalStyleClass"
+        [style.backgroundImage]="'url(\'assets/icons/movius/messages/icons-all-group.svg\')'"
+    ></div>
+    <div class="clogo__muted logo-avatar" *ngIf="isMuted">
+        <div
+            class="clogo__mutedIco"
+            [style.backgroundImage]="'url(\'assets/icons/movius/common/icons-mute-bell.svg\')'">
+        </div>
+    </div>
+    <ng-content></ng-content>
+</ng-container>

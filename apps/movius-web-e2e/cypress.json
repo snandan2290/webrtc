@@ -1,0 +1,20 @@
+{
+    "fileServerFolder": ".",
+    "fixturesFolder": "./src/fixtures",
+    "integrationFolder": "./src/integration",
+    "modifyObstructiveCode": false,
+    "pluginsFile": "./src/plugins/index",
+    "supportFile": "./src/support/index.ts",
+    "video": false,
+    "videosFolder": "../../dist/cypress/apps/movius-web-e2e/videos",
+    "screenshotsFolder": "../../dist/cypress/apps/movius-web-e2e/screenshots",
+    "chromeWebSecurity": false,
+    "numTestsKeptInMemory": 1,
+    "defaultCommandTimeout": 15000,
+    "execTimeout": 15000,
+    "taskTimeout": 15000,
+    "pageLoadTimeout": 15000,
+    "requestTimeout": 15000,
+    "responseTimeout": 15000,
+    "testFiles": "**/*.spec.ts"
+}   

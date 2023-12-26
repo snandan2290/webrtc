@@ -1,0 +1,282 @@
+<!-- TODO CB: 06Oct2020: Extract layout-wrapper to the shared layout folder. -->
+<nz-layout class="shell" *ngIf="view$ | async as view">
+    <ng-container
+        *ngIf="
+            view.userStateStatus.kind === 'StateStatusInitial' ||
+            view.userStateStatus.kind === 'StateStatusLoading'
+        "
+    >
+        ...
+    </ng-container>
+    <ng-container *ngIf="view.userStateStatus.kind === 'StateStatusLoaded'">
+        <movius-web-header *ngIf="appEmbededStatus !== 'messaging'" [composeMessageType]="composeMessageType" [popOverContent]="popOverContent"
+            [teamsLocationEnabled]="teamsLocationEnabled" [is911Message]="is911Message"
+            [isLocationEnabled]="isLocationEnabled" [showHeader]="showHeader" [isCollapsed]="isCollapsed" [userInfo]="userInfo" [view]="view" (onLogoutCLicked)="onLogout()" (MuteStatus)="changeMuteStatus($event)"
+            [MuteinboundCallAndMsgSound]="MuteinboundCallAndMsgSound" >
+        </movius-web-header>
+        <nz-layout class="shell__mainframe">
+            <nz-sider
+                class="shell__sidebar"
+                nzCollapsible
+                [(nzCollapsed)]="isCollapsed"
+                [nzTrigger]="null"
+                *ngIf="appEmbededStatus !== 'messaging'"
+            >
+                <ul
+                    class="shell__menu"
+                    nz-menu
+                    nzTheme="dark"
+                    nzMode="inline"
+                    [nzInlineCollapsed]="isCollapsed"
+                    [nzInlineIndent]="0"
+                >
+                    <li
+                        class="shell__mItem"
+                        nz-menu-item
+                        nzMatchRouter
+                        routerLink="/calling"
+                    >
+                        <a
+                            data-cy="calling-nav-item"
+                            [class.shell__badge]="view.hasNewCalls"
+                            class="shell__mLink"
+                            (click)="onCallingClick($event)"
+                        >
+                            <div
+                                class="shell__mIcon calls-icon"
+                                [routerLinkActive]="['is-active']"
+                                alt="Calls"
+                            >
+                                <div class="shell__mTxt">Calls</div>
+                            </div>
+                        </a>
+                    </li>
+
+                    <li
+                        class="shell__mItem"
+                        nz-menu-item
+                        nzMatchRouter
+                        routerLink="/messaging"
+                    >
+                        <a
+                            data-cy="messaging-nav-item"
+                            [class.shell__badge]="view.hasNewMessages"
+                            class="shell__mLink shell__badge"
+                            (click)="onMessagingClick($event)"
+                        >
+                            <div
+                                class="shell__mIcon messages-icon"
+                                [routerLinkActive]="['is-active']"
+                                alt="Messages"
+                            >
+                                <div class="shell__mTxt">Messages</div>
+                            </div>
+                        </a>
+                    </li>
+                    <li
+                        class="shell__mItem"
+                        nz-menu-item
+                        nzMatchRouter
+                        routerLink="/contacts"
+                    >
+                        <a
+                            data-cy="contacts-nav-item"
+                            class="shell__mLink"
+                            (click)="onContactsClick($event)"
+                        >
+                            <div
+                                class="shell__mIcon contacts-icon"
+                                [routerLinkActive]="['is-active']"
+                                alt="Contacts"
+                            >
+                                <div class="shell__mTxt">Contacts</div>
+                            </div>
+                        </a>
+                    </li>
+                    <li
+                        class="shell__mItem"
+                        nz-menu-item
+                        nzMatchRouter
+                        routerLink="/settings"
+                    >
+                        <a
+                            class="shell__mLink"
+                            data-cy="settings-nav-item"
+                            (click)="onSettingsClick($event)"
+                        >
+                            <div
+                                class="shell__mIcon setup-icon"
+                                [routerLinkActive]="['is-active']"
+                                alt="Settings"
+                            >
+                                <div class="shell__mTxt">Settings</div>
+                            </div>
+                        </a>
+                    </li>
+                    <li class="shell__mItem" nz-menu-item nzMatchRouter>
+                        <a class="shell__mLink" (click)="openSupportModal()">
+                            <div
+                                class="shell__mIcon support-icon"
+                                [ngClass]="{
+                                    'is-active': isSupportOpened$ | async
+                                }"
+                                alt="Support"
+                            >
+                                <div
+                                    class="shell__mTxt"
+                                    [class.is-active]="isSupportOpened$ | async"
+                                >
+                                    Support
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </nz-sider>
+            <nz-content class="shell__content">
+                <router-outlet></router-outlet>
+            </nz-content>
+        </nz-layout>
+        <!-- <nz-footer
+            [ngClass]="
+                isTeamsSSO() === false ? 'shell__footer' : 'shell__footer_teams'
+            "
+            [ngStyle]="{
+                'display': getFooterDisplay(),
+                'height': getFooterHeight(),
+                'max-height': getFooterMaxHeight()
+            }"
+        >
+            <div class="shell__downInfo">
+                <div class="shell__downLogo"></div>
+               <div class="shell__downText" *ngIf="isMobileDevice">
+                   <strong>Copyright © Movius Corp.</strong> All rights
+                   reserved. Movius and associated logos are trademarks or
+                   registered trademarks of Movius Corp.
+               </div>
+                <div class="shell__downText" *ngIf="!isMobileDevice">
+                    <strong>Copyright © Movius Corp.</strong>
+                    All rights reserved. Movius and associated logos are trademarks
+                    or registered trademarks of Movius Corp.
+                </div>
+            </div>
+           <div *ngIf="!isMobileDevice" style="text-align:center;">
+               All rights reserved. Movius and associated logos are trademarks
+               or registered trademarks of Movius Corp.
+            </div>
+        </nz-footer> -->
+    </ng-container>
+</nz-layout>
+
+<ng-template #ConnectionStatusPopover>
+    <p class="online-popover" *ngIf="isConnectionLost === false">Online</p>
+    <p class="offline-popover" *ngIf="isConnectionLost === true">Offline</p>
+</ng-template>
+
+<ng-template #MuteStatusPopover>
+    <div class="mute-popover">
+        <svg
+            class="svg-popover-i"
+            width="36px"
+            height="24px"
+            viewBox="0 0 24 24"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+        >
+            <g
+                id="icn_info"
+                stroke="none"
+                stroke-width="1"
+                fill="none"
+                fill-rule="evenodd"
+            >
+                <g
+                    id="􀅵"
+                    transform="translate(4.000000, 4.000000)"
+                    fill="#1F1E33"
+                    fill-rule="nonzero"
+                >
+                    <path
+                        d="M7.59375,15.1796875 C8.63020833,15.1796875 9.60677083,14.9804688 10.5234375,14.5820312 C11.4401042,14.1835938 12.2473958,13.6354167 12.9453125,12.9375 C13.6432292,12.2395833 14.1901042,11.4335938 14.5859375,10.5195312 C14.9817708,9.60546875 15.1796875,8.62760417 15.1796875,7.5859375 C15.1796875,6.54947917 14.9804688,5.57291667 14.5820312,4.65625 C14.1835938,3.73958333 13.6354167,2.93098958 12.9375,2.23046875 C12.2395833,1.52994792 11.4322917,0.983072917 10.515625,0.58984375 C9.59895833,0.196614583 8.62239583,0 7.5859375,0 C6.54947917,0 5.57421875,0.196614583 4.66015625,0.58984375 C3.74609375,0.983072917 2.93880208,1.52994792 2.23828125,2.23046875 C1.53776042,2.93098958 0.989583333,3.73958333 0.59375,4.65625 C0.197916667,5.57291667 0,6.54947917 0,7.5859375 C0,8.62760417 0.19921875,9.60546875 0.59765625,10.5195312 C0.99609375,11.4335938 1.54427083,12.2395833 2.2421875,12.9375 C2.94010417,13.6354167 3.74609375,14.1835938 4.66015625,14.5820312 C5.57421875,14.9804688 6.55208333,15.1796875 7.59375,15.1796875 Z M6.25,11.78125 C6.08333333,11.78125 5.94270833,11.7265625 5.828125,11.6171875 C5.71354167,11.5078125 5.65625,11.3697917 5.65625,11.203125 C5.65625,11.046875 5.71354167,10.9127604 5.828125,10.8007812 C5.94270833,10.6888021 6.08333333,10.6328125 6.25,10.6328125 L7.171875,10.6328125 L7.171875,7.3046875 L6.3828125,7.3046875 C6.21614583,7.3046875 6.07552083,7.25130208 5.9609375,7.14453125 C5.84635417,7.03776042 5.7890625,6.8984375 5.7890625,6.7265625 C5.7890625,6.57552083 5.84635417,6.44401042 5.9609375,6.33203125 C6.07552083,6.22005208 6.21614583,6.1640625 6.3828125,6.1640625 L7.828125,6.1640625 C8.03645833,6.1640625 8.19401042,6.23046875 8.30078125,6.36328125 C8.40755208,6.49609375 8.4609375,6.67447917 8.4609375,6.8984375 L8.4609375,10.6328125 L9.359375,10.6328125 C9.52604167,10.6328125 9.66536458,10.6888021 9.77734375,10.8007812 C9.88932292,10.9127604 9.9453125,11.046875 9.9453125,11.203125 C9.9453125,11.3697917 9.88932292,11.5078125 9.77734375,11.6171875 C9.66536458,11.7265625 9.52604167,11.78125 9.359375,11.78125 L6.25,11.78125 Z M7.5390625,4.9375 C7.25260417,4.9375 7.00911458,4.83723958 6.80859375,4.63671875 C6.60807292,4.43619792 6.5078125,4.1953125 6.5078125,3.9140625 C6.5078125,3.62239583 6.60807292,3.37630208 6.80859375,3.17578125 C7.00911458,2.97526042 7.25260417,2.875 7.5390625,2.875 C7.8203125,2.875 8.06119792,2.97526042 8.26171875,3.17578125 C8.46223958,3.37630208 8.5625,3.62239583 8.5625,3.9140625 C8.5625,4.1953125 8.46223958,4.43619792 8.26171875,4.63671875 C8.06119792,4.83723958 7.8203125,4.9375 7.5390625,4.9375 Z"
+                        id="Shape"
+                    ></path>
+                </g>
+            </g>
+        </svg>
+        <p
+            class="mute-popover"
+            [ngSwitch]="MuteinboundCallAndMsgSound.toString()"
+        >
+            <ng-template ngSwitchCase="false">
+                Click to mute sound for ringtone and message notifications
+            </ng-template>
+            <ng-template ngSwitchCase="true">
+                Click to play sound for ringtone and message notifications
+            </ng-template>
+        </p>
+    </div>
+</ng-template>
+
+<ng-template #e911HeaderPopover>
+    <div class="shell__e911Pop">
+        <p>
+            If you call 911 using Wi-Fi and emergency services can’t locate you,
+            they will go to the address you enter here. This address can’t be a
+            P.O.Box
+        </p>
+        <p>
+            Calling 911 only works within the U.S., Puerto Rico and the
+            U.S.Virgin islands
+        </p>
+        <button class="shell__goE911Setup" routerLink="/settings/e911">
+            Add Address
+        </button>
+    </div>
+</ng-template>
+
+<ng-container *ngIf="isNotCypress && appEmbededStatus != 'messaging'">
+    <!--<audio #mainAudio></audio>-->
+    <audio
+        #soundOutgoing
+        src="assets/sounds/ringbacktone.wav"
+        loop="true"
+        width="0"
+        height="0"
+        enablejavascript="true"
+    ></audio>
+
+    <audio
+        #soundIncoming
+        src="assets/sounds/newincoming_new_ring_tone.wav"
+        loop="true"
+        width="0"
+        height="0"
+        enablejavascript="true"
+    ></audio>
+
+    <audio
+        #soundIncomingSecondary
+        src="assets/sounds/newsecond-incoming-call.wav"
+        loop="true"
+        width="0"
+        height="0"
+        enablejavascript="true"
+    ></audio>
+    <audio
+        #soundCallEnd
+        src="assets/sounds/newcall-end.wav"
+        width="0"
+        height="0"
+        enablejavascript="true"
+    ></audio>
+</ng-container>
+<ng-container>
+    <audio
+        #soundMessage
+        src="assets/sounds/notifications_20.wav"
+        width="0"
+        height="0"
+        enablejavascript="true"
+    ></audio>
+</ng-container>

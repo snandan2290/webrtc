@@ -1,0 +1,115 @@
+<mat-card class="audio-player" [style.border]="!readStatus ? '1px solid #ff9447' :'1px solid #cccccc'">
+    <div class="header-top-audio">
+        <div class="audio-icon">
+            <svg class="vm-img" width="16px" height="16px" viewBox="0 0 16 16" version="1.1"
+                xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <g id="Final-VVM(M2022-50)" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g id="Messages_with_badge-count" transform="translate(-616.000000, -492.000000)">
+                        <g id="Group-2" transform="translate(604.000000, 480.000000)">
+                            <g id="Group" transform="translate(12.025424, 12.000000)">
+                                <circle id="Oval" stroke="#1F1E33" cx="8" cy="8" r="7.5"></circle>
+                                <path
+                                    d="M10.8888889,5.33333333 C9.53777778,5.33333333 8.44444444,6.42666667 8.44444444,7.77777778 C8.44444444,8.36888889 8.65333333,8.91111111 9.00444444,9.33333333 L6.99555556,9.33333333 C7.34666667,8.91111111 7.55555556,8.36888889 7.55555556,7.77777778 C7.55555556,6.42666667 6.46222222,5.33333333 5.11111111,5.33333333 C3.76,5.33333333 2.66666667,6.42666667 2.66666667,7.77777778 C2.66666667,9.12888889 3.76,10.2222222 5.11111111,10.2222222 L10.8888889,10.2222222 C12.24,10.2222222 13.3333333,9.12888889 13.3333333,7.77777778 C13.3333333,6.42666667 12.24,5.33333333 10.8888889,5.33333333 Z M5.11111111,9.33333333 C4.25333333,9.33333333 3.55555556,8.63555556 3.55555556,7.77777778 C3.55555556,6.92 4.25333333,6.22222222 5.11111111,6.22222222 C5.96888889,6.22222222 6.66666667,6.92 6.66666667,7.77777778 C6.66666667,8.63555556 5.96888889,9.33333333 5.11111111,9.33333333 Z M10.8888889,9.33333333 C10.0311111,9.33333333 9.33333333,8.63555556 9.33333333,7.77777778 C9.33333333,6.92 10.0311111,6.22222222 10.8888889,6.22222222 C11.7466667,6.22222222 12.4444444,6.92 12.4444444,7.77777778 C12.4444444,8.63555556 11.7466667,9.33333333 10.8888889,9.33333333 Z"
+                                    id="icon/communication/voicemail_24px" fill="#1F1E33" fill-rule="nonzero"></path>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </svg>
+        </div>
+        <div class="unread-message" *ngIf="!readStatus">
+            <span class="unread-content">New</span>
+        </div>
+    </div>
+
+    <div class="audio-container">
+        <div nz-popover [nzPopoverContent]="disablePlayButton  && noNetworkDisablePlay"
+            [nzPopoverOverlayClassName]="'noNetworkDisablePlayClass'" nzPopoverPlacement="bottomLeft">
+            <div [ngClass]="disablePlayButton !== null ? 'play-icon-disable' : 'play-icon'" (click)="playAudio()"
+                [disabled]="state?.error || disablePlayButton" *ngIf="!state?.playing && showToggleSpinner === false">
+                <svg width="13px" height="16px" viewBox="0 0 13 16" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                        <g id="Messages_with_badge-count" transform="translate(-621.000000, -695.000000)" fill="#343446"
+                            fill-rule="nonzero">
+                            <g id="Group-2" transform="translate(603.000000, 643.000000)">
+                                <g id="icon/av/play_arrow_24px" transform="translate(12.000000, 48.000000)">
+                                    <polygon points="6 4 6 20 18.5714286 12"></polygon>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </svg>
+            </div>
+        </div>
+        <div class="spinner-icon" *ngIf="!state?.playing && showToggleSpinner === true">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                y="0px" viewBox="0 0 2400 2400" xml:space="preserve" width="24" height="24">
+                <g stroke-width="200" stroke-linecap="round" stroke="#6b6868" fill="none" id="spinner">
+                    <line x1="1200" y1="600" x2="1200" y2="100" />
+                    <line opacity="0.5" x1="1200" y1="2300" x2="1200" y2="1800" />
+                    <line opacity="0.917" x1="900" y1="680.4" x2="650" y2="247.4" />
+                    <line opacity="0.417" x1="1750" y1="2152.6" x2="1500" y2="1719.6" />
+                    <line opacity="0.833" x1="680.4" y1="900" x2="247.4" y2="650" />
+                    <line opacity="0.333" x1="2152.6" y1="1750" x2="1719.6" y2="1500" />
+                    <line opacity="0.75" x1="600" y1="1200" x2="100" y2="1200" />
+                    <line opacity="0.25" x1="2300" y1="1200" x2="1800" y2="1200" />
+                    <line opacity="0.667" x1="680.4" y1="1500" x2="247.4" y2="1750" />
+                    <line opacity="0.167" x1="2152.6" y1="650" x2="1719.6" y2="900" />
+                    <line opacity="0.583" x1="900" y1="1719.6" x2="650" y2="2152.6" />
+                    <line opacity="0.083" x1="1750" y1="247.4" x2="1500" y2="680.4" />
+                    <animateTransform attributeName="transform" attributeType="XML" type="rotate"
+                        keyTimes="0;0.08333;0.16667;0.25;0.33333;0.41667;0.5;0.58333;0.66667;0.75;0.83333;0.91667"
+                        values="0 1199 1199;30 1199 1199;60 1199 1199;90 1199 1199;120 1199 1199;150 1199 1199;180 1199 1199;210 1199 1199;240 1199 1199;270 1199 1199;300 1199 1199;330 1199 1199"
+                        dur="0.83333s" begin="0s" repeatCount="indefinite" calcMode="discrete" />
+                </g>
+            </svg>
+        </div>
+        <div class="pause-icon" (click)="pauseAudio()" *ngIf="state?.playing">
+            <svg width="14px" height="18px" viewBox="0 0 14 18" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink">
+                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g id="Messages_with_badge-count" transform="translate(-621.000000, -531.000000)" fill="#1F1E33">
+                        <g id="Group-2" transform="translate(604.000000, 480.000000)">
+                            <g id="Combined-Shape" transform="translate(12.000000, 48.000000)">
+                                <path
+                                    d="M8.5,3 C9.05228475,3 9.5,3.44771525 9.5,4 L9.5,20 C9.5,20.5522847 9.05228475,21 8.5,21 L6,21 C5.44771525,21 5,20.5522847 5,20 L5,4 C5,3.44771525 5.44771525,3 6,3 L8.5,3 Z M17.5,3 C18.0522847,3 18.5,3.44771525 18.5,4 L18.5,20 C18.5,20.5522847 18.0522847,21 17.5,21 L15,21 C14.4477153,21 14,20.5522847 14,20 L14,4 C14,3.44771525 14.4477153,3 15,3 L17.5,3 Z">
+                                </path>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </svg>
+        </div>
+        <div class="seek-slider">
+            <mat-slider min="0" [max]="state?.duration" step="1" [value]="state?.currentTime"
+                (input)="onSliderChangeEnd($event)" [disabled]="state?.error"></mat-slider>
+        </div>
+
+        <!-- For Now Delete option is not there in the requirement. -->
+
+        <!-- <div class="play-icon-delete">
+            <div (click)="deleteAudio()" *ngIf="state?.playing">
+                <img src="assets/icons/movius/common/delete-icon.svg" alt="Delete">
+            </div>
+        </div> -->
+    </div>
+    <div class="duration seek-slider">
+        <p class="start-duration">{{state?.readableCurrentTime}}/</p>
+        <p class="end-duration">{{totalDuration}}</p>
+    </div>
+</mat-card>
+
+<ng-template #noNetworkDisablePlay>
+    <p class="networkDisableCallPop" [ngSwitch]="disablePlayButton">
+        <ng-template ngSwitchCase="network-error">
+            Sorry! Network Unreachable
+        </ng-template>
+        <ng-template ngSwitchCase="another-active-call">
+            Sorry! Call is in progress.
+        </ng-template>
+    </p>
+</ng-template>
+
+<movius-web-general-failure class="error-class" (passConnectionError)="getConnectionError($event)">
+</movius-web-general-failure>

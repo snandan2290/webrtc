@@ -1,0 +1,63 @@
+<ng-container *ngIf="state$ | async as state">
+    <button
+        [disabled]="state.kind !== 'AudioPanelUnConnectedState'"
+        (click)="onConnect()"
+        nz-button
+        nzType="primary"
+        nzBlock
+    >
+        Connect
+    </button>
+    <button
+        [disabled]="state.kind !== 'AudioPanelConnectedState'"
+        (click)="onRegister()"
+        nz-button
+        nzType="primary"
+        nzBlock
+    >
+        Register
+    </button>
+    <button
+        [disabled]="state.kind !== 'AudioPanelRegisteredState'"
+        (click)="onUnregister()"
+        nz-button
+        nzType="primary"
+        nzBlock
+    >
+        Unregister
+    </button>
+    <button
+        [disabled]="state.kind === 'AudioPanelUnConnectedState'"
+        (click)="onDisconnect()"
+        nz-button
+        nzType="primary"
+        nzBlock
+    >
+        Disconnect
+    </button>
+    <h2>Contacts</h2>
+    <button
+        *ngFor="let peer of peers$ | async"
+        [disabled]="
+            state.kind !== 'AudioPanelRegisteredState' ||
+            peer.status === 'calling'
+        "
+        nz-button
+        nzType="primary"
+        nzBlock
+        (click)="onCall(peer.id)"
+    >
+        Call {{ peer.name }}
+    </button>
+    <ng-container *ngIf="state.kind === 'AudioPanelRegisteredState'">
+        <movius-web-call
+            *ngFor="let call of calls$ | async; trackBy: trackByCall"
+            [call]="call"
+            (accept)="onAccept(state['sessions'][call.id])"
+            (hangUp)="onHangUp(state['sessions'][call.id])"
+            (hold)="onHold(state['sessions'][call.id], $event)"
+            (mute)="onMute(state['sessions'][call.id], $event)"
+        ></movius-web-call>
+    </ng-container>
+</ng-container>
+<audio #panelRemoteAudio></audio>

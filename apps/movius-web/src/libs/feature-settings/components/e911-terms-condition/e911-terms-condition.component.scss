@@ -1,0 +1,13 @@
+div {
+    padding: 25px;
+    overflow-y: auto;
+    max-height: 94vh;
+
+    .inner-points {
+        margin-left: 2rem;
+    }
+
+    .enine_header{
+        color: var(--black);
+    }
+}

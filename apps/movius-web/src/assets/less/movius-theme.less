@@ -1,0 +1,122 @@
+
+
+@movius-purple: #19182e;
+@movius-lightpurple: #565665;
+@movius-menu-text: #9493ad;
+@movius-white: #ffffff;
+
+@primary-color: @movius-lightpurple;
+@processing-color: @movius-lightpurple;
+
+@divider-color: #dddddd;
+
+@layout-sider-background: @movius-purple;
+
+@menu-bg: @movius-purple;
+@menu-item-active-bg: @movius-purple;
+
+@menu-dark-bg: @movius-purple;
+@menu-dark-item-active-bg: @movius-purple;
+
+@modal-body-padding: 0;
+@layout-header-padding: 1rem;
+
+@menu-item-vertical-margin: 8px;
+@menu-item-boundary-margin: 4px;
+@menu-inline-toplevel-item-height: 60px;
+@menu-item-height: 60px;
+@menu-dark-color: @movius-menu-text;
+@menu-collapsed-width: 87px;
+
+.ant-popover-arrow {
+    display: none;
+}
+
+//BUG CB:01Nov2020: Workaround: Disable modal mask -> sidefeect -> Hotfix - Ng-zorro backdrop shadow is displayed above modals.
+.cdk-global-overlay-wrapper {
+    z-index: 1000;
+    opacity: 1;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    overflow-y: auto;
+}
+
+.ant-modal-content {
+    border-radius: 0.5rem;
+}
+
+.ant-radio.ant-radio-checked {
+    .ant-radio-inner {
+        background-color: @movius-purple;
+    }
+    .ant-radio-inner::after {
+        background-color: @movius-white;
+    }
+}
+
+.ant-radio {
+    .ant-radio-inner {
+        background-color: @movius-white;
+    }
+    .ant-radio-inner::after {
+        background-color: @movius-white;
+    }
+}
+
+.ant-layout-sider {
+    width: @menu-collapsed-width !important;
+    min-width: @menu-collapsed-width !important;
+    max-width: @menu-collapsed-width !important;
+}
+
+.ant-modal-footer {
+    padding: 0;
+    border: 0;
+}
+
+.ant-modal-close-x {
+    width: 16px;
+    height: 16px;
+    line-height: 16px;
+}
+
+.ant-modal-body {
+    padding: 0;
+}
+
+.ant-modal-confirm .ant-modal-body {
+    padding: 0;
+}
+
+.ant-modal-close {
+    top: 24px;
+    right: 24px;
+}
+
+.ant-select-dropdown {
+    border-radius: 0.5rem;
+}
+
+.ant-tooltip-inner {
+    color: black;
+    background-color: white;
+    white-space: pre-wrap;
+    width: 120%;
+    padding: 10px 10px 10px 10px;
+}
+.ant-tooltip-arrow-content {
+    background-color: white;
+}
+
+
+.ant-modal-wrap {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+    outline: 0;
+    -webkit-overflow-scrolling: touch;
+}

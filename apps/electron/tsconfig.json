@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "rootDir": ".",
+        "baseUrl": ".",
+        "moduleResolution": "node",
+        "module": "commonjs",
+        "target": "es5",
+        "resolveJsonModule": true,
+        "sourceMap": true,
+        "removeComments": false,
+        "outDir": "../../dist/electron",
+        "noImplicitReturns": true,
+        "skipLibCheck": true,
+        "lib": ["es2015", "dom"]
+    },
+    "include": [
+        "./src/**/*"
+    ],
+    "exclude": [
+        "node_modules"
+    ]
+}

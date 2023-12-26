@@ -1,0 +1,66 @@
+@import '../../../../assets/scss/app.scss';
+
+@mixin sync-component {
+
+    padding: 0 2rem 0 2rem;
+
+    &__syncBtn {
+        width: 12.25rem;
+        height: 2.25rem;
+        @extend %sync-btn--apply;
+    }
+
+    &__cancelBtn {
+        width: 12.25rem;
+        height: 2.25rem;
+        @extend %sync-btn--cancel;
+    }
+
+    &__loadingCap {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__loadingCapIco {
+        $self: &;
+        margin: 0 0 $spacing-xxl-2 0;
+
+        &--succ {
+            @extend #{$self};
+            @include background-image('/movius/contacts/icons-success.svg');
+            width: 3rem;
+            height: 3.125rem;
+        }
+
+        &--fail {
+            @extend #{$self};
+            @include background-image('/movius/contacts/icons-failed.svg');
+            width: 3rem;
+            height: 3.125rem;
+        }
+    }
+
+    &__loadingCapTxt {
+        $self: &;
+        text-align: center;
+        @include font-semi-bold-600(1.5rem);
+
+        &--succ {
+            @extend #{$self};
+            color: var(--movius_leafy-green);
+        }
+
+        &--fail {
+            @extend #{$self};
+            color: var(--movius_orangey-red);
+        }
+    }
+
+    &__loadingCapSubTxt {
+        text-align: center;
+        @include font-normal(0.875rem);
+        margin: $spacing-xs 0 0 0;
+    }
+}

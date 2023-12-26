@@ -1,0 +1,10 @@
+{
+    "/proxy": {
+        "target": "https://scrum1.moviuscorp.net:8021/adk/mml/accounts/",
+        "secure": false,
+        "pathRewrite": {
+            "^/proxy": ""
+        }
+    },
+    "changeOrigin": true
+}

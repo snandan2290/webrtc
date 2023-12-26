@@ -1,0 +1,85 @@
+<div class="pin">
+    <div class="pin__header">
+        <p class="pin__title authCaption">Enter PIN</p>
+        <p class="pin__subtitle authSubCaption">
+            An email with a PIN was just sent to your email address.
+            If you have not received PIN in your Inbox, 
+            please check your spam/junk folder.
+        </p>
+    </div>
+
+    <form
+        class="pin__form"
+        [formGroup]="pinForm"
+        [class.invalid]="pinForm.invalid"
+    >
+        <div class="pin__inputs" (paste)="onPastePin($event)">
+            <input
+                #inputs
+                *ngFor="let item of pinFields; let i = index"
+                class="authInput pin__input"
+                type="text"
+                maxlength="1"
+                oneNumberOnly
+                formControlName="{{ item }}"
+                (input)="onPinInput(i, $event)"
+                (keydown)="onKeyPress(i, $event)"
+                (keyup.backspace)="onPinClear(i)"
+                [attr.data-cy]="'pin-num-' + i"
+            />
+            <div
+                class="pin__clear"
+                *ngIf="pinForm.dirty"
+                (click)="clearPin()"
+            ></div>
+        </div>
+
+        <div
+            class="pin__validation"
+            *ngIf="this.pinForm.dirty && (error$ | async)"
+        >
+            Incorrect PIN
+        </div>
+    </form>
+
+    <div
+        class="pin__controls"
+        [ngClass]="{ 'pin__controls--invalid': pinForm.valid }"
+    >
+        <div class="pin__buttons">
+            <button
+                [disabled]="!pinForm.valid || (isSending$ | async)"
+                class="pin__button authButton"
+                (click)="onSubmit()"
+                data-cy="next-button"
+            >
+                <span [ngClass]="{ spinnered: isSending$ | async }">Next</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="pin__terms" *ngIf="!isResetPassword">
+        By clicking on "Next", you agree to the
+        <u
+            ><a target="_blank" href="/login/tandc"
+                >Terms and Privacy Policy</a
+            ></u
+        >
+    </div>
+        <div class="set-row-timer">
+            <p class="{{isDisabledResend}}" (click)="onResendPin()">Resend PIN</p>
+            <div class="timer-wrapper" *ngIf="onPressResendOption === true">
+                <div class="pie spinner"></div>
+                <div class="pie filler"></div>
+                <div class="mask"></div>
+            </div>
+        </div>
+        
+    <div class="pin__timer" *ngIf="{ time: timer$ | async } as timer">
+        <div class="pin__timerInner">
+            This page will timeout automatically after
+            <strong>{{ getMinutes(timer.time) + ':' + getSeconds(timer.time) }}</strong>
+            min
+        </div>
+    </div>
+</div>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Send</title>
+    <g id="Send" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M3.65185769,13.7867213 L9.59129226,10.4767135 C9.7334016,10.3971196 9.91766773,10.4545556 10.0092797,10.6052351 C10.1008916,10.7559146 10.0596778,10.9373479 9.91756882,11.0169506 L3.97813425,14.3269585 L6.90875938,23.3030277 L19.3537635,5.39419131 L-3.02166006,6.89971065 L3.65185769,13.7867213 Z" id="icons/all/send-message" stroke="#5C5FC8" transform="translate(8.166052, 14.348610) rotate(30.000000) translate(-8.166052, -14.348610) "></path>
+    </g>
+</svg>

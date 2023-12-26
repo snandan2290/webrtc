@@ -1,0 +1,19 @@
+@import 'scss/variables';
+@import 'scss/mixins';
+
+@mixin settings-layouts {
+    &__pane {
+        padding: $spacing-xxl-2 5rem $spacing-xxl-2 $spacing-xxl-7;
+        height: 100%;
+        //background-color: var(--movius_lightgray_and_black);
+    }
+
+    &__header{
+
+    }
+
+    &__headerTxt {
+        @include font-semi-bold-600(1.5rem);
+        color: var(--black);
+    }
+}

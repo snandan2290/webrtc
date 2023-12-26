@@ -1,0 +1,13 @@
+<nz-card nzTitle="Calling">
+    <p>To : {{ peerName }}</p>
+    <p>
+        <button
+            nz-button
+            nzType="danger"
+            nzShape="circle"
+            (click)="hangUp.emit()"
+        >
+            <i nz-icon nzType="stop"></i>
+        </button>
+    </p>
+</nz-card>

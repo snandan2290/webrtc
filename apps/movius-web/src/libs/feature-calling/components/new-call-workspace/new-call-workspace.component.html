@@ -1,0 +1,8 @@
+<movius-web-new-call-inactive
+    *ngIf="view$ | async as view"
+    [peers]="view.peers"
+    [callingStatus]="view.callingStatus"
+    (voiceMail)="onVoiceMail()"
+    (call)="onCall($event)"
+    (numberChanged)="onNumberChanged($event)"
+></movius-web-new-call-inactive>

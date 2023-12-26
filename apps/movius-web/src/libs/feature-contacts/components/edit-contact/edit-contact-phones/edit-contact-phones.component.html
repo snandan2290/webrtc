@@ -1,0 +1,45 @@
+<div
+    nz-row
+    class="addCnt__phone"
+    *ngFor="let phone of formArray.controls; let i = index"
+>
+    <div class="addCnt__countries" nz-col nzFlex="55px" *ngIf="!invalidNum">
+        <movius-web-country-selector
+            class="addCnt__countrySelector"
+            #countrySelector
+            [enableAutoCountrySelect]="true"
+            [selectFirstCountry]="!phone['controls']?.phone?.value"
+            [preferredCountries]="[preferredCountryName]"
+            [actualPhoneValue]="phone['controls']?.phone?.value"
+            (countryChange)="setCountryCodeForPhone(i, $event.dialCode)"
+        >
+        </movius-web-country-selector>
+    </div>
+    <div nz-col nzFlex="auto">
+        <div class="addCnt__phoneControls">
+            <movius-web-ui-slide-input
+                class="addCnt__phoneInput"
+                cyAttribute="phone"
+                [uiTitle]="phone['controls'].type.value?.toString() | camelCap"
+                [MandatoryStar]="((phone['controls'].type.value !== 'BusinessPhone' || i === 0) && phone['controls'].type.value !== 'MobilePhone' && phone['controls'].type.value !== 'HomePhone') ? true : false"
+                [control]="phone['controls'].phone"
+                (onInput)="
+                    prependNumberWithPlus(phone['controls']?.phone) ||
+                    countrySelector?.writeValueThenReportIfChanged({
+                        number: $event?.target?.value,
+                        countryCode: null
+                    })
+                "
+            ></movius-web-ui-slide-input>
+        </div>
+    </div>
+    <ng-container *ngIf="(phone['controls'].type.value !== 'BusinessPhone' || i !== 0)">
+        <div
+        class="addCnt__removeBtn--rightAbs"
+        data-cy="remove-phone-button"
+        nz-button
+        (click)="removePhnNumber(i, phone['controls'].type.value, formArray.controls)" 
+        ></div>
+    </ng-container>
+    
+</div>

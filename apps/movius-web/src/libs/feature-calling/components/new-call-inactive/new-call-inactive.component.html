@@ -1,0 +1,70 @@
+<pane-frame class="newCall wide" [includeDefaultHeader]="false">
+    <div mainCustom class="newCall__topShell">
+        <div class="newCall__headingShell">
+            <movius-web-contact-selector
+                #contactSelector
+                [contacts]="peers"
+                (changed)="onValueChanged($event)"
+                class="newCall__heading"
+            ></movius-web-contact-selector>
+            <div
+                *ngIf="disableCallButton()"
+                class="newCall__headingError"
+            >
+                <div class="errorVariant" [ngSwitch]="callingStatus">
+                    <ng-template ngSwitchCase="network-error">
+                        Network Unreachable.
+                    </ng-template>
+                    <ng-template ngSwitchCase="calls-not-allowed">
+                        Call functionality has been disabled for your
+                        organization
+                    </ng-template>
+                    <ng-template ngSwitchCase="mic-not-allowed">
+                        To enable calling functionality, please permit to access the microphone
+                    </ng-template>
+                    <ng-template ngSwitchCase="e911-declined">
+                        You have not accepted E911 Terms and Conditions. To
+                        enable calling functionality, please enter an address
+                        for E911 under
+                        <a routerLink="/settings/e911">Settings > E911</a>
+                    </ng-template>
+                    <ng-template ngSwitchCase="conference_number">
+                        Currently you cannot make calls to conference numbers.
+                    </ng-template>
+                    <ng-template ngSwitchCase="invalid_number">
+                        Invalid number.
+                    </ng-template>
+                    <ng-template ngSwitchCase="destination-911">
+                        '911' is invalid. Please enter the phone number with a
+                        valid country code (e.g. For U.S: 1xxxxxxxxxx).
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+        <div class="newCall__dialerShell">
+            <div class="newCall__dialer">
+                <movius-web-phone-keyboard
+                    class="newCall__keyboard {{
+                        preserveAutocompleteClassName
+                    }}"
+                    [isSimple]
+                    (voiceMail)="voiceMail.emit()"
+                    (clicked)="onPhoneButtonClicked($event)"
+                ></movius-web-phone-keyboard>
+                <div class="newCall__controls">
+                    <movius-web-call-control-button
+                        data-cy="make-call-button"
+                        class="newCall__call"
+                        [type]="callControlTypes.Start"
+                        [isDisabled]="disableCallButton() || getConnectionErrorValue == true"
+                        (clicked)="onCall(selectedContact.multiline)"
+                    ></movius-web-call-control-button>
+                </div>
+            </div>
+        </div>
+    </div>
+</pane-frame>
+
+<movius-web-general-failure style="display: none;"
+    (passConnectionError)="getConnectionError($event)">
+</movius-web-general-failure>

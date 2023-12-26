@@ -1,0 +1,80 @@
+@import '../../../../assets/scss/mixins';
+@import '../../../../assets/scss/variables';
+
+.call-inbound{
+    color: var(--movius_black);
+    @include font-normal(0.875rem);
+}
+
+.call-outbound{
+    color: var(--movius_black);
+    @include font-normal(0.875rem);
+}
+
+.call_declined{
+    color: var(--movius_orangey-red);
+    @include font-normal(0.875rem);
+}
+
+.typeOfCall{
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-items: center;
+    min-width: 5.5rem;
+
+    overflow: inherit;
+    white-space: inherit;
+    text-overflow: inherit;
+
+    &__logo {
+        width: 1rem;
+        height: 1rem;
+        min-height: 1rem;
+        min-width: 1rem;
+
+        &.call-inbound{
+            @include background-image('/movius/v2/calls/icons-call-type-incoming.svg');
+
+            &--dark{
+                @include background-image('/movius/v2/calls/icons-call-type-incoming-dark.svg');
+            }
+        }
+
+        &.call-outbound {
+            @include background-image('/movius/v2/calls/icons-call-type-outgoing.svg');
+
+            &--dark{
+                @include background-image('/movius/v2/calls/icons-call-type-outgoing-dark.svg');
+            }
+        }
+
+        &.call-declined {
+            @include background-image('/movius/v2/calls/icons-call-type-missed.svg');
+
+            &--dark{
+                @include background-image('/movius/v2/calls/icons-call-type-missed.svg');
+            }
+        }
+    }
+
+    &__text {
+        height: 0.875rem;
+        line-height: 0.875rem;
+
+        margin-left: 0.4rem;
+        word-break: keep-all;
+        white-space: nowrap;
+        overflow: inherit;
+        text-overflow: inherit;
+
+        &.call-inbound, &.call-outbound, &.call-declined, &.call-declined {
+            color: var(--movius_text-gray);
+
+            &--dark{
+                color: var(--movius_black);
+            }
+        }
+    }
+}

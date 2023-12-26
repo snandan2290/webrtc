@@ -1,0 +1,47 @@
+<pane-frame
+    data-cy="sync-contacts"
+    class="syncCnt syncCnt__pane"
+    [isBodyCentered]="true"
+    [includeDefaultBody]="false"
+    [includeDefaultHeader]="false"
+    [includeDefaultFooter]="false"
+>
+    <div class="syncCnt__header" headingCustom>
+        <div class="syncCnt__headerTxt">Exchange Contact</div>
+    </div>
+    <div mainCustom [class.centered]="state !== 'not-sync'" [ngSwitch]="state">
+        <ng-template ngSwitchCase="not-sync">
+            <div class="syncCnt__shell syncCnt__main">
+                <div class="syncCnt__caption">
+                    <p class="syncCnt__captionTxt">
+                        Click <strong>Connect to Office 365 Exchange Server</strong> to access your exchange contacts
+                    </p>
+                </div>
+            </div>
+
+            <div class="syncCnt__controls">
+                <button
+                    data-cy="sync-button"
+                    class="syncCnt__syncBtn"
+                    (click)="onSync()"
+                >
+                    Connect to Office 365 Exchange Server
+                </button>
+
+                <!-- <button
+                    data-cy="disable-sync-button"
+                    (click)="onDisableExchangeSync()"
+                    class="syncCnt__syncBtn"
+                >
+                    Logout microsoft account
+                </button> -->
+            </div>
+        </ng-template>
+
+        <movius-web-contact-sync-gain class="syncCnt__shell syncCnt__syncing" *ngSwitchCase="'syncing'">
+        </movius-web-contact-sync-gain>
+
+        <movius-web-contact-sync-fail class="syncCnt__shell syncCnt__error" *ngSwitchCase="'error'" (tryAgain)="onTryAgain()">
+        </movius-web-contact-sync-fail>
+    </div>
+</pane-frame>

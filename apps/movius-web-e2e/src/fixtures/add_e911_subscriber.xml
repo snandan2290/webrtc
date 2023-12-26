@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<root>
+    <return>0</return>
+    <desc>
+    <prov:AddSubscrResp xmlns:prov="http://lis.telecomsys.com/prov">
+    <prov:RqstId>913811</prov:RqstId>
+    <prov:SubscriberID>sip:16415488746@10.130.105.71</prov:SubscriberID>
+        <prov:LocStatus>
+            <prov:VDBinvalid>
+                <prov:VDBalternative>
+                    <urn:civicAddress xmlns:urn="urn:ietf:params:xml:ns:pidf:geopriv10:civicAddr">
+                        <urn:country>US</urn:country>
+                        <urn:A1>GA</urn:A1>
+                        <urn:RD>RIVER GREEN PKWY</urn:RD>
+                        <urn:HNO>4450</urn:HNO>
+                        <urn:LOC>Parkway Suite 300</urn:LOC>
+                        <urn:PC>30096</urn:PC>
+                        <urn:PCN>Duluth</urn:PCN>
+                    </urn:civicAddress>
+                </prov:VDBalternative>
+            </prov:VDBinvalid>
+        </prov:LocStatus>
+    </prov:AddSubscrResp>
+    </desc>
+</root>

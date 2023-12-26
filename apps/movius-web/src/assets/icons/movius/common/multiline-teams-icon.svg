@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="28px" height="28px" viewBox="0 0 28 28" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>logo/multiline</title>
+    <defs>
+        <filter x="-0.6%" y="-12.7%" width="101.2%" height="125.4%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="1" dy="2" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="1" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Messages:-Empty-Copy-7" transform="translate(-84.000000, -61.000000)" fill-rule="nonzero">
+            <g id="hdr-copy" filter="url(#filter-1)" transform="translate(63.000000, 42.000000)">
+                <g id="Group" transform="translate(22.875000, 19.000000)">
+                    <rect id="Rectangle" fill="#FF4E3B" x="0" y="0" width="23" height="24"></rect>
+                    <g transform="translate(4.000000, 4.000000)" fill="#FFFFFF" id="Path">
+                        <polygon points="2.51733703 15 2.51733703 2.35073788 2.90418713 2.77942168 7.45698542 7.19379729 15 8.8817842e-16 11.3530382 8.8817842e-16 7.47160475 3.70196269 3.65427147 8.8817842e-16 0 8.8817842e-16 0 15"></polygon>
+                        <polygon points="7.47160475 10.0204135 4.50387975 7.1432317 4.50387975 10.6491123 7.45698542 13.5128099 12.4776024 8.72424901 12.4776024 15 14.996064 15 14.996064 2.84403326"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

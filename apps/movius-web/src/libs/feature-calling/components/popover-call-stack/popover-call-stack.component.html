@@ -1,0 +1,15 @@
+<div class="call-stack" cdkDrag>
+    <div class="call-stack__header">Calls</div>
+    <movius-web-popover-call
+        *ngFor="let call of calls; trackBy: trackByCall; index as i"
+        [peer]="call.peer"
+        [call]="call"
+        (accept)="accept.emit(call.callId)"
+        (cancel)="cancel.emit(call.callId)"
+        (swap)="swap.emit(call.callId)"
+        (mute)="mute.emit({ callId: call.callId, isMute: $event })"
+        (hold)="hold.emit({ callId: call.callId, isHold: $event })"
+        [isStacked]="i > 0"
+    >
+    </movius-web-popover-call>
+</div>

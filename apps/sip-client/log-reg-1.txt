@@ -1,0 +1,82 @@
+Log-level=info
+SIPml-api.js:1330 2020-10-21T10:55:54.100Z s_websocket_server_url=wss://rnd100.moviuscorp.net:8089/ws
+SIPml-api.js:1330 2020-10-21T10:55:54.100Z s_sip_outboundproxy_url=(null)
+SIPml-api.js:1330 2020-10-21T10:55:54.100Z b_rtcweb_breaker_enabled=yes
+SIPml-api.js:1330 2020-10-21T10:55:54.100Z b_click2call_enabled=no
+SIPml-api.js:1330 2020-10-21T10:55:54.100Z b_early_ims=yes
+SIPml-api.js:1330 2020-10-21T10:55:54.100Z b_enable_media_stream_cache=no
+SIPml-api.js:1330 2020-10-21T10:55:54.100Z o_bandwidth={"audio":64,"video":512}
+SIPml-api.js:1330 2020-10-21T10:55:54.101Z o_video_size={}
+SIPml-api.js:1330 2020-10-21T10:55:54.101Z SIP stack start: proxy='ns313841.ovh.net:10062', realm='<sip:rnd100.moviuscorp.net>', impi='f5c85833285076a63dd3a722beeb7c94', impu='"f5c85833285076a63dd3a722beeb7c94"<sip:f5c85833285076a63dd3a722beeb7c94@rnd100.moviuscorp.net:8089>'
+SIPml-api.js:1330 2020-10-21T10:55:54.101Z Connecting to 'wss://rnd100.moviuscorp.net:8089/ws'
+SIPml-api.js:1330 2020-10-21T10:55:54.103Z ==stack event = starting
+SIPml-api.js:1330 2020-10-21T10:55:59.173Z __tsip_transport_ws_onopen
+SIPml-api.js:1330 2020-10-21T10:55:59.181Z ==stack event = started
+SIPml-api.js:1330 2020-10-21T10:55:59.181Z State machine: tsip_dialog_register_Started_2_InProgress_X_oRegister
+SIPml-api.js:1330 2020-10-21T10:55:59.182Z SEND: REGISTER sip:rnd100.moviuscorp.net SIP/2.0
+Via: SIP/2.0/WSS df7jal23ls0d.invalid;branch=z9hG4bKpqQRrwE62JD2PrCJtE3a9aqAmxdlQ6oT;rport
+From: "f5c85833285076a63dd3a722beeb7c94"<sip:f5c85833285076a63dd3a722beeb7c94@rnd100.moviuscorp.net:8089>;tag=4TfQovgGVuS2LMGZ8uNr
+To: "f5c85833285076a63dd3a722beeb7c94"<sip:f5c85833285076a63dd3a722beeb7c94@rnd100.moviuscorp.net:8089>
+Contact: "f5c85833285076a63dd3a722beeb7c94"<sips:f5c85833285076a63dd3a722beeb7c94@df7jal23ls0d.invalid;rtcweb-breaker=yes;transport=wss>;expires=200;click2call=no;+g.oma.sip-im;+audio;language="en"
+Call-ID: 4ecc4eab-32fb-6f51-bd45-c72f06cf603b
+CSeq: 7784 REGISTER
+Content-Length: 0
+Max-Forwards: 70
+X-CAFE-IDENTITY: 14843123841
+IX-MCP-SECURECALL: yes
+User-Agent: Movius WEBRTC
+X-CAFE-IDENTITY-INFO: identity='14843123841',last_message=''
+Supported: path
+
+
+SIPml-api.js:1330 2020-10-21T10:55:59.184Z ==session event = connecting
+SIPml-api.js:1330 2020-10-21T10:55:59.187Z ==session event = sent_request
+SIPml-api.js:1330 2020-10-21T10:55:59.349Z recv=SIP/2.0 401 Unauthorized
+Via: SIP/2.0/WSS df7jal23ls0d.invalid;rport;received=212.34.48.205;branch=z9hG4bKpqQRrwE62JD2PrCJtE3a9aqAmxdlQ6oT
+From: "f5c85833285076a63dd3a722beeb7c94"<sip:f5c85833285076a63dd3a722beeb7c94@rnd100.moviuscorp.net:8089>;tag=4TfQovgGVuS2LMGZ8uNr
+To: "f5c85833285076a63dd3a722beeb7c94"<sip:f5c85833285076a63dd3a722beeb7c94@rnd100.moviuscorp.net:8089>;tag=as2cd99dd4
+Call-ID: 4ecc4eab-32fb-6f51-bd45-c72f06cf603b
+CSeq: 7784 REGISTER
+Content-Length: 0
+Server: CAFE MAS
+Allow: INVITE,ACK,CANCEL,OPTIONS,BYE,REFER,SUBSCRIBE,NOTIFY,INFO,PUBLISH,MESSAGE,PRACK,UPDATE
+Supported: replaces,timer
+WWW-Authenticate: Digest realm="@moviuscorp.com",nonce="26fd8c1d",stale=FALSE,algorithm=MD5
+
+
+SIPml-api.js:1330 2020-10-21T10:55:59.350Z State machine: tsip_dialog_register_InProgress_2_InProgress_X_401_407_421_494
+SIPml-api.js:1330 2020-10-21T10:55:59.354Z SEND: REGISTER sip:rnd100.moviuscorp.net SIP/2.0
+Via: SIP/2.0/WSS df7jal23ls0d.invalid;branch=z9hG4bKhMX8pcLTT3ZXDiT2xeQc0HIWvK2FwppG;rport
+From: "f5c85833285076a63dd3a722beeb7c94"<sip:f5c85833285076a63dd3a722beeb7c94@rnd100.moviuscorp.net:8089>;tag=4TfQovgGVuS2LMGZ8uNr
+To: "f5c85833285076a63dd3a722beeb7c94"<sip:f5c85833285076a63dd3a722beeb7c94@rnd100.moviuscorp.net:8089>
+Contact: "f5c85833285076a63dd3a722beeb7c94"<sips:f5c85833285076a63dd3a722beeb7c94@df7jal23ls0d.invalid;rtcweb-breaker=yes;transport=wss>;expires=200;click2call=no;+g.oma.sip-im;+audio;language="en"
+Call-ID: 4ecc4eab-32fb-6f51-bd45-c72f06cf603b
+CSeq: 7785 REGISTER
+Content-Length: 0
+Max-Forwards: 70
+Authorization: Digest username="f5c85833285076a63dd3a722beeb7c94",realm="@moviuscorp.com",nonce="26fd8c1d",uri="sip:rnd100.moviuscorp.net",response="54c80bbc7cdfa489527bae4c58b3e371",algorithm=MD5
+X-CAFE-IDENTITY: 14843123841
+IX-MCP-SECURECALL: yes
+User-Agent: Movius WEBRTC
+X-CAFE-IDENTITY-INFO: identity='14843123841',last_message=''
+Supported: path
+
+
+SIPml-api.js:1330 2020-10-21T10:55:59.358Z ==session event = sent_request
+SIPml-api.js:1330 2020-10-21T10:55:59.522Z recv=SIP/2.0 200 OK
+Via: SIP/2.0/WSS df7jal23ls0d.invalid;rport;received=212.34.48.205;branch=z9hG4bKhMX8pcLTT3ZXDiT2xeQc0HIWvK2FwppG
+From: "f5c85833285076a63dd3a722beeb7c94"<sip:f5c85833285076a63dd3a722beeb7c94@rnd100.moviuscorp.net:8089>;tag=4TfQovgGVuS2LMGZ8uNr
+To: "f5c85833285076a63dd3a722beeb7c94"<sip:f5c85833285076a63dd3a722beeb7c94@rnd100.moviuscorp.net:8089>;tag=as2cd99dd4
+Contact: <sips:f5c85833285076a63dd3a722beeb7c94@df7jal23ls0d.invalid;rtcweb-breaker=yes;transport=wss>;expires=200
+Call-ID: 4ecc4eab-32fb-6f51-bd45-c72f06cf603b
+CSeq: 7785 REGISTER
+Expires: 200
+Content-Length: 0
+Server: CAFE MAS
+Allow: INVITE,ACK,CANCEL,OPTIONS,BYE,REFER,SUBSCRIBE,NOTIFY,INFO,PUBLISH,MESSAGE,PRACK,UPDATE
+Supported: replaces,timer
+Date: 21 Oct 2020 10:55:59 GMT;21
+
+
+SIPml-api.js:1330 2020-10-21T10:55:59.523Z State machine: tsip_dialog_register_InProgress_2_Connected_X_2xx
+SIPml-api.js:1330 2020-10-21T10:55:59.526Z ==session event = connected

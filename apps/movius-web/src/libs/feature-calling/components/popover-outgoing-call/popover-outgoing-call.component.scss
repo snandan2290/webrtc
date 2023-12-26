@@ -1,0 +1,11 @@
+@import '../../../../assets/scss/mixins';
+@import '../../../../assets/scss/variables';
+@import '../common/calling-common.scss';
+
+:host {
+    @include inherit-border();
+}
+
+.pop-outgo {
+    @include popup-call();
+}

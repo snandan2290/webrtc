@@ -1,0 +1,67 @@
+@import '../../../../assets/scss/variables';
+@import '../../../../assets/scss/mixins';
+@import '../../../../assets/scss/app.scss';
+
+$darker-gray: var(--movius_border-gray-2);
+
+%bordered {
+    @include bottom-bordered($darker-gray);
+}
+
+.cntDetails {
+    &__column {
+        min-width: 6rem;
+    }
+
+    &__libCaption {
+        @include font-bold(1.125rem);
+        padding: 0 0 $spacing-xl 0;
+        margin: 0;
+    }
+
+    &__item {
+        flex-wrap: nowrap;
+        &:nth-child(1){
+            padding: 0 0 $spacing-m 0;
+        }
+        padding: $spacing-m 0 $spacing-m 0;
+        word-break: break-all;
+    }
+
+    &__libCaption, &__item {
+        @extend %bordered;
+    }
+
+    &__data {
+        display: block;
+        margin: 0 0 0 $spacing-xxl-2;
+        @include font-normal( 0.875rem);
+        word-break: keep-all;
+    }
+
+    &__description {
+        display: block;
+        margin: 0 0 0 $spacing-xxl-2;
+        @include font-bold(0.875rem);
+        color: $movius_text-gray;
+        word-break: keep-all;
+    }
+
+    &__library {
+
+        @include screen-mobile-above{
+            width: $cnt-details-def-width;
+
+        }
+        @include screen-mobile{
+            width: $cnt-details-def-width-mobile;
+        }
+
+
+        height: 100%;
+        margin: 0 auto;
+        overflow-y: auto;
+
+        @extend %scroll;
+    }
+}

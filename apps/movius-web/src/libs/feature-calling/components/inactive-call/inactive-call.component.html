@@ -1,0 +1,135 @@
+<pane-frame class="history" [includeDefaultHeader]="false">
+    <movius-web-contact-header
+        headingCustom
+        class="history__heading history__detailsLink"
+        [srcContactName]="isAnonymous ? 'Anonymous' : getContactCallTitle(peer)"
+        [srcContactAddress]="
+            isAnonymous ? 'Anonymous' : getContactRealNumber(peer)
+        "
+        [addCustomLogo]="true"
+        [contactType]="isAnonymous ? 'unknown' : peer.multiLineType"
+        [isClickable]="true"
+        (logoClicked)="navigateToDetails(peer?.contact?.id)"
+        (nameClicked)="navigateToDetails(peer?.contact?.id)"
+    >
+        <movius-web-contact-logo
+            customLogo
+            class="history__detailsLink contact-logo"
+            [peer]="peer"
+            [alt]="'Contact Logo'"
+            [doZoomLetters]="true"
+        >
+        </movius-web-contact-logo>
+        <ng-container *ngIf="!isAnonymous" buttons class="history__controls">
+            <movius-web-labeled-button
+                [isDisabled]="messagingStatus !== 'allowed'"
+                text="Message"                
+                imgUri="assets/icons/movius/common/icons-contact-message.svg"
+                (clicked)="onMessageClicked(peer.multiLine)"
+            >
+            </movius-web-labeled-button>
+            <movius-web-labeled-button *ngIf="peer.contact && whatsAppMessageEnabled"
+                [isDisabled]="messagingStatus !== 'allowed'"
+                text="WhatsApp"                
+                imgUri="assets/icons/movius/contacts/icons-whatsapp.svg"
+                (clicked)="onWhatsAppMessage(peer.contact, peer.multiLine)"
+            >
+            </movius-web-labeled-button>
+            <movius-web-labeled-button
+                [isDisabled]="getConnectionErrorValue == true ? callingStatus_temp : callingStatus"
+                data-cy="call-button"
+                text="Call"
+                imgUri="assets/icons/movius/common/icons-contact-call.svg"
+                (clicked)="call.emit()"
+            >
+            </movius-web-labeled-button>
+            <movius-web-labeled-button
+                *ngIf="!peer.contact"
+                text="Create Contact"
+                imgUri="assets/icons/movius/common/icons-contact-create.svg"
+                [routerLink]="['/contacts', 'new', peer.multiLine]"
+            >
+            </movius-web-labeled-button>
+            <movius-web-labeled-button
+                *ngIf="!peer.contact && (peers$ | async)?.length > 0"
+                text="Add to Existing"
+                imgUri="assets/icons/movius/common/icons-contact-add.svg"
+                (click)="addToExistentContact.emit()"
+            >
+            </movius-web-labeled-button>
+        </ng-container>
+    </movius-web-contact-header>
+
+    <div mainCustom class="history__container" *ngIf="history.length > 0">
+        <p class="history__libCaption">
+            Calls History
+            <!-- <button
+                data-cy="remove-all-history"
+                class="history__clearAll"
+                nz-button
+                nzShape="round"
+                nzSize="small"
+                (click)="onClearHistory()"
+            >
+                Clear All
+            </button> -->
+        </p>
+        <div class="history__library">
+            <communication-item
+                main
+                data-cy="call-history-item"
+                class="history__historyItem"
+                [removeLogo]="true"
+                *ngFor="let item of history; trackBy: trackByHistory"
+                (click)="activateHistoryItem(item)"
+                [class.active]="item === activeHistoryItem"
+                [externalStyle]="{ 'padding-right': 0 }"
+            >
+                >
+                <div title class="history__itemCarrier">
+                    <movius-web-type-of-call
+                        [historySession]="item"
+                        [isDarkMode]="true"
+                        class="history__itemType"
+                    >
+                    </movius-web-type-of-call>
+                    <span class="history__itemText">{{
+                        formatDate(item.startTime)
+                    }}</span>
+                </div>
+                <div addition>
+                    <div class="history__itemControls">
+                        <div class="history__duration">
+                            <ng-container
+                                *ngIf="
+                                    item.kind === 'HistorySessionCompleted' &&
+                                    item.type !== 'rejected'
+                                "
+                            >
+                                {{ formatDuration(item) }}
+                            </ng-container>
+                        </div>
+                        <!--
+                        //Remove calls is not supported by IP so we decided to remove them completely
+                        <div
+                            data-cy="remove-history-item"
+                            class="history__removeItem"
+                            (click)="onDeleteHistoryItem(item.id)"
+                        >
+                            <img
+                                class="history__removeItemIco"
+                                src="assets/icons/movius/common/icons-delete.svg"
+                            />
+                        </div>
+                        -->
+                    </div>
+                </div>
+            </communication-item>
+        </div>
+    </div>
+</pane-frame>
+
+
+<movius-web-general-failure style="display: none;"
+    (passConnectionError)="getConnectionError($event)">
+</movius-web-general-failure>

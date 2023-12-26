@@ -1,0 +1,14 @@
+<div class="typeOfCall">
+    <div
+        class="typeOfCall__logo {{
+            selectedParameters.cssClass + (isDarkMode ? '--dark' : '')
+        }}"
+    ></div>
+    <span
+        class="typeOfCall__text {{
+            selectedParameters.cssClass + (isDarkMode ? '--dark' : '')
+        }}"
+    >
+        {{ callType || selectedParameters.text }}
+    </span>
+</div>

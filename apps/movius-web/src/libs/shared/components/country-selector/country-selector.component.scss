@@ -1,0 +1,90 @@
+@import '../../../../assets/scss/variables';
+@import '../../../../assets/scss/mixins';
+
+.country-selector {
+    &__flagBtn {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    &__selectedDialCode {
+        margin-left: 0.5rem;
+    }
+}
+
+.country-dropdown {
+    &__list {
+        background: var(--movius_white);
+        color: var(--black);
+
+        overflow-y: scroll;
+        @include scrollbars(0.3rem, var(--movius_darkgray), var(--movius_lightgray));
+
+        border-bottom-left-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
+    }
+}
+
+.search-container {
+    position: relative;
+}
+.search-container input {
+    width: 100%;
+    border: none;
+    border-bottom: 0.05rem solid var(--movius_gray);
+    padding-left: 0.5rem;
+    color: var(--black);
+    background-color: var(--movius_text-gray-and-white);
+
+
+    @include placeholder {
+        color: var(--black);
+    }
+}
+
+// li.iti__country:hover {
+// 	background-color: rgba(0, 0, 0, 0.05);
+// }
+// .iti__selected-flag.dropdown-toggle:after {
+// 	content: none;
+// }
+// .iti__flag-container.disabled {
+// 	cursor: default !important;
+// }
+// .iti.iti--allow-dropdown .flag-container.disabled:hover .iti__selected-flag {
+// 	background: none;
+// }
+// .country-dropdown {
+// 	border: 1px solid #ccc;
+// 	width: fit-content;
+// 	padding: 1px;
+// 	border-collapse: collapse;
+// }
+
+// .iti__country-list {
+// 	position: relative;
+// 	border: none;
+// }
+
+// .iti input#country-search-box {
+// 	padding-left: 6px;
+// }
+
+// .iti .selected-dial-code {
+// 	margin-left: 6px;
+// }
+
+// .iti.separate-dial-code .iti__selected-flag,
+// .iti.separate-dial-code.iti--allow-dropdown.iti-sdc-2 .iti__selected-flag,
+// .iti.separate-dial-code.iti--allow-dropdown.iti-sdc-3 .iti__selected-flag,
+// .iti.separate-dial-code.iti--allow-dropdown.iti-sdc-4 .iti__selected-flag {
+// 	width: 93px;
+// }
+
+// .iti.separate-dial-code input,
+// .iti.separate-dial-code.iti--allow-dropdown.iti-sdc-2 input,
+// .iti.separate-dial-code.iti--allow-dropdown.iti-sdc-3 input,
+// .iti.separate-dial-code.iti--allow-dropdown.iti-sdc-4 input {
+// 	padding-left: 98px;
+// }

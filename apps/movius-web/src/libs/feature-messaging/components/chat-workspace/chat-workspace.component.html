@@ -1,0 +1,439 @@
+<ng-container *ngIf="view$ | async as session">
+    <!-- <svg  class="align_item" *ngIf="isMobileDevice" (click)="backToList()" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="80.593px" height="122.88px"
+        viewBox="0 0 80.593 122.88" enable-background="new 0 0 80.593 122.88" xml:space="preserve">
+        <g>
+            <polygon points="80.593,0 49.771,0 0,61.44 49.771,122.88 80.593,122.88 30.82,61.44 80.593,0" />
+        </g>
+    </svg> -->
+    <pane-frame
+        class="mobile_ui_send_picture"
+        #chatShell
+        *ngIf="session.peer as peer"
+        [isChatHeight] = "this.chatHeight"
+        [ngClass]="
+            getDisplayImagesSelectedValue == true
+                ? isMobileDevice ? 'chatspace' : 'chatspace__padding'
+                : isMobileDevice ? 'chatspace__padding-height' : 'chatspace__padding'
+        "
+        [emphasizeHeader]="true"
+        [isMobileDevice]="!isMobileDevice"
+        [urlId]="urlId"
+        (backBtnClicked)="backBtnClicked($event)"
+        scrollClass = "chatscroll"
+    >
+        <communication-item
+            class="chatspace__heading"
+            *ngIf="{
+                isNamed:
+                    !!peer?.contact?.firstName ||
+                    !!peer?.contact?.lastName ||
+                    !!peer.name
+            } as cond"
+            [addCustomLogo]="true"
+            headingLeft
+            [showBackOption]="true"
+            (onBackCLicked)="backToList()"
+            [isGroup]="session.isGroup"
+        >
+            <movius-web-contact-logo
+                *ngIf="
+                    session.isGroup === false &&
+                    getContactCallTitleValue(session) !== 'Anonymous'
+                "
+                customLogo
+                class="chatspace__hCntLogo"
+                [peer]="peer"
+                [alt]="'Contact Logo'"
+                [disabled]="getContactCallTitleValue(session) === 'Anonymous'"
+                [routerLink]="['./details']"
+            >
+            </movius-web-contact-logo>
+            <movius-web-contact-logo
+                *ngIf="
+                    session.isGroup === false &&
+                    getContactCallTitleValue(session) === 'Anonymous'
+                "
+                customLogo
+                class="chatspace__hCntLogo"
+                [peer]="peer"
+                [alt]="'Contact Logo'"
+            >
+            </movius-web-contact-logo>
+            <svg
+                *ngIf="session.isGroup === true"
+                customLogo
+                class="chatspace__hCntLogo"
+                [routerLink]="['./participants']"
+                width="40px"
+                height="40px"
+                viewBox="0 0 40 40"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+            >
+                <g
+                    id="Messages"
+                    stroke="none"
+                    stroke-width="1"
+                    fill="none"
+                    fill-rule="evenodd"
+                >
+                    <g
+                        id="Group-Messages:-New-Group"
+                        transform="translate(-603.000000, -84.000000)"
+                    >
+                        <g
+                            id="info"
+                            transform="translate(603.000000, 72.000000)"
+                        >
+                            <g
+                                id="icons/group"
+                                transform="translate(0.000000, 12.000000)"
+                            >
+                                <path
+                                    d="M20,0 C8.97071872,0 0,8.96184561 0,20 C0,31.0381544 8.97071872,40 20,40 C31.0292813,40 40,31.0292813 40,20 C40,8.97071872 31.0381544,0 20,0"
+                                    fill="#5C5FC8"
+                                    fill-rule="nonzero"
+                                ></path>
+                                <g
+                                    id="Group"
+                                    transform="translate(6.000000, 12.000000)"
+                                    fill="#FFFFFF"
+                                >
+                                    <path
+                                        d="M7.2,16.4137931 L7.2,15.7247285 C7.2,13.6823496 7.96918001,12.1726152 9.26700701,11.1938604 C10.5341986,10.2384538 12.2258141,9.84827586 14,9.84827586 C15.772813,9.84827586 17.4659583,10.2384855 18.732993,11.1938604 C20.0292902,12.1709106 20.8,13.683737 20.8,15.7247285 L20.8,16.4137931 L7.2,16.4137931 Z M10.4,4.10427946 C10.4,1.83984794 12.1918448,8.74702609e-14 14.3991898,8.74702609e-14 C16.6081552,8.74702609e-14 18.4,1.83984794 18.4,4.10427946 C18.4,6.36871097 16.6081552,8.20689655 14.3991898,8.20689655 C12.1918448,8.20689655 10.4,6.36871097 10.4,4.10427946 Z"
+                                        id="Fill-1"
+                                    ></path>
+                                    <path
+                                        d="M4.95721975,9.84827586 C6.05163383,9.84827586 7.12509685,10.0520507 8,10.5567195 C6.7780613,11.5994762 6.00002066,13.0274897 5.76431088,14.7724138 L3.75699472e-13,14.7723323 L3.75699472e-13,14.0654781 C3.75699472e-13,12.6135822 0.564976187,11.5182923 1.53186566,10.8066698 C2.4664814,10.1189296 3.69813114,9.84827586 4.95721975,9.84827586 Z M23.0427803,9.84827586 C24.3018689,9.84827586 25.5334773,10.1189178 26.4681343,10.8066856 C27.4350238,11.51832 28,12.613628 28,14.0655479 L28,14.7724138 L22.2357718,14.7724138 C22.0000992,13.0275831 21.2220627,11.5995052 20.0000826,10.5566497 C20.8749031,10.0520541 21.9483248,9.84827586 23.0427803,9.84827586 Z M5.19925393,2.46206897 C6.74610534,2.46206897 8,3.74992267 8,5.33371739 C8,6.92210431 6.74610534,8.20689655 5.19925393,8.20689655 C3.65389466,8.20689655 2.4,6.92210431 2.4,5.33371739 C2.4,3.74992267 3.65389466,2.46206897 5.19925393,2.46206897 Z M22.8007461,2.46206897 C24.3461053,2.46206897 25.6,3.74992267 25.6,5.33524812 C25.6,6.92210431 24.3461053,8.20689655 22.8007461,8.20689655 C21.2538947,8.20689655 20,6.92210431 20,5.33524812 C20,3.74992267 21.2538947,2.46206897 22.8007461,2.46206897 Z"
+                                        id="Combined-Shape"
+                                        opacity="0.600000024"
+                                    ></path>
+                                </g>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </svg>
+            <div
+                *ngIf="
+                    session.isGroup === false &&
+                    getContactCallTitleValue(session) !== 'Anonymous'
+                "
+                title
+                class="chatspace__hName"
+                [routerLink]="['./details']"
+            >
+            <message-channel-type-icon
+                [messageChannelType] = "session.messageChannelType"
+                [alt] = "'img'">
+            </message-channel-type-icon>
+                <!-- <img
+                    *ngIf="session.isWhatsAppThread"
+                    src="assets/icons/movius/contacts/icons-whatsapp.svg"
+                    alt="img"
+                /> -->
+                <!-- {{ getContactCallTitle(peer) }} -->
+                {{ session | contactTitle: savedContact }}
+            </div>
+            <div
+                *ngIf="
+                    session.isGroup === false &&
+                    getContactCallTitleValue(session) === 'Anonymous'
+                "
+                title
+                class="chatspace__hName"
+            >
+                {{ getContactCallTitleValue(session) }}
+            </div>
+            <div
+                *ngIf="session.isGroup === true"
+                title
+                class="chatspace__hName"
+                [routerLink]="['./participants']"
+            >
+            <message-channel-type-icon
+                [messageChannelType] = "session.messageChannelType"
+                [alt] = "'img'">
+            </message-channel-type-icon>
+                <!-- <img
+                    *ngIf="session.isWhatsAppThread"
+                    src="assets/icons/movius/contacts/icons-whatsapp.svg"
+                    alt="img"
+                /> -->
+                {{ getContactCallTitleValue(session) }}
+            </div>
+            <!-- <div
+                subtitle
+                class="chatspace__hPhone"
+                *ngIf="cond.isNamed && !session.isGroup"
+                [routerLink]="['./details']"
+            >
+                <div>{{ getContactRealNumber(peer) }}</div>
+            </div> -->
+        </communication-item>
+
+        <div headingRight class="chatspace__hControls">
+            <div
+                nz-popover
+                [nzPopoverContent]="disbaledCallButton && e911DialPopover"
+                [nzPopoverOverlayClassName]="'e911tooltip'"
+                nzPopoverPlacement="top"
+            >
+                <button
+                    *ngIf="
+                        session.isGroup === false &&
+                        getContactCallTitleValue(session) !== 'Anonymous' &&
+                        appEmbededStatus !== 'messaging' &&
+                        !isLineOrWeChatThread(peer.multiLine)
+                    "
+                    class="chatspace__hCall chatspace__hBtn--crcl"
+                    [disabled]="
+                        disbaledCallButton || getConnectionErrorValue == true
+                    "
+                    (click)="onCall(peer.multiLine)"
+                >
+                    <div class="chatspace__hCallIco"></div>
+                </button>
+                <div
+                    nz-popover
+                    [nzPopoverContent]="
+                        callingStatus_tmp == 'another-active-call'
+                            ? ''
+                            : anonymousDisableCall
+                    "
+                    [nzPopoverOverlayClassName]="'anonymousDisableCallPopup'"
+                    nzPopoverPlacement="bottom"
+                >
+                    <button
+                        *ngIf="
+                            session.isGroup === false &&
+                            getContactCallTitleValue(session) === 'Anonymous'
+                        "
+                        class="chatspace__hCall chatspace__hBtn--crcl"
+                        [disabled]="
+                            getContactCallTitleValue(session) === 'Anonymous'
+                        "
+                    >
+                        <div class="chatspace__hCallIco"></div>
+                    </button>
+                </div>
+            </div>
+            <button
+                *ngIf="session.isGroup === false"
+                data-cy="chat-menu-dropdown"
+                class="chatspace__hOther chatspace__hBtn--crcl"
+                nz-dropdown
+                [nzDropdownMenu]="menu"
+                [disabled]="getContactCallTitleValue(session) === 'Anonymous'"
+                [nzPlacement]="'bottomLeft'"
+            >
+                <div class="chatspace__hOtherIco"></div>
+            </button>
+            <button
+                *ngIf="session.isGroup === true"
+                class="chatspace__hOther chatspace__hBtn--crcl"
+                [routerLink]="['./participants']"
+            >
+                <div class="chatspace__hGroupInfoIcon"></div>
+            </button>
+            <button
+                *ngIf="session.isGroup === true && session.isMuted"
+                class="chatspace__hOther chatspace__hBtn--crcl"
+                (click)="onMuteThread(session.threadId, !session.isMuted)"
+            >
+                <div class="chatspace__hMuteIcon"></div>
+            </button>
+            <button
+                *ngIf="session.isGroup === true && !session.isMuted"
+                class="chatspace__hOther chatspace__hBtn--crcl"
+                (click)="onMuteThread(session.threadId, !session.isMuted)"
+            >
+                <div class="chatspace__hUnmuteIcon"></div>
+            </button>
+            <nz-dropdown-menu #menu="nzDropdownMenu">
+                <ul nz-menu class="chatspace__dropMenu">
+                    <li
+                        *ngIf="session.isGroup === false"
+                        nz-menu-item
+                        class="chatspace__dropMenuItem"
+                        [routerLink]="['./details']"
+                    >
+                        Contact Information
+                    </li>
+                    <li
+                        *ngIf="session.isGroup === true"
+                        nz-menu-item
+                        class="chatspace__dropMenuItem"
+                        [routerLink]="['./participants']"
+                    >
+                        Group Information
+                    </li>
+                    <li
+                        nz-menu-item
+                        class="chatspace__dropMenuItem"
+                        (click)="
+                            onMuteThread(session.threadId, !session.isMuted)
+                        "
+                    >
+                        {{
+                            !session.isMuted
+                                ? 'Mute Notifications'
+                                : 'Unmute Notifications'
+                        }}
+                    </li>
+                    <li
+                        nz-menu-item
+                        class="chatspace__dropMenuItem"
+                        (click)="addMoreParticipants(session.participants)"
+                        *ngIf="(session.isWhatsOptInReqAccepted || session.messageChannelType == 'Line' || session.messageChannelType == 'WeChat' || session.messageChannelType == 'whatsapp') && session.whatsOptInReqStatus?.toString() != '5' && session.whatsOptInReqStatus?.toString() != '2' && add_participants_enable() === 'true'"
+                    >
+                        Add user to conversation
+                    </li>
+                    <!-- <li
+                        nz-menu-item
+                        class="chatspace__dropMenuItem"
+                        (click)="leaveConversation()"
+                        *ngIf="session.messageChannelType == 'Line' || session.messageChannelType == 'WeChat'"
+                    >
+                        Leave Conversation
+                    </li> -->
+                    <!-- Disabled since no API support
+                    <li
+                        data-cy="chat-remove-messages"
+                        nz-menu-item
+                        class="chatspace__dropMenuItem"
+                        (click)="onRemoveMessages(peer.multiLine)"
+                    >
+                        Delete Messages
+                    </li>
+                    -->
+                </ul>
+            </nz-dropdown-menu>
+        </div>
+
+        <div errorTextSample class="start__headingError">
+            <div class="errorVariant">
+                {{ selfDestinationError }}
+            </div>
+        </div>
+
+        <div
+            main
+            class="chatspace__image-templete"
+            *ngIf="getDisplayImagesSelectedValue === true"
+        >
+            <display-selected-image
+                (imagePreviewCancel)="imagePreviewCancelStatus($event)"
+                [imageBlob]="imageBlobData"
+                (sendMMSEvent)="onSendMedia(session, $event)"
+            >
+            </display-selected-image>
+        </div>
+
+        <div
+            main
+            class="chatspace__chat"
+            [ngStyle]="{ 'display': getDisplayImagesSelectedValue ? 'none' : 'block' }"
+        >
+            <movius-web-chat
+                [session]="session"
+                [cnt_id]="cntId"
+                (messageDisplayed)="onMessageDisplayed(session, $event)"
+                (removeMessage)="onRemoveMessage(peer.multiLine, $event)"
+                (copyMessage)="onCopyMessage($event)"
+                (forwardMessage)="onForwardMessage($event)"
+                (loadedImages_chat_workspace)="onNewImageLoaded($event)"
+                [loadedPictureMessage_chat_workspace]="loadedPictures$"
+            >
+            </movius-web-chat>
+        </div>
+
+        <div
+            footer
+            class="chatspace__controls"
+            *ngIf="getDisplayImagesSelectedValue === false"
+        >
+            <fieldset
+                [attr.disabled]="
+                    getContactCallTitleValue(session) === 'Anonymous'
+                        ? 'disabled'
+                        : null
+                "
+            >
+                <movius-web-message-form
+                    [showWhatsTemplate]="session.showWhatsAppTemplateList"
+                    class="chatspace__form"
+                    [messagingStatus]="session.messagingStatus"
+                    [selectedContactMultiline]="peer.multiLine"
+                    [picMsgCancelledStatus]="picMsgeventCancelled"
+                    (messageSent)="onSendMessage(session, $event)"
+                    (mediaSent)="onSendMedia(session, $event)"
+                    (displayImageSelected)="
+                        getDisplayImagesSelectedStatus($event)
+                    "
+                    (blobImageURL)="fetchBlobURL($event)"
+                    [isValNum]="isValnum"
+                ></movius-web-message-form>
+            </fieldset>
+        </div>
+    </pane-frame>
+
+    <ng-template #anonymousDisableCall>
+        <p class="anonymousDisableCall">
+            You cannot place a call to Anonymous number
+        </p>
+    </ng-template>
+
+    <ng-template #emptyChat>
+        <pane-frame class="chatspace" [includeDefaultHeader]="false"
+        [isChatHeight] = "this.chatHeight">
+            <movius-web-contact-selector
+                class="chatspace__heading--cntr"
+                headingCustom
+            ></movius-web-contact-selector>
+            <movius-web-message-form
+                footer
+                [messagingStatus]="session.messagingStatus"
+                (messageSent)="onSendMessage(session, $event)"
+            ></movius-web-message-form>
+        </pane-frame>
+    </ng-template>
+
+    <ng-template #e911DialPopover>
+        <!-- TECH-DEBT: CB:20Jul2021: Duplications detected. Consider extracting template to shell with introduced tempalte-variable for status OR separate comp. -->
+        <div class="e911Pop--error">
+            <p>Sorry!</p>
+            <p class="e911Pop--error" [ngSwitch]="session.callingStatus">
+                <ng-template ngSwitchCase="network-error">
+                    Network Unreachable
+                </ng-template>
+                <ng-template ngSwitchCase="calls-not-allowed">
+                    Call functionality has been disabled for your organization
+                </ng-template>
+                <ng-template ngSwitchCase="mic-not-allowed">
+                    To enable calling functionality, please permit to access the
+                    microphone
+                </ng-template>
+                <ng-template ngSwitchCase="e911-declined">
+                    You have not accepted E911 Terms and Conditions. To enable
+                    calling functionality, please enter an address for E911
+                    under <a routerLink="/settings/e911">Settings > E911</a>
+                </ng-template>
+                <ng-template ngSwitchCase="another-active-call">
+                    Another call in progress.
+                </ng-template>
+            </p>
+            <p *ngIf="callingStatus_tmp == 'network-error'">
+                Network Unreachable
+            </p>
+        </div>
+    </ng-template>
+</ng-container>
+
+<movius-web-general-failure
+    style="display: none;"
+    (passConnectionError)="getConnectionError($event)"
+>
+</movius-web-general-failure>

@@ -1,0 +1,76 @@
+<ng-container *ngFor="let address of formArray.controls; index as i">
+    <div nz-row class="addCnt__subCaption">
+        <p>{{ getAddressTypeLabel(address['controls'].type.value) }} address</p>
+        <div
+            class="addCnt__removeBtn--rightAbs"
+            data-cy="remove-address-button"
+            nz-button
+            (click)="remove.emit(i)"
+        ></div>
+    </div>
+    <ng-container>
+        <div nz-row class="addCnt__street">
+            <div nz-col nzFlex="auto">
+                <movius-web-ui-slide-input
+                    class="addCnt__inpFld--spaced"
+                    cyAttribute="street"
+                    uiTitle="Street"
+                    [control]="address['controls'].street"
+                ></movius-web-ui-slide-input>
+            </div>
+        </div>
+        <!--
+        <div nz-row class="addCnt__street">
+            <div nz-col nzFlex="auto">
+                <movius-web-ui-slide-input
+                    class="addCnt__inpFld--spaced"
+                    cyAttribute="street2"
+                    uiTitle="Street 2 (optional)"
+                    [control]="address['controls'].street2"
+                ></movius-web-ui-slide-input>
+            </div>
+        </div>
+        -->
+        <div nz-row>
+            <div nz-col nzFlex="1" class="addCnt__city">
+                <movius-web-ui-slide-input
+                    class="addCnt__inpFld--spaced"
+                    cyAttribute="city"
+                    uiTitle="City (optional)"
+                    [control]="address['controls'].city"
+                ></movius-web-ui-slide-input>
+            </div>
+            <div nz-col nzFlex="1" class="addCnt__state">
+                <movius-web-ui-slide-input
+                    class="addCnt__inpFld--spaced"
+                    cyAttribute="state"
+                    uiTitle="State (optional)"
+                    [control]="address['controls'].state"
+                ></movius-web-ui-slide-input>
+            </div>
+        </div>
+        <div nz-row>
+            <div nz-col nzFlex="1" class="addCnt__zipPostalCode">
+                <movius-web-ui-slide-input
+                    class="addCnt__inpFld--spaced"
+                    cyAttribute="postal"
+                    uiTitle="Zip / Postal Code"
+                    [control]="address['controls'].postal"
+                >
+                </movius-web-ui-slide-input>
+            </div>
+            <div nz-col nzFlex="1" class="addCnt__country">
+                <div nz-col nzFlex="auto">
+                    <movius-web-ui-slide-input
+                        class="addCnt__inpFld--spaced"
+                        cyAttribute="country"
+                        uiTitle="Country (optional)"
+                        [control]="address['controls'].country"
+                    >
+                    </movius-web-ui-slide-input>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    <div class="addCnt__splitter"></div>
+</ng-container>

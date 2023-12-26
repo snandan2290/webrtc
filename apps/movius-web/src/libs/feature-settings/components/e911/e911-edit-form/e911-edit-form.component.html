@@ -1,0 +1,148 @@
+<form autocomplete="off" class="emergency__form" [formGroup]="addressForm">
+    <section class="emergency__main">
+        <div class="emergency__formRow" nz-row>
+            <movius-web-ui-slide-input
+                nz-col
+                nzFlex="47.07%"
+                class="emergency__input ui-slide-input"
+                inputFormControlName="firstName"
+                [form]="addressForm"
+                uiTitle="First Name"
+                [customValidationMessage]="{
+                    required: 'Please enter first name',
+                    maxlength: 'Maximum length is 53'
+                }"
+            >
+            </movius-web-ui-slide-input>
+            <movius-web-ui-slide-input
+                nz-col
+                nzFlex="auto"
+                class="emergency__input ui-slide-input"
+                inputFormControlName="lastName"
+                [form]="addressForm"
+                uiTitle="Last Name"
+                [customValidationMessage]="{
+                    required: 'Please enter last name',
+                    maxlength: 'Maximum length is 52'
+                }"
+            >
+            </movius-web-ui-slide-input>
+        </div>
+        <div class="emergency__formRow" nz-row>
+            <movius-web-ui-slide-input
+                nz-col
+                nzFlex="auto"
+                class="emergency__input ui-slide-input"
+                inputFormControlName="houseNumber"
+                [form]="addressForm"
+                uiTitle="Unit/Apt Number/Street Number (Do not include street name)"
+                [customValidationMessage]="{
+                    required: 'Please enter Unit/Apt Number/Street Number (Do not include street name)',
+                    maxlength: 'Maximum length is 10'
+                }"
+            >
+            </movius-web-ui-slide-input>
+        </div>
+        <div class="emergency__formRow" nz-row>
+            <movius-web-ui-slide-input
+                nz-col
+                nzFlex="auto"
+                class="emergency__input ui-slide-input"
+                inputFormControlName="street"
+                [form]="addressForm"
+                uiTitle="Address Line 1"
+                [customValidationMessage]="{
+                    required: 'Please enter street',
+                    maxlength: 'Maximum length is 95'
+                }"
+            >
+            </movius-web-ui-slide-input>
+        </div>
+        <div class="emergency__formRow" nz-row>
+            <movius-web-ui-slide-input
+                nz-col
+                nzFlex="auto"
+                class="emergency__input ui-slide-input"
+                inputFormControlName="street2"
+                [form]="addressForm"
+                uiTitle="Address Line 2 (optional)"
+                [customValidationMessage]="'Maximum length is 95'"
+            >
+            </movius-web-ui-slide-input>
+        </div>
+        <div class="emergency__formRow" nz-row>
+            <movius-web-ui-slide-input
+                nz-col
+                nzFlex="auto"
+                class="emergency__input ui-slide-input"
+                inputFormControlName="city"
+                [form]="addressForm"
+                uiTitle="City"
+                [customValidationMessage]="{
+                    required: 'Please enter city',
+                    maxlength: 'Maximum length is 35'
+                }"
+            >
+            </movius-web-ui-slide-input>
+        </div>
+        <div class="emergency__formRow" nz-row>
+            <movius-web-ui-slide-dropdown
+                class="emergency__stateDrop emergency__input ui-slide-dropdown"
+                nzFlex="47.07%"
+                nz-col
+                [control]="addressForm.controls['state']"
+                [uiTitleEmpty]="'Select State'"
+                [uiTitle]="'State'"
+                [optionList]="dataService.getUsaStateNamesAndCodes()"
+                customValidationMessage="Please select state"
+            >
+            </movius-web-ui-slide-dropdown>
+            <movius-web-ui-slide-input
+                nz-col
+                nzFlex="auto"
+                class="emergency__input ui-slide-input"
+                inputFormControlName="postal"
+                [form]="addressForm"
+                uiTitle="Zip / Postal Code"
+                [customValidationMessage]="{
+                    required: 'Please enter postal/zip code',
+                    maxlength: 'Maximum length is 5'
+                }"
+            >
+            </movius-web-ui-slide-input>
+        </div>
+    </section>
+    <div class="emergency__controls">
+        <div class="emergency__error" *ngIf="errorMessage">
+            {{ errorMessage }}
+        </div>
+        <div class="emergency__buttons">
+            <div nz-col>
+                <button
+                    nz-button
+                    nzType="text"
+                    class="emergency__cancel"
+                    (click)="onCancel()"
+                >
+                    Cancel
+                </button>
+            </div>
+            <div nz-col>
+                <button
+                    [disabled]="addressForm.invalid || processing"
+                    nz-button
+                    nzType="text"
+                    class="emergency__add"
+                    (click)="onContinue()"
+                >
+                    Continue
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<movius-web-general-failure 
+    class="emergency__displayNone"
+    (passConnectionError)="getConnectionError($event)">
+</movius-web-general-failure>

@@ -1,0 +1,36 @@
+{
+  "name": "MLDTAPP",
+  "version": "1.0.0",
+  "description": "MultiLine Desktop",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "package:mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --out=out --icon=assets/images/mml.icns MLDTAPP",
+    "package:win": "electron-packager . --overwrite --platform=win32 --arch=x64 --out=out --icon=assets/images/mml.ico MLDTAPP",
+    "package:wininstaller": "node ./script/installer.js",
+    "package:macinstaller": "electron-installer-dmg ./out/MLDTAPP-x64/MLDTAPP.app ./out/mac-installer"
+  },
+  "repository": "https://github.com/electron/electron-quick-start",
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "demo"
+  ],
+  "author": "GitHub",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "electron": "^13.1.6"
+  },
+  "dependencies": {
+    "bootstrap": "^5.1.0",
+    "dist": "^0.1.2",
+    "electron-installer-dmg": "^3.0.0",
+    "electron-packager": "^15.3.0",
+    "electron-squirrel-startup": "^1.0.0",
+    "electron-winstaller": "^5.0.0",
+    "replace": "^1.2.1",
+    "sessionstorage-for-nodejs": "^1.0.0"
+  }
+}

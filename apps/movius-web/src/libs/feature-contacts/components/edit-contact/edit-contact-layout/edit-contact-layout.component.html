@@ -1,0 +1,450 @@
+<pane-frame
+    [includeDefaultHeader]="false"
+    [includeDefaultBody]="false"
+    [includeDefaultFooter]="false"
+>
+    <div mainCustom class="addCnt" *ngIf="view$ | async as view">
+        <form class="addCnt__form" *ngIf="view.form as form" [formGroup]="form">
+            <section class="addCnt__header">
+                <div nz-row class="addCnt__caption">
+                    {{ view.title }} Contact
+                </div>
+                <div nz-row class="addCnt__logo">
+                    <div class="addCnt__logoShell" nz-col nzFlex="10">
+                        <div class="addCnt__logoShellWrap">
+                            <movius-web-contact-logo
+                                class="addCnt__logoPreview"
+                                [peer]="
+                                    view.isCreateMode
+                                        ? { img: view.img == undefined ? 'assets/icons/dark_theme_icons/avatar.svg' : view.img }
+                                        : getLogoContact(view.contact, view.img)
+                                "
+                                [doZoomLetters]="true"
+                                [alt]="'Logo'"
+                            >
+                            </movius-web-contact-logo>
+                            <button
+                                class="addCnt__addLogo"
+                                nz-button
+                                type="button"
+                                nzType="text"
+                                (click)="openAddPhotoDialog(view.img)"
+                            >
+                                <div class="addCnt__addLogoIco"></div>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="addCnt__logoSider" nz-col nzFlex="26">
+                        <movius-web-edit-contact-name
+                            [formGroup]="form.controls.name"
+                            (removeTitle)="onRemoveTitle(form)"
+                            (removeSuffix)="onRemoveSuffix(form)"
+                            (removeMiddlename)="onRemoveMiddlename(form)"
+                            (removeNickname)="onRemoveNickname(form)"
+                            (removeYomiNames)="onRemoveYomiNames(form)"
+                        >
+                        </movius-web-edit-contact-name>
+                    </div>
+                </div>
+            </section>
+
+            <section class="addCnt__contactInfo">
+                <div nz-row class="addCnt__subCaption">Contact information</div>
+
+                <movius-web-edit-contact-phones
+                    class="addCnt__contactInfoPhones"
+                    [formArray]="form.controls.phones"
+                    [preferredCountryCode]="prefCountryCode"
+                    [preferredCountryName]="prefCountryName"
+                    (remove)="onRemovePhone(form, $event)"
+                >
+                </movius-web-edit-contact-phones>
+
+                <movius-web-edit-contact-emails
+                    class="addCnt__contactInfoEmails"
+                    [formArray]="form.controls.emails"
+                    (remove)="onRemoveEmail(form, $event)"
+                >
+                </movius-web-edit-contact-emails>
+
+                <div class="addCnt__chat" nz-row>
+                    <movius-web-ui-slide-input
+                        *ngIf="form.controls.chat.value !== null"
+                        nz-col
+                        nzFlex="auto"
+                        #title
+                        cyAttribute="chat"
+                        uiTitle="Chat"
+                        [control]="form.controls.chat"
+                    >
+                    </movius-web-ui-slide-input>
+                    <div class="addCnt__removeBtn--rightAbs" nz-button (click)="onRemoveChat(form)"></div>
+                </div>
+            </section>
+
+            <section class="addCnt__addressInfo" formArrayName="addresses">
+                <movius-web-edit-contact-addresses
+                    [formArray]="form.controls.addresses"
+                    (remove)="onRemoveAddress(form, $event)"
+                >
+                </movius-web-edit-contact-addresses>
+            </section>
+
+            <section class="addCnt__workInfo">
+                <div nz-row class="addCnt__subCaption">
+                    <p>Work</p>
+                </div>
+                <movius-web-edit-contact-work [formGroup]="form.controls.work">
+                </movius-web-edit-contact-work>
+            </section>
+
+            <section class="addCnt__workInfo" *ngIf="hasOther(form)">
+                <div nz-row class="addCnt__subCaption">
+                    <p>Other</p>
+                </div>
+                <movius-web-edit-contact-other
+                    [formGroup]="form.controls.other"
+                >
+                </movius-web-edit-contact-other>
+            </section>
+
+            <div nz-row>
+                <div nz-row class="addCnt__subCaption">
+                    <p>Notes</p>
+                </div>
+                <!-- TODO : Textarea -->
+                <movius-web-ui-slide-input
+                    nz-col
+                    nzFlex="auto"
+                    #title
+                    cyAttribute="note"
+                    uiTitle="Add notes"
+                    [control]="form.controls.note"
+                >
+                </movius-web-ui-slide-input>
+            </div>
+
+            <div class="addCnt__controls">
+                <ng-container *ngIf="canAddAnything(form)">
+                    <div
+                        data-cy="add-more-button"
+                        class="addCnt__addMoreBtn"
+                        nz-dropdown
+                        [nzDropdownMenu]="menu"
+                        nzPlacement="topRight"
+                        [nzOverlayClassName]="'editCntDropdown'"
+                    >
+                        <div class="addBtn">
+                            <!-- <div class="addCnt__addMoreIco addIco"></div> -->
+
+                            <svg *ngIf="GetTheme() == 'Dark'" class="addCnt__addMoreIco addIco" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                                <g fill="none" fill-rule="evenodd">
+                                    <g fill="#FFFFFF" fill-rule="nonzero">
+                                        <g>
+                                            <path d="M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm4.645 8.903c0 .213-.174.387-.387.387H9.29v2.968c0 .213-.174.387-.387.387H7.097c-.213 0-.387-.174-.387-.387V9.29H3.742c-.213 0-.387-.174-.387-.387V7.097c0-.213.174-.387.387-.387H6.71V3.742c0-.213.174-.387.387-.387h1.806c.213 0 .387.174.387.387V6.71h2.968c.213 0 .387.174.387.387v1.806z" transform="translate(-1053 -500) translate(1053 498) translate(0 2)"/>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+
+                            <svg *ngIf="GetTheme() == null" class="addCnt__addMoreIco addIco" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                                <g fill="none" fill-rule="evenodd">
+                                    <g fill="#1F1E33" fill-rule="nonzero">
+                                        <g>
+                                            <path d="M8 0C3.58 0 0 3.58 0 8s3.58 8 8 8 8-3.58 8-8-3.58-8-8-8zm4.645 8.903c0 .213-.174.387-.387.387H9.29v2.968c0 .213-.174.387-.387.387H7.097c-.213 0-.387-.174-.387-.387V9.29H3.742c-.213 0-.387-.174-.387-.387V7.097c0-.213.174-.387.387-.387H6.71V3.742c0-.213.174-.387.387-.387h1.806c.213 0 .387.174.387.387V6.71h2.968c.213 0 .387.174.387.387v1.806z" transform="translate(-1053 -500) translate(1053 498) translate(0 2)"/>
+                                        </g>
+                                    </g>
+                                </g>
+                            </svg>
+                            
+
+                            <div class="addCnt__addMoreText addText">
+                                Add More
+                            </div>
+                            <div class="addCnt__addMoreIco addIcoEnd"></div>
+                        </div>
+                    </div>
+                    <nz-dropdown-menu #menu="nzDropdownMenu">
+                        <ul nz-menu>
+                            <li
+                                nz-menu-item
+                                [nzDisabled]="!canAddEmail(form)"
+                                (click)="onAddEmail(form)"
+                                data-cy="email-menu-item"
+                            >
+                                Email
+                            </li>
+                            <li
+                                nz-menu-item
+                                [nzDisabled]="!canAddChat(form)"
+                                (click)="onAddChat(form)"
+                                data-cy="add-chat-menu-item"
+                            >
+                                Chat
+                            </li>
+                            <li
+                                data-cy="name-submenu"
+                                nz-submenu
+                                nzTitle="Name"
+                                [nzDisabled]="!canAddName(form)"
+                            >
+                                <ul>
+                                    <li
+                                        *ngIf="form.value.name.title === null"
+                                        (click)="onAddNameTitle(form)"
+                                        data-cy="title-submenu-item"
+                                        nz-menu-item
+                                    >
+                                        Title
+                                    </li>
+                                    <li
+                                        *ngIf="
+                                            form.value.name.middleName === null
+                                        "
+                                        (click)="onAddNameMiddleName(form)"
+                                        data-cy="middle-name-submenu-item"
+                                        nz-menu-item
+                                    >
+                                        Middle Name
+                                    </li>
+                                    <li
+                                        *ngIf="form.value.name.suffix === null"
+                                        (click)="onAddNameSuffix(form)"
+                                        data-cy="suffix-submenu-item"
+                                        nz-menu-item
+                                    >
+                                        Suffix
+                                    </li>
+                                    <li
+                                        *ngIf="
+                                            form.value.name.nickName === null
+                                        "
+                                        (click)="onAddNickName(form)"
+                                        data-cy="nick-name-submenu-item"
+                                        nz-menu-item
+                                    >
+                                        Nick Name
+                                    </li>
+                                    <li
+                                        *ngIf="
+                                            form.value.name.yomiFirstName ===
+                                            null
+                                        "
+                                        (click)="onAddYomiName(form)"
+                                        data-cy="yomi-name-submenu-item"
+                                        nz-menu-item
+                                    >
+                                        Yomi Name
+                                    </li>
+                                </ul>
+                            </li>
+                            <li
+                                data-cy="add-phone-submenu"
+                                nz-submenu
+                                nzTitle="Phone"
+                                [nzDisabled]="!canAddSomePhone(form)"
+                            >
+                                <ul>
+                                    <li
+                                        nz-menu-item
+                                        data-cy="add-business-phone-menu-item"
+                                        *ngIf="
+                                            canAddPhone(form, 'BusinessPhone')
+                                        "
+                                        (click)="
+                                            onAddPhone(form, 'BusinessPhone')
+                                        "
+                                    >
+                                        Business Phone
+                                    </li>
+                                    <li
+                                        nz-menu-item
+                                        data-cy="add-mobile-phone-menu-item"
+                                        *ngIf="canAddPhone(form, 'MobilePhone')"
+                                        (click)="
+                                            onAddPhone(form, 'MobilePhone')
+                                        "
+                                    >
+                                        Mobile Phone
+                                    </li>
+                                    <li
+                                        data-cy="add-home-phone-menu-item"
+                                        *ngIf="canAddPhone(form, 'HomePhone')"
+                                        (click)="onAddPhone(form, 'HomePhone')"
+                                        nz-menu-item
+                                    >
+                                        Home Phone
+                                    </li>
+                                </ul>
+                            </li>
+                            <li
+                                nz-submenu
+                                data-cy="add-work-submenu"
+                                nzTitle="Work"
+                                [nzDisabled]="!canAddWork(form)"
+                            >
+                                <ul>
+                                    <li
+                                        *ngIf="
+                                            form.value.work?.jobTitle === null
+                                        "
+                                        nz-menu-item
+                                        data-cy="add-job-title-menu-item"
+                                        (click)="onAddJobTitle(form)"
+                                    >
+                                        Job Title
+                                    </li>
+                                    <li
+                                        *ngIf="
+                                            form.value.work?.yomiCompany ===
+                                            null
+                                        "
+                                        nz-menu-item
+                                        data-cy="add-yomi-company-menu-item"
+                                        (click)="onAddYomiCompany(form)"
+                                    >
+                                        Yomi company Address
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li
+                                nz-submenu
+                                data-cy="add-address-submenu"
+                                nzTitle="Address"
+                                [nzDisabled]="!canAddSomeAddress(form)"
+                            >
+                                <ul>
+                                    <li
+                                        nz-menu-item
+                                        data-cy="add-business-address-menu-item"
+                                        *ngIf="
+                                            !hasAddress(form, 'BusinessAddress')
+                                        "
+                                        (click)="
+                                            onAddAddress(
+                                                form,
+                                                'BusinessAddress'
+                                            )
+                                        "
+                                    >
+                                        Business Address
+                                    </li>
+                                    <li
+                                        nz-menu-item
+                                        data-cy="add-home-address-menu-item"
+                                        *ngIf="!hasAddress(form, 'HomeAddress')"
+                                        (click)="
+                                            onAddAddress(form, 'HomeAddress')
+                                        "
+                                    >
+                                        Home Address
+                                    </li>
+                                    <li
+                                        nz-menu-item
+                                        data-cy="add-other-address-menu-item"
+                                        *ngIf="
+                                            !hasAddress(form, 'OtherAddress')
+                                        "
+                                        (click)="
+                                            onAddAddress(form, 'OtherAddress')
+                                        "
+                                    >
+                                        Other Address
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li
+                                nz-submenu
+                                data-cy="add-other-submenu"
+                                nzTitle="Other"
+                                [nzDisabled]="!canAddOther(form)"
+                            >
+                                <ul>
+                                    <li
+                                        *ngIf="
+                                            form.value.other
+                                                ?.personalWebPage === null
+                                        "
+                                        nz-menu-item
+                                        data-cy="add-other-personal-web-page-menu-item"
+                                        (click)="
+                                            onAddOtherPersonalWebPage(form)
+                                        "
+                                    >
+                                        Personal Web Page
+                                    </li>
+                                    <li
+                                        *ngIf="
+                                            form.value.other
+                                                ?.significantOther === null
+                                        "
+                                        nz-menu-item
+                                        data-cy="add-other-significant-other-menu-item"
+                                        (click)="
+                                            onAddOtherSignificantOther(form)
+                                        "
+                                    >
+                                        Significant Other
+                                    </li>
+                                    <li
+                                        *ngIf="
+                                            form.value.other?.birthday === null
+                                        "
+                                        nz-menu-item
+                                        data-cy="add-other-birthday-menu-item"
+                                        (click)="onAddOtherBirthday(form)"
+                                    >
+                                        Birthday
+                                    </li>
+                                    <!--
+                                    <li *ngIf="
+                                            form.value.other?.anniversary ===
+                                            null
+                                        " nz-menu-item
+                                        data-cy="add-other-anniversary-menu-item"
+                                        (click)="onAddOtherAnniversary(form)">
+                                        Anniversary
+                                    </li>
+                                --></ul>
+                            </li>
+                        </ul>
+                    </nz-dropdown-menu>
+                </ng-container>
+                <div class="addCnt__control">
+                    <button
+                        data-cy="cancel-button"
+                        nz-button
+                        nzType="text"
+                        type="button"
+                        class="addCnt__cancelBtn--light"
+                        (click)="onCancel()"
+                    >
+                        Cancel
+                    </button>
+                </div>
+                <div class="addCnt__control">
+                    <button
+                        data-cy="apply-button"
+                        nz-button
+                        nzType="text"
+                        type="button"
+                        class="addCnt__applyBtn"
+                        [disabled]="isLoading === true ? true : !isValid(form)"
+                        (click)="
+                            onApply(
+                                view.id,
+                                view.contact,
+                                form,
+                                view.isCreateMode
+                            )
+                        "
+                    ><span [ngClass]="{ spinnered: isLoading }" >
+                        {{ view.title }}</span>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</pane-frame>

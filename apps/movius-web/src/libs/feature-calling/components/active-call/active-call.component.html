@@ -1,0 +1,27 @@
+<movius-web-active-outgoing-call
+    *ngIf="isOutgoingCall"
+    [peer]="peer"
+    [call]="call"
+    (cancel)="cancel.emit()"
+></movius-web-active-outgoing-call>
+<movius-web-active-ongoing-call
+    *ngIf="isOngoingCall"
+    [peer]="peer"
+    [call]="call"
+    [isAnonymous]="isAnonymous"
+    [isHold]="isHold"
+    [isMute]="isMute"
+    (reject)="cancel.emit()"
+    (mute)="mute.emit($event)"
+    (hold)="hold.emit($event)"
+    (swap)="swap.emit()"
+    (keyClicked)="keyClicked.emit($event)"
+></movius-web-active-ongoing-call>
+<movius-web-active-incoming-call
+    *ngIf="isIncomingCall"
+    [peer]="peer"
+    [call]="call"
+    [isAnonymous]="isAnonymous"
+    (accept)="accept.emit()"
+    (reject)="cancel.emit()"
+></movius-web-active-incoming-call>

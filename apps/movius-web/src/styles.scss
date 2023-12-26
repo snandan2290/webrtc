@@ -1,0 +1,382 @@
+@import '~@ctrl/ngx-emoji-mart/picker';
+@import './assets/scss/app.scss';
+
+:root {
+    --white: #{$white};
+    --black: #{$black};
+    --red: #{$red};
+    --orange: #{$orange};
+    --gold: #{$gold};
+    --green: #{$green};
+    --blue: #{$blue};
+    --cyan: #{$cyan};
+    --purple: #{$purple};
+    --magenta: #{$magenta};
+    --volcano: #{$volcano};
+    --lime: #{$lime};
+    --geekblue: #{$geekblue};
+    --gray-dark: #{$gray-dark};
+    --gray: #{$gray};
+
+    --gray-light: #{$gray-light};
+    --gray-lighter: #{$gray-lighter};
+    --gray-lightest: #{$gray-lightest};
+    --movius_lightgray: #{$movius_lightgray};
+    //--movius_lightgray_and_black: #{$movius_lightgray};
+    --movius_lightgray_and_black: #{$movius_settings-light-gray};
+    --movius_darkgray: #{$movius_darkgray};
+    --movius_white: #{$movius_white};
+    --movius_gray: #{$movius_gray};
+    --movius_darkgray: #{$movius_darkgray};
+    --movius_scroll_darkgray: #{$movius_scroll_darkgray};
+    --movius_lightestgreen: #{$movius_lightestgreen};
+    --movius_teams_LHS_gray: #{$movius_teams_LHS_gray};
+    --movius_acceptGreen: #{$movius_acceptGreen};
+    --movius_rejectRed: #{$movius_rejectRed};
+    --movius_sand: #{$movius_sand};
+    --movius-purple: #{$movius-purple};
+    --movius-lightpurple: #{$movius-lightpurple};
+    --movius_colors-secondary-gray: #{$movius_colors-secondary-gray};
+    --movius_orangey-red: #{$movius_orangey-red};
+    --movius_leafy-green: #{$movius_leafy-green};
+    --movius_black: #{$movius_black};
+    --movius_black_dropItemContent: #{$movius_black};
+    --movius_color-white: #{$movius_color-white};
+    --movius-addrfolder-inactive-bg-clr: #{$movius_color-white};
+    --movius_vermillion: #{$movius_vermillion};
+    --movius_black-two: #{$movius_black-two};
+    --movius_very-light-pink: #{$movius_very-light-pink};
+    --movius_very-light-pink-two: #{$movius_very-light-pink-two};
+    --movius_colors-primary-green-2: #{$movius_colors-primary-green-2};
+    --movius_color-teams-theme-blue-dark: #{$movius_color-teams-theme-blue-dark};
+    --movius_color-teams-blue-light-chat: #{$movius_color-teams-blue-light-chat};
+    --movius_colors-secondary-2: #{$movius_colors-secondary-2};
+    --movius_invalid-red: #{$movius_invalid-red};
+    --movius_invalid-red-pale: #{$movius_invalid-red-pale};
+    --movius_pale-green: #{$movius_pale-green};
+    --movius_text-gray: #{$movius_text-gray};
+    --movius_text-gray-dropItemHeader: #{$movius_text-gray};
+    --movius_text-gray-and-white: #{$white};
+    --movius_block-gray: #{$movius_block-gray};
+    --movius_avatar-gray: #{$movius_avatar-gray};
+    --movius_notify-green: #{$movius_notify-green};
+    --movius_phone-button-gray: #{$movius_phone-button-gray};
+    --movius-addrfolder-bg-clr: #{$movius_phone-button-gray};
+    --movius_phone-button-gray-hover: #{$movius_phone-button-gray-hover};
+    --movius_phone-button-gray-hover-second: #{$movius_phone-button-gray-hover-second};
+    --movius_phone-button-darkgray: #{$movius_phone-button-darkgray};
+    --movius_phone-button-green: #{$movius_phone-button-green};
+    --movius_border-gray: #{$movius_border-gray};
+    --movius_border-gray-2: #{$movius_border-gray-2};
+    --movius_papaya: #{$movius_papaya};
+    --movius_light-papaya: #{$movius_light-papaya};
+    --movius_ripe-papaya: #{$movius_ripe-papaya};
+    --movius_plum: #{$movius_plum};
+    --movius_pale-sand: #{$movius_pale-sand};
+    --movius_grapefruit: #{$movius_grapefruit};
+    --movius_fireorange: #{$movius_fireorange};
+    --movius_ginger-sand: #{$movius_ginger-sand};
+    --movius_popup-call-reject: #{$movius_popup-call-reject};
+    --movius_popup-call-accept: #{$movius_popup-call-accept};
+    --movius_popup-gray: #{$movius_popup-gray};
+    --movius_popup-shadow: #{$movius_popup-shadow};
+    --movius_settings-light-gray: #{$movius_settings-light-gray};
+    --movius_settings-gray: #{$movius_settings-gray};
+    --movius_ocean: #{$movius_ocean};
+    --movius_dark-ocean: #{$movius_dark-ocean};
+    --movius_btn-disabled-bgr: #{$movius_btn-disabled-bgr};
+    --movius_btn-disabled-font: #{$movius_btn-disabled-font};
+    --movius_btn-cta-disabled: #{$movius_btn-cta-disabled};
+    --movius_menu-text: #{$movius_menu-text};
+    --movius_mute-logo: #{$movius_mute-logo};
+    --movius_swap-frame: #{$movius_swap-frame};
+    --movius_text-highlight: #{$movius_text-highlight};
+    --movius_search-gray: #{$movius_search-gray};
+    --movius_separator: #{$movius_separator};
+    --movius_general-failure: #{$movius_general-failure};
+    --movius_alert-success-border: #{$movius_alert-success-border};
+    --movius_alert-success-color: #{$movius_alert-success-color};
+    --movius_alert-info-border: #{$movius_alert-info-border};
+    --movius_alert-info-color: #{$movius_alert-info-color};
+    --movius_alert-warn-border: #{$movius_alert-warn-border};
+    --movius_alert-warn-color: #{$movius_alert-warn-color};
+    --movius_alert-error-border: #{$movius_alert-error-border};
+    --movius_alert-error-color: #{$movius_alert-error-color};
+    --movius_menu-primary: #{$movius_menu-primary};
+    --movius_menu-primary-uploadTxt: #{$movius_menu-primary};
+    --movius_menu-secondary: #{$movius_menu-secondary};
+    --movius-blue: #{$movius-blue};
+    --movius_lightgray-dark: #{$movius_lightgray_dark};
+    --movius_text-black-and-white: #{$black};
+    --movius_hover_grey_whitegrey:#{$movius_active_tab};
+    --movius_hover_grey_whitegrey_activeuser:#{$movius_active_tab};
+    --movius_border_color:#{$movius_border_color};
+    --movius_right_chat_color:#{$movius_color-teams-blue-light-chat};
+    --movius_num-input-gray-and-white:#{$movius_phone-button-gray};
+    --add-user-popup-bgcolor-white-dark:#{$movius_lightgray};
+    --movius-placeholder-clr:#{#757575};
+    --movius-autofill-dropdown-border-clr:#{$movius_border-gray-2};
+    --movius-autofill-dropdown-hover-clr:#{#e2e1e1};
+    --movius_text-highlight-selected:#{$movius_text-highlight};
+    --movius_searchterm-text-highlight-selected:#{#efd8378f};
+    --movius_text-hyperlink:#{$hyperlink};
+    --movius_hover_grey_whitegrey_copy_forward_popup:#{$movius_phone-button-gray-hover};
+    --movius_border-gray-optin-history-popup: #{#eaeaea};
+    --movius_lightgray_and_black_details: #{#fff};
+    --movius_lightgray_and_black_details_edit_contact_details: #{#f5f5f5};
+    --mobile-details-page-bgcolor: #{$white};
+    --movius-forward-label: #{$movius_phone-button-gray};
+    --movius-contact-field-border-clr: #{$movius_black};
+    --movius_settings-summary-bgclr: #{$movius_settings-light-gray};
+    --movius_sumtitle_txt_clr: #{$movius_text-gray};
+    --movius-cancel-btn-hoverclr: #{$white};
+    --movius-cancel-btn-bgclr: #{$white};
+    --movius-system-msg-bgclr: #{#fff5d9};
+    --movius-optin-reqbtn-clr: #{#C3C7CB};
+    --movius-blue-disabled-btn: #{$movius-blue-disabled};
+}
+
+.theme-dark {
+      --white: #{$white_dark};
+      --black: #{$black_dark};
+      --red: #{$red_dark};
+      --orange: #{$orange_dark};
+      --gold: #{$gold_dark};
+      --green: #{$green_dark};
+      --blue: #{$blue_dark};
+      --cyan: #{$cyan_dark};
+      --purple: #{$purple_dark};
+      --magenta: #{$magenta_dark};
+      --volcano: #{$volcano_dark};
+      --lime: #{$lime_dark};
+      --geekblue: #{$geekblue_dark};
+      --gray-dark: #{$gray-dark_dark};
+      --gray: #{$gray_dark};
+
+      --gray-light: #{$gray-light_dark};
+      --gray-lighter: #{$gray-lighter_dark};
+      --gray-lightest: #{$gray-lightest_dark};
+      --movius_lightgray: #{$white_dark};
+      --movius_lightgray_and_black: #{$white_dark};
+      --movius_darkgray: #{$movius_darkgray_dark};
+      --movius_white: #{$gray_dark};
+      --movius_gray: #{$movius_gray_dark};
+      --movius_darkgray: #{$movius_darkgray_dark};
+      --movius_scroll_darkgray: #{$movius_scroll_darkgray_dark};
+      --movius_lightestgreen: #{$movius_lightestgreen_dark};
+      --movius_teams_LHS_gray: #{$movius_teams_LHS_gray_dark};
+      --movius_acceptGreen: #{$movius_acceptGreen_dark};
+      --movius_rejectRed: #{$movius_rejectRed_dark};
+      --movius_sand: #{$movius_sand_dark};
+      --movius-purple: #{$movius-purple_dark};
+      --movius-lightpurple: #{$movius-lightpurple_dark};
+      --movius_colors-secondary-gray: #{$movius_colors-secondary-gray_dark};
+      --movius_orangey-red: #{$movius_orangey-red_dark};
+      --movius_leafy-green: #{$movius_leafy-green_dark};
+      --movius_black: #{$movius_black_dark};
+      --movius_black_dropItemContent: #{$black_dark};
+      --movius_color-white: #{$movius_color-white_dark};
+      --movius-addrfolder-inactive-bg-clr: #{#4a4747};
+      --movius_vermillion: #{$movius_vermillion_dark};
+      --movius_black-two: #{$movius_black-two_dark};
+      --movius_very-light-pink: #{$movius_very-light-pink_dark};
+      --movius_very-light-pink-two: #{$movius_very-light-pink-two_dark};
+      --movius_colors-primary-green-2: #{$movius_colors-primary-green-2_dark};
+      --movius_color-teams-theme-blue-dark: #{$movius_color-teams-theme-blue-dark_dark};
+      --movius_color-teams-blue-light-chat: #{$movius_color-teams-blue-light-chat_dark};
+      --movius_colors-secondary-2: #{$movius_colors-secondary-2_dark};
+      --movius_invalid-red: #{$movius_invalid-red_dark};
+      --movius_invalid-red-pale: #{$movius_invalid-red-pale_dark};
+      --movius_pale-green: #{$movius_pale-green_dark};
+      --movius_text-gray: #{$movius_text-gray};
+      --movius_text-gray-dropItemHeader: #{$black_dark};
+      --movius_text-gray-and-white: #{$movius_text-gray_dark};
+      --movius_text-black-and-white: #{$black_dark};
+      --movius_block-gray: #{$movius_block-gray_dark};
+      --movius_avatar-gray: #{$movius_avatar-gray_dark};
+      --movius_notify-green: #{$movius_notify-green_dark};
+      --movius_phone-button-gray: #{$movius_phone-button-gray_dark};
+      --movius-addrfolder-bg-clr: #{#4a4747};
+      --movius_phone-button-gray-hover: #{$movius_text-gray_dark};
+      --movius_phone-button-gray-hover-second: #{$movius_phone-button-gray-hover-second_dark};
+      --movius_phone-button-darkgray: #{$movius_phone-button-darkgray_dark};
+      --movius_phone-button-green: #{$movius_phone-button-green_dark};
+      --movius_border-gray: #{$white_dark};
+      //--movius_border-gray-2: #{$gray-dark};
+      --movius_border-gray-2: #{#4c4747};
+      --movius_papaya: #{$movius_papaya};
+      --movius_light-papaya: #{$movius_light-papaya_dark};
+      --movius_ripe-papaya: #{$movius_ripe-papaya_dark};
+      --movius_plum: #{$movius_plum_dark};
+      --movius_pale-sand: #{$movius_pale-sand_dark};
+      --movius_grapefruit: #{$movius_grapefruit_dark};
+      --movius_fireorange: #{$movius_fireorange_dark};
+      --movius_ginger-sand: #{$movius_ginger-sand_dark};
+      --movius_popup-call-reject: #{$movius_popup-call-reject_dark};
+      --movius_popup-call-accept: #{$movius_popup-call-accept_dark};
+      --movius_popup-gray: #{$movius_popup-gray_dark};
+      --movius_popup-shadow: #{$movius_popup-shadow_dark};
+      --movius_settings-light-gray: #{$movius_settings-light-gray_dark};
+      --movius_settings-gray: #{$movius_settings-gray_dark};
+      --movius_ocean: #{$movius_ocean_dark};
+      --movius_dark-ocean: #{$movius_dark-ocean_dark};
+      --movius_btn-disabled-bgr: #{$movius_btn-disabled-bgr_dark};
+      --movius_btn-disabled-font: #{$movius_btn-disabled-font_dark};
+      --movius_btn-cta-disabled: #{$movius_btn-cta-disabled_dark};
+      --movius_menu-text: #{$movius_menu-text_dark};
+      --movius_mute-logo: #{$movius_mute-logo_dark};
+      --movius_swap-frame: #{$movius_swap-frame_dark};
+      --movius_text-highlight: #{$movius_text-highlight_dark};
+      --movius_search-gray: #{$movius_text-gray_dark};
+      --movius_separator: #{$movius_separator_dark};
+      --movius_general-failure: #{$movius_general-failure_dark};
+      --movius_alert-success-border: #{$movius_alert-success-border_dark};
+      --movius_alert-success-color: #{$movius_alert-success-color_dark};
+      --movius_alert-info-border: #{$movius_alert-info-border_dark};
+      --movius_alert-info-color: #{$movius_alert-info-color_dark};
+      --movius_alert-warn-border: #{$movius_alert-warn-border_dark};
+      --movius_alert-warn-color: #{$movius_alert-warn-color_dark};
+      --movius_alert-error-border: #{$movius_alert-error-border_dark};
+      --movius_alert-error-color: #{$movius_alert-error-color_dark};
+      --movius_menu-primary: #{$movius_menu-primary_dark};
+      --movius_menu-primary-uploadTxt: #{$hyperlink};
+      --movius_menu-secondary: #{$movius_text-gray_dark};
+      --movius-blue: #{$movius-blue_dark};
+      --movius_lightgray-dark: #{$white_dark};
+      --movius_hover_grey_whitegrey:#{$movius_text-gray-popup-hover};
+      --movius_border_color:#{$movius_border_color_dark};
+      --movius_right_chat_color:#{$movius_chat_color_dark};
+      --movius_num-input-gray-and-white:#{$movius_text-gray_dark};
+      --add-user-popup-bgcolor-white-dark:#{$movius_text-gray_dark};
+      --movius-placeholder-clr:#{$movius-placeholder-clr};
+      --movius-autofill-dropdown-border-clr:#{$movius_black-two_dark};
+      --movius-autofill-dropdown-hover-clr:#{$movius-autofill-dropdown-hover-clr};
+      --movius_text-highlight-selected:#{$movius_general-failure_dark};
+      --movius_searchterm-text-highlight-selected:#{$movius_general-failure_dark};
+      --movius_text-hyperlink:#{$hyperlink};
+      --movius_hover_grey_whitegrey_copy_forward_popup:#{$movius_text-gray-popup-hover};
+      --movius_border-gray-optin-history-popup: #{$movius_phone-button-gray-hover_dark};
+      --movius_lightgray_and_black_details: #{$white_dark};
+      --movius_lightgray_and_black_details_edit_contact_details: #{$white_dark};
+      --movius_hover_grey_whitegrey_activeuser:#{$movius_text-gray-popup-hover};
+      --mobile-details-page-bgcolor: #{$white_dark};
+      --movius-forward-label: #{$movius-forward-label};
+      --movius-contact-field-border-clr: #{$black_dark};
+      --movius_settings-summary-bgclr: #{#4a4747};
+      --movius_sumtitle_txt_clr: #{#e2e2e2};
+      --movius-cancel-btn-hoverclr: #{$movius-cancel-btn-hoverclr};
+      --movius-cancel-btn-bgclr: #{$movius-forward-label};
+      --movius-system-msg-bgclr: #{#8b5e35};
+      --movius-optin-reqbtn-clr: #{#5b6065};
+      --movius-blue-disabled-btn: #{#A7A9E1};
+
+  }
+
+
+// TODO : Correct popover modal
+//#region BUG CB:01Nov2020: Workaround: Disable modal mask -> sidefeect -> Hotfix - Ng-zorro backdrop shadow is displayed above modals.
+.draggableNzModal {
+    position: relative;
+    display: contents;
+}
+nz-modal-container.ant-modal-wrap {
+    overflow-y: auto;
+}
+
+// CB:14Apr2021: No need this fix anymore - assume after the upd of ng-zorro.
+// div.cdk-overlay-pane {
+//     height: 0px;
+// }
+//#endregion BUG CB:01Nov2020: Workaround: Disable modal mask -> sidefeect -> Hotfix - Ng-zorro backdrop shadow is displayed above modals.
+
+.ant-modal-content {
+    // CB:01Nov2020: Adj to adapt @angular/cdk drag-n-drop.
+    > * {
+        movius-web-popover-call-stack{
+            height: 0;
+        }
+    }
+}
+
+div.cdk-overlay-container {
+    overflow-y: auto;
+}
+
+div.cdk-overlay-backdrop {
+    position: inherit;
+}
+
+.cdk-global-scrollblock, .cdk-global-scrollblock body {
+    overflow-x: hidden;
+    overflow-y: hidden;
+    display: initial;
+    position: initial;
+}
+
+.ant-dropdown-menu {
+    border-radius: 0.5rem;
+}
+
+.ant-image-preview-wrap{
+    background: #000000a6;
+}
+
+.custom-notification {
+    $parent: &;
+    width: 519px;
+    height: 40px;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    margin: 3rem 0 0 0;
+
+    border-radius: 2px;
+
+    &--success{
+        @extend #{$parent};
+        border: solid 1px rgba(18, 156, 132, 0.33);
+        background-color: rgba(18, 156, 132, 0.1);
+    }
+
+    &--error {
+        @extend #{$parent};
+        border: solid 1px #ffbec1;
+        background-color: rgba(255, 34, 43, 0.11);
+    }
+
+    & .ant-notification-notice-message {
+        @include font-normal(0.875rem);
+        margin: 0;
+    }
+
+    & .ant-notification-notice-close {
+        display: none;
+    }
+}
+
+a.terms-link {
+    @include font-bold(0.875rem);
+    color: $movius_black;
+    text-decoration: underline;
+}
+
+.highlighted-text{
+    padding: 0;
+    //background-color: #efd8378f;
+    background-color: var(--movius_searchterm-text-highlight-selected);
+    color: var(--black);
+}
+
+.emoji-mart-scroll {
+    height: 24vh !important;
+}
+.mat-form-field-underline{
+    background-color: $movius-blue;
+}
+
+.mode{
+    color: var(--movius_text-black-and-white);
+    cursor: pointer;
+}

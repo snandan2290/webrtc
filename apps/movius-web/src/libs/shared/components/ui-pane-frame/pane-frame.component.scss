@@ -1,0 +1,162 @@
+@import '.././../../../assets/scss/mixins';
+@import '.././../../../assets/scss/variables';
+@import '../../../../assets/scss/app.scss';
+
+$pane: 'pane';
+
+:host {
+     display: block;
+     height: 100%;
+     overflow-y: auto;
+     @extend %scroll;
+}
+
+:host-context(.wide) .#{$pane} {
+    width: 100%;
+}
+
+:host-context(.no-scroll) .#{$pane} {
+    &__body {
+        @extend %no-scroll;
+    }
+}
+
+.#{$pane} {
+    display: flex;
+    flex-direction: column;
+
+    height: 100%;
+
+    padding-right: $scrollbar-padding;
+    //background-color: var(--white);
+    //background-color: var(--movius_lightgray_and_black);
+    color: var(--black);
+
+    overflow-y: inherit;
+    overflow-x: inherit;
+
+    %__heading{
+        display: flex;
+        flex-direction: row;
+
+        min-height: 4rem;
+        max-height: 4rem;
+        @include screen-mobile{
+            padding: 0px 1rem;
+        }
+    }
+    &__heading {
+
+        @extend %__heading;
+
+        &--emph{
+            @extend %__heading;
+            border-bottom: 0.1rem var(--movius_border-gray-2) solid;
+        }
+    }
+
+    %defaultHeading {
+        align-self: center;
+    }
+    &__headingLeft {
+        @extend %defaultHeading;
+        &:empty{
+            display: none;
+        }
+        max-width: 80%;
+    }
+
+    &__headingRight {
+        @extend %defaultHeading;
+        &:empty{
+            display: none;
+        }
+        max-width: 20%;
+        margin-left: auto;
+    }
+
+    &__body {
+        $self: &;
+        @extend %no-scroll;
+
+        &--centered {
+            @extend #{$self};
+            margin: auto auto;
+        }
+        // padding-right: 1rem;
+        // height: 75vh;
+    }
+
+    &__body:hover {
+        @extend %scroll;
+    }
+
+
+    &__body_min_height {
+        $self: &;
+        @extend %scroll;
+
+        &--centered {
+            @extend #{$self};
+            margin: auto auto;
+        }
+        height: 65vh;
+        padding-right: 1rem;
+    }
+
+    &__body_mobile {
+        $self: &;
+        @extend %scroll;
+
+        &--centered {
+            @extend #{$self};
+            margin: auto auto;
+        }
+        height: 35rem;
+        padding-right: 1rem;
+    }
+
+    &__bodyCustom {
+        $self: &;
+        &--centered {
+            @extend #{$self};
+            margin: auto auto;
+        }
+    }
+
+    &__contnet {
+    }
+
+    &__footer {
+        bottom: 0rem;
+        margin-top: auto;
+        background: var(--movius_lightgray);
+    }
+
+    &__footer_mob {
+        //margin-top: auto;
+        // position: fixed;
+        bottom: 0rem;
+        // width: 90vw;
+        margin-top: auto;
+        //background: var(--movius_lightgray);
+    }
+
+    &__footer_side_by_side {
+        position: fixed;
+        bottom: 3rem;
+        width: 55vw;
+    }
+
+    &__footer_browser {
+        //margin-top: auto;
+        position: fixed;
+        bottom: 3rem;
+        width: 58vw;
+    }
+
+    &__errorTextSample {
+        display: block;
+        text-align: center;
+    }
+}

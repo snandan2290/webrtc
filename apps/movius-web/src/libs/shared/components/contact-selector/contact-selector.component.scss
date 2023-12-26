@@ -1,0 +1,170 @@
+@import 'scss/variables';
+@import 'scss/mixins';
+
+$contSelector: 'contSelector';
+
+$componentWidth: 25vw;
+
+:host {
+    display: block;
+    position: relative;
+    height: 2.0625rem;
+}
+
+%focused-text {
+    box-shadow: none;
+}
+
+.#{$contSelector} {
+    $base: &;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    &__contact {
+        width: 100%;
+    }
+
+    &__contactSection {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    &__contactInput {
+        $self: &;
+        width: 100%;
+        min-width: $componentWidth;
+        padding: 0 2rem 0 2rem;
+        border: none;
+        @include font-semi-bold-600(1.5rem);
+        text-align: left;
+
+        &:required, &:invalid {
+            box-shadow:none;
+        }
+
+        &:invalid {
+            @include font-normal(1rem);
+            color: var(--movius_text-gray);
+
+            .clearBtn {
+                display: none;
+            }
+        }
+
+        &:focus {
+            @extend #{$self};
+            @extend %focused-text;
+        }
+
+        &:placeholder-shown {
+            text-align: center;
+        }
+
+
+        &--padded {
+            $input: &;
+            @extend #{$self};
+            padding: 0 2rem 0 4rem;
+
+            &:focus {
+                @extend #{$input};
+                @extend %focused-text;
+            }
+        }
+    }
+
+    &__contactDropdown {
+    }
+
+    &__countries {
+        position: absolute;
+        left: 0;
+        margin: auto 1rem;
+    }
+
+    &__cntName {
+        @include font-semi-bold-600(1rem);
+        text-overflow: ellipsis;
+        overflow: hidden;
+        margin: 0 0 0 $spacing-m;
+    }
+
+    &__cntPhone {
+        @include font-normal(0.875rem);
+        color: var(--movius_text-gray);
+        margin: $spacing-xxs 0 0 $spacing-m;
+    }
+
+    &__cntPhoneType {
+        @include font-normal(0.875rem);
+        margin: $spacing-xxs 0 0 $spacing-m;
+    }
+
+    &__clear {
+        &,
+        &--disabled {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            position: absolute;
+            right: 0;
+            margin: 0 0 0 $spacing-m;
+        }
+
+        &--disabled {
+            visibility: hidden;
+        }
+    }
+
+    &__clearBtn {
+        width: 1.813rem;
+        height: 1.125rem;
+        @include background-image('movius/common/icons-delete-text.svg');
+        cursor: pointer;
+    }
+}
+
+::ng-deep {
+
+    .ant-select-dropdown {
+        padding: 0;
+        margin-top: 0.6875rem;
+    }
+
+    .autoDropdown {
+        padding: 0;
+        border-bottom-left-radius: 1rem;
+        border-bottom-right-radius: 1rem;
+
+        max-height: 34.84vh;
+
+        overflow-y: auto;
+        @include scrollbars(0.375rem, var(--movius_darkgray), transparent);
+
+        @include chrome-safari {
+            overflow-y: overlay;
+            @include scrollbars-overlay(1rem, var(--movius_darkgray), transparent);
+        }
+
+        > div {
+            //CB: 02Dec2020: !important is needed to override ng-zorro inline styles.
+            overflow-y: unset !important;
+            max-height: unset !important;
+        }
+
+        .ant-select-item {
+            padding: calc(#{$spacing-l}/ 2) $spacing-m calc(#{$spacing-l}/ 2)
+                $spacing-m;
+            &:first-of-type {
+                padding: $spacing-l $spacing-m calc(#{$spacing-l}/ 2) $spacing-m;
+            }
+
+            &:last-of-type {
+                padding: calc(#{$spacing-l}/ 2) $spacing-m $spacing-l $spacing-m;
+            }
+        }
+    }
+}

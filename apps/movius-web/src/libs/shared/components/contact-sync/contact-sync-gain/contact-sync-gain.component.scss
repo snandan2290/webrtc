@@ -1,0 +1,9 @@
+@import '../../../../../assets/scss/mixins';
+@import '../../../../../assets/scss/variables';
+@import '../sync-styles.scss';
+
+.syncCntGain {
+    @include sync-component;
+}
+
+

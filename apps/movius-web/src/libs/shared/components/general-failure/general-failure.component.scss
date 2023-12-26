@@ -1,0 +1,14 @@
+@import 'scss/mixins';
+@import 'scss/variables';
+
+.error {
+
+    &__networkErrorIco {
+        width: 1rem;
+        height: 1rem;
+
+        margin: 0 $spacing-s 0 0;
+    }
+
+    @include generalFailure();
+}

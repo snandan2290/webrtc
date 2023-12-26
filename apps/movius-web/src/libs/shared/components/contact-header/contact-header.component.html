@@ -1,0 +1,24 @@
+<communication-item
+    class="cntHeader"
+    [logoUrl]="srcLogoUri || 'assets/icons/dark_theme_icons/avatar.svg'"
+    [isVertical]="true"
+    [addCustomLogo]="addCustomLogo"
+>
+    <div customLogo [class.clickable]="isClickable" (click)="logoClicked.emit()">
+        <ng-content *ngIf="addCustomLogo" select="[customLogo]"></ng-content>
+    </div>
+    <div title class="cntHeader__contactInfo contact-info" [class.contact-info--popup]="contactHeaderType === 'Popup'">
+        <p class="cntHeader__name contact-name" [class.contact-name--popup]="contactHeaderType === 'Popup'" [class.clickable]="isClickable" (click)="nameClicked.emit()">{{ srcContactName.includes('whatsapp:') ? srcContactName.replace('whatsapp:','') : srcContactName }}</p>
+        <p class="cntHeader__phone contact-phone" [class.contact-phone--popup]="contactHeaderType === 'Popup'" *ngIf="!srcContactAddress">{{ srcContactAddress }}</p>
+        <p class="cntHeader__status contact-type" *ngIf="!!contactType">
+            {{ contactType | camelCap }}
+        </p>
+        <p class="cntHeader__status contact-status" *ngIf="!!srcContactStatus">
+            {{ srcContactStatus }}
+        </p>
+    </div>
+
+    <div subtitle class="cntHeader__controls">
+        <ng-content select="[buttons]"></ng-content>
+    </div>
+</communication-item>

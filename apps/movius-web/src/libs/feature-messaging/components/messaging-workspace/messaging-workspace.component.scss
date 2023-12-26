@@ -1,0 +1,192 @@
+@import 'scss/mixins';
+@import 'scss/variables';
+@import 'scss/app.scss';
+
+.messages_mobile {
+    position: relative;
+    overflow: auto;
+    height: 100%;
+    //background: white;
+}
+
+.messages_mobile_history {
+    position: relative;
+    overflow: auto;
+    background: white;
+}
+
+.messages_browser {
+    display: block;
+    //height: 95vh;
+    position: relative;
+    //overflow: auto;
+}
+
+.messages {
+    // display: flex;
+    height: 100%;
+    position: relative;
+    overflow: auto;
+
+    @include verticalToHorizontalWorkspace();
+
+    &__subCaption {
+        @extend %history-item;
+        width: auto;
+        cursor: default;
+        height: 2.5rem;
+        font-size: 16px;
+        font-weight: 800;
+        color: var(--black);
+        margin-top: 1.25rem;
+    }
+    &___body{
+        height: calc(100% - 4rem);
+    }
+
+    &___mldt-body{
+        height: 100% !important;
+    }
+
+    &__spinner_icon {
+        text-align: center;
+        margin-top: 16px;
+    }
+
+    &__historyItem  {
+        @extend %history-item;
+        width: auto;
+    }
+
+
+    &__unreadCount{
+        width: 1.5rem;
+        min-width: 1.5rem;
+        height: 1rem;
+        min-height: 1rem;
+
+        margin-top: auto;
+
+        background-color: var(--movius_papaya);
+        color: #fff;
+        //color: var(--black);
+        border-radius: 0.75rem;
+
+        text-align: center;
+        vertical-align: bottom;
+        font-size: smaller;
+        font-weight: bold;
+    }
+    &__blurred{
+        opacity: 0.5;
+    }
+
+    &__chatPlace{
+        position: absolute;
+        right: 16px;
+        bottom: 16px;
+    }
+
+    &__chatPlace_mob{
+        position:fixed;
+        right: 16px;
+        bottom: 16px;
+    }
+
+    &__icon-img {
+        height: 18px;
+        margin: 5px;
+    }
+
+    &__dropMenu {
+        left: -20px;
+        background-color: var(--movius_text-gray-and-white);
+    }
+    .loading-container{
+        height: 2px;
+    }
+
+    &__dropMenuItem {
+        padding: 10px 35px 7px 10px;
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--black);
+    }
+
+    @include leftWorkspaceGeneralMarkup();
+
+    @include historyItemTwoLiner();
+
+    @include emptySearch('../icons/movius/common/icons-all-no-results.svg');
+
+    @include generalFailure();
+}
+.messages__splitter {
+    //background: var(--movius_teams_LHS_gray);
+    overflow: auto;
+    position: relative;
+    // height: calc(100vh - #{$header-height});
+    box-shadow: -5px 0px 14px -8px #888888;
+    // height: 100vh;
+}
+
+.message_height_teams{
+    height: 100vh;
+}
+
+.message_height{
+    height: calc(100vh - #{$header-height});
+}
+
+.display-flex {
+    display: block;
+}
+
+.display-none {
+    display: none;
+}
+
+.messages__splitter_full{
+    overflow: auto;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    background-color: white;
+}
+
+.vm-img {
+    height: 14px;
+    width: 14px;
+    margin: 0px 4px 1px 0px;
+}
+
+.pic-img {
+    height: 18px;
+    width: 18px;
+    margin: 0px 2px 1px 0px;
+}
+.marginLeft{
+    margin-left: 23px;
+}
+.whatsIconStyle{
+    position: absolute;
+}
+
+.message_style_flex {
+    display: flex
+}
+
+.message_style_block {
+    display: block
+}
+
+@media only screen and (max-width: 414px) {
+    .messages_mobile_history {
+        background: transparent !important;
+    }
+    .messages__splitter {
+        //background: var(--movius_white);
+    }
+}

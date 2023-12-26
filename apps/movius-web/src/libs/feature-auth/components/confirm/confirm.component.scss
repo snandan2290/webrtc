@@ -1,0 +1,50 @@
+@import '../../../../assets/scss/variables';
+@import '../../../../assets/scss/mixins';
+@import '../../../../assets/scss/auth.scss';
+
+.confirm {
+    @extend %flex-col-centered;
+    @extend %spaced;
+
+    &__header,
+    &__buttons {
+        @extend %spaced;
+        @extend %flex-col-centered;
+    }
+
+    &__address{
+        background: var(--movius_white);
+        padding: 1rem;
+    }
+
+    &__addrDelim{
+        color: var(--movius_gray);
+    }
+
+    &__addrImg, &__addrPhone, &__addrDelim{
+        display: inline-block;
+        margin: 0;
+    }
+
+    &__addrImg {
+        width: 1rem;
+        height: 1rem;
+        margin: 0.5rem;
+    }
+
+    &__addrPhone {
+        padding-left: 0.5rem;
+        font-weight: bold;
+        border-left: 1px solid var(--movius_gray);
+    }
+
+    &__button {
+        width: 20vw;
+        padding: 0.4rem;
+        vertical-align: middle;
+
+        &[disabled] {
+            background: lighten($movius_menu-secondary, 20);
+        }
+    }
+}

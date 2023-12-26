@@ -1,0 +1,40 @@
+.main-section{
+    height: 80vh;
+}
+#Page-1 > #Region > #Group-2 > #America {
+    fill: #FF4E3B;
+    cursor: pointer;
+}
+#Page-1 > #Region > #Group-2 > #America:hover {
+    fill: #FF6858;
+}
+
+
+#Page-1 > #Region > #Group-2 > #EMEA {
+    fill: #1F1E33;
+    cursor: pointer;
+}
+#Page-1 > #Region > #Group-2 > #EMEA:hover {
+    fill: #403F51;
+}
+
+#Page-1 > #Region > #Group-2 > #APAC {
+    fill: #6D9980;
+    cursor: pointer;
+}
+#Page-1 > #Region > #Group-2 > #APAC:hover {
+    fill: #82A892;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+ }
+ .footer-text {
+     font-size: .8em;
+     text-decoration: underline;
+     cursor: pointer;
+ }

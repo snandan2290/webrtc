@@ -1,0 +1,92 @@
+<div class="phoneKeyboard{{ isSimple ? '--simple' : '--normal' }}">
+    <button
+        moviusWebLongPress
+        class="phoneBtn--crcl anyKey one"
+        (mouseLongPress)="onVoiceMail()"
+        (mouseJustClick)="passValue('1')"
+    >
+        <div class="phoneKeyboard__btnFolder">
+            <div class="phoneKeyboard__digit">1</div>
+            <!-- <div class="phoneKeyboard__letters--empty"></div> -->
+            <div class="phoneKeyboard__letters">
+                <img
+                    class="voicemail"
+                    src="assets/icons/movius/calls/icons-call-voicemail.svg"
+                    alt="Voicemail"
+                />
+            </div>
+        </div>
+    </button>
+    <button class="phoneBtn--crcl anyKey two" (click)="passValue('2')">
+        <div class="phoneKeyboard__btnFolder">
+            <div class="phoneKeyboard__digit">2</div>
+            <div class="phoneKeyboard__letters">A B C</div>
+        </div>
+    </button>
+    <button class="phoneBtn--crcl anyKey three" (click)="passValue('3')">
+        <div class="phoneKeyboard__btnFolder">
+            <div class="phoneKeyboard__digit">3</div>
+            <div class="phoneKeyboard__letters">D E F</div>
+        </div>
+    </button>
+    <button class="phoneBtn--crcl anyKey four" (click)="passValue('4')">
+        <div class="phoneKeyboard__btnFolder">
+            <div class="phoneKeyboard__digit">4</div>
+            <div class="phoneKeyboard__letters">G H I</div>
+        </div>
+    </button>
+    <button class="phoneBtn--crcl anyKey five" (click)="passValue('5')">
+        <div class="phoneKeyboard__btnFolder">
+            <div class="phoneKeyboard__digit">5</div>
+            <div class="phoneKeyboard__letters">J K L</div>
+        </div>
+    </button>
+    <button class="phoneBtn--crcl anyKey six" (click)="passValue('6')">
+        <div class="phoneKeyboard__btnFolder">
+            <div class="phoneKeyboard__digit">6</div>
+            <div class="phoneKeyboard__letters">M N O</div>
+        </div>
+    </button>
+    <button class="phoneBtn--crcl anyKey seven" (click)="passValue('7')">
+        <div class="phoneKeyboard__btnFolder">
+            <div class="phoneKeyboard__digit">7</div>
+            <div class="phoneKeyboard__letters">P Q R S</div>
+        </div>
+    </button>
+    <button class="phoneBtn--crcl anyKey eight" (click)="passValue('8')">
+        <div class="phoneKeyboard__btnFolder">
+            <div class="phoneKeyboard__digit">8</div>
+            <div class="phoneKeyboard__letters">T U V</div>
+        </div>
+    </button>
+    <button class="phoneBtn--crcl anyKey nine" (click)="passValue('9')">
+        <div class="phoneKeyboard__btnFolder">
+            <div class="phoneKeyboard__digit">9</div>
+            <div class="phoneKeyboard__letters">W X Y Z</div>
+        </div>
+    </button>
+    <button class="phoneBtn--crcl anyKey asterisk" (click)="passValue('*')">
+        <div class="phoneKeyboard__btnFolder">
+            <div class="phoneKeyboard__digit--big">*</div>
+        </div>
+    </button>
+    <button class="phoneBtn--crcl anyKey zero" (click)="passValue('0')">
+        <div class="phoneKeyboard__btnFolder">
+            <div class="phoneKeyboard__digit">0</div>
+            <div class="phoneKeyboard__letters--big">+</div>
+        </div>
+    </button>
+    <button class="phoneBtn--crcl anyKey hash" (click)="passValue('#')">
+        <div class="phoneKeyboard__btnFolder">
+            <div class="phoneKeyboard__digit--big">#</div>
+        </div>
+    </button>
+</div>
+
+<audio
+    #soundDTFMF
+    src="assets/sounds/dtmf.wav"
+    width="0"
+    height="0"
+    enablejavascript="true"
+></audio>

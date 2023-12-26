@@ -1,0 +1,26 @@
+<pane-frame
+    class="terms terms__pane"
+    [includeDefaultHeader]="false"
+    [includeDefaultFooter]="false"
+>
+    <div class="terms__header" headingCustom>
+        <div class="terms__headerTxt">Terms & Privacy Policy</div>
+    </div>
+    <div mainCustom class="terms__shell" *ngIf="view$ | async as view">
+        <div class="terms__main">
+            <section
+                *ngIf="view.text"
+                class="terms__body"
+                nz-row
+                [innerHtml]="view.text"
+            ></section>
+            <section
+                *ngIf="view.status === 'loading'"
+                class="terms__body"
+                nz-row
+            >
+                Loading...
+            </section>
+        </div>
+    </div>
+</pane-frame>

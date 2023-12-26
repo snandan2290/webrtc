@@ -1,0 +1,112 @@
+@import '../../assets/scss/variables';
+@import '../../assets/scss/fonts';
+@import '../../assets/scss/app.scss';
+
+%spaced {
+    & > * {
+        margin: 0.7rem;
+    }
+}
+
+%flex-col-centered {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+%authFont {
+    //TODO: 09Nov2020: Empty after refactor. Consider to remove;
+}
+
+.authButton:focus{
+    background-color: $movius-blue;
+}
+
+.authButton {
+    @include bordered-rounded-btn;
+
+    @include screen-mobile {
+        min-width: 35vw;
+    }
+
+    cursor: pointer;
+}
+
+.authInput {
+    height: $inputs-height;
+    color: var(--black);
+
+    text-align: left;
+    border: 0.005rem solid var(--movius_very-light-pink);
+
+    &.ng-dirty.ng-invalid {
+        border: 0.05rem solid var(--movius_vermillion);
+    }
+
+    &.isDisabled {
+        color: var(--black);
+        background: var(--movius_very-light-pink)-two;
+        pointer-events: none;
+        cursor: not-allowed;
+    }
+}
+
+.authCaption {
+    @extend %authFont;
+    @include font-bold(32px);
+
+    color: var(--black);
+}
+
+.authSubCaption {
+    @extend %authFont;
+    @include font-normal(16px);
+
+    color: var(--black);
+}
+
+
+.authInputBlock {
+    position: relative;
+}
+
+.authInputHide {
+    //$self: &;
+    $hide_size: 1rem;
+    width: $hide_size;
+    height: $hide_size;
+    position: absolute;
+    right: $spacing-s;
+    bottom: calc(50% - #{$hide_size}/ 2);
+
+    background-image: url('../../assets/icons/movius/eye.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    &--active {
+        //@extend #{$self};
+        background-image: url('../../assets/icons/movius/eye_disabled.svg');
+    }
+}
+
+//TODO CB06Nov2020: Temporarily placed in common.
+.no-numbers {
+    @extend %spaced;
+    @extend %flex-col-centered;
+
+    &__header,
+    &__title,
+    &__subtitle {
+        @extend %spaced;
+        @extend %flex-col-centered;
+    }
+
+    &__subtitle {
+        @extend %authFont;
+        @include font-normal(16px);
+    }
+
+    &__button{
+        width: $buttons-width;
+    }
+}

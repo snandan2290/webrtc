@@ -1,0 +1,162 @@
+<div class="group-participants">
+    <svg *ngIf="GetTheme() == null"
+        class="card-iconsallclose"
+        (click)="PreviousPage()"
+        xmlns="http://www.w3.org/2000/svg"
+        width="12"
+        height="12"
+        viewBox="0 0 12 12"
+    >
+        <g fill="none" fill-rule="evenodd">
+            <g fill="gray">
+                <path
+                    d="M11.7 1.77c.399-.398.398-1.042.002-1.438l-.034-.034C11.271-.099 10.628-.1 10.23.3L6.19 4.34c-.104.104-.275.103-.377 0L1.77.3C1.372-.1.728-.099.33.297L.299.332C-.099.729-.1 1.372.3 1.77L4.34 5.81c.104.104.103.275 0 .377L.3 10.23c-.399.399-.398 1.043-.002 1.44l.034.033c.397.397 1.04.398 1.439-.001L5.81 7.66c.104-.104.275-.103.377 0l4.041 4.04c.399.399 1.043.398 1.44.002l.033-.034c.397-.397.398-1.04-.001-1.439L7.66 6.19c-.104-.104-.103-.275 0-.377L11.7 1.77z"
+                    transform="translate(-1236 -95) translate(1236 95)"
+                />
+            </g>
+        </g>
+    </svg>
+
+    <svg *ngIf="GetTheme() == 'Dark'"
+        class="card-iconsallclose"
+        (click)="PreviousPage()"
+        xmlns="http://www.w3.org/2000/svg"
+        width="12"
+        height="12"
+        viewBox="0 0 12 12"
+    >
+        <g fill="#ffffff" fill-rule="evenodd">
+            <g fill="#ffffff">
+                <path
+                    d="M11.7 1.77c.399-.398.398-1.042.002-1.438l-.034-.034C11.271-.099 10.628-.1 10.23.3L6.19 4.34c-.104.104-.275.103-.377 0L1.77.3C1.372-.1.728-.099.33.297L.299.332C-.099.729-.1 1.372.3 1.77L4.34 5.81c.104.104.103.275 0 .377L.3 10.23c-.399.399-.398 1.043-.002 1.44l.034.033c.397.397 1.04.398 1.439-.001L5.81 7.66c.104-.104.275-.103.377 0l4.041 4.04c.399.399 1.043.398 1.44.002l.033-.034c.397-.397.398-1.04-.001-1.439L7.66 6.19c-.104-.104-.103-.275 0-.377L11.7 1.77z"
+                    transform="translate(-1236 -95) translate(1236 95)"
+                />
+            </g>
+        </g>
+    </svg>
+    <div
+        class="group-participants-cont"
+        [ngStyle]="{
+            'margin-left': isMobileDevice ?  '65px' : '108px',
+            'margin-right': isMobileDevice ? '65px' : '108px'
+        }"
+    >
+        <p class="all-participants-title">
+            All Participants ({{ participantsList?.length }})
+        </p>
+        <ul class="user-detail-cont">
+            <li
+                class="inner-detail-cont"
+                *ngFor="let participants of participantsList"
+            >
+                <movius-web-contact-logo
+                    customLogo
+                    class="profile-iconsavatar"
+                    [peer]="getPeer(participants)"
+                    alt="Peer Logo"
+                    [doZoomLetters]="true"
+                ></movius-web-contact-logo>
+                <!-- <img
+                    *ngIf="participants.includes('whatsapp:')"
+                    src="assets/icons/movius/contacts/icons-whatsapp.svg"
+                    alt="img"
+                    class="whatsapp-icon"
+                /> -->
+                <div class="detail-flow">
+                    <p
+                        *ngIf="isContactSaved(participants) === 0"
+                        class="title-name"
+                    >
+                    <message-channel-type-icon 
+                        [messageChannelType]="getChannelType(participants)" 
+                        [alt]="'img'">
+                    </message-channel-type-icon>
+                        {{ getContactName(participants) }}
+                    </p>
+                    <p
+                        *ngIf="isContactSaved(participants) === 1"
+                        class="only-title-number"
+                    >
+                    <message-channel-type-icon 
+                    [messageChannelType]="getChannelType(participants)" 
+                    [alt]="'img'">
+                </message-channel-type-icon>
+                        {{ getContactName(participants) }}
+                    </p>
+                    <p
+                        *ngIf="isContactSaved(participants) === 0"
+                        class="sub-title-number"
+                    >
+                        {{ getContactRealNumber(participants) }}
+                    </p>
+                </div>
+                <div
+                    *ngIf="apiUserIdentity !== participants"
+                    class="user-info"
+                    (click)="participantsDetails(participants)"
+                >
+                    <svg
+                        class="profile-info"
+                        width="5px"
+                        height="13px"
+                        viewBox="0 0 5 13"
+                        version="1.1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        (click)="participantsDetails(participants)"
+                    >
+                        <g
+                            id="Messages"
+                            stroke="none"
+                            stroke-width="1"
+                            fill="none"
+                            fill-rule="evenodd"
+                        >
+                            <g
+                                id="Group-Messages:-Group-Participants"
+                                transform="translate(-1156.000000, -187.000000)"
+                                fill="#1F1E33"
+                            >
+                                <g
+                                    id="user"
+                                    transform="translate(676.500000, 159.000000)"
+                                >
+                                    <g
+                                        id="Combined-Shape"
+                                        transform="translate(479.500000, 28.000000)"
+                                    >
+                                        <path
+                                            d="M3.57717846,4.31641868 L3.57717846,10.8224554 L5,10.8224554 L5,13 L9.9998e-05,13 L-1.33226763e-14,10.8451374 L1.4150217,10.8451374 L1.4150217,6.48605741 L-1.33226763e-14,6.48605741 L-1.33226763e-14,4.31641868 L3.57717846,4.31641868 Z M2.1602068,7.10542736e-15 C2.94924102,0.00493294889 3.58595328,0.652169689 3.58790324,1.44939788 C3.57423102,2.26241252 2.91701666,2.91359713 2.11235775,2.91163144 C1.3301484,2.88991999 0.708085838,2.24071563 0.712932284,1.44939788 C0.729562909,0.651184615 1.3701726,0.0098760011 2.1602068,7.10542736e-15 Z"
+                                        ></path>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+            </li>
+            <div class="break-line"></div>
+        </ul>
+        <div>
+            <button class="manage-participants-action" [disabled]="isGroupMessageEnabled === false" (click)="managePartcipants()" *ngIf="hashRecored[urlId]?.messageChannelType == 'normalMsg'">
+                Manage Participants
+            </button>
+            <button class="manage-participants-action" (click)="addMoreParticipants(participantsList)" 
+            *ngIf="hashRecored[urlId]?.messageChannelType != 'normalMsg' && isUserPresentInGroup() && 
+            hashRecored[urlId]?.threadId && (isWhatsAppenabled(hashRecored[urlId]?.threadId) || hashRecored[urlId]?.messageChannelType != 'whatsapp') &&
+             isWhatsAppGroupEnabled">
+                Add user to conversation
+            </button>
+            <button class="manage-participants-action" (click)="removeParticipants(participantsList)" 
+            *ngIf="hashRecored[urlId]?.messageChannelType != 'normalMsg' && isUserPresentInGroup() && 
+            hashRecored[urlId]?.threadId && (isWhatsAppenabled(hashRecored[urlId]?.threadId) || hashRecored[urlId]?.messageChannelType != 'whatsapp') &&
+             isWhatsAppGroupEnabled">
+                Remove Participant(s)
+            </button>
+            <button class="manage-participants-action" (click)="leaveConversation()" *ngIf="hashRecored[urlId]?.messageChannelType != 'normalMsg' && isUserPresentInGroup() && 
+            hashRecored[urlId]?.threadId && (isWhatsAppenabled(hashRecored[urlId]?.threadId) || hashRecored[urlId]?.messageChannelType != 'whatsapp')">
+                Leave Conversation
+            </button>
+        </div>
+    </div>
+</div>

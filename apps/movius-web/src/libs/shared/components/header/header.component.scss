@@ -1,0 +1,615 @@
+@import '../../../../app/main-layout/main-layout.component.scss';
+// @import '../../../../assets/scss/variables';
+
+// .shell {
+//     display: flex;
+//     height: 100vh;
+
+//     &__header {
+//         display: flex;
+//         flex-direction: row;
+//         align-items: center;
+//         justify-items: center;
+
+//         height: $header-height;
+//         line-height: normal;
+
+//         background-color: var(--movius_lightgray);
+//         border-bottom: 2px solid $movius-gray;
+//         padding: 0px 16px 0px 16px;
+//     }
+
+//     &__header_teams {
+//         display: flex;
+//         flex-direction: row;
+//         align-items: center;
+//         justify-items: center;
+
+//         height: 48px;
+//         line-height: normal;
+
+//         background-color: var(--movius_lightgray);
+//         border-bottom: 2px solid $movius-gray;
+//         padding: 0px 16px 0px 16px;
+//     }
+
+//     &__header_teams-mobile {
+//         display: flex;
+//         flex-direction: row;
+//         align-items: center;
+//         justify-items: center;
+
+//         height: 48px;
+//         line-height: normal;
+
+//         background-color: var(--movius_white);
+//         border-bottom: 2px solid $movius-gray;
+//         padding: 0px 16px 0px 16px;
+//     }
+
+//     &__search {
+//         margin-left: 2rem;
+//         cursor: pointer;
+//     }
+
+//     &__hFolder {
+//         display: flex;
+//         flex-direction: row;
+//         align-items: center;
+//         justify-items: center;
+//         width: 100%;
+//     }
+
+//     &__hLogo {
+//         width: 7.125rem;
+//         height: 100%;
+//         min-width: 7.125rem;
+//         min-height: 1.5rem;
+
+//         margin-left: $spacing-xl;
+
+//         align-self: center;
+//     }
+
+//     &__hLogo_teams {
+//         width: auto;
+//         height: 100%;
+//         margin-top: 2px;
+//         min-height: 1.5rem;
+//         align-self: center;
+//     }
+
+//     &__hLogo_teams_text {
+//         font-size: 1.6vw;
+//         font-weight: 800;
+//         margin: -3px 0 0 5px;
+//         width: auto;
+//     }
+
+//     &__hLogo_img{
+//         height: 100%;
+//         width: 100%;
+//     }
+
+//     &__mutilineUser_imgMobile {
+//         display: flex;
+//         opacity: 0.5;
+//     }
+
+//     &__suitcase-mobile {
+//         width: 1rem;
+//         height: 1.5rem;
+//         margin: 0 0.5rem 0 0;
+//     }
+
+//     &__title-mobile {
+//         font-size: 16px;
+//         font-weight: bold;
+//         font-family: OpenSans-Bold;
+//     }
+
+//     &__rightSide{
+//         display: flex;
+//         flex-direction: row;
+//         align-items: center;
+//         justify-items: center;
+//         margin-left: auto;
+//     }
+
+//     &__hNotify {
+//         width: 1rem;
+//         height: 1rem;
+
+//         @include background-image('/movius/v2/menu/icons-notificationbell.svg')
+//     }
+
+//     &__hUser {
+//         height: 1rem;
+//     }
+
+//     &__selfLogo {
+//         width: 2.5rem;
+//         height: 2.5rem;
+//     }
+
+//     &__title {
+//         display: flex;
+//         flex-direction: column;
+//         align-items: flex-start;
+//         justify-content: center;
+
+//         margin: 0 0 0 $spacing-m;
+
+//         &--up {
+//             @include font-semi-bold-600(1rem);
+//             overflow: hidden;
+//             text-overflow: ellipsis;
+//             white-space: nowrap;
+//             max-width: 200px;
+//         }
+
+//         &--down {
+//             display: flex;
+//             flex-direction: row;
+//             align-items: center;
+
+//             @include font-semi-bold-600(0.875rem);
+//             color: var(--movius_text-gray);
+//         }
+//     }
+
+//     &__titleIco {
+//         margin: 0 0.438rem 0 0;
+//     }
+
+//     &__subtitle {
+//         font-weight: bold;
+//     }
+
+//     &__subLogo {
+//         display: inline-block;
+//         width: 1rem;
+//         height: 1rem;
+//         vertical-align: bottom;
+//     }
+
+//     &__rightSider {
+//         display: flex;
+//         flex-direction: row;
+//         align-items: center;
+//     }
+
+//     &__logoutBtn,
+//     &__bell {
+//         display: block;
+//         width: 1rem;
+//         height: 1rem;
+//         margin-right: 1rem;
+//     }
+
+//     &__e911 {
+//         height: 1rem;
+//         margin-right: 3rem;
+//     }
+
+//     &__e911Pop {
+//         max-width: 14rem;
+//     }
+
+//     &__e911PopInfo {
+//     }
+
+//     &__goE911Setup {
+//         @extend %sync-btn--apply;
+//         margin: 0 auto;
+//     }
+
+//     &__hide-unhide-header {
+//         align-self: center;
+//         cursor: pointer;
+//     }
+
+//     &__mainframe {
+//     }
+
+//     &__sidebar {
+//     }
+
+//     &__content {
+//     }
+
+//     &__menu {
+//         display: flex;
+//         flex-direction: column;
+//         height: 100%;
+
+//         overflow: auto;
+//         @include scrollbars(0.25rem, var(--movius_menu-text), var(--movius-purple))
+//     }
+
+//     &__mItem {
+//         display: block;
+//         overflow: visible;
+
+//         margin-top: 2rem;
+
+//         &:nth-last-child(2) {
+//             margin-bottom: 2rem;
+//         }
+
+//         &:last-of-type {
+//             margin-top: auto;
+//             margin-bottom: 2rem;
+//         }
+//     }
+
+//     &__mLink {
+//         height: 100%;
+
+//         display: flex;
+//         flex-direction: column;
+//         justify-content: center;
+//         align-items: center;
+//     }
+
+//     &__mIcon {
+//         display: flex;
+
+//         height: 1.25rem;
+//         width: 1.25rem;
+
+//         padding-top: 3rem;
+
+//         justify-content: center;
+//         align-items: center;
+
+//         @include font-normal(0.75rem);
+//     }
+
+//     &__mTxt {
+//         margin: 0.563rem 0 0 0;
+
+//         &.is-active {
+//             color: var(--movius_white);
+//         }
+//     }
+
+//     &__badge::after {
+//         //content: url('../../assets/icons/movius/common/icons-notification-orange.svg');
+//         content: '';
+//         position: absolute;
+//         top: 22%;
+//         right: 28%;
+//         z-index: 3;
+
+//         width: 0.75rem;
+//         height: 0.75rem;
+
+//         border-radius: 50%;
+//         background-color: var(--movius_papaya);
+//         border: 2px solid var(--movius_menu-primary);
+//     }
+
+//     &__footer {
+//         display: flex;
+//         height: $footer-height;
+//         max-height: $footer-height;
+
+//         background-color: var(--white);
+//         border-top: 1px solid var(--movius_border-gray-2);
+
+//         overflow: hidden;
+//     }
+
+//     &__footer_teams {
+//         display: flex;
+//         height: 18px;
+//         max-height: 18px;
+
+//         background-color: var(--white);
+//         border-top: 1px solid var(--movius_border-gray-2);
+
+//         overflow: hidden;
+//     }
+
+//     .ant-layout-footer {
+//         padding: 18px 50px;
+//     }
+
+//     &__downInfo {
+//         display: flex;
+//         flex-direction: row;
+//         align-items: center;
+//         justify-content: center;
+//     }
+
+//     &__downLogo {
+//         background-image: url('../../assets/icons/movius/common/logo-pwdby-mov.svg');
+//         background-size: contain;
+//         background-repeat: no-repeat;
+//         background-position: center;
+
+//         min-width: 9.5rem;
+//         min-height: 1rem;
+
+//         margin-right: $spacing-s;
+//     }
+
+//     &__downText {
+//         height: 1.0625rem;
+//         max-width: 63.125vw;
+//         color: var(--movius_text-gray);
+//         @include font-normal(0.75rem);
+
+//         word-break: keep-all;
+//         overflow: hidden;
+//         text-overflow: ellipsis;
+//         white-space: nowrap;
+//     }
+
+//     &__suppVer {
+//         margin: auto 0 auto auto;
+//     }
+
+//     @include screen-mobile {
+//         &__downInfo {
+//             max-width: none;
+//         }
+
+//         &__logoutBtn,
+//         &__bell,
+//         &__e911 {
+//             margin-right: 0.5rem;
+//         }
+//     }
+
+//     //#region Header Dropdown
+//     $dropMenuBorderRadius: 0.5rem;
+//     &__dropMenu {
+
+//         width: 19.0625rem;
+//         height: auto;
+
+//         border-radius: $dropMenuBorderRadius;
+//         background-color: var(--movius_white);
+
+//         box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.1);
+//     }
+
+//     &__dropMenuIco {
+//         width: 1rem;
+//         height: 1rem;
+//         margin: 0 $spacing-s 0 0;
+//     }
+
+//     &__dropMenuItem {
+//         $self: &;
+//         display: flex;
+//         flex-direction: row;
+//         justify-content: flex-start;
+//         align-items: flex-start;
+//         margin: 0 0 $spacing-xs 0;
+
+//         @include font-normal(0.875rem);
+
+//         &--title{
+//             @extend #{$self};
+//             @include font-semi-bold-600(1rem);
+//         }
+
+//         &--email {
+//             @extend #{$self};
+//             align-items: center;
+//             margin: 0;
+//         }
+
+//         &--phone {
+//             @extend #{$self};
+//             align-items: center;
+//             margin: $spacing-m 0 0 0;
+//         }
+
+//         &--logout {
+//             margin: 0;
+//             cursor: pointer;
+//         }
+
+//         & > * {
+//             display: inline-flex;
+//         }
+//     }
+
+//     &__dropMenuSection {
+//         $self: &;
+//         display: flex;
+//         flex-direction: column;
+//         padding: $spacing-xl $spacing-xxl $spacing-xl $spacing-xxl;
+
+//         &--top{
+//             @extend #{$self};
+//             flex-direction: column;
+//             align-items: flex-start;
+//             justify-content: flex-start;
+//             padding: $spacing-xl $spacing-xxl $spacing-xl $spacing-xxl;
+//             border-top-left-radius: $dropMenuBorderRadius;
+//             border-top-right-radius: $dropMenuBorderRadius;
+//             border-bottom-left-radius: 0;
+//             border-bottom-right-radius: 0;
+
+//             background-color: $movius_phone-button-gray;
+//         }
+//     }
+
+//     &__settings-icon {
+//         margin-left: 16px;
+//         cursor: pointer;
+//         margin-top: 2px;
+//     }
+
+//    &__settings-list {
+//         width: 12rem;
+//         padding: 0px !important;
+//         border-radius: 0.5rem !important;
+
+//         .ant-dropdown-menu-item, .ant-dropdown-menu-submenu-title {
+//             padding: 14px !important;
+//             font-weight: 600;
+//         }
+//     }
+//     //#endregion Header Dropdown
+// }
+
+// .calls-icon {
+//     width: 1.375rem;
+//     height: 1.375rem;
+//     z-index: 2;
+//     //transition: background-image 0.5s ease;
+//     @include background-image('/movius/v2/menu/icons-nav-calls.svg');
+
+//     &.is-active, &:hover {
+//         @include background-image('/movius/v2/menu/icons-nav-calls-active.svg');
+//     }
+// }
+
+// .messages-icon {
+//     width: 1.375rem;
+//     height: 1.375rem;
+//     z-index: 2;
+//     //transition: background-image 0.5s ease;
+//     @include background-image('/movius/v2/menu/icons-nav-messages.svg');
+
+//     &.is-active, &:hover {
+//         @include background-image(
+//             '/movius/v2/menu/icons-nav-messages-active.svg'
+//         );
+//     }
+// }
+
+// .contacts-icon {
+//     width: 1.375rem;
+//     height: 1.375rem;
+//     z-index: 2;
+//     //transition: background-image 0.5s ease;
+//     @include background-image('/movius/v2/menu/icons-nav-contacts.svg');
+
+//     &.is-active, &:hover {
+//         @include background-image(
+//             '/movius/v2/menu/icons-nav-contacts-active.svg'
+//         );
+//     }
+// }
+
+// .setup-icon {
+//     width: 1.375rem;
+//     height: 1.375rem;
+//     z-index: 2;
+//     //transition: background-image 0.5s ease;
+//     @include background-image('/movius/v2/menu/icons-nav-setup.svg');
+
+//     &.is-active, &:hover {
+//         @include background-image('/movius/v2/menu/icons-nav-setup-active.svg');
+//     }
+// }
+
+// .support-icon {
+//     width: 1.375rem;
+//     height: 1.375rem;
+//     z-index: 2;
+//     //transition: background-image 0.5s ease;
+//     @include background-image('/movius/v2/menu/icons-nav-support.svg');
+
+//     &.is-active, &:hover {
+//         @include background-image(
+//             '/movius/v2/menu/icons-nav-support-active.svg'
+//         );
+//     }
+// }
+
+// .register-unregister-icon {
+//     position: relative;
+//     left: -18px;
+//     margin-top: 18px;
+// }
+
+// .online-popover {
+//     padding: 0;
+//     margin: 0;
+//     font-size: 12px;
+//     color: var(--movius_black);
+// }
+
+// .offline-popover {
+//     padding: 0;
+//     margin: 0;
+//     font-size: 12px;
+//     color: red;
+// }
+
+// ::ng-deep .connectionStatusPopOver {
+//     width: 56px;
+//     padding: 0;
+//     top: 30px;
+//     margin-left: -40px;
+
+//     &::ng-deep {
+//         .ant-popover-inner {
+//             border-radius: 0.5rem;
+//         }
+//     }
+
+//     &::ng-deep {
+//         .ant-popover-inner-content {
+//             height: 32px;
+//             padding: 8px 8px 8px 8px !important;
+//         }
+//     }
+// }
+
+// .mute-icoming-icon {
+//     margin-left: 24px;
+//     margin-right: 8px;
+// }
+
+// .svg-mute-incoming {
+//     cursor: pointer;
+// }
+
+// ::ng-deep .muteIconToolTip {
+//     width: 20rem;
+//     margin-top: 56px;
+//     margin-right: -32px;
+//     padding: 0;
+
+//     &::ng-deep {
+//         .ant-popover-inner {
+//             border-radius: 0.5rem;
+//         }
+//     }
+
+//     &::ng-deep {
+//         .ant-popover-inner-content {
+//             padding: 12px 0px 8px 8px !important;
+//         }
+//     }
+// }
+
+// .mute-popover {
+//     display: flex;
+//     height: 40px;
+//     color: var(--movius_black);
+// }
+
+// .svg-popover-i{
+//     margin-right: 8px;
+// }
+
+// .info-icon {
+//     margin-right: 15px;
+//     img {
+//         width: 20px;
+//         height: 20px;
+//     }
+// }
+
+
+

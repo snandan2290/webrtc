@@ -1,0 +1,5 @@
+<!--This is to avoid reload during acquireTokenSilent() because of hidden iframe; see msal2  sample app -->
+<router-outlet></router-outlet>
+
+<movius-web-general-failure style="display: none;" (passConnectionError)="getConnectionError($event)">
+</movius-web-general-failure>

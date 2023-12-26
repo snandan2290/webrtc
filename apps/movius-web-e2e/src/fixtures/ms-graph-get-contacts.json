@@ -1,0 +1,54 @@
+{
+    "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users('max.putilov%40gmail.com')/contacts",
+    "@odata.nextLink": "https://graph.microsoft.com/v1.0/me/contacts?$skip=10",
+    "value": [
+        {
+            "id": "AQMkADAwATNiZmYAZC05NDIwLTE4YjEtMDACLTAwCgBGAAAD1xIOzFElQEAAmE85m441HSkHAEUAOltR6x1Nrm4nzG7Kme0AAAIBDgAAAEUAOltR6x1Nrm4nzG7Kme0AA-8lLxkAAAA=",
+            "createdDateTime": "2021-02-12T09:40:37Z",
+            "lastModifiedDateTime": "2021-02-12T09:42:02Z",
+            "changeKey": "EQAAABYAAABFADpbUesdTa5uJ8xuypntAAP/XDvd",
+            "categories": [],
+            "parentFolderId": "AQMkADAwATNiZmYAZC05NDIwLTE4YjEtMDACLTAwCgAuAAAD1xIOzFElQEAAmE85m441HSkBAEUAOltR6x1Nrm4nzG7Kme0AAAIBDgAAAA==",
+            "birthday": "2017-12-31T11:59:00Z",
+            "fileAs": "one, fake c",
+            "displayName": "dr fake c one mr",
+            "givenName": "fake",
+            "initials": null,
+            "middleName": "c",
+            "nickName": "xxx",
+            "surname": "one",
+            "title": "dr",
+            "yomiGivenName": "yominamef",
+            "yomiSurname": "yominamel",
+            "yomiCompanyName": "yomicompany",
+            "generation": "mr",
+            "imAddresses": ["111111"],
+            "jobTitle": "ceo",
+            "companyName": "coca-cola",
+            "department": null,
+            "officeLocation": null,
+            "profession": null,
+            "businessHomePage": null,
+            "assistantName": null,
+            "manager": null,
+            "homePhones": ["+79772753412", "+79772753413"],
+            "businessPhones": ["+79772753415", "+79772753416"],
+            "mobilePhone": "+79772753411",            
+            "spouseName": "marry n",
+            "personalNotes": "note",
+            "children": [],
+            "emailAddresses": [
+                { "name": "max@google.com", "address": "max@google.com" }
+            ],
+            "homeAddress": {
+                "street": "helm",
+                "city": "moscow",
+                "state": "ms",
+                "countryOrRegion": "usa",
+                "postalCode": "115522"
+            },
+            "businessAddress": {},
+            "otherAddress": {}
+        }
+    ]
+}

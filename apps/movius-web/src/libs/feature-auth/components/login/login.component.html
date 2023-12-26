@@ -1,0 +1,135 @@
+<div class="login" *ngIf="!isViaTeams && !isViaTeamsMobile">
+    <ng-container *ngIf="!isSpecialErrorVisible()">
+        <div class="login__header">
+            <p class="login__title authCaption">Welcome!</p>
+            <ng-container [ngSwitch]="info">
+                <ng-template *ngIf="!!info" ngSwitchCase="timeoutExpired">
+                    <div class="login__notification">
+                        Your session has timed out! Please sign in again.
+                    </div>
+                </ng-template>
+            </ng-container>
+            
+            <p class="login__subtitle authSubCaption">
+                {{
+                    doShowSignup
+                        ? userMessage
+                        : 'Enter your username to sign in'
+                }}
+            </p>
+        </div>
+
+        <form class="login__form" [formGroup]="loginForm">
+            <div class="login__inputs">
+                <input
+                    class="login__input login__inputsRow authInput"
+                    type="email"
+                    placeholder="Enter Email ID"
+                    formControlName="email"
+                    data-cy="email-input"
+                    [readonly]="doShowSignup"
+                    [ngClass]="{ isDisabled: doShowSignup }"
+                />
+                <div class="login__inputsRow authInputBlock" *ngIf="doShowSignup">
+                    <div *ngIf="doShowSignup2">
+                        <input
+                            class="login__input authInput"
+                            type="{{ isPwdVisible ? 'text' : 'password' }}"
+                            placeholder="Enter Password"
+                            formControlName="password"
+                            data-cy="password-input"
+                        />
+                        <div
+                            class="authInputHide"
+                            [class.authInputHide--active]="!isPwdVisible"
+                            (click)="isPwdVisible = !isPwdVisible">
+                        </div>
+                   </div>
+                </div>
+                <div class="login__validation">
+                    <span *ngIf="loginForm.invalid">
+                        <ng-container
+                            *ngFor="let err of getFormValidationErrors()"
+                            >{{ err }}</ng-container
+                        >
+                        <div>
+                            <ng-container 
+                            *ngFor="let err of loginForm.errors | keyvalue"
+                            >{{ err.value }}</ng-container
+                        ></div>
+                    </span>
+                    <span *ngIf="emailError">{{emailErrorText}}</span>
+                </div>
+            </div>
+
+            <div class="login__controls">
+                <div
+                    class="login__buttons"
+                    *ngIf="{ isSigning: isSigning$ | async } as data"
+                >
+                    <button
+                        *ngIf="!doShowSignup"
+                        class="login__button authButton"
+                        (click)="onContinue()"
+                        [disabled]="loginForm.get('email').invalid"
+                    >
+                        Continue
+                    </button>
+                    <div *ngIf="doShowSignup2">
+                        <button
+                            [disabled]="data.isSigning"
+                            *ngIf="doShowSignup"
+                            class="login__button authButton"
+                            (click)="onSignIn()"
+                            data-cy="signin-button"
+                        >
+                            <span [ngClass]="{ spinnered: data.isSigning }"
+                                >Sign in</span
+                            >
+                        </button>
+                    </div>
+                    <div style="margin-top: 15px;">
+                        <button
+                            *ngIf="doShowSignup"
+                            class="login__button authButton--light"
+                            (click)="doShowSignup = false; backToPage()"
+                        >
+                            Back
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="login__reset" *ngIf="doShowSignup">
+                <div *ngIf="doShowSignup2">
+                    <p class="login__resetText" (click)="onForgotPassword()">
+                        Forgot Password?
+                    </p>
+                </div>
+            </div>
+        </form>
+        <a (click)="onGoToPage()" style="display: none;">Go to page</a>
+    </ng-container>
+
+    <ng-container *ngIf="isSpecialErrorVisible()">
+        <div class="login__specialErrors">
+            <div class="login__nna-err">
+                <div class="login__errTitle">Sorry!</div>
+                <div class="login__errText">
+                    <div>No Numbers Available,</div>
+                    <div>Please contact your Administration and request for a MultiLine number.</div>
+                </div>
+                <button
+                    class="login__button authButton login__errOk"
+                    (click)="clearError()"
+                >
+                    Ok
+                </button>
+            </div>
+        </div>
+    </ng-container>
+</div>
+<!-- <div *ngIf="isViaTeamsMobile">
+    <movius-web-access-denied></movius-web-access-denied>
+</div> -->

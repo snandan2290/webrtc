@@ -1,0 +1,15 @@
+<div class="emergency__edit">
+    <movius-web-e911-edit-form
+        *ngIf="step.kind === 'edit'"
+        [address]="address"
+        (cancel)="onEditCancel()"
+        (continue)="onEditContinue($event)"
+    >
+    </movius-web-e911-edit-form>
+    <movius-web-e911-address-list
+        *ngIf="step.kind === 'confirm'"
+        [addresses]="step['addresses']"
+        (cancel)="onConfirmCancel()"
+        (updated)="onConfirmUpdated($event)"
+    ></movius-web-e911-address-list>
+</div>

@@ -1,0 +1,30 @@
+<nz-list-item-meta>
+    <nz-list-item-meta-title>
+        {{ message.user.name }}
+        <ng-container *ngIf="message.user.isMe">(me)</ng-container>
+    </nz-list-item-meta-title>
+    <nz-list-item-meta-description>
+        <div *ngIf="message.status.kind === 'MessageReceivedStatus'">
+            <div class="nowrapped">
+                Sent: {{ message.sentDateTime | date: 'medium' }}
+            </div>
+            <div class="nowrapped">
+                Received:
+                {{ message.status['receivedDateTime'] | date: 'medium' }}
+            </div>
+        </div>
+        <div
+            class="nowrapped"
+            *ngIf="message.status.kind === 'MessageSendingStatus'"
+        >
+            Sent : {{ message.sentDateTime | date: 'medium' }}
+        </div>
+        <div
+            class="nowrapped"
+            *ngIf="message.status.kind === 'MessageErrorStatus'"
+        >
+            Error !
+        </div>
+    </nz-list-item-meta-description>
+</nz-list-item-meta>
+{{ message.content }}

@@ -1,0 +1,140 @@
+@import 'scss/variables';
+@import 'scss/mixins';
+@import 'scss/app.scss';
+
+.support {
+
+    //padding: $spacing-s $spacing-m $spacing-s $spacing-m;
+
+    &__main {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        justify-content: space-between;
+
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    &__section {
+        border-bottom: 1px var(--movius_avatar-gray) solid;
+
+        &:last-of-type {
+            border-bottom: none;
+        }
+    }
+
+    &__inputPair {
+        align-items: center;
+        margin: 0.6rem;
+    }
+
+    &__cancel{
+        @extend %sync-btn--cancel;
+        margin: 1rem;
+
+        display: inline-block;
+    }
+    &__add{
+        @extend %sync-btn--apply;
+        margin: 1rem;
+
+        display: inline-block;
+    }
+
+    &__title{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: $spacing-xl $spacing-xl 0 $spacing-xl;
+
+        @include font-normal(0.875rem);
+        color: var(--movius_text-gray);
+    }
+
+    &__part {
+        padding: $spacing-xs $spacing-xl $spacing-xl $spacing-xl;
+    }
+
+    %supportIco{
+        display: inline-block;
+
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 1rem;
+        height: 1rem;
+        margin-right: $spacing-s;
+    }
+
+    %supportContentMargins{
+        margin: 0 0 0 $spacing-xl;
+    }
+
+    &__imgCall{
+        @extend %supportIco;
+        @include background-image('/movius/support/icons-all-call-gray.svg');
+    }
+
+    &__imgEmail{
+        @extend %supportIco;
+        @include background-image('/movius/support/icons-all-email-gray.svg');
+    }
+
+    &__button{
+        @extend %supportContentMargins;
+        height: 2.25rem;
+        padding: 0.563rem $spacing-xl 0.563rem $spacing-xl;
+
+        border: 1px solid var(--movius_black);
+        border-radius: 6.25rem;
+
+        @include font-semi-bold-600(0.875rem);
+        color: var(--movius_colors-primary-green-2);
+        background-color: var(--movius_white);
+        cursor: pointer;
+
+        &.disabled {
+            opacity: 0.5;
+            @include unSelectable();
+        }
+    }
+
+    &__emailForm{
+        @extend %supportContentMargins;
+    }
+
+    //#region Header
+    &__header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        margin: $spacing-xl $spacing-xl 0 $spacing-xl;
+    }
+
+    &__hCaption {
+        display: flex;
+        align-self: flex-start;
+        @include font-bold(1.125rem);
+    }
+
+    &__hClose {
+        display: flex;
+        align-self: center;
+        cursor: pointer;
+
+        width: 0.75rem;
+        height: 0.75rem;
+        @include background-image('/movius/common/icons-all-close.svg')
+    }
+    //#endregion Header
+
+    ::ng-deep.pane{
+        padding: 0;
+    }
+}
+
+::ng-deep .ant-modal-footer {
+    display: none;
+}

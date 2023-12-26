@@ -1,0 +1,143 @@
+<pane-frame class="forward" [includeDefaultHeader]="false" [includeDefaultFooter]="false" [includeDefaultBody] = "false">
+    <div mainCustom class="forward__main">
+        <section class="forward__header">
+            <div class="forward__hCaption">{{ headerTitle }}</div>
+            <div class="forward__hClose" (click)="onClose()"></div>
+        </section>
+        <ng-container *ngIf="view$ | async as view">
+            <section class="forward__section">
+                <div class="forward__title" *ngIf="actionTriggeredFrom === 'forward'">
+                    <input class="forward__search" (keyup)="onSearchTermChanged($event.target.value)" />
+                </div>
+                <div class="forward__title" *ngIf="actionTriggeredFrom === 'addMoreParticipants'">
+                    <i nz-icon nzType="search" class="search" *ngIf="!searchInputForContact"></i>
+                    <input class="add_user_to_conversation" placeholder="Search for Name/Phone Number/Email" (keyup)="onSearchKey($event.target.value)" [(ngModel)]='searchInputForContact' />
+                    <div class="searchbar__remove" *ngIf="searchInputForContact"  (click)="clearInputField()" ></div>
+                </div>
+                <section class="contacts_limit__reached" *ngIf="maxLimitReached">
+                    <div class="contacts_limit__reached__vldMssg">
+                        You can only add up to 10 participants
+                    </div>
+                </section>
+                <section class="forward__validation" *ngIf="view.limitReached">
+                    <div class="forward__vldMsg">
+                        You can only share with up to
+                        {{ view.limitReached }} contacts
+                    </div>
+                </section>
+                <section class="forward__labels" *ngIf="(this.mode !== 'single') && actionTriggeredFrom === 'forward' ">
+                    <div class="forward__labelsSpacer">
+                        <nz-tag class="forward__label" *ngFor="
+                                let contact of view.selectedContacts;
+                                trackBy: trackByContact
+                            " nzMode="closeable" (nzOnClose)="onDeselect(contact)">
+                            {{ (contact.friendlyName.length > 23) ? contact.friendlyName.substring(0,22)+"..." :
+                            contact.friendlyName
+                            || contact.multiLine }}
+                        </nz-tag>
+                    </div>
+                </section>
+
+                <section class="forward__labels" *ngIf="actionTriggeredFrom === 'addMoreParticipants'">
+                    <div class="forward__labelsSpacer">
+                        <nz-tag class="forward__label" *ngFor="
+                        let data of selectedData;
+                            " nzMode="closeable" (nzOnClose)="removeSelectedUser(data)">
+                            {{data.first_name}} {{data.last_name}}
+                        </nz-tag>
+                    </div>
+                </section>
+                <div class="forward__part" [class.forward__part--limitedHeight]="
+                        heightMode === 'Limited'" *ngIf="actionTriggeredFrom === 'forward'"
+                    >
+                    <cdk-virtual-scroll-viewport [itemSize]="64" class="forward__viewport" [style.height.px]="800">
+                        <ng-container *cdkVirtualFor="let contact of view.contacts;trackBy: trackByContact">
+                            <div [class.disabled]="view.limitReached" class="forward__cntShell"
+                                *ngIf="loogedUserNumber !== contact.multiLine"
+                                (click)="(!view.limitReached || contact.isSelected) && (loogedUserNumber !== contact.multiLine) ? onToggle(contact): null"
+                                [class.inactive]="!contact.isSelected && view.limitReached">
+                                <div class="forward__isAdded" [class.forward__isAdded--single-item]="this.mode === 'single'
+                            " [class.inactive]="!contact.isSelected">
+                                </div>
+                                <movius-web-contact-logo class="forward__cntLogo" [peer]="contact"
+                                    [doZoomLetters]="true" alt="Contact logo">
+                                </movius-web-contact-logo>
+                                <div class="forward__cntInfo"
+                                    [ngClass]="{'disabled-user':loogedUserNumber === contact.multiLine}">
+                                    <div class="forward__cntName">
+                                        {{ contact.friendlyName }}
+                                    </div>
+                                    <div class="forward__cntPhone">
+                                        {{ contact.phones && contact.phones[0] && contact.phones[0].orgPhone ? addPulsToMultilineNumber(contact.phones[0].orgPhone): null}}
+                                    </div>
+
+                                </div>
+                            </div>
+                        </ng-container>
+                    </cdk-virtual-scroll-viewport>
+                </div>
+                <div class="forward__part" [class.forward__part--limitedHeight]="
+                        heightMode === 'Limited'
+                    " *ngIf="actionTriggeredFrom === 'addMoreParticipants' || actionTriggeredFrom === 'removeParticipants'">
+                    <!-- <span *ngFor="let whatsappUsers of listOfWhatsappUsers;">{{whatsappUsers.first_name}}</span> -->
+                    <div [itemSize]="64" class="forward__viewport" [style.height.px]="800">
+                        <ng-container *ngFor="let whatsappUsers of listOfWhatsappUsers;">
+                            <div [class.disabled]="view.limitReached" class="forward__cntShell" [ngClass]="{'my_class': whatsappUsers?.participationOfGroup === true}" (click)="toggleSelectedUser(whatsappUsers)"
+                            *ngIf="usersList.length === 0 ? true : usersList[0] !== undefined">
+                                <div class="forward__isAdded"
+                             [class.inactive]="!whatsappUsers?.isSelected" *ngIf="whatsappUsers !== undefined">
+                                </div>
+                                <movius-web-contact-logo class="forward__cntLogo" [peer]="updatedWhatappUser(whatsappUsers)"
+                                    [doZoomLetters]="true" alt="Contact logo" *ngIf="whatsappUsers !== undefined">
+                                </movius-web-contact-logo>
+                                <div class="forward__cntInfo"
+                                [ngClass]="{'disabled-user':loogedUserNumber === whatsappUsers?.mml_number}">
+                                    <div class="forward__cntName" [ngClass]="{'user-name':maxLimitReached === true ? !whatsappUsers?.isSelected : null}">
+                                        {{ whatsappUsers?.first_name }} {{ whatsappUsers?.last_name }}
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-container>
+                        <div
+                            class="contact__emptyShell"
+                            *ngIf="usersList.length === 0 ? false : usersList[0] === undefined">
+                            <div class="contact__emptyIco"></div>
+                            <div class="contact__emptyTxt">No Results Found</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section *ngIf="displayShareChatHistory && actionTriggeredFrom === 'addMoreParticipants'">
+                <div class="share-history__controls">
+                    <div class="share-history__cntName">Share chat history </div>
+                    <div class="share-history__cntCtrl" (click)="toggleShareHistory()">
+                        <nz-switch class="share-history__switch">
+                            <button nz-wave="" type="button" class="ant-switch ant-switch-checked"
+                                ng-reflect-nz-wave-extra-node="true"
+                                [ngClass]="{'share-history':isShareHistoryShown === true ? true : false}">
+                                <span class="ant-switch-handle" [ngClass]="{'ant-switch-handle-on':isShareHistoryShown === true}">
+                                </span>
+                                <span class="ant-switch-inner"></span>
+                                <div class="ant-click-animating-node"></div>
+                            </button>
+                        </nz-switch>
+                        <div class="share-history__switchCheck"></div>
+                    </div>
+                </div>
+            </section>
+            <section class="forward__controls">
+                <button class="forward__btn forward__cancelBtn" (click)="onCancel()" *ngIf="!!cancelBtnTitle">
+                    {{ cancelBtnTitle }}
+                </button>
+                <button class="forward__btn forward__okBtn" [disabled]="view?.selectedContacts?.length === 0"
+                    (click)="onOk(view.selectedContacts)" *ngIf="!!okBtnTitle && actionTriggeredFrom === 'forward'">
+                    {{ okBtnTitle }}
+                </button>
+                <button class="forward__btn forward__okBtn" [disabled]="selectedData.length === 0"
+                *ngIf="!!okBtnTitle && actionTriggeredFrom === 'addMoreParticipants' || actionTriggeredFrom === 'removeParticipants'" (click)="actionBasedOnTriggerType(actionTriggeredFrom)">
+                {{ okBtnTitle }}
+            </button>
+            </section>
+        </ng-container>
+    </div>
+</pane-frame>

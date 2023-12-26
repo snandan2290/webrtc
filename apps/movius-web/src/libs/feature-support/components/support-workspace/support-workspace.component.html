@@ -1,0 +1,96 @@
+<pane-frame
+    class="support"
+    [includeDefaultHeader]="false"
+    [includeDefaultFooter]="false"
+    *ngIf="view$ | async as view"
+>
+    <div mainCustom class="support__main">
+        <section class="support__header">
+            <div class="support__hCaption">Support</div>
+            <div class="support__hClose" (click)="onClose()"></div>
+        </section>
+        <section class="support__section">
+            <div class="support__title">
+                <span class="support__imgCall"></span>
+                <span class="support__text">Call support</span>
+            </div>
+            <div
+                class="support__part support__call"
+                nz-popover
+                [nzPopoverContent]="
+                    disbaledCallButton && callErrorPopover
+                "
+            >
+                <button
+                    class="support__button"
+                    [disabled]="disbaledCallButton"
+                    [class.disabled]="disbaledCallButton"
+                    (click)="onPhoneClick()"
+                >
+                    {{ view.support?.phone }}
+                </button>
+            </div>
+        </section>
+        <!-- <nz-divider></nz-divider> -->
+        <section class="support__section">
+            <div class="support__title">
+                <span class="support__imgEmail"></span>
+                <span class="support__text">
+                    {{ 'Email support' }}
+                </span>
+            </div>
+            <div class="support__part support__email">
+                <button
+                    class="support__button"
+                    (click)="onEmailClick(view.callingLog)"
+                >
+                    {{ view.support?.email }}
+                </button>
+            </div>
+        </section>
+        <!-- <nz-divider></nz-divider> -->
+        <section class="support__section">
+            <div class="support__title">
+                <span class="support__imgEmail"></span>
+                <span class="support__text">Knowledge base</span>
+            </div>
+            <div class="support__part support__knowledge">
+                <button
+                    class="support__button"
+                    (click)="goToLink(knowledgeBaseLink)"
+                >
+                    {{ knowledgeBaseLink }}
+                </button>
+            </div>
+        </section>
+    </div>
+    <ng-template #callErrorPopover>
+        <div class="e911Pop--error">
+            <p>Sorry!</p>
+            <p class="e911Pop--error" [ngSwitch]="callingStatus_tmp || callingStatus">
+                <ng-template ngSwitchCase="network-error">
+                    Network Unreachable
+                </ng-template>
+                <ng-template ngSwitchCase="calls-not-allowed">
+                    Call functionality has been disabled for your organization
+                </ng-template>
+                <ng-template ngSwitchCase="mic-not-allowed">
+                    To enable calling functionality, please permit to access the microphone
+                </ng-template>
+                <ng-template ngSwitchCase="e911-declined">
+                    You have not accepted E911 Terms and Conditions. To enable
+                    calling functionality, please enter an address for E911
+                    under <a routerLink="/settings/e911">Settings > E911</a>
+                </ng-template>
+                <ng-template ngSwitchCase="another-active-call">
+                    Another call in progress.
+                </ng-template>
+            </p>
+        </div>
+    </ng-template>
+</pane-frame>
+<div class="support__controls" *nzModalFooter></div>
+
+<movius-web-general-failure style="display: none;"
+    (passConnectionError)="getConnectionError($event)">
+</movius-web-general-failure>

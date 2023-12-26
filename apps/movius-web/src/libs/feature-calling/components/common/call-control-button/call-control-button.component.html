@@ -1,0 +1,35 @@
+<button
+    [disabled]="isDisabled"
+    (click)="clicked.emit()"
+    class="call-control phoneBtn--crcl {{
+        type.toLowerCase() + getActivePrefix()
+    }}"
+    [class.small] = isSmall
+    [class.gradBtn] = isGrad
+>
+    <div class="call-control__content">
+        <img
+            class="call-control__logo {{
+                selectedParameters.cssClass + getActivePrefix()
+            }}"
+            [class.small] = isSmall
+            src="{{
+                isDisabled ?
+                (!!selectedParameters.disabledIconUri ? selectedParameters.disabledIconUri : selectedParameters.iconUri) :
+                (isActive
+                    ? selectedParameters?.activeIconUri
+                    : selectedParameters.iconUri)
+            }}"
+            alt="{{ selectedParameters.text }}"
+        />
+        <span
+            *ngIf="doShowText"
+            class="call-control__text {{
+                selectedParameters.cssClass + getActivePrefix()
+            }}"
+            >{{  isActive
+                ? selectedParameters?.text
+                : selectedParameters.toggleText}}</span
+        >
+    </div>
+</button>

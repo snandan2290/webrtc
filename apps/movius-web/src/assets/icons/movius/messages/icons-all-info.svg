@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="5px" height="13px" viewBox="0 0 5 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>icons/all/more</title>
+    <g id="Messages" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-Messages:-Group-Participants" transform="translate(-1156.000000, -187.000000)" fill="#FFFFFF">
+            <g id="user" transform="translate(676.500000, 159.000000)">
+                <g id="Combined-Shape" transform="translate(479.500000, 28.000000)">
+                    <path d="M3.57717846,4.31641868 L3.57717846,10.8224554 L5,10.8224554 L5,13 L9.9998e-05,13 L-1.33226763e-14,10.8451374 L1.4150217,10.8451374 L1.4150217,6.48605741 L-1.33226763e-14,6.48605741 L-1.33226763e-14,4.31641868 L3.57717846,4.31641868 Z M2.1602068,7.10542736e-15 C2.94924102,0.00493294889 3.58595328,0.652169689 3.58790324,1.44939788 C3.57423102,2.26241252 2.91701666,2.91359713 2.11235775,2.91163144 C1.3301484,2.88991999 0.708085838,2.24071563 0.712932284,1.44939788 C0.729562909,0.651184615 1.3701726,0.0098760011 2.1602068,7.10542736e-15 Z"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

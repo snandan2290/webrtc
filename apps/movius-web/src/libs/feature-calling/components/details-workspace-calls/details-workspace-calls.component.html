@@ -1,0 +1,8 @@
+<movius-web-shared-details-workspace
+    *ngIf="view$ | async as view"
+    [userGhost]="view.ghost"
+    [doShowAddToExisting]="(peers$ | async)?.length > 0"
+    (onCreateContactOccured)="onCreateContact($event)"
+    (onAddToContactOccured)="onAddToContact($event)"
+>
+</movius-web-shared-details-workspace>

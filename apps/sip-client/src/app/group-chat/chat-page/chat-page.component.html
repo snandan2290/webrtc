@@ -1,0 +1,11 @@
+<div class="content">
+    <div class="user" *ngFor="let user of users">
+        <h2>{{user.name}}</h2>
+        <h2>{{user.id}}</h2>
+        <h2>{{user.identifier}}</h2>
+        <movius-web-chat
+            [user]="user"
+            [peers]="getPeers(user.id)"
+        ></movius-web-chat>
+    </div>
+</div>

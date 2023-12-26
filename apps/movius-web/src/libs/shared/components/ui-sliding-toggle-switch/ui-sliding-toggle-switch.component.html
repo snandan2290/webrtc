@@ -1,0 +1,8 @@
+<label class="switch">
+    <input type="checkbox" [(ngModel)]="isEnabled" (change)="onChange()"/>
+    <span class="slider round"></span>
+    <div class="text">
+        <div class="text__left" [class.active]="!isEnabled">{{ leftText }}</div>
+        <div class="text__right" [class.active]="isEnabled">{{ rightText }}</div>
+    </div>
+</label>

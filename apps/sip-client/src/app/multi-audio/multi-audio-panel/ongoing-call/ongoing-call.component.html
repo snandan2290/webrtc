@@ -1,0 +1,49 @@
+<nz-card [nzTitle]="type + ' Call'">
+    <p>Peer : {{ peerName }}</p>
+    <p>
+        <button
+            *ngIf="isMute"
+            nz-button
+            nzType="primary"
+            nzShape="circle"
+            (click)="onMute(false)"
+        >
+            <i nz-icon nzType="audio-muted"></i>
+        </button>
+        <button
+            *ngIf="!isMute"
+            nz-button
+            nzType="primary"
+            nzShape="circle"
+            (click)="onMute(true)"
+        >
+            <i nz-icon nzType="audio"></i>
+        </button>
+        <button
+            *ngIf="isHold"
+            nz-button
+            nzType="primary"
+            nzShape="circle"
+            (click)="onHold(false)"
+        >
+            <i nz-icon nzType="pause"></i>
+        </button>
+        <button
+            *ngIf="!isHold"
+            nz-button
+            nzType="primary"
+            nzShape="circle"
+            (click)="onHold(true)"
+        >
+            <i nz-icon nzType="caret-right"></i>
+        </button>
+        <button
+            nz-button
+            nzType="danger"
+            nzShape="circle"
+            (click)="hangUp.emit()"
+        >
+            <i nz-icon nzType="stop"></i>
+        </button>
+    </p>
+</nz-card>

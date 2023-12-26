@@ -1,0 +1,141 @@
+@import '../../../../assets/scss/variables';
+@import '../../../../assets/scss/mixins';
+@import '../../../../assets/scss/app.scss';
+
+$inputHeight: 2rem;
+$slidein: 'slidein';
+$brd-size: 0.0625rem;
+
+$main-color: var(--movius_black);
+$secondary-color: var(--movius_text-gray);
+
+.#{$slidein} {
+    &__inpCtrl {
+        $self: &;
+        //padding: 1rem;
+
+        &--header {
+            @extend #{$self};
+            &,
+            > input {
+                width: 100%;
+            }
+        }
+    }
+
+    &__inpFld {
+        $self: &;
+        position: relative;
+        padding: 0 0 $spacing-xxs 0;
+
+        line-height: $inputHeight;
+        border: none;
+        border-bottom: $brd-size solid $secondary-color;
+        color: $main-color;
+        //background: var(--movius_lightgray_and_black);
+        background: var(--movius_lightgray_and_black_details_edit_contact_details);
+
+        @include font-normal(0.875rem);
+
+        // &.focus {
+        //     @extend #{$self};
+        //     border-bottom: $brd-size solid $main-color;
+        // }
+        &:focus {
+            @include placeholder {
+                color: transparent;
+            }
+        }
+
+        &--spaced {
+            @extend #{$self};
+            margin: 0 0 $spacing-xxl-4 0;
+        }
+
+        &--invalid {
+            border-bottom: $brd-size solid var(--movius_invalid-red);
+        }
+
+        &--numeric {
+            width: 100%;
+
+
+            ::ng-deep .ant-input-number-input {
+                padding: 0;
+            }
+        }
+    }
+
+    &__inpPlaceholder {
+        display: inline-block;
+
+        @include font-normal(0.75rem);
+        color: $secondary-color;
+
+
+    }
+
+    &__inpPlaceholderWrapper {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+    }
+
+    &__mainPlaceholder {
+        display: block;
+        position: absolute;
+
+        width: 100%;
+
+        padding: 0;
+        left: 0;
+        top: 1.4375rem;
+        pointer-events: none;
+        color: $secondary-color;
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        @include font-normal(0.875rem);
+
+        &.req::after {
+            content: '*';
+            color: var(--movius_invalid-red);
+        }
+
+        // &--narrow {
+        //     top: 1px;
+        // }
+    }
+}
+
+.#{$slidein}__inpFld:focus {
+    color: var(--black);
+    //border-bottom: $brd-size solid $main-color;
+    + .#{$slidein}__mainPlaceholder {
+        display: none;
+    }
+}
+
+.#{$slidein}__inpFld:not(:placeholder-shown) {
+    color: var(--black);
+    + .#{$slidein}__mainPlaceholder {
+        display: none;
+    }
+
+    &:focus {
+        //border-bottom: $brd-size solid $main-color;
+        border-bottom: $brd-size solid var(--movius-contact-field-border-clr);
+    }
+}
+
+
+.phone-required {
+    position: relative;
+    left: 6px;
+    top: 0px;
+    color: var(--movius_invalid-red)!important;
+}

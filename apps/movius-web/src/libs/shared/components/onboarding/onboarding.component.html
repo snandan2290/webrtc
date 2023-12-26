@@ -1,0 +1,600 @@
+<div class="onboarding" *ngIf="(currentOnboardingStep !== 'GDPR'); else GPPRTemplate">
+    <ng-container>
+        <div class="onboarding__steper" *ngIf="isTeamsSSO() === false">
+            <div class="onboarding__steperTxt">
+                Step {{ currentOnboardingStepNumber }} of
+                {{ totalOnboardingSteps }}
+            </div>
+        </div>
+        <div class="onboarding__heading" *ngIf="isTeamsSSO() === false">
+            <div class="onboarding__cap">Welcome Onboard!</div>
+        </div>
+    </ng-container>
+    <!-- <ng-template #standAloneTmpl>
+        <div class="onboarding__heading">
+            <div class="onboarding__cap">Welcome Onboard!</div>
+        </div> -->
+        <!-- <ng-template #GPPRTemplate>Title</ng-template> -->
+    <!-- </ng-template> -->
+    <div class="onboarding__content" [ngSwitch]="currentOnboardingStep">
+        <ng-container
+            #emergency
+            class="onboarding__section"
+            *ngSwitchCase="'addressPopup'"
+        >
+            <div class="emergencySection">
+                <div class="onboarding__picture step1" *ngIf="GetTheme() == 'Dark'">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="220" height="132" viewBox="0 0 220 132">
+                        <g fill="none" fill-rule="evenodd">
+                            <g fill-rule="nonzero">
+                                <g>
+                                    <g>
+                                        <path fill="#FFFFFF" d="M205.217 67.365h-29.634c-.48 0-.87.39-.87.87s.39.87.87.87h28.765v35.147h-7.044V92.6c0-.48-.389-.87-.87-.87h-12.086c-.48 0-.87.39-.87.87s.39.87.87.87h11.182v10.782h-12.365V92.357c0-.48-.39-.87-.87-.87s-.869.39-.869.87v11.895h-7.191c-.48 0-.87.39-.87.87s.39.87.87.87h30.982c.48 0 .87-.39.87-.87V68.235c0-.48-.39-.87-.87-.87z" opacity=".3" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#FFFFFF" d="M199.74 74.374h-7.47c-.48 0-.87.39-.87.87v7.469c0 .48.39.87.87.87h7.47c.48 0 .869-.39.869-.87v-7.47c0-.48-.39-.87-.87-.87zm-.87 7.47h-5.73v-5.731h5.73v5.73z" opacity=".6" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#FFFFFF" d="M172.174 41.278H158.19c-.48 0-.87.39-.87.87s.39.87.87.87h13.113v61.234h-7.043V92.6c0-.48-.39-.87-.87-.87h-5.13c-.48 0-.87.39-.87.87s.39.87.87.87h4.226v10.782h-12.365v-3.2c0-.48-.39-.87-.87-.87s-.87.39-.87.87v3.2h-7.19c-.48 0-.87.39-.87.87s.39.87.87.87h30.982c.48 0 .87-.39.87-.87V42.148c0-.48-.39-.87-.87-.87zM83.548 104.252h-15.14V30.54c0-.48-.389-.87-.869-.87s-.87.39-.87.87v86.757h-5.8V97.79c0-.48-.389-.87-.869-.87s-.87.39-.87.87v19.505H33.913V97.817h21.974c.48 0 .87-.389.87-.87 0-.48-.39-.869-.87-.869H33.043c-.48 0-.87.39-.87.87v20.348h-4.347V31.713h35.017c.48 0 .87-.39.87-.87s-.39-.87-.87-.87H26.957c-.48 0-.87.39-.87.87v87.322c0 .48.39.87.87.87h40.582c.48 0 .87-.39.87-.87v-12.174h15.139c.48 0 .87-.389.87-.87 0-.48-.39-.869-.87-.869z" opacity=".3" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#FFFFFF" d="M40.609 83.07c.48 0 .87.389.87.87v7.469c0 .48-.39.87-.87.87h-7.47c-.48 0-.87-.39-.87-.87v-7.47c0-.48.39-.87.87-.87zm-.87 1.739h-5.73v5.73h5.73v-5.73zm.87-16.844c.48 0 .87.39.87.87v7.47c0 .48-.39.869-.87.869h-7.47c-.48 0-.87-.39-.87-.87v-7.47c0-.48.39-.869.87-.869zm-.87 1.74h-5.73v5.73h5.73v-5.73zm.87-16.844c.48 0 .87.39.87.87V61.2c0 .48-.39.87-.87.87h-7.47c-.48 0-.87-.39-.87-.87v-7.47c0-.48.39-.87.87-.87zm-.87 1.739h-5.73v5.73h5.73V54.6zm.87-16.843c.48 0 .87.389.87.87v7.46c0 .48-.39.87-.87.87h-7.47c-.48 0-.87-.39-.87-.87v-7.46c0-.481.39-.87.87-.87zm-.87 1.739h-5.73v5.721h5.73v-5.721zM162.452 79.565c.48 0 .87.39.87.87v7.608c0 .48-.39.87-.87.87h-5.06c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.19v-5.869h-2.712c-.48 0-.87-.389-.87-.87 0-.48.39-.869.87-.869zm0-15.391c.48 0 .87.39.87.87v7.608c0 .48-.39.87-.87.87h-5.06c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.19v-5.869h-4.19c-.48 0-.87-.39-.87-.87s.39-.87.87-.87zm0-15.383c.48 0 .87.39.87.87v7.609c0 .48-.39.87-.87.87h-5.06c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.19v-5.87h-4.19c-.48 0-.87-.389-.87-.87 0-.48.39-.869.87-.869z" opacity=".6" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#FFFFFF" d="M96.009 31.713h4.791c.48 0 .87-.39.87-.87s-.39-.87-.87-.87h-4.791c-.48 0-.87.39-.87.87s.39.87.87.87z" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#FFFFFF" d="M178.6 16.522c-1.25 0-2.265-1.011-2.27-2.261-.004-1.25 1.003-2.269 2.253-2.278 1.25-.01 2.272.993 2.287 2.243.004.606-.233 1.188-.658 1.62-.426.43-1.006.673-1.612.676zm0-2.809c-.293 0-.53.238-.53.53 0 .293.237.53.53.53.293 0 .53-.237.53-.53.008-.145-.045-.286-.145-.392-.1-.105-.24-.164-.385-.164v.026zM117.73 121.74c-1.25-.001-2.264-1.012-2.269-2.262-.005-1.25 1.002-2.268 2.252-2.278 1.25-.01 2.273.994 2.287 2.243.005.606-.232 1.189-.658 1.62-.426.43-1.006.674-1.612.676zm0-2.81c-.293 0-.53.238-.53.53 0 .294.237.531.53.531.293 0 .53-.237.53-.53.008-.145-.045-.287-.145-.392-.1-.105-.24-.165-.385-.165v.026z" opacity=".6" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#FFFFFF" d="M103.87 56.73c-.48 0-.87.39-.87.87v14.07c0 .48.39.87.87.87s.87-.39.87-.87V57.6c0-.48-.39-.87-.87-.87z" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#FF4E3B" d="M129.217 54.33c-6.934.01-12.551 5.631-12.556 12.566 0 6.652 11.356 23.313 11.843 24.017.162.237.43.378.718.378.287 0 .555-.141.717-.378.496-.713 11.8-17.374 11.8-24.017-.005-6.921-5.601-12.537-12.522-12.566zm0 34.522c-2.521-3.809-10.817-16.748-10.817-21.956 0-5.977 4.845-10.822 10.822-10.822 5.976 0 10.821 4.845 10.821 10.822-.043 5.208-8.304 18.147-10.826 21.956z" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#FFFFFF" d="M129.217 60.104c-3.75 0-6.79 3.04-6.79 6.792 0 3.75 3.04 6.791 6.79 6.791 3.751 0 6.792-3.04 6.792-6.791-.005-3.75-3.043-6.787-6.792-6.792z" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#FF4E3B" d="M89.417 27.696c0-3.117-2.526-5.644-5.643-5.644s-5.644 2.527-5.644 5.644c0 3.116 2.527 5.643 5.644 5.643 3.115-.005 5.639-2.529 5.643-5.643z" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#FFFFFF" d="M156.243 80.487c.002-1.708-.58-3.365-1.652-4.696V32.696c0-.3-.154-.58-.408-.74-.255-.159-.574-.175-.844-.043l-24.052 11.74-25.017-11.844c-.094-.04-.194-.064-.296-.07-.092-.015-.186-.015-.278 0h-.13L89.912 38.4c2.191-3.93 4.209-8.243 4.209-10.783 0-5.69-4.614-10.304-10.305-10.304-5.69 0-10.304 4.613-10.304 10.304 0 3.618 4.096 10.835 6.957 15.4l-1.418.696c-.298.146-.487.45-.487.783v62.27c0 .3.154.58.409.738.255.16.574.176.843.044l24.087-11.722 24.913 11.896c.104.047.217.074.33.078.118-.003.233-.03.34-.078l24.53-11.974c.299-.146.488-.45.487-.783v-9.322c.914-1.587 1.505-3.34 1.74-5.156zm-1.739 0c0 2.47-3.678 8.609-5.774 11.809-2.095-3.2-5.773-9.34-5.773-11.809 0-3.189 2.585-5.774 5.773-5.774 3.19 0 5.774 2.585 5.774 5.774zM83.774 19.13c4.728.005 8.56 3.837 8.565 8.566 0 3.713-5.643 13.043-8.565 17.391-2.922-4.417-8.565-13.713-8.565-17.391.004-4.729 3.836-8.56 8.565-8.566zm69.07 75.287l-22.783 11.13V95.166c0-.48-.39-.87-.87-.87s-.87.39-.87.87V105.6l-23.556-11.287V79.6c0-.48-.39-.87-.87-.87s-.869.39-.869.87v14.722l-22.783 11.121v-60.33l1.105-.54c.939 1.47 1.609 2.453 1.739 2.61.162.236.43.378.717.378s.556-.142.718-.378c.165-.244 1.878-2.757 3.817-6L103.061 34v15.957c0 .48.39.87.87.87s.869-.39.869-.87V33.965l23.522 11.157v5.435c0 .48.39.87.87.87s.869-.39.869-.87v-5.34l22.782-11.13v40.122c-2.306-1.521-5.262-1.651-7.694-.34-2.431 1.313-3.945 3.855-3.94 6.618 0 3.826 6.087 12.852 6.8 13.86.162.237.43.379.717.379s.555-.142.717-.378c.33-.478 1.87-2.765 3.4-5.435v5.504z" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#FF4E3B" d="M148.696 76.252c-2.34 0-4.235 1.896-4.235 4.235 0 2.339 1.896 4.235 4.235 4.235 2.338 0 4.234-1.896 4.234-4.235 0-2.339-1.896-4.235-4.234-4.235z" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#FFFFFF" d="M61.74 19.696c-1.254 0-2.27-1.016-2.27-2.27 0-1.253 1.016-2.27 2.27-2.27 1.253 0 2.269 1.017 2.269 2.27-.005 1.252-1.018 2.265-2.27 2.27zm0-2.809c-.294 0-.531.237-.531.53 0 .293.237.53.53.53.293 0 .53-.237.53-.53 0-.293-.237-.53-.53-.53z" opacity=".6" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <g fill="#FFFFFF" opacity=".4">
+                                            <path d="M211.557 5.435h-4.966c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.966c.48 0 .87.39.87.87s-.39.87-.87.87zm-9.94 0h-4.965c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.965c.48 0 .87.39.87.87s-.39.87-.87.87zm-9.939 0h-4.974c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.966c.48 0 .87.39.87.87s-.39.87-.87.87h.008zm-9.939 0h-4.965c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.965c.48 0 .87.39.87.87s-.39.87-.87.87zm-9.939 0h-4.965c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.965c.48 0 .87.39.87.87s-.39.87-.87.87zm-9.94 0h-4.964c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.965c.48 0 .87.39.87.87s-.39.87-.87.87zm-9.938 0h-4.965c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.965c.48 0 .87.39.87.87s-.39.87-.87.87zm-9.94 0h-4.965c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.966c.48 0 .87.39.87.87s-.39.87-.87.87zm-9.939 0h-4.965c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.965c.48 0 .87.39.87.87s-.39.87-.87.87zm-9.939 0h-4.965c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.965c.48 0 .87.39.87.87s-.39.87-.87.87zM219.13 5.435h-2.608c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h2.608c.48 0 .87.39.87.87s-.39.87-.87.87zM205.543 1.74H27.5c-.78 0-1.413-.39-1.413-.87S26.72 0 27.5 0h178.043c.78 0 1.414.39 1.414.87s-.633.87-1.414.87zM55.217 5.217H.435c-.24 0-.435-.389-.435-.87 0-.48.195-.869.435-.869h54.782c.24 0 .435.39.435.87s-.194.87-.435.87z" transform="translate(-531 -169) translate(381 83) translate(150 86) translate(0 125)"/>
+                                        </g>
+                                        <path fill="#FFFFFF" d="M122.774 13.913c-1.476 0-2.674-1.194-2.678-2.67.003-1.025.59-1.96 1.513-2.408-.01-.171-.01-.342 0-.513-.005-2.913 2.347-5.282 5.26-5.296.41 0 .819.047 1.218.14.9-1.927 2.83-3.16 4.956-3.166 2.185.014 4.159 1.307 5.044 3.304h.087c2.104-.008 3.97 1.351 4.609 3.357.295-.092.603-.139.913-.14 1.347.006 2.534.887 2.93 2.175 1.183.485 1.856 1.742 1.604 2.996-.253 1.254-1.36 2.153-2.639 2.143l-22.808.078h-.01zm4.087-9.191c-1.953.01-3.53 1.595-3.53 3.548.009.294.056.586.139.87.068.248.021.515-.126.726-.148.212-.382.347-.64.369-.488.036-.866.44-.87.93-.019.261.072.518.25.71.178.191.428.3.69.299l22.809-.07c.493.013.91-.363.95-.856.04-.492-.313-.93-.803-.996-.382-.063-.676-.372-.721-.756-.054-.689-.623-1.224-1.313-1.235-.356 0-.696.141-.948.391-.246.248-.615.325-.94.196-.323-.129-.539-.439-.547-.787-.043-1.683-1.422-3.023-3.104-3.018-.175.005-.35.022-.522.053-.437.074-.86-.192-.983-.618-.47-1.607-1.934-2.718-3.609-2.739-1.67.006-3.139 1.11-3.608 2.713-.072.237-.24.432-.465.536-.224.105-.482.11-.71.012-.442-.189-.918-.283-1.4-.278z" opacity=".3" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+
+
+                <div class="onboarding__picture step1" *ngIf="GetTheme() == null">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="220" height="132" viewBox="0 0 220 132">
+                        <g fill="none" fill-rule="evenodd">
+                            <g fill-rule="nonzero">
+                                <g>
+                                    <g>
+                                        <path fill="#1F1E33" d="M205.217 67.365h-29.634c-.48 0-.87.39-.87.87s.39.87.87.87h28.765v35.147h-7.044V92.6c0-.48-.389-.87-.87-.87h-12.086c-.48 0-.87.39-.87.87s.39.87.87.87h11.182v10.782h-12.365V92.357c0-.48-.39-.87-.87-.87s-.869.39-.869.87v11.895h-7.191c-.48 0-.87.39-.87.87s.39.87.87.87h30.982c.48 0 .87-.39.87-.87V68.235c0-.48-.39-.87-.87-.87z" opacity=".3" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#1F1E33" d="M199.74 74.374h-7.47c-.48 0-.87.39-.87.87v7.469c0 .48.39.87.87.87h7.47c.48 0 .869-.39.869-.87v-7.47c0-.48-.39-.87-.87-.87zm-.87 7.47h-5.73v-5.731h5.73v5.73z" opacity=".6" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#1F1E33" d="M172.174 41.278H158.19c-.48 0-.87.39-.87.87s.39.87.87.87h13.113v61.234h-7.043V92.6c0-.48-.39-.87-.87-.87h-5.13c-.48 0-.87.39-.87.87s.39.87.87.87h4.226v10.782h-12.365v-3.2c0-.48-.39-.87-.87-.87s-.87.39-.87.87v3.2h-7.19c-.48 0-.87.39-.87.87s.39.87.87.87h30.982c.48 0 .87-.39.87-.87V42.148c0-.48-.39-.87-.87-.87zM83.548 104.252h-15.14V30.54c0-.48-.389-.87-.869-.87s-.87.39-.87.87v86.757h-5.8V97.79c0-.48-.389-.87-.869-.87s-.87.39-.87.87v19.505H33.913V97.817h21.974c.48 0 .87-.389.87-.87 0-.48-.39-.869-.87-.869H33.043c-.48 0-.87.39-.87.87v20.348h-4.347V31.713h35.017c.48 0 .87-.39.87-.87s-.39-.87-.87-.87H26.957c-.48 0-.87.39-.87.87v87.322c0 .48.39.87.87.87h40.582c.48 0 .87-.39.87-.87v-12.174h15.139c.48 0 .87-.389.87-.87 0-.48-.39-.869-.87-.869z" opacity=".3" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#1F1E33" d="M40.609 83.07c.48 0 .87.389.87.87v7.469c0 .48-.39.87-.87.87h-7.47c-.48 0-.87-.39-.87-.87v-7.47c0-.48.39-.87.87-.87zm-.87 1.739h-5.73v5.73h5.73v-5.73zm.87-16.844c.48 0 .87.39.87.87v7.47c0 .48-.39.869-.87.869h-7.47c-.48 0-.87-.39-.87-.87v-7.47c0-.48.39-.869.87-.869zm-.87 1.74h-5.73v5.73h5.73v-5.73zm.87-16.844c.48 0 .87.39.87.87V61.2c0 .48-.39.87-.87.87h-7.47c-.48 0-.87-.39-.87-.87v-7.47c0-.48.39-.87.87-.87zm-.87 1.739h-5.73v5.73h5.73V54.6zm.87-16.843c.48 0 .87.389.87.87v7.46c0 .48-.39.87-.87.87h-7.47c-.48 0-.87-.39-.87-.87v-7.46c0-.481.39-.87.87-.87zm-.87 1.739h-5.73v5.721h5.73v-5.721zM162.452 79.565c.48 0 .87.39.87.87v7.608c0 .48-.39.87-.87.87h-5.06c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.19v-5.869h-2.712c-.48 0-.87-.389-.87-.87 0-.48.39-.869.87-.869zm0-15.391c.48 0 .87.39.87.87v7.608c0 .48-.39.87-.87.87h-5.06c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.19v-5.869h-4.19c-.48 0-.87-.39-.87-.87s.39-.87.87-.87zm0-15.383c.48 0 .87.39.87.87v7.609c0 .48-.39.87-.87.87h-5.06c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.19v-5.87h-4.19c-.48 0-.87-.389-.87-.87 0-.48.39-.869.87-.869z" opacity=".6" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#1F1E33" d="M96.009 31.713h4.791c.48 0 .87-.39.87-.87s-.39-.87-.87-.87h-4.791c-.48 0-.87.39-.87.87s.39.87.87.87z" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#1F1E33" d="M178.6 16.522c-1.25 0-2.265-1.011-2.27-2.261-.004-1.25 1.003-2.269 2.253-2.278 1.25-.01 2.272.993 2.287 2.243.004.606-.233 1.188-.658 1.62-.426.43-1.006.673-1.612.676zm0-2.809c-.293 0-.53.238-.53.53 0 .293.237.53.53.53.293 0 .53-.237.53-.53.008-.145-.045-.286-.145-.392-.1-.105-.24-.164-.385-.164v.026zM117.73 121.74c-1.25-.001-2.264-1.012-2.269-2.262-.005-1.25 1.002-2.268 2.252-2.278 1.25-.01 2.273.994 2.287 2.243.005.606-.232 1.189-.658 1.62-.426.43-1.006.674-1.612.676zm0-2.81c-.293 0-.53.238-.53.53 0 .294.237.531.53.531.293 0 .53-.237.53-.53.008-.145-.045-.287-.145-.392-.1-.105-.24-.165-.385-.165v.026z" opacity=".6" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#1F1E33" d="M103.87 56.73c-.48 0-.87.39-.87.87v14.07c0 .48.39.87.87.87s.87-.39.87-.87V57.6c0-.48-.39-.87-.87-.87z" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#FF4E3B" d="M129.217 54.33c-6.934.01-12.551 5.631-12.556 12.566 0 6.652 11.356 23.313 11.843 24.017.162.237.43.378.718.378.287 0 .555-.141.717-.378.496-.713 11.8-17.374 11.8-24.017-.005-6.921-5.601-12.537-12.522-12.566zm0 34.522c-2.521-3.809-10.817-16.748-10.817-21.956 0-5.977 4.845-10.822 10.822-10.822 5.976 0 10.821 4.845 10.821 10.822-.043 5.208-8.304 18.147-10.826 21.956z" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#1F1E33" d="M129.217 60.104c-3.75 0-6.79 3.04-6.79 6.792 0 3.75 3.04 6.791 6.79 6.791 3.751 0 6.792-3.04 6.792-6.791-.005-3.75-3.043-6.787-6.792-6.792z" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#FF4E3B" d="M89.417 27.696c0-3.117-2.526-5.644-5.643-5.644s-5.644 2.527-5.644 5.644c0 3.116 2.527 5.643 5.644 5.643 3.115-.005 5.639-2.529 5.643-5.643z" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#1F1E33" d="M156.243 80.487c.002-1.708-.58-3.365-1.652-4.696V32.696c0-.3-.154-.58-.408-.74-.255-.159-.574-.175-.844-.043l-24.052 11.74-25.017-11.844c-.094-.04-.194-.064-.296-.07-.092-.015-.186-.015-.278 0h-.13L89.912 38.4c2.191-3.93 4.209-8.243 4.209-10.783 0-5.69-4.614-10.304-10.305-10.304-5.69 0-10.304 4.613-10.304 10.304 0 3.618 4.096 10.835 6.957 15.4l-1.418.696c-.298.146-.487.45-.487.783v62.27c0 .3.154.58.409.738.255.16.574.176.843.044l24.087-11.722 24.913 11.896c.104.047.217.074.33.078.118-.003.233-.03.34-.078l24.53-11.974c.299-.146.488-.45.487-.783v-9.322c.914-1.587 1.505-3.34 1.74-5.156zm-1.739 0c0 2.47-3.678 8.609-5.774 11.809-2.095-3.2-5.773-9.34-5.773-11.809 0-3.189 2.585-5.774 5.773-5.774 3.19 0 5.774 2.585 5.774 5.774zM83.774 19.13c4.728.005 8.56 3.837 8.565 8.566 0 3.713-5.643 13.043-8.565 17.391-2.922-4.417-8.565-13.713-8.565-17.391.004-4.729 3.836-8.56 8.565-8.566zm69.07 75.287l-22.783 11.13V95.166c0-.48-.39-.87-.87-.87s-.87.39-.87.87V105.6l-23.556-11.287V79.6c0-.48-.39-.87-.87-.87s-.869.39-.869.87v14.722l-22.783 11.121v-60.33l1.105-.54c.939 1.47 1.609 2.453 1.739 2.61.162.236.43.378.717.378s.556-.142.718-.378c.165-.244 1.878-2.757 3.817-6L103.061 34v15.957c0 .48.39.87.87.87s.869-.39.869-.87V33.965l23.522 11.157v5.435c0 .48.39.87.87.87s.869-.39.869-.87v-5.34l22.782-11.13v40.122c-2.306-1.521-5.262-1.651-7.694-.34-2.431 1.313-3.945 3.855-3.94 6.618 0 3.826 6.087 12.852 6.8 13.86.162.237.43.379.717.379s.555-.142.717-.378c.33-.478 1.87-2.765 3.4-5.435v5.504z" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#FF4E3B" d="M148.696 76.252c-2.34 0-4.235 1.896-4.235 4.235 0 2.339 1.896 4.235 4.235 4.235 2.338 0 4.234-1.896 4.234-4.235 0-2.339-1.896-4.235-4.234-4.235z" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#1F1E33" d="M61.74 19.696c-1.254 0-2.27-1.016-2.27-2.27 0-1.253 1.016-2.27 2.27-2.27 1.253 0 2.269 1.017 2.269 2.27-.005 1.252-1.018 2.265-2.27 2.27zm0-2.809c-.294 0-.531.237-.531.53 0 .293.237.53.53.53.293 0 .53-.237.53-.53 0-.293-.237-.53-.53-.53z" opacity=".6" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <g fill="#1F1E33" opacity=".4">
+                                            <path d="M211.557 5.435h-4.966c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.966c.48 0 .87.39.87.87s-.39.87-.87.87zm-9.94 0h-4.965c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.965c.48 0 .87.39.87.87s-.39.87-.87.87zm-9.939 0h-4.974c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.966c.48 0 .87.39.87.87s-.39.87-.87.87h.008zm-9.939 0h-4.965c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.965c.48 0 .87.39.87.87s-.39.87-.87.87zm-9.939 0h-4.965c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.965c.48 0 .87.39.87.87s-.39.87-.87.87zm-9.94 0h-4.964c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.965c.48 0 .87.39.87.87s-.39.87-.87.87zm-9.938 0h-4.965c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.965c.48 0 .87.39.87.87s-.39.87-.87.87zm-9.94 0h-4.965c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.966c.48 0 .87.39.87.87s-.39.87-.87.87zm-9.939 0h-4.965c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.965c.48 0 .87.39.87.87s-.39.87-.87.87zm-9.939 0h-4.965c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.965c.48 0 .87.39.87.87s-.39.87-.87.87zM219.13 5.435h-2.608c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h2.608c.48 0 .87.39.87.87s-.39.87-.87.87zM205.543 1.74H27.5c-.78 0-1.413-.39-1.413-.87S26.72 0 27.5 0h178.043c.78 0 1.414.39 1.414.87s-.633.87-1.414.87zM55.217 5.217H.435c-.24 0-.435-.389-.435-.87 0-.48.195-.869.435-.869h54.782c.24 0 .435.39.435.87s-.194.87-.435.87z" transform="translate(-531 -169) translate(381 83) translate(150 86) translate(0 125)"/>
+                                        </g>
+                                        <path fill="#1F1E33" d="M122.774 13.913c-1.476 0-2.674-1.194-2.678-2.67.003-1.025.59-1.96 1.513-2.408-.01-.171-.01-.342 0-.513-.005-2.913 2.347-5.282 5.26-5.296.41 0 .819.047 1.218.14.9-1.927 2.83-3.16 4.956-3.166 2.185.014 4.159 1.307 5.044 3.304h.087c2.104-.008 3.97 1.351 4.609 3.357.295-.092.603-.139.913-.14 1.347.006 2.534.887 2.93 2.175 1.183.485 1.856 1.742 1.604 2.996-.253 1.254-1.36 2.153-2.639 2.143l-22.808.078h-.01zm4.087-9.191c-1.953.01-3.53 1.595-3.53 3.548.009.294.056.586.139.87.068.248.021.515-.126.726-.148.212-.382.347-.64.369-.488.036-.866.44-.87.93-.019.261.072.518.25.71.178.191.428.3.69.299l22.809-.07c.493.013.91-.363.95-.856.04-.492-.313-.93-.803-.996-.382-.063-.676-.372-.721-.756-.054-.689-.623-1.224-1.313-1.235-.356 0-.696.141-.948.391-.246.248-.615.325-.94.196-.323-.129-.539-.439-.547-.787-.043-1.683-1.422-3.023-3.104-3.018-.175.005-.35.022-.522.053-.437.074-.86-.192-.983-.618-.47-1.607-1.934-2.718-3.609-2.739-1.67.006-3.139 1.11-3.608 2.713-.072.237-.24.432-.465.536-.224.105-.482.11-.71.012-.442-.189-.918-.283-1.4-.278z" opacity=".3" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+
+                <div class="onboarding__subcap subCapEmergency">
+                    <p>
+                        To use the MultiLine Desktop, you must enter a valid
+                        U.S. address where emergency services can find you if
+                        you call 911 from this device.
+                    </p>
+                </div>
+                <form class="onboarding__emergency" autocomplete="off" [formGroup]="emergencyForm">
+                    <div class="onboarding__emergencyRow" nz-row>
+                        <div
+                            class="onboarding__emergencyCol"
+                            nz-col
+                            nzFlex="50%"
+                        >
+                            <input
+                                data-cy="firstName"
+                                autocomplete="disabled"
+                                class="onboarding__input"
+                                formControlName="firstName"
+                                nz-input
+                                placeholder="First Name"
+                                type="text"
+                            />
+                            <span
+                                class="onboarding__validationSimple"
+                                *ngIf="
+                                (emergencyFormControl.firstName.touched || submitted) && emergencyFormControl.firstName.errors?.required
+                                "
+                            >
+                                Please enter first name
+                            </span>
+                            <span
+                                class="onboarding__validationSimple"
+                                *ngIf="
+                                emergencyFormControl.firstName.dirty && emergencyFormControl['firstName'].hasError('maxlength')
+                                "
+                            >
+                                Maximum length is 53
+                            </span>
+                        </div>
+                        <div
+                            class="onboarding__emergencyCol"
+                            nz-col
+                            nzFlex="auto"
+                        >
+                            <input
+                                data-cy="lastName"
+                                autocomplete="disabled"
+                                class="onboarding__input"
+                                formControlName="lastName"
+                                nz-input
+                                placeholder="Last Name"
+                                type="text"
+                            />
+                            <span
+                                class="onboarding__validationSimple"
+                                *ngIf="
+                                (emergencyFormControl.lastName.touched || submitted) && emergencyFormControl.lastName.errors?.required
+                                "
+                            >
+                                Please enter last name
+                            </span>
+                            <span
+                                class="onboarding__validationSimple"
+                                *ngIf="
+                                emergencyFormControl['lastName'].dirty &&
+                                emergencyFormControl['lastName'].hasError(
+                                        'maxlength'
+                                    )
+                                "
+                            >
+                                Maximum length is 52
+                            </span>
+                        </div>
+                    </div>
+                    <div class="onboarding__emergencyRow" nz-row>
+                        <div nz-col [nzSpan]="24">
+                            <div nz-row>
+                                <input
+                                    data-cy="houseNumber"
+                                    autocomplete="disabled"
+                                    class="onboarding__input"
+                                    formControlName="houseNumber"
+                                    nz-input
+                                    placeholder="Unit/Apt/Street Number (Do not include street name)"
+                                    type="text"
+                                />
+                                <span
+                                    class="onboarding__validationSimple"
+                                    *ngIf="
+                                    (emergencyFormControl.houseNumber.touched || submitted) && emergencyFormControl.houseNumber.errors?.required
+                                    "
+                                >
+                                {{ 'Please enter Unit/Apt/Street Number (Do not include street name)' }}
+                                </span>
+                                <span
+                                    class="onboarding__validationSimple"
+                                    *ngIf="
+                                    emergencyFormControl['houseNumber']
+                                            .dirty &&
+                                            emergencyFormControl[
+                                            'houseNumber'
+                                        ].hasError('maxlength')
+                                    "
+                                >
+                                    Maximum length is 10
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="onboarding__emergencyRow" nz-row>
+                        <div nz-col [nzSpan]="24">
+                            <div nz-row>
+                                <input
+                                    data-cy="street"
+                                    autocomplete="disabled"
+                                    class="onboarding__input"
+                                    formControlName="street"
+                                    nz-input
+                                    placeholder="Address Line 1"
+                                    type="text"
+                                />
+                                <span
+                                    class="onboarding__validationSimple"
+                                    *ngIf="
+                                    (emergencyFormControl.street.touched || submitted) && emergencyFormControl.street.errors?.required
+                                    "
+                                >
+                                    Please enter street
+                                </span>
+                                <span
+                                    class="onboarding__validationSimple"
+                                    *ngIf="
+                                    emergencyFormControl['street']
+                                            .dirty &&
+                                            emergencyFormControl[
+                                            'street'
+                                        ].hasError('maxlength')
+                                    "
+                                >
+                                    Maximum length is 95
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="onboarding__emergencyRow" nz-row>
+                        <div nz-col [nzSpan]="24">
+                            <div nz-row>
+                                <input
+                                    data-cy="street2"
+                                    autocomplete="disabled"
+                                    class="onboarding__input"
+                                    formControlName="street2"
+                                    nz-input
+                                    placeholder="Address Line 2 (optional)"
+                                    type="text"
+                                />
+                                <span
+                                    class="onboarding__validationSimple"
+                                    *ngIf="
+                                    emergencyFormControl['street2']
+                                            .dirty &&
+                                    emergencyFormControl[
+                                            'street2'
+                                        ].hasError('maxlength')
+                                    "
+                                >
+                                    Maximum length is 95
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="onboarding__emergencyRow" nz-row>
+                        <div nz-col [nzSpan]="12">
+                            <div nz-row>
+                                <input
+                                    data-cy="city"
+                                    autocomplete="disabled"
+                                    class="onboarding__input--spaced"
+                                    formControlName="city"
+                                    nz-input
+                                    placeholder="City"
+                                    type="text"
+                                />
+                                <span
+                                    class="onboarding__validationSimple"
+                                    *ngIf="
+                                    (emergencyFormControl.city.touched || submitted) && emergencyFormControl.city.errors?.required
+                                    "
+                                >
+                                    Please enter city
+                                </span>
+                                <span
+                                    class="onboarding__validationSimple"
+                                    *ngIf="
+                                    emergencyFormControl['city'].dirty &&
+                                    emergencyFormControl['city'].hasError(
+                                            'maxlength'
+                                        )
+                                    "
+                                >
+                                    Maximum length is 35
+                                </span>
+                            </div>
+                        </div>
+                        <div nz-col [nzSpan]="12">
+                            <div nz-row>
+                                <input
+                                    data-cy="postal"
+                                    autocomplete="disabled"
+                                    class="onboarding__input"
+                                    formControlName="postal"
+                                    nz-input
+                                    placeholder="Postal / Zip code"
+                                    type="text"
+                                />
+                                <span
+                                    class="onboarding__validationSimple"
+                                    *ngIf="
+                                        (emergencyFormControl.postal.touched || submitted) && emergencyFormControl.postal.errors?.required
+                                    "
+                                >
+                                    Please enter postal/zip code
+                                </span>
+                                <span
+                                    class="onboarding__validationSimple"
+                                    *ngIf="
+                                    emergencyFormControl['postal']
+                                            .dirty &&
+                                    emergencyFormControl[
+                                            'postal'
+                                        ].hasError('maxlength')
+                                    "
+                                >
+                                    Maximum length is 5
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="onboarding__emergencyRow" nz-row>
+                        <div nz-col [nzSpan]="24">
+                            <div nz-row>
+                                <nz-select
+                                    class="onboarding__dropdown"
+                                    data-cy="state"
+                                    [formControl]="
+                                        emergencyForm.controls['state']
+                                    "
+                                    nzShowSearch
+                                    nzAllowClear
+                                    nzPlaceHolder="State"
+                                >
+                                    <nz-option
+                                        class="onboarding__dropOption"
+                                        *ngFor="
+                                            let opt of dataService.getUsaStateNamesAndCodes()
+                                        "
+                                        nzLabel="{{ opt }}"
+                                        nzValue="{{ dataService.getOnlyCodeFromName(opt) }}"
+                                    >
+                                    </nz-option>
+                                </nz-select>
+                                <span
+                                    class="onboarding__validationSimple"
+                                    *ngIf="
+                                    (emergencyFormControl.state.touched || submitted) && emergencyFormControl.state.errors?.required
+                                    "
+                                >
+                                    Please select state
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- CB: 07Apr2021: Country field is stale. Remove in case no-more-need. -->
+                    <!-- <div class="onboarding__emergencyRow" nz-row>
+                        <div nz-col [nzSpan]="24">
+                            <div nz-row>
+                                <input
+                                    data-cy="country"
+                                    class="onboarding__input"
+                                    formControlName="country"
+                                    nz-input
+                                    placeholder="Country"
+                                    type="text"
+                                />
+                            </div>
+                        </div>
+                    </div> -->
+                </form>
+                <div class="onboarding__error" *ngIf="errorMessage">
+                    {{ errorMessage }}
+                </div>
+                <div class="onboarding__e911terms">
+                    <span
+                        >By clicking on "Continue", you agree to the
+                        <span
+                            class="onboarding__link"
+                            data-cy="e911-terms"
+                            (click)="onE911TermsClicked()"
+                            >E911 Terms & Conditions</span
+                        ></span
+                    >
+                </div>
+            </div>
+        </ng-container>
+        <ng-container
+            #address
+            class="onboarding__section"
+            *ngSwitchCase="'Address'"
+        >
+            <div class="addressSection">
+                <div class="onboarding__picture step1" *ngIf="GetTheme() == 'Dark'">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="220" height="132" viewBox="0 0 220 132">
+                        <g fill="none" fill-rule="evenodd">
+                            <g fill-rule="nonzero">
+                                <g>
+                                    <g>
+                                        <path fill="#FFFFFF" d="M205.217 67.365h-29.634c-.48 0-.87.39-.87.87s.39.87.87.87h28.765v35.147h-7.044V92.6c0-.48-.389-.87-.87-.87h-12.086c-.48 0-.87.39-.87.87s.39.87.87.87h11.182v10.782h-12.365V92.357c0-.48-.39-.87-.87-.87s-.869.39-.869.87v11.895h-7.191c-.48 0-.87.39-.87.87s.39.87.87.87h30.982c.48 0 .87-.39.87-.87V68.235c0-.48-.39-.87-.87-.87z" opacity=".3" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#FFFFFF" d="M199.74 74.374h-7.47c-.48 0-.87.39-.87.87v7.469c0 .48.39.87.87.87h7.47c.48 0 .869-.39.869-.87v-7.47c0-.48-.39-.87-.87-.87zm-.87 7.47h-5.73v-5.731h5.73v5.73z" opacity=".6" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#FFFFFF" d="M172.174 41.278H158.19c-.48 0-.87.39-.87.87s.39.87.87.87h13.113v61.234h-7.043V92.6c0-.48-.39-.87-.87-.87h-5.13c-.48 0-.87.39-.87.87s.39.87.87.87h4.226v10.782h-12.365v-3.2c0-.48-.39-.87-.87-.87s-.87.39-.87.87v3.2h-7.19c-.48 0-.87.39-.87.87s.39.87.87.87h30.982c.48 0 .87-.39.87-.87V42.148c0-.48-.39-.87-.87-.87zM83.548 104.252h-15.14V30.54c0-.48-.389-.87-.869-.87s-.87.39-.87.87v86.757h-5.8V97.79c0-.48-.389-.87-.869-.87s-.87.39-.87.87v19.505H33.913V97.817h21.974c.48 0 .87-.389.87-.87 0-.48-.39-.869-.87-.869H33.043c-.48 0-.87.39-.87.87v20.348h-4.347V31.713h35.017c.48 0 .87-.39.87-.87s-.39-.87-.87-.87H26.957c-.48 0-.87.39-.87.87v87.322c0 .48.39.87.87.87h40.582c.48 0 .87-.39.87-.87v-12.174h15.139c.48 0 .87-.389.87-.87 0-.48-.39-.869-.87-.869z" opacity=".3" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#FFFFFF" d="M40.609 83.07c.48 0 .87.389.87.87v7.469c0 .48-.39.87-.87.87h-7.47c-.48 0-.87-.39-.87-.87v-7.47c0-.48.39-.87.87-.87zm-.87 1.739h-5.73v5.73h5.73v-5.73zm.87-16.844c.48 0 .87.39.87.87v7.47c0 .48-.39.869-.87.869h-7.47c-.48 0-.87-.39-.87-.87v-7.47c0-.48.39-.869.87-.869zm-.87 1.74h-5.73v5.73h5.73v-5.73zm.87-16.844c.48 0 .87.39.87.87V61.2c0 .48-.39.87-.87.87h-7.47c-.48 0-.87-.39-.87-.87v-7.47c0-.48.39-.87.87-.87zm-.87 1.739h-5.73v5.73h5.73V54.6zm.87-16.843c.48 0 .87.389.87.87v7.46c0 .48-.39.87-.87.87h-7.47c-.48 0-.87-.39-.87-.87v-7.46c0-.481.39-.87.87-.87zm-.87 1.739h-5.73v5.721h5.73v-5.721zM162.452 79.565c.48 0 .87.39.87.87v7.608c0 .48-.39.87-.87.87h-5.06c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.19v-5.869h-2.712c-.48 0-.87-.389-.87-.87 0-.48.39-.869.87-.869zm0-15.391c.48 0 .87.39.87.87v7.608c0 .48-.39.87-.87.87h-5.06c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.19v-5.869h-4.19c-.48 0-.87-.39-.87-.87s.39-.87.87-.87zm0-15.383c.48 0 .87.39.87.87v7.609c0 .48-.39.87-.87.87h-5.06c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.19v-5.87h-4.19c-.48 0-.87-.389-.87-.87 0-.48.39-.869.87-.869z" opacity=".6" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#FFFFFF" d="M96.009 31.713h4.791c.48 0 .87-.39.87-.87s-.39-.87-.87-.87h-4.791c-.48 0-.87.39-.87.87s.39.87.87.87z" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#FFFFFF" d="M178.6 16.522c-1.25 0-2.265-1.011-2.27-2.261-.004-1.25 1.003-2.269 2.253-2.278 1.25-.01 2.272.993 2.287 2.243.004.606-.233 1.188-.658 1.62-.426.43-1.006.673-1.612.676zm0-2.809c-.293 0-.53.238-.53.53 0 .293.237.53.53.53.293 0 .53-.237.53-.53.008-.145-.045-.286-.145-.392-.1-.105-.24-.164-.385-.164v.026zM117.73 121.74c-1.25-.001-2.264-1.012-2.269-2.262-.005-1.25 1.002-2.268 2.252-2.278 1.25-.01 2.273.994 2.287 2.243.005.606-.232 1.189-.658 1.62-.426.43-1.006.674-1.612.676zm0-2.81c-.293 0-.53.238-.53.53 0 .294.237.531.53.531.293 0 .53-.237.53-.53.008-.145-.045-.287-.145-.392-.1-.105-.24-.165-.385-.165v.026z" opacity=".6" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#FFFFFF" d="M103.87 56.73c-.48 0-.87.39-.87.87v14.07c0 .48.39.87.87.87s.87-.39.87-.87V57.6c0-.48-.39-.87-.87-.87z" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#FF4E3B" d="M129.217 54.33c-6.934.01-12.551 5.631-12.556 12.566 0 6.652 11.356 23.313 11.843 24.017.162.237.43.378.718.378.287 0 .555-.141.717-.378.496-.713 11.8-17.374 11.8-24.017-.005-6.921-5.601-12.537-12.522-12.566zm0 34.522c-2.521-3.809-10.817-16.748-10.817-21.956 0-5.977 4.845-10.822 10.822-10.822 5.976 0 10.821 4.845 10.821 10.822-.043 5.208-8.304 18.147-10.826 21.956z" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#FFFFFF" d="M129.217 60.104c-3.75 0-6.79 3.04-6.79 6.792 0 3.75 3.04 6.791 6.79 6.791 3.751 0 6.792-3.04 6.792-6.791-.005-3.75-3.043-6.787-6.792-6.792z" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#FF4E3B" d="M89.417 27.696c0-3.117-2.526-5.644-5.643-5.644s-5.644 2.527-5.644 5.644c0 3.116 2.527 5.643 5.644 5.643 3.115-.005 5.639-2.529 5.643-5.643z" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#FFFFFF" d="M156.243 80.487c.002-1.708-.58-3.365-1.652-4.696V32.696c0-.3-.154-.58-.408-.74-.255-.159-.574-.175-.844-.043l-24.052 11.74-25.017-11.844c-.094-.04-.194-.064-.296-.07-.092-.015-.186-.015-.278 0h-.13L89.912 38.4c2.191-3.93 4.209-8.243 4.209-10.783 0-5.69-4.614-10.304-10.305-10.304-5.69 0-10.304 4.613-10.304 10.304 0 3.618 4.096 10.835 6.957 15.4l-1.418.696c-.298.146-.487.45-.487.783v62.27c0 .3.154.58.409.738.255.16.574.176.843.044l24.087-11.722 24.913 11.896c.104.047.217.074.33.078.118-.003.233-.03.34-.078l24.53-11.974c.299-.146.488-.45.487-.783v-9.322c.914-1.587 1.505-3.34 1.74-5.156zm-1.739 0c0 2.47-3.678 8.609-5.774 11.809-2.095-3.2-5.773-9.34-5.773-11.809 0-3.189 2.585-5.774 5.773-5.774 3.19 0 5.774 2.585 5.774 5.774zM83.774 19.13c4.728.005 8.56 3.837 8.565 8.566 0 3.713-5.643 13.043-8.565 17.391-2.922-4.417-8.565-13.713-8.565-17.391.004-4.729 3.836-8.56 8.565-8.566zm69.07 75.287l-22.783 11.13V95.166c0-.48-.39-.87-.87-.87s-.87.39-.87.87V105.6l-23.556-11.287V79.6c0-.48-.39-.87-.87-.87s-.869.39-.869.87v14.722l-22.783 11.121v-60.33l1.105-.54c.939 1.47 1.609 2.453 1.739 2.61.162.236.43.378.717.378s.556-.142.718-.378c.165-.244 1.878-2.757 3.817-6L103.061 34v15.957c0 .48.39.87.87.87s.869-.39.869-.87V33.965l23.522 11.157v5.435c0 .48.39.87.87.87s.869-.39.869-.87v-5.34l22.782-11.13v40.122c-2.306-1.521-5.262-1.651-7.694-.34-2.431 1.313-3.945 3.855-3.94 6.618 0 3.826 6.087 12.852 6.8 13.86.162.237.43.379.717.379s.555-.142.717-.378c.33-.478 1.87-2.765 3.4-5.435v5.504z" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#FF4E3B" d="M148.696 76.252c-2.34 0-4.235 1.896-4.235 4.235 0 2.339 1.896 4.235 4.235 4.235 2.338 0 4.234-1.896 4.234-4.235 0-2.339-1.896-4.235-4.234-4.235z" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#FFFFFF" d="M61.74 19.696c-1.254 0-2.27-1.016-2.27-2.27 0-1.253 1.016-2.27 2.27-2.27 1.253 0 2.269 1.017 2.269 2.27-.005 1.252-1.018 2.265-2.27 2.27zm0-2.809c-.294 0-.531.237-.531.53 0 .293.237.53.53.53.293 0 .53-.237.53-.53 0-.293-.237-.53-.53-.53z" opacity=".6" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <g fill="#FFFFFF" opacity=".4">
+                                            <path d="M211.557 5.435h-4.966c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.966c.48 0 .87.39.87.87s-.39.87-.87.87zm-9.94 0h-4.965c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.965c.48 0 .87.39.87.87s-.39.87-.87.87zm-9.939 0h-4.974c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.966c.48 0 .87.39.87.87s-.39.87-.87.87h.008zm-9.939 0h-4.965c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.965c.48 0 .87.39.87.87s-.39.87-.87.87zm-9.939 0h-4.965c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.965c.48 0 .87.39.87.87s-.39.87-.87.87zm-9.94 0h-4.964c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.965c.48 0 .87.39.87.87s-.39.87-.87.87zm-9.938 0h-4.965c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.965c.48 0 .87.39.87.87s-.39.87-.87.87zm-9.94 0h-4.965c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.966c.48 0 .87.39.87.87s-.39.87-.87.87zm-9.939 0h-4.965c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.965c.48 0 .87.39.87.87s-.39.87-.87.87zm-9.939 0h-4.965c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.965c.48 0 .87.39.87.87s-.39.87-.87.87zM219.13 5.435h-2.608c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h2.608c.48 0 .87.39.87.87s-.39.87-.87.87zM205.543 1.74H27.5c-.78 0-1.413-.39-1.413-.87S26.72 0 27.5 0h178.043c.78 0 1.414.39 1.414.87s-.633.87-1.414.87zM55.217 5.217H.435c-.24 0-.435-.389-.435-.87 0-.48.195-.869.435-.869h54.782c.24 0 .435.39.435.87s-.194.87-.435.87z" transform="translate(-531 -169) translate(381 83) translate(150 86) translate(0 125)"/>
+                                        </g>
+                                        <path fill="#FFFFFF" d="M122.774 13.913c-1.476 0-2.674-1.194-2.678-2.67.003-1.025.59-1.96 1.513-2.408-.01-.171-.01-.342 0-.513-.005-2.913 2.347-5.282 5.26-5.296.41 0 .819.047 1.218.14.9-1.927 2.83-3.16 4.956-3.166 2.185.014 4.159 1.307 5.044 3.304h.087c2.104-.008 3.97 1.351 4.609 3.357.295-.092.603-.139.913-.14 1.347.006 2.534.887 2.93 2.175 1.183.485 1.856 1.742 1.604 2.996-.253 1.254-1.36 2.153-2.639 2.143l-22.808.078h-.01zm4.087-9.191c-1.953.01-3.53 1.595-3.53 3.548.009.294.056.586.139.87.068.248.021.515-.126.726-.148.212-.382.347-.64.369-.488.036-.866.44-.87.93-.019.261.072.518.25.71.178.191.428.3.69.299l22.809-.07c.493.013.91-.363.95-.856.04-.492-.313-.93-.803-.996-.382-.063-.676-.372-.721-.756-.054-.689-.623-1.224-1.313-1.235-.356 0-.696.141-.948.391-.246.248-.615.325-.94.196-.323-.129-.539-.439-.547-.787-.043-1.683-1.422-3.023-3.104-3.018-.175.005-.35.022-.522.053-.437.074-.86-.192-.983-.618-.47-1.607-1.934-2.718-3.609-2.739-1.67.006-3.139 1.11-3.608 2.713-.072.237-.24.432-.465.536-.224.105-.482.11-.71.012-.442-.189-.918-.283-1.4-.278z" opacity=".3" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+
+
+                <div class="onboarding__picture step1" *ngIf="GetTheme() == null">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="220" height="132" viewBox="0 0 220 132">
+                        <g fill="none" fill-rule="evenodd">
+                            <g fill-rule="nonzero">
+                                <g>
+                                    <g>
+                                        <path fill="#1F1E33" d="M205.217 67.365h-29.634c-.48 0-.87.39-.87.87s.39.87.87.87h28.765v35.147h-7.044V92.6c0-.48-.389-.87-.87-.87h-12.086c-.48 0-.87.39-.87.87s.39.87.87.87h11.182v10.782h-12.365V92.357c0-.48-.39-.87-.87-.87s-.869.39-.869.87v11.895h-7.191c-.48 0-.87.39-.87.87s.39.87.87.87h30.982c.48 0 .87-.39.87-.87V68.235c0-.48-.39-.87-.87-.87z" opacity=".3" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#1F1E33" d="M199.74 74.374h-7.47c-.48 0-.87.39-.87.87v7.469c0 .48.39.87.87.87h7.47c.48 0 .869-.39.869-.87v-7.47c0-.48-.39-.87-.87-.87zm-.87 7.47h-5.73v-5.731h5.73v5.73z" opacity=".6" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#1F1E33" d="M172.174 41.278H158.19c-.48 0-.87.39-.87.87s.39.87.87.87h13.113v61.234h-7.043V92.6c0-.48-.39-.87-.87-.87h-5.13c-.48 0-.87.39-.87.87s.39.87.87.87h4.226v10.782h-12.365v-3.2c0-.48-.39-.87-.87-.87s-.87.39-.87.87v3.2h-7.19c-.48 0-.87.39-.87.87s.39.87.87.87h30.982c.48 0 .87-.39.87-.87V42.148c0-.48-.39-.87-.87-.87zM83.548 104.252h-15.14V30.54c0-.48-.389-.87-.869-.87s-.87.39-.87.87v86.757h-5.8V97.79c0-.48-.389-.87-.869-.87s-.87.39-.87.87v19.505H33.913V97.817h21.974c.48 0 .87-.389.87-.87 0-.48-.39-.869-.87-.869H33.043c-.48 0-.87.39-.87.87v20.348h-4.347V31.713h35.017c.48 0 .87-.39.87-.87s-.39-.87-.87-.87H26.957c-.48 0-.87.39-.87.87v87.322c0 .48.39.87.87.87h40.582c.48 0 .87-.39.87-.87v-12.174h15.139c.48 0 .87-.389.87-.87 0-.48-.39-.869-.87-.869z" opacity=".3" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#1F1E33" d="M40.609 83.07c.48 0 .87.389.87.87v7.469c0 .48-.39.87-.87.87h-7.47c-.48 0-.87-.39-.87-.87v-7.47c0-.48.39-.87.87-.87zm-.87 1.739h-5.73v5.73h5.73v-5.73zm.87-16.844c.48 0 .87.39.87.87v7.47c0 .48-.39.869-.87.869h-7.47c-.48 0-.87-.39-.87-.87v-7.47c0-.48.39-.869.87-.869zm-.87 1.74h-5.73v5.73h5.73v-5.73zm.87-16.844c.48 0 .87.39.87.87V61.2c0 .48-.39.87-.87.87h-7.47c-.48 0-.87-.39-.87-.87v-7.47c0-.48.39-.87.87-.87zm-.87 1.739h-5.73v5.73h5.73V54.6zm.87-16.843c.48 0 .87.389.87.87v7.46c0 .48-.39.87-.87.87h-7.47c-.48 0-.87-.39-.87-.87v-7.46c0-.481.39-.87.87-.87zm-.87 1.739h-5.73v5.721h5.73v-5.721zM162.452 79.565c.48 0 .87.39.87.87v7.608c0 .48-.39.87-.87.87h-5.06c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.19v-5.869h-2.712c-.48 0-.87-.389-.87-.87 0-.48.39-.869.87-.869zm0-15.391c.48 0 .87.39.87.87v7.608c0 .48-.39.87-.87.87h-5.06c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.19v-5.869h-4.19c-.48 0-.87-.39-.87-.87s.39-.87.87-.87zm0-15.383c.48 0 .87.39.87.87v7.609c0 .48-.39.87-.87.87h-5.06c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.19v-5.87h-4.19c-.48 0-.87-.389-.87-.87 0-.48.39-.869.87-.869z" opacity=".6" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#1F1E33" d="M96.009 31.713h4.791c.48 0 .87-.39.87-.87s-.39-.87-.87-.87h-4.791c-.48 0-.87.39-.87.87s.39.87.87.87z" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#1F1E33" d="M178.6 16.522c-1.25 0-2.265-1.011-2.27-2.261-.004-1.25 1.003-2.269 2.253-2.278 1.25-.01 2.272.993 2.287 2.243.004.606-.233 1.188-.658 1.62-.426.43-1.006.673-1.612.676zm0-2.809c-.293 0-.53.238-.53.53 0 .293.237.53.53.53.293 0 .53-.237.53-.53.008-.145-.045-.286-.145-.392-.1-.105-.24-.164-.385-.164v.026zM117.73 121.74c-1.25-.001-2.264-1.012-2.269-2.262-.005-1.25 1.002-2.268 2.252-2.278 1.25-.01 2.273.994 2.287 2.243.005.606-.232 1.189-.658 1.62-.426.43-1.006.674-1.612.676zm0-2.81c-.293 0-.53.238-.53.53 0 .294.237.531.53.531.293 0 .53-.237.53-.53.008-.145-.045-.287-.145-.392-.1-.105-.24-.165-.385-.165v.026z" opacity=".6" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#1F1E33" d="M103.87 56.73c-.48 0-.87.39-.87.87v14.07c0 .48.39.87.87.87s.87-.39.87-.87V57.6c0-.48-.39-.87-.87-.87z" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#FF4E3B" d="M129.217 54.33c-6.934.01-12.551 5.631-12.556 12.566 0 6.652 11.356 23.313 11.843 24.017.162.237.43.378.718.378.287 0 .555-.141.717-.378.496-.713 11.8-17.374 11.8-24.017-.005-6.921-5.601-12.537-12.522-12.566zm0 34.522c-2.521-3.809-10.817-16.748-10.817-21.956 0-5.977 4.845-10.822 10.822-10.822 5.976 0 10.821 4.845 10.821 10.822-.043 5.208-8.304 18.147-10.826 21.956z" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#1F1E33" d="M129.217 60.104c-3.75 0-6.79 3.04-6.79 6.792 0 3.75 3.04 6.791 6.79 6.791 3.751 0 6.792-3.04 6.792-6.791-.005-3.75-3.043-6.787-6.792-6.792z" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#FF4E3B" d="M89.417 27.696c0-3.117-2.526-5.644-5.643-5.644s-5.644 2.527-5.644 5.644c0 3.116 2.527 5.643 5.644 5.643 3.115-.005 5.639-2.529 5.643-5.643z" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#1F1E33" d="M156.243 80.487c.002-1.708-.58-3.365-1.652-4.696V32.696c0-.3-.154-.58-.408-.74-.255-.159-.574-.175-.844-.043l-24.052 11.74-25.017-11.844c-.094-.04-.194-.064-.296-.07-.092-.015-.186-.015-.278 0h-.13L89.912 38.4c2.191-3.93 4.209-8.243 4.209-10.783 0-5.69-4.614-10.304-10.305-10.304-5.69 0-10.304 4.613-10.304 10.304 0 3.618 4.096 10.835 6.957 15.4l-1.418.696c-.298.146-.487.45-.487.783v62.27c0 .3.154.58.409.738.255.16.574.176.843.044l24.087-11.722 24.913 11.896c.104.047.217.074.33.078.118-.003.233-.03.34-.078l24.53-11.974c.299-.146.488-.45.487-.783v-9.322c.914-1.587 1.505-3.34 1.74-5.156zm-1.739 0c0 2.47-3.678 8.609-5.774 11.809-2.095-3.2-5.773-9.34-5.773-11.809 0-3.189 2.585-5.774 5.773-5.774 3.19 0 5.774 2.585 5.774 5.774zM83.774 19.13c4.728.005 8.56 3.837 8.565 8.566 0 3.713-5.643 13.043-8.565 17.391-2.922-4.417-8.565-13.713-8.565-17.391.004-4.729 3.836-8.56 8.565-8.566zm69.07 75.287l-22.783 11.13V95.166c0-.48-.39-.87-.87-.87s-.87.39-.87.87V105.6l-23.556-11.287V79.6c0-.48-.39-.87-.87-.87s-.869.39-.869.87v14.722l-22.783 11.121v-60.33l1.105-.54c.939 1.47 1.609 2.453 1.739 2.61.162.236.43.378.717.378s.556-.142.718-.378c.165-.244 1.878-2.757 3.817-6L103.061 34v15.957c0 .48.39.87.87.87s.869-.39.869-.87V33.965l23.522 11.157v5.435c0 .48.39.87.87.87s.869-.39.869-.87v-5.34l22.782-11.13v40.122c-2.306-1.521-5.262-1.651-7.694-.34-2.431 1.313-3.945 3.855-3.94 6.618 0 3.826 6.087 12.852 6.8 13.86.162.237.43.379.717.379s.555-.142.717-.378c.33-.478 1.87-2.765 3.4-5.435v5.504z" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#FF4E3B" d="M148.696 76.252c-2.34 0-4.235 1.896-4.235 4.235 0 2.339 1.896 4.235 4.235 4.235 2.338 0 4.234-1.896 4.234-4.235 0-2.339-1.896-4.235-4.234-4.235z" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <path fill="#1F1E33" d="M61.74 19.696c-1.254 0-2.27-1.016-2.27-2.27 0-1.253 1.016-2.27 2.27-2.27 1.253 0 2.269 1.017 2.269 2.27-.005 1.252-1.018 2.265-2.27 2.27zm0-2.809c-.294 0-.531.237-.531.53 0 .293.237.53.53.53.293 0 .53-.237.53-.53 0-.293-.237-.53-.53-.53z" opacity=".6" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                        <g fill="#1F1E33" opacity=".4">
+                                            <path d="M211.557 5.435h-4.966c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.966c.48 0 .87.39.87.87s-.39.87-.87.87zm-9.94 0h-4.965c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.965c.48 0 .87.39.87.87s-.39.87-.87.87zm-9.939 0h-4.974c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.966c.48 0 .87.39.87.87s-.39.87-.87.87h.008zm-9.939 0h-4.965c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.965c.48 0 .87.39.87.87s-.39.87-.87.87zm-9.939 0h-4.965c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.965c.48 0 .87.39.87.87s-.39.87-.87.87zm-9.94 0h-4.964c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.965c.48 0 .87.39.87.87s-.39.87-.87.87zm-9.938 0h-4.965c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.965c.48 0 .87.39.87.87s-.39.87-.87.87zm-9.94 0h-4.965c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.966c.48 0 .87.39.87.87s-.39.87-.87.87zm-9.939 0h-4.965c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.965c.48 0 .87.39.87.87s-.39.87-.87.87zm-9.939 0h-4.965c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h4.965c.48 0 .87.39.87.87s-.39.87-.87.87zM219.13 5.435h-2.608c-.48 0-.87-.39-.87-.87s.39-.87.87-.87h2.608c.48 0 .87.39.87.87s-.39.87-.87.87zM205.543 1.74H27.5c-.78 0-1.413-.39-1.413-.87S26.72 0 27.5 0h178.043c.78 0 1.414.39 1.414.87s-.633.87-1.414.87zM55.217 5.217H.435c-.24 0-.435-.389-.435-.87 0-.48.195-.869.435-.869h54.782c.24 0 .435.39.435.87s-.194.87-.435.87z" transform="translate(-531 -169) translate(381 83) translate(150 86) translate(0 125)"/>
+                                        </g>
+                                        <path fill="#1F1E33" d="M122.774 13.913c-1.476 0-2.674-1.194-2.678-2.67.003-1.025.59-1.96 1.513-2.408-.01-.171-.01-.342 0-.513-.005-2.913 2.347-5.282 5.26-5.296.41 0 .819.047 1.218.14.9-1.927 2.83-3.16 4.956-3.166 2.185.014 4.159 1.307 5.044 3.304h.087c2.104-.008 3.97 1.351 4.609 3.357.295-.092.603-.139.913-.14 1.347.006 2.534.887 2.93 2.175 1.183.485 1.856 1.742 1.604 2.996-.253 1.254-1.36 2.153-2.639 2.143l-22.808.078h-.01zm4.087-9.191c-1.953.01-3.53 1.595-3.53 3.548.009.294.056.586.139.87.068.248.021.515-.126.726-.148.212-.382.347-.64.369-.488.036-.866.44-.87.93-.019.261.072.518.25.71.178.191.428.3.69.299l22.809-.07c.493.013.91-.363.95-.856.04-.492-.313-.93-.803-.996-.382-.063-.676-.372-.721-.756-.054-.689-.623-1.224-1.313-1.235-.356 0-.696.141-.948.391-.246.248-.615.325-.94.196-.323-.129-.539-.439-.547-.787-.043-1.683-1.422-3.023-3.104-3.018-.175.005-.35.022-.522.053-.437.074-.86-.192-.983-.618-.47-1.607-1.934-2.718-3.609-2.739-1.67.006-3.139 1.11-3.608 2.713-.072.237-.24.432-.465.536-.224.105-.482.11-.71.012-.442-.189-.918-.283-1.4-.278z" opacity=".3" transform="translate(-531 -169) translate(381 83) translate(150 86)"/>
+                                    </g>
+                                </g>
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+                <div class="onboarding__subcap">
+                    <p>Select an address</p>
+                </div>
+                <div
+                    data-cy="address"
+                    class="onboarding__addrFolder"
+                    *ngFor="let item of availableAddresses"
+                    (click)="onSelectAddress(item)"
+                    [class.inactive]="item !== selectedAddress"
+                    [class.active]="item === selectedAddress"
+                >
+                    <div
+                        class="onboarding__checkmark"
+                        [class.inactive]="item !== selectedAddress"
+                        [class.active]="item === selectedAddress"
+                    ></div>
+                    <div class="onboarding__addrData">
+                        <div class="onboarding__addrText">
+                            {{ getAddressString(item) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        <ng-container
+            #exchange
+            class="onboarding__section"
+            *ngSwitchCase="'SyncExchange'"
+        >
+            <div class="exchangeSection">
+                <div class="onboarding__picture step2"></div>
+                <div class="onboarding__subcap subCapExchange">
+                    <p *ngIf="!syncMsGraphInProgress">
+                        Sync your Exchange contacts and start communicating.
+                        Click
+                        <strong>Connect to Office 365 Exchange Server</strong>
+                        to access your Exchange Contacts
+                    </p>
+                    <p *ngIf="syncMsGraphInProgress">
+                        Connection Establishing!
+                    </p>
+                </div>
+                <div class="onboarding__syncFolder">
+                    <p *ngIf="syncMsGraphInProgress">
+                        Exchange contacts sync in progress...
+                    </p>
+                    <div
+                        class="onboarding__error"
+                        *ngIf="errorMessage && !syncMsGraphInProgress"
+                    >
+                        {{ errorMessage }}
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+        <ng-container
+            #final
+            class="onboarding__section"
+            *ngSwitchCase="'Final'"
+        >
+            <div class="finalSection">
+                <div class="onboarding__picture step2"></div>
+                <div class="onboarding__subcap subCapFinal">
+                    <p>
+                        Checkout our new WebClient and make your first MultiLine
+                        call!
+                    </p>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+    <!-- CB: 18Nov2020: Disclaimer: YAGNI+KISS - Use implicit comparsions here. Rework if complexity is increased.-->
+    <div
+        class="onboarding__controls{{
+            currentOnboardingStep === 'SyncExchange' ? '--vert' : ''
+        }}"
+        [ngSwitch]="currentOnboardingStep"
+    >
+        <ng-container *ngSwitchCase="'SyncExchange'">
+            <button
+                data-cy="sync-exchange-button"
+                *ngIf="
+                    currentOnboardingStep === 'SyncExchange' &&
+                    !syncMsGraphInProgress
+                "
+                (click)="onSyncExchange()"
+                class="onboarding__continue onboarding__msExchange"
+            >
+                <p>Connect to Office 365 Exchange Server</p>
+            </button>
+            <div
+                data-cy="later-button"
+                class="onboarding__later"
+                *ngIf="
+                    currentOnboardingStep === 'SyncExchange' &&
+                    !syncMsGraphInProgress
+                "
+                (click)="onNext()"
+            >
+                I will do it later
+            </div>
+        </ng-container>
+        <ng-container *ngSwitchDefault>
+            <button
+                [disabled]="nextDisabled$ | async"
+                data-cy="continue-button"
+                class="onboarding__continue"
+                (click)="onNext()"
+                type="button"
+            >
+                <p [ngClass]="{ spinnered: nextDisabled$ | async }">Continue</p>
+            </button>
+        </ng-container>
+    </div>
+</div>
+
+<ng-template #GPPRTemplate>
+    <div class="confirm" [ngClass]="{'confirm--centered': appearance === 'Centered'}">
+        <div class="confirm__title">
+            Privacy Settings
+        </div>
+        <div class="confirm__subTitleShell"  [ngClass]="{'confirm__subTitleShell--emptyTitle': !titleTxt}">
+            <span class="confirm__error" *ngIf="type === 'Error'" nz-icon nzType="close-circle" nzTheme="outline" style="color: red;"></span>
+            <div
+                class="confirm__subTitle"
+               >
+               This application requires the use of your personal data as defined in <a class="terms-link" href="/login/tandc" target="_blank">Terms and Privacy Policy</a>. You currently have this setting turned off. Turn on the setting to continue to use this service.
+            </div>
+        </div>
+    
+        <div class="confirm__controls">
+            <div
+                class="confirm__cancel"
+                (click)="onCancel()"
+            >
+                Cancel
+            </div>
+            <div class="confirm__apply" (click)="onApply()">
+                Turn On
+            </div>
+        </div>
+    </div>
+</ng-template>

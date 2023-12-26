@@ -1,0 +1,32 @@
+<div class="confirm" [ngClass]="{'confirm--centered': appearance === 'Centered'}">
+    <div class="confirm__title">
+        {{ titleTxt }}
+    </div>
+    <div class="confirm__subTitleShell"  [ngClass]="{'confirm__subTitleShell--emptyTitle': !titleTxt}">
+        <span class="confirm__error" *ngIf="type === 'Error'" nz-icon nzType="close-circle" nzTheme="outline" style="color: red;"></span>
+        <div
+            class="confirm__subTitle"
+            [innerHtml]="subTitleTxt">
+        </div>
+        <div
+            class="confirm__infoTitleTxt"
+            [innerHtml]="infoTitleTxt">
+        </div>
+    </div>
+
+    <div class="confirm__controls">
+        <div
+            class="confirm__cancel"
+            *ngIf="!!cancelBtnTxt"
+            (click)="onCancel()"
+        >
+            {{ cancelBtnTxt }}
+        </div>
+        <div class="confirm__apply" *ngIf="!!applyBtnTxt" (click)="onApply()">
+            {{ applyBtnTxt }}
+        </div>
+    </div>
+    <div class="confirm__apply-center" *ngIf="!!applyBtnTxtCenter" (click)="onApply()">
+        {{ applyBtnTxtCenter }}
+    </div>
+</div>

@@ -1,0 +1,29 @@
+@import '../../../../assets/scss/app.scss';
+@import '../../../../assets/scss/variables';
+
+.e911Terms {
+
+    &__text {
+        margin: 2rem;
+    }
+
+    &__controls{
+        display: flex;
+        justify-content: flex-end;
+        margin: 1rem;
+    }
+
+    &__accept {
+        @extend %sync-btn--apply;
+        margin: 1rem;
+
+        display: inline-block;
+    }
+
+    &__decline {
+        @extend %sync-btn--cancel;
+        margin: 1rem;
+
+        display: inline-block;
+    }
+}
